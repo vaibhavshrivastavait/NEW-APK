@@ -16,7 +16,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import useAssessmentStore from '../store/assessmentStore';
 import pdfExportGenerator, { PatientData } from '../utils/pdfExportGenerator';
-import SimpleDrugInteractionChecker from '../SimpleDrugInteractionChecker';
+import SimpleDrugInteractionChecker from '../components/SimpleDrugInteractionChecker';
 
 // Import ALL AI risk calculators and drug interaction features
 import { calculateAllRisks, type ComprehensiveRiskResults, type PatientRiskData } from '../utils/medicalCalculators';
