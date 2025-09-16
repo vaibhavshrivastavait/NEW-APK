@@ -19,7 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAssessmentStore } from '../store/assessmentStore';
 import { TreatmentPlanEngine, TreatmentInputs, TreatmentRecommendation } from '../utils/treatmentPlanEngine';
 import { TreatmentPlanGenerator, TreatmentPlanInputs, TreatmentPlan } from '../utils/treatmentPlanGenerator';
-import { crashProofStorage } from '../utils/asyncStorageUtils';
+import crashProofStorage from '../utils/asyncStorageUtils';
 import { SafeFlatList } from '../components/SafeFlatList';
 
 interface CustomTreatmentInputs extends TreatmentPlanInputs {
