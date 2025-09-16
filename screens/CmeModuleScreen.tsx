@@ -42,6 +42,9 @@ const { width } = Dimensions.get('window');
 
 export default function CmeModuleScreen({ navigation, route }: Props) {
   const { moduleId } = route.params;
+  
+  // Safely handle CME content with fallback for APK builds
+  const [cmeContent] = useState(() => loadCmeContent());
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [startTime] = useState(Date.now());
