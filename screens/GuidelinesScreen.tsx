@@ -167,40 +167,69 @@ export default function GuidelinesScreen({ navigation }: Props) {
   };
 
   const renderSectionCard = ({ item }: { item: GuidelineSection }) => {
-    const isBookmarked = bookmarks.includes(item.id);
-    
-    return (
-      <TouchableOpacity
-        style={styles.sectionCard}
-        onPress={() => openSectionModal(item)}
-      >
-        <View style={styles.cardHeader}>
-          <MaterialIcons 
-            name={item.icon as any} 
-            size={24} 
-            color="#D81B60" 
-          />
-          <TouchableOpacity
-            style={styles.bookmarkButton}
-            onPress={() => toggleBookmark(item.id)}
-          >
+    // Add defensive checks for item data
+    if (!item) {
+      console.error('🚨 GuidelinesScreen: Received null/undefined item in renderSectionCard');
+      return (
+        <View style={styles.sectionCard}>
+          <Text style={styles.errorText}>Invalid guideline data</Text>
+        </View>
+      );
+    }
+
+    // Ensure required fields exist
+    const safeItem = {
+      id: item.id || `fallback_${Date.now()}`,
+      title: item.title || 'Unknown Guideline',
+      body_md: item.body_md || 'No content available',
+      bullets: item.bullets || [],
+      icon: item.icon || 'help',
+      ...item
+    };
+
+    try {
+      const isBookmarked = bookmarks.includes(safeItem.id);
+      
+      return (
+        <TouchableOpacity
+          style={styles.sectionCard}
+          onPress={() => openSectionModal(safeItem)}
+        >
+          <View style={styles.cardHeader}>
             <MaterialIcons 
-              name={isBookmarked ? "bookmark" : "bookmark-border"} 
-              size={20} 
-              color={isBookmarked ? "#D81B60" : "#999"} 
+              name={safeItem.icon as any} 
+              size={24} 
+              color="#D81B60" 
             />
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.bookmarkButton}
+              onPress={() => toggleBookmark(safeItem.id)}
+            >
+              <MaterialIcons 
+                name={isBookmarked ? "bookmark" : "bookmark-border"} 
+                size={20} 
+                color={isBookmarked ? "#D81B60" : "#999"} 
+              />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.cardTitle}>{safeItem.title}</Text>
+          <Text style={styles.cardPreview} numberOfLines={2}>
+            {safeItem.body_md.substring(0, 100)}...
+          </Text>
+          <View style={styles.cardFooter}>
+            <Text style={styles.bulletCount}>{safeItem.bullets.length} key points</Text>
+            <MaterialIcons name="arrow-forward" size={16} color="#D81B60" />
+          </View>
+        </TouchableOpacity>
+      );
+    } catch (error) {
+      console.error('🚨 GuidelinesScreen: Error rendering section card:', error, 'Item:', item);
+      return (
+        <View style={styles.sectionCard}>
+          <Text style={styles.errorText}>Error displaying: {safeItem.title}</Text>
         </View>
-        <Text style={styles.cardTitle}>{item.title}</Text>
-        <Text style={styles.cardPreview} numberOfLines={2}>
-          {item.body_md.substring(0, 100)}...
-        </Text>
-        <View style={styles.cardFooter}>
-          <Text style={styles.bulletCount}>{item.bullets.length} key points</Text>
-          <MaterialIcons name="arrow-forward" size={16} color="#D81B60" />
-        </View>
-      </TouchableOpacity>
-    );
+      );
+    }
   };
 
   const renderTable = (table: any, index: number) => (
