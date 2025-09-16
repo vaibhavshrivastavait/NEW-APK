@@ -1,6 +1,37 @@
 import { create } from 'zustand';
-import crashProofStorage from '../utils/asyncStorageUtils';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
+
+// 🔧 Safe storage wrapper to prevent crashes (ChatGPT suggestion)
+const safeStorage = {
+  getItem: async (key: string) => {
+    try {
+      const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+      console.log("🔍 safeStorage.getItem - AsyncStorage:", !!AsyncStorage, "key:", key);
+      return AsyncStorage?.getItem ? await AsyncStorage.getItem(key) : null;
+    } catch (error) {
+      console.log("🚨 safeStorage.getItem error:", error);
+      return null;
+    }
+  },
+  setItem: async (key: string, value: string) => {
+    try {
+      const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+      console.log("🔍 safeStorage.setItem - AsyncStorage:", !!AsyncStorage, "key:", key);
+      return AsyncStorage?.setItem ? await AsyncStorage.setItem(key, value) : null;
+    } catch (error) {
+      console.log("🚨 safeStorage.setItem error:", error);
+    }
+  },
+  removeItem: async (key: string) => {
+    try {
+      const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+      console.log("🔍 safeStorage.removeItem - AsyncStorage:", !!AsyncStorage, "key:", key);
+      return AsyncStorage?.removeItem ? await AsyncStorage.removeItem(key) : null;
+    } catch (error) {
+      console.log("🚨 safeStorage.removeItem error:", error);
+    }
+  },
+};
 
 export interface PatientData {
   id: string;
