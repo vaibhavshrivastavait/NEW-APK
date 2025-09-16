@@ -1,18 +1,18 @@
 // interaction-aggregator.ts
 // Production-ready logic to fetch severity for 1:1 (main vs optional) mapping
 
-// Import drug interaction data using import instead of require for APK compatibility
-import drugInteractionDataImport from "../assets/rules/drug_interactions.json";
-
-// Safely handle drug interaction data with fallback for APK builds
-const drugInteractionData = (() => {
+// Import drug interaction data with proper error handling for APK compatibility
+const loadDrugInteractionData = () => {
   try {
-    return drugInteractionDataImport || { rules: [] };
+    return require("../assets/rules/drug_interactions.json");
   } catch (error) {
     console.warn('Could not load drug interaction data:', error);
     return { rules: [] };
   }
-})();
+};
+
+// Safely handle drug interaction data with fallback for APK builds
+const drugInteractionData = loadDrugInteractionData();
 
 export interface InteractionResult {
   severity: string;
