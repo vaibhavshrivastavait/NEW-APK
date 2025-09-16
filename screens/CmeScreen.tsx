@@ -14,8 +14,19 @@ import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useFocusEffect } from '@react-navigation/native';
 
-// Import CME content - using import instead of require for APK compatibility
-import cmeContentImport from '../assets/cme-content-merged.json';
+// Import CME content with proper error handling for APK compatibility
+const loadCmeContent = () => {
+  try {
+    return require('../assets/cme-content-merged.json');
+  } catch (error) {
+    console.error('Error loading CME content:', error);
+    return {
+      modules: [],
+      metadata: { totalCredits: 0 },
+      popularQuizzes: { quizzes: [] }
+    };
+  }
+};
 
 type RootStackParamList = {
   Home: undefined;
