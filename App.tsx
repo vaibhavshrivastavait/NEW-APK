@@ -4,6 +4,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { AppState } from 'react-native';
 
+// 🔍 DEBUG: AsyncStorage availability check (ChatGPT suggestion)
+import AsyncStorage from '@react-native-async-storage/async-storage';
+console.log("🔍 AsyncStorage module check:", AsyncStorage);
+console.log("🔍 AsyncStorage.getItem type:", typeof AsyncStorage?.getItem);
+console.log("🔍 AsyncStorage.setItem type:", typeof AsyncStorage?.setItem);
+
 // Import screens
 import HomeScreen from './screens/HomeScreen';
 import PatientIntakeScreen from './screens/PatientIntakeScreen';
