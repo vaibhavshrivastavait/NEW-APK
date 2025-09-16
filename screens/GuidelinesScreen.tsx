@@ -82,20 +82,7 @@ const GUIDELINES_VERSION_KEY = 'mht_guidelines_version';
 export default function GuidelinesScreen({ navigation }: Props) {
   // Safely handle guidelines data with fallback for APK builds
   const [guidelines, setGuidelines] = useState<GuidelinesData>(() => {
-    try {
-      return guidelinesDataImport || {
-        version: "1.0.0",
-        lastUpdated: new Date().toISOString(),
-        sections: []
-      };
-    } catch (error) {
-      console.error('Error loading guidelines data:', error);
-      return {
-        version: "1.0.0",
-        lastUpdated: new Date().toISOString(),
-        sections: []
-      };
-    }
+    return loadGuidelinesData();
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSection, setSelectedSection] = useState<GuidelineSection | null>(null);
