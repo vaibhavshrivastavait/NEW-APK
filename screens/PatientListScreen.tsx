@@ -93,68 +93,98 @@ export default function PatientListScreen({ navigation }: Props) {
     }
   };
 
-  const renderPatientItem = ({ item }: { item: PatientData }) => (
-    <TouchableOpacity 
-      style={styles.patientCard}
-      onPress={() => navigation.navigate('PatientDetails', { 
-        patient: {
-          ...item,
-          // Safely handle createdAt whether it's a Date object or string
-          createdAt: item.createdAt && typeof item.createdAt === 'object' && item.createdAt.toISOString 
-            ? item.createdAt.toISOString() 
-            : typeof item.createdAt === 'string' 
-              ? item.createdAt 
-              : new Date().toISOString()
-        }
-      })}
-      activeOpacity={0.7}
-    >
-      <View style={styles.patientInfo}>
-        <Text style={styles.patientName}>{item.name}</Text>
-        <Text style={styles.patientDetails}>
-          Age: {item.age} • BMI: {item.bmi ? item.bmi.toFixed(1) : 'N/A'}
-        </Text>
-        <Text style={styles.patientDetails}>
-          Status: {item.menopausalStatus}
-        </Text>
-        <Text style={styles.patientDate}>
-          Created: {formatDate(item.createdAt)}
-        </Text>
-      </View>
-      <View style={styles.cardActions}>
+  const renderPatientItem = ({ item }: { item: PatientData }) => {
+    // Add defensive checks for item data
+    if (!item) {
+      console.error('🚨 PatientListScreen: Received null/undefined item in renderPatientItem');
+      return (
+        <View style={styles.patientCard}>
+          <Text style={styles.errorText}>Invalid patient data</Text>
+        </View>
+      );
+    }
+
+    // Ensure required fields exist
+    const safeItem = {
+      name: item.name || 'Unknown Patient',
+      age: item.age || 0,
+      bmi: item.bmi || null,
+      menopausalStatus: item.menopausalStatus || 'Unknown',
+      createdAt: item.createdAt || new Date(),
+      ...item
+    };
+
+    try {
+      return (
         <TouchableOpacity 
-          style={styles.detailsButton}
-          onPress={(e) => {
-            e.stopPropagation();
-            navigation.navigate('PatientDetails', { 
-              patient: {
-                ...item,
-                // Safely handle createdAt whether it's a Date object or string
-                createdAt: item.createdAt && typeof item.createdAt === 'object' && item.createdAt.toISOString 
-                  ? item.createdAt.toISOString() 
-                  : typeof item.createdAt === 'string' 
-                    ? item.createdAt 
-                    : new Date().toISOString()
-              }
-            });
-          }}
+          style={styles.patientCard}
+          onPress={() => navigation.navigate('PatientDetails', { 
+            patient: {
+              ...safeItem,
+              // Safely handle createdAt whether it's a Date object or string
+              createdAt: safeItem.createdAt && typeof safeItem.createdAt === 'object' && safeItem.createdAt.toISOString 
+                ? safeItem.createdAt.toISOString() 
+                : typeof safeItem.createdAt === 'string' 
+                  ? safeItem.createdAt 
+                  : new Date().toISOString()
+            }
+          })}
+          activeOpacity={0.7}
         >
-          <MaterialIcons name="visibility" size={20} color="#2196F3" />
-          <Text style={styles.detailsText}>View</Text>
+          <View style={styles.patientInfo}>
+            <Text style={styles.patientName}>{safeItem.name}</Text>
+            <Text style={styles.patientDetails}>
+              Age: {safeItem.age} • BMI: {safeItem.bmi ? safeItem.bmi.toFixed(1) : 'N/A'}
+            </Text>
+            <Text style={styles.patientDetails}>
+              Status: {safeItem.menopausalStatus}
+            </Text>
+            <Text style={styles.patientDate}>
+              Created: {formatDate(safeItem.createdAt)}
+            </Text>
+          </View>
+          <View style={styles.cardActions}>
+            <TouchableOpacity 
+              style={styles.detailsButton}
+              onPress={(e) => {
+                e.stopPropagation();
+                navigation.navigate('PatientDetails', { 
+                  patient: {
+                    ...safeItem,
+                    createdAt: safeItem.createdAt && typeof safeItem.createdAt === 'object' && safeItem.createdAt.toISOString 
+                      ? safeItem.createdAt.toISOString() 
+                      : typeof safeItem.createdAt === 'string' 
+                        ? safeItem.createdAt 
+                        : new Date().toISOString()
+                  }
+                });
+              }}
+            >
+              <MaterialIcons name="visibility" size={20} color="#2196F3" />
+              <Text style={styles.detailsText}>View</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.deleteButton}
+              onPress={(e) => {
+                e.stopPropagation();
+                handleDeletePatient(safeItem);
+              }}
+            >
+              <MaterialIcons name="delete" size={20} color="#F44336" />
+              <Text style={styles.deleteText}>Delete</Text>
+            </TouchableOpacity>
+          </View>
         </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.deleteButton}
-          onPress={(e) => {
-            e.stopPropagation();
-            handleDeletePatient(item);
-          }}
-        >
-          <MaterialIcons name="delete" size={20} color="#F44336" />
-          <Text style={styles.deleteText}>Delete</Text>
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
-  );
+      );
+    } catch (error) {
+      console.error('🚨 PatientListScreen: Error rendering patient item:', error, 'Item:', item);
+      return (
+        <View style={styles.patientCard}>
+          <Text style={styles.errorText}>Error displaying patient: {safeItem.name}</Text>
+        </View>
+      );
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
