@@ -8,7 +8,7 @@
 
 import { TreatmentPlanEngine, TreatmentInputs, TreatmentRecommendation } from './treatmentPlanEngine';
 import { TreatmentPlanGenerator, TreatmentPlanInputs, TreatmentPlan } from './treatmentPlanGenerator';
-import { crashProofStorage } from './asyncStorageUtils';
+import crashProofStorage from './asyncStorageUtils';
 
 export interface EnhancedTreatmentInputs extends TreatmentInputs {
   // Additional clinical context
