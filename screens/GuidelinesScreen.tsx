@@ -154,12 +154,17 @@ export default function GuidelinesScreen({ navigation }: Props) {
     }
   };
 
-  // Search functionality
+  // Search functionality with safe fallback
   const filteredSections = useMemo(() => {
-    if (!searchQuery.trim()) return guidelines.sections;
+    // 🔧 CRITICAL FIX: Handle undefined guidelines.sections
+    console.log("🔍 GuidelinesScreen: filteredSections - guidelines:", guidelines);
+    console.log("🔍 GuidelinesScreen: guidelines.sections type:", typeof guidelines?.sections);
+    
+    const sections = guidelines?.sections || [];
+    if (!searchQuery.trim()) return sections;
     
     const query = searchQuery.toLowerCase();
-    return guidelines.sections.filter(section =>
+    return sections.filter(section =>
       section.title.toLowerCase().includes(query) ||
       section.body_md.toLowerCase().includes(query) ||
       section.bullets.some(bullet => bullet.toLowerCase().includes(query)) ||
@@ -168,7 +173,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
         table.rows.some(row => row.some(cell => cell.toLowerCase().includes(query)))
       )
     );
-  }, [searchQuery, guidelines.sections]);
+  }, [searchQuery, guidelines?.sections]);
 
   const openWebLink = (url: string) => {
     Linking.canOpenURL(url).then(supported => {
