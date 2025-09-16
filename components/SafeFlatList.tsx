@@ -76,7 +76,7 @@ export default class SafeFlatList<T> extends Component<SafeFlatListProps<T>, Saf
           <MaterialIcons name="error-outline" size={48} color="#D81B60" />
           <Text style={styles.errorTitle}>Unable to load list</Text>
           <Text style={styles.errorMessage}>
-            {this.props.fallbackMessage || 'An error occurred while loading the data. This may be due to a storage issue.'}
+            {this.props.fallbackMessage || 'An error occurred while loading the data. This may be due to a data loading issue or storage problem. Please try restarting the app.'}
           </Text>
           
           {this.state.retryCount < 3 && (
