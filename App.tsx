@@ -213,6 +213,11 @@ export default function App() {
           options={{ title: 'Rules-Based Treatment Plan' }}
         />
         <Stack.Screen 
+          name="RobustTreatmentPlan" 
+          component={RobustTreatmentPlanScreen}
+          options={{ title: 'Treatment Plan Generator' }}
+        />
+        <Stack.Screen 
           name="MedicineSettings" 
           component={MedicineSettingsScreen}
           options={{ title: 'Medicine Analysis Settings' }}
