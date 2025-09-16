@@ -470,18 +470,15 @@ const useAssessmentStore = create<AssessmentStore>()(
         },
         removeItem: async (name) => {
           try {
-            // Additional safety check for crashProofStorage availability
-            if (!crashProofStorage || typeof crashProofStorage.removeItem !== 'function') {
-              console.warn('crashProofStorage not available during removeItem, cannot remove data');
-              return;
-            }
-
-            const isAvailable = await crashProofStorage.isAvailable();
-            if (!isAvailable) {
+            // Use direct AsyncStorage import for better reliability
+            const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+            
+            if (!AsyncStorage) {
               console.warn('AsyncStorage not available, cannot remove data');
               return;
             }
-            await crashProofStorage.removeItem(name);
+            
+            await AsyncStorage.removeItem(name);
           } catch (error) {
             console.error('Error removing data from storage:', error);
             // Don't throw error, just log it to prevent app crashes
