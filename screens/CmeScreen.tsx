@@ -59,6 +59,23 @@ const STORAGE_KEYS = {
 };
 
 export default function CmeScreen({ navigation }: Props) {
+  // Safely handle CME content with fallback for APK builds
+  const [cmeContent] = useState(() => {
+    try {
+      return cmeContentImport || {
+        modules: [],
+        metadata: { totalCredits: 0 },
+        popularQuizzes: { quizzes: [] }
+      };
+    } catch (error) {
+      console.error('Error loading CME content:', error);
+      return {
+        modules: [],
+        metadata: { totalCredits: 0 },
+        popularQuizzes: { quizzes: [] }
+      };
+    }
+  });
   const [progress, setProgress] = useState<CmeProgress>({});
   const [isLoading, setIsLoading] = useState(true);
 
