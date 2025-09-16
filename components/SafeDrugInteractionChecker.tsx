@@ -24,14 +24,11 @@ interface SafeInteractionResult {
   recommended_action: string;
 }
 
-// Import drug interaction data using import instead of require for APK compatibility
-import drugInteractionDataImport from '../assets/rules/drug_interactions.json';
-
-// Safe medicine categories - loaded from JSON data safely
+// Safe medicine categories - loaded from JSON data safely with APK compatibility
 const loadDrugInteractionData = () => {
   try {
-    // Use imported data instead of require
-    const data = drugInteractionDataImport;
+    // Use require with proper error handling for APK builds
+    const data = require('../assets/rules/drug_interactions.json');
     
     if (data && data.rules && Array.isArray(data.rules)) {
       console.log(`✅ Loaded ${data.rules.length} drug interactions from JSON`);
