@@ -19,8 +19,19 @@ import SafeFlatList from '../components/SafeFlatList';
 import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Import the guidelines data - using import instead of require for APK compatibility
-import guidelinesDataImport from '../assets/guidelines.json';
+// Import guidelines data with proper error handling for APK compatibility
+const loadGuidelinesData = () => {
+  try {
+    return require('../assets/guidelines.json');
+  } catch (error) {
+    console.error('Error loading guidelines data:', error);
+    return {
+      version: "1.0.0",
+      lastUpdated: new Date().toISOString(),
+      sections: []
+    };
+  }
+};
 
 type RootStackParamList = {
   Home: undefined;
