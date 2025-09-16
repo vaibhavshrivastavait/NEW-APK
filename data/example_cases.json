@@ -1,0 +1,185 @@
+{
+  "version": "1.0",
+  "cases": [
+    {
+      "id": "case-01",
+      "inputs": { 
+        "age": 62, 
+        "sex": "female", 
+        "ASCVD": 22.4, 
+        "FRAX_major": 12.3, 
+        "GAIL_5yr": 2.1, 
+        "Wells": 0, 
+        "selected_medicine": "Estrogen (systemic)", 
+        "current_medications": ["Warfarin"], 
+        "conditions": ["none"] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Do NOT prescribe estrogen-based HRT (high ASCVD + warfarin interaction)", 
+        "mustFire": ["I_HI_EST_WARF","ASCVD_high"] 
+      }
+    },
+    {
+      "id": "case-02",
+      "inputs": { 
+        "age": 48, 
+        "sex": "female", 
+        "ASCVD": 4.2, 
+        "FRAX_major": 3.2, 
+        "GAIL_5yr": 1.0, 
+        "Wells": 1, 
+        "selected_medicine": "Herbal supplement (St John's Wort)", 
+        "current_medications": ["Combined oral contraceptive"], 
+        "conditions": [] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Warn: St John's Wort may reduce contraceptive efficacy (moderate interaction)", 
+        "mustFire": ["I_MOD_STJ_COC"] 
+      }
+    },
+    {
+      "id": "case-03",
+      "inputs": { 
+        "age": 55, 
+        "sex": "female", 
+        "ASCVD": 12, 
+        "FRAX_major": 8, 
+        "GAIL_5yr": 2.5, 
+        "Wells": 0, 
+        "selected_medicine": "Non-hormonal (SSRI)", 
+        "current_medications": [], 
+        "conditions": [] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Consider non-hormonal therapy (SSRI). Cardiology review for intermediate ASCVD.", 
+        "mustFire": ["ASCVD_intermediate"] 
+      }
+    },
+    {
+      "id": "case-04",
+      "inputs": { 
+        "age": 45, 
+        "sex": "female", 
+        "ASCVD": 2.1, 
+        "FRAX_major": 1.0, 
+        "GAIL_5yr": 0.8, 
+        "Wells": 0, 
+        "selected_medicine": "Combined oral contraceptive", 
+        "current_medications": [], 
+        "conditions": ["pregnancy"] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Do NOT prescribe (pregnancy)", 
+        "mustFire": ["C_ABS_PREGNANCY"] 
+      }
+    },
+    {
+      "id": "case-05",
+      "inputs": { 
+        "age": 70, 
+        "sex": "female", 
+        "ASCVD": 18, 
+        "FRAX_major": 25, 
+        "GAIL_5yr": 1.2, 
+        "Wells": 0, 
+        "selected_medicine": "Estrogen (systemic)", 
+        "current_medications": [], 
+        "conditions": ["none"] 
+      },
+      "expected": { 
+        "primaryRecommendation": "High fracture risk — prioritize bone protection; avoid estrogen-based HRT given FRAX", 
+        "mustFire": ["FRAX_high"] 
+      }
+    },
+    {
+      "id": "case-06",
+      "inputs": { 
+        "age": 58, 
+        "sex": "female", 
+        "ASCVD": 6.2, 
+        "FRAX_major": 9.0, 
+        "GAIL_5yr": 3.0, 
+        "Wells": 0, 
+        "selected_medicine": "Tamoxifen", 
+        "current_medications": ["Paroxetine (SSRI)"], 
+        "conditions": [] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Avoid paroxetine with tamoxifen (high interaction)", 
+        "mustFire": ["I_HI_PAX_TAM"] 
+      }
+    },
+    {
+      "id": "case-07",
+      "inputs": { 
+        "age": 50, 
+        "sex": "female", 
+        "ASCVD": 3.0, 
+        "FRAX_major": 2.0, 
+        "GAIL_5yr": 0.9, 
+        "Wells": 0, 
+        "selected_medicine": "Herbal supplement (general)", 
+        "current_medications": ["Warfarin"], 
+        "conditions": [] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Warn: herbal supplements may increase bleeding risk with warfarin", 
+        "mustFire": ["I_MOD_HERB_AC"] 
+      }
+    },
+    {
+      "id": "case-08",
+      "inputs": { 
+        "age": 66, 
+        "sex": "female", 
+        "ASCVD": 25.0, 
+        "FRAX_major": 15.0, 
+        "GAIL_5yr": 2.8, 
+        "Wells": 1, 
+        "selected_medicine": "Non-hormonal (SSRI)", 
+        "current_medications": [], 
+        "conditions": [] 
+      },
+      "expected": { 
+        "primaryRecommendation": "High ASCVD — avoid estrogen; recommend non-hormonal options", 
+        "mustFire": ["ASCVD_high"] 
+      }
+    },
+    {
+      "id": "case-09",
+      "inputs": { 
+        "age": 53, 
+        "sex": "female", 
+        "ASCVD": 9.0, 
+        "FRAX_major": 6.0, 
+        "GAIL_5yr": 2.0, 
+        "Wells": 3, 
+        "selected_medicine": "Estrogen (systemic)", 
+        "current_medications": [], 
+        "conditions": [] 
+      },
+      "expected": { 
+        "primaryRecommendation": "High VTE probability (Wells high) — DO NOT prescribe estrogen", 
+        "mustFire": ["WELLS_high"] 
+      }
+    },
+    {
+      "id": "case-10",
+      "inputs": { 
+        "age": 40, 
+        "sex": "female", 
+        "ASCVD": 1.0, 
+        "FRAX_major": 0.5, 
+        "GAIL_5yr": 0.4, 
+        "Wells": 0, 
+        "selected_medicine": "Combined oral contraceptive", 
+        "current_medications": [], 
+        "conditions": ["uncontrolled_hypertension"] 
+      },
+      "expected": { 
+        "primaryRecommendation": "Relative contraindication (uncontrolled hypertension) — use caution and treat BP first", 
+        "mustFire": ["C_REL_HTN"] 
+      }
+    }
+  ]
+}

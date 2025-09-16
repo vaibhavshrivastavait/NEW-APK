@@ -1,0 +1,161 @@
+{
+  "rules": [
+    {
+      "id": "hrt_contra_breast_cancer",
+      "conditions": {
+        "medicineType": "HRT",
+        "history.breastCancer_active": true
+      },
+      "action": {
+        "recommendation": "HRT is contraindicated due to active breast cancer. Immediate clinician referral required.",
+        "rationale": "Active breast cancer is an absolute contraindication for hormone replacement therapy.",
+        "confidence": 95,
+        "urgency": "high",
+        "category": "contraindication",
+        "references": ["NAMS Guidelines 2022", "ACOG Practice Bulletin"]
+      }
+    },
+    {
+      "id": "hrt_vte_history",
+      "conditions": {
+        "medicineType": "HRT",
+        "history.VTE": true
+      },
+      "action": {
+        "recommendation": "HRT is not recommended due to VTE history. Consider non-hormonal therapies after clinician review.",
+        "rationale": "Previous venous thromboembolism significantly increases risk of recurrence with hormone therapy.",
+        "confidence": 90,
+        "urgency": "medium",
+        "category": "contraindication",
+        "alternatives": ["Non-hormonal options", "Lifestyle modifications"],
+        "references": ["ESC Guidelines on VTE", "NAMS Position Statement"]
+      }
+    },
+    {
+      "id": "herbal_supplement_interaction",
+      "conditions": {
+        "medicineType": "HerbalSupplement",
+        "medicationListContains": ["warfarin", "clopidogrel", "aspirin"]
+      },
+      "action": {
+        "recommendation": "Potential herb-drug interaction detected. Discuss with clinician before starting herbal supplements.",
+        "rationale": "Many herbal supplements can affect anticoagulant medications and bleeding risk.",
+        "confidence": 85,
+        "urgency": "medium",
+        "category": "interaction",
+        "references": ["Natural Medicines Database"]
+      }
+    },
+    {
+      "id": "high_ascvd_hrt_caution",
+      "conditions": {
+        "medicineType": "HRT",
+        "riskScores.ASCVD": ">15"
+      },
+      "action": {
+        "recommendation": "Consider cardiology consultation before HRT initiation due to elevated cardiovascular risk.",
+        "rationale": "High ASCVD score indicates increased cardiovascular risk that may be further elevated with hormone therapy.",
+        "confidence": 80,
+        "urgency": "medium",
+        "category": "caution",
+        "alternatives": ["Non-hormonal therapies", "Lifestyle modifications"],
+        "references": ["AHA/ACC Cardiovascular Risk Guidelines"]
+      }
+    },
+    {
+      "id": "high_frax_bone_health",
+      "conditions": {
+        "riskScores.FRAX": ">20"
+      },
+      "action": {
+        "recommendation": "Consider referral to osteoporosis specialist for comprehensive bone health evaluation.",
+        "rationale": "High FRAX score indicates significant fracture risk requiring specialized assessment.",
+        "confidence": 85,
+        "urgency": "medium",
+        "category": "referral",
+        "alternatives": ["Calcium and Vitamin D supplementation", "Weight-bearing exercise"],
+        "references": ["IOF Guidelines", "NOGG Guidelines"]
+      }
+    },
+    {
+      "id": "high_wells_score",
+      "conditions": {
+        "riskScores.Wells": ">6"
+      },
+      "action": {
+        "recommendation": "Urgent thrombosis evaluation recommended. Contact clinician immediately.",
+        "rationale": "High Wells score suggests high probability of deep vein thrombosis requiring immediate assessment.",
+        "confidence": 95,
+        "urgency": "high",
+        "category": "urgent",
+        "references": ["Wells DVT Clinical Prediction Rule"]
+      }
+    },
+    {
+      "id": "ssri_interaction_check",
+      "conditions": {
+        "medicineType": "SSRI",
+        "currentMedications": ["warfarin", "tramadol", "triptans"]
+      },
+      "action": {
+        "recommendation": "Potential drug interactions with current medications. Discuss with clinician before SSRI initiation.",
+        "rationale": "SSRIs can interact with multiple medications affecting serotonin levels and bleeding risk.",
+        "confidence": 80,
+        "urgency": "medium",
+        "category": "interaction",
+        "references": ["FDA Drug Interaction Guidelines"]
+      }
+    },
+    {
+      "id": "elderly_renal_caution",
+      "conditions": {
+        "age": ">75",
+        "comorbidities.renalImpairment": true
+      },
+      "action": {
+        "recommendation": "Consider nephrology consultation for medication dosing in elderly patients with renal impairment.",
+        "rationale": "Advanced age and renal impairment require careful medication selection and dosing adjustments.",
+        "confidence": 75,
+        "urgency": "medium",
+        "category": "caution",
+        "references": ["AGS Beers Criteria", "Kidney Disease Guidelines"]
+      }
+    },
+    {
+      "id": "low_risk_lifestyle_first",
+      "conditions": {
+        "riskScores.ASCVD": "<7.5",
+        "symptoms.severity": "mild"
+      },
+      "action": {
+        "recommendation": "Consider lifestyle modifications as first-line approach given low cardiovascular risk and mild symptoms.",
+        "rationale": "Low-risk patients with mild symptoms may benefit from conservative management before pharmacological intervention.",
+        "confidence": 70,
+        "urgency": "low",
+        "category": "lifestyle",
+        "alternatives": ["Diet modifications", "Exercise program", "Stress management"],
+        "references": ["Lifestyle Medicine Guidelines"]
+      }
+    },
+    {
+      "id": "incomplete_data_generic",
+      "conditions": {
+        "dataCompleteness": "<80"
+      },
+      "action": {
+        "recommendation": "Complete additional assessments before generating specific recommendations. Generic lifestyle advice provided.",
+        "rationale": "Insufficient data prevents generation of personalized recommendations.",
+        "confidence": 60,
+        "urgency": "low",
+        "category": "incomplete",
+        "alternatives": ["Complete risk assessments", "Obtain missing laboratory values"]
+      }
+    }
+  ],
+  "config": {
+    "ENABLE_SPECIFIC_SUGGESTIONS": true,
+    "MIN_CONFIDENCE_THRESHOLD": 50,
+    "HIGH_URGENCY_THRESHOLD": 90,
+    "MEDIUM_URGENCY_THRESHOLD": 70
+  }
+}

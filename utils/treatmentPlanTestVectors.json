@@ -1,0 +1,446 @@
+{
+  "description": "QA Test Vectors for Treatment Plan Generator",
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-15",
+  "testScenarios": [
+    {
+      "id": "scenario_001",
+      "name": "Absolute Contraindication - Breast Cancer",
+      "description": "55yo with personal history of breast cancer and severe symptoms",
+      "input": {
+        "age": 55,
+        "gender": "female",
+        "personalHistoryBreastCancer": true,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "severe",
+        "genitourinarySymptoms": true,
+        "sleepDisturbance": true,
+        "moodSymptoms": false,
+        "patientPreference": "no_preference",
+        "bmi": 24,
+        "breastfeeding": false,
+        "timeSinceMenopause": 3,
+        "ascvdResult": {
+          "tenYearRisk": 8,
+          "riskCategory": "low"
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "no_hrt_contraindicated",
+        "primaryRecommendationTitle": "HRT Not Recommended",
+        "safetyLevel": "avoid",
+        "safetyColor": "red",
+        "expectedSafetyFlags": 1,
+        "expectedContraindications": ["Personal history of breast cancer"],
+        "expectedAlternatives": ["ssri_snri_alternative", "vaginal_estrogen_alternative"],
+        "triggeredRules": ["RULE_001"]
+      }
+    },
+    {
+      "id": "scenario_002", 
+      "name": "Absolute Contraindication - Active VTE",
+      "description": "50yo with personal history of DVT",
+      "input": {
+        "age": 50,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": true,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "moderate",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": true,
+        "moodSymptoms": true,
+        "patientPreference": "hormonal",
+        "bmi": 26,
+        "breastfeeding": false,
+        "timeSinceMenopause": 1
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "no_hrt_contraindicated",
+        "primaryRecommendationTitle": "HRT Not Recommended",
+        "safetyLevel": "avoid",
+        "safetyColor": "red",
+        "expectedSafetyFlags": 1,
+        "expectedContraindications": ["Personal history of venous thromboembolism"],
+        "expectedAlternatives": ["ssri_snri_alternative"],
+        "triggeredRules": ["RULE_002"]
+      }
+    },
+    {
+      "id": "scenario_003",
+      "name": "High ASCVD Risk",
+      "description": "60yo with high cardiovascular risk and moderate symptoms",
+      "input": {
+        "age": 60,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": true,
+        "diabetes": true,
+        "vasomotorSymptoms": "moderate",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": true,
+        "moodSymptoms": false,
+        "patientPreference": "no_preference",
+        "bmi": 28,
+        "breastfeeding": false,
+        "timeSinceMenopause": 8,
+        "ascvdResult": {
+          "tenYearRisk": 25,
+          "riskCategory": "high"
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "individualized_assessment",
+        "safetyLevel": "consider",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 1,
+        "expectedAlternatives": ["ssri_snri_alternative"],
+        "triggeredRules": ["RULE_101"]
+      }
+    },
+    {
+      "id": "scenario_004",
+      "name": "Low Risk with Severe Symptoms",
+      "description": "52yo healthy woman with severe vasomotor symptoms",
+      "input": {
+        "age": 52,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "severe",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": true,
+        "moodSymptoms": true,
+        "patientPreference": "hormonal",
+        "bmi": 23,
+        "breastfeeding": false,
+        "timeSinceMenopause": 2,
+        "ascvdResult": {
+          "tenYearRisk": 6,
+          "riskCategory": "low"
+        },
+        "wellsScore": 1
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "low_risk_severe_symptoms",
+        "primaryRecommendationTitle": "Consider systemic HRT",
+        "safetyLevel": "preferred",
+        "safetyColor": "green",
+        "expectedSafetyFlags": 0,
+        "expectedContraindications": [],
+        "expectedAlternatives": ["transdermal_alternative", "ssri_snri_alternative"],
+        "triggeredRules": ["RULE_201"]
+      }
+    },
+    {
+      "id": "scenario_005",
+      "name": "High Wells Score - VTE Risk",
+      "description": "58yo with high Wells score indicating VTE risk",
+      "input": {
+        "age": 58,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "moderate",
+        "genitourinarySymptoms": true,
+        "sleepDisturbance": false,
+        "moodSymptoms": false,
+        "patientPreference": "hormonal",
+        "bmi": 32,
+        "breastfeeding": false,
+        "timeSinceMenopause": 4,
+        "wellsScore": 7
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "individualized_assessment",
+        "safetyLevel": "consider",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 1,
+        "expectedAlternatives": ["transdermal_alternative", "vaginal_estrogen_alternative"],
+        "triggeredRules": ["RULE_102"]
+      }
+    },
+    {
+      "id": "scenario_006",
+      "name": "Smoking Over 35",
+      "description": "42yo smoker with moderate symptoms",
+      "input": {
+        "age": 42,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": true,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "moderate",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": true,
+        "moodSymptoms": false,
+        "patientPreference": "hormonal",
+        "bmi": 25,
+        "breastfeeding": false,
+        "timeSinceMenopause": 1,
+        "ascvdResult": {
+          "tenYearRisk": 4,
+          "riskCategory": "low"
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "individualized_assessment",
+        "safetyLevel": "consider",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 1,
+        "expectedContraindications": ["Smoking over age 35 (relative contraindication)"],
+        "expectedAlternatives": ["transdermal_alternative", "ssri_snri_alternative"],
+        "triggeredRules": ["RULE_103"]
+      }
+    },
+    {
+      "id": "scenario_007",
+      "name": "High FRAX Score",
+      "description": "65yo with high fracture risk but low other risks",
+      "input": {
+        "age": 65,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "mild",
+        "genitourinarySymptoms": true,
+        "sleepDisturbance": false,
+        "moodSymptoms": false,
+        "patientPreference": "no_preference",
+        "bmi": 21,
+        "breastfeeding": false,
+        "timeSinceMenopause": 12,
+        "ascvdResult": {
+          "tenYearRisk": 8,
+          "riskCategory": "low"
+        },
+        "fraxResult": {
+          "majorFractureRisk": 25,
+          "hipFractureRisk": 8
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "low_risk_mild_symptoms",
+        "safetyLevel": "alternative",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 1,
+        "expectedAlternatives": ["vaginal_estrogen_alternative"],
+        "triggeredRules": ["RULE_104", "RULE_203"]
+      }
+    },
+    {
+      "id": "scenario_008",
+      "name": "Drug Interaction Scenario",
+      "description": "55yo on multiple medications with potential interactions",
+      "input": {
+        "age": 55,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": true,
+        "diabetes": false,
+        "vasomotorSymptoms": "moderate",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": true,
+        "moodSymptoms": false,
+        "patientPreference": "hormonal",
+        "bmi": 27,
+        "breastfeeding": false,
+        "timeSinceMenopause": 3,
+        "currentMedications": ["warfarin", "phenytoin", "rifampin"],
+        "ascvdResult": {
+          "tenYearRisk": 12,
+          "riskCategory": "moderate"
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "moderate_risk_moderate_symptoms",
+        "safetyLevel": "consider",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 0,
+        "expectedAlternatives": ["ssri_snri_alternative"],
+        "triggeredRules": ["RULE_202"]
+      }
+    },
+    {
+      "id": "scenario_009",
+      "name": "Patient Preference Non-Pharmacologic",
+      "description": "48yo prefers non-medication approaches",
+      "input": {
+        "age": 48,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "mild",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": false,
+        "moodSymptoms": true,
+        "patientPreference": "minimal_medication",
+        "bmi": 24,
+        "breastfeeding": false,
+        "timeSinceMenopause": 1,
+        "ascvdResult": {
+          "tenYearRisk": 3,
+          "riskCategory": "low"
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "low_risk_mild_symptoms",
+        "safetyLevel": "alternative",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 0,
+        "expectedContraindications": [],
+        "expectedAlternatives": [],
+        "triggeredRules": ["RULE_203"]
+      }
+    },
+    {
+      "id": "scenario_010",
+      "name": "Elderly Patient with Comorbidities",
+      "description": "68yo with multiple comorbidities - edge case",
+      "input": {
+        "age": 68,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": true,
+        "diabetes": true,
+        "vasomotorSymptoms": "mild",
+        "genitourinarySymptoms": true,
+        "sleepDisturbance": false,
+        "moodSymptoms": false,
+        "patientPreference": "no_preference",
+        "bmi": 29,
+        "breastfeeding": false,
+        "timeSinceMenopause": 15,
+        "ascvdResult": {
+          "tenYearRisk": 18,
+          "riskCategory": "moderate"
+        },
+        "framinghamResult": {
+          "tenYearRisk": 22,
+          "riskCategory": "moderate"
+        }
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "individualized_assessment",
+        "safetyLevel": "consider",
+        "safetyColor": "yellow",
+        "expectedSafetyFlags": 0,
+        "expectedAlternatives": ["vaginal_estrogen_alternative"],
+        "triggeredRules": ["DEFAULT_RULE"]
+      }
+    },
+    {
+      "id": "scenario_011",
+      "name": "Unexplained Vaginal Bleeding",
+      "description": "52yo with unexplained bleeding requiring investigation",
+      "input": {
+        "age": 52,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": true,
+        "liverDisease": false,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "severe",
+        "genitourinarySymptoms": false,
+        "sleepDisturbance": true,
+        "moodSymptoms": false,
+        "patientPreference": "hormonal",
+        "bmi": 25,
+        "breastfeeding": false,
+        "timeSinceMenopause": 2
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "no_hrt_contraindicated",
+        "primaryRecommendationTitle": "HRT Not Recommended",
+        "safetyLevel": "avoid",
+        "safetyColor": "red",
+        "expectedSafetyFlags": 1,
+        "expectedContraindications": ["Unexplained vaginal bleeding"],
+        "expectedAlternatives": [],
+        "triggeredRules": ["RULE_003"]
+      }
+    },
+    {
+      "id": "scenario_012",
+      "name": "Active Liver Disease",
+      "description": "50yo with active liver disease",
+      "input": {
+        "age": 50,
+        "gender": "female",
+        "personalHistoryBreastCancer": false,
+        "personalHistoryDVT": false,
+        "unexplainedVaginalBleeding": false,
+        "liverDisease": true,
+        "smoking": false,
+        "hypertension": false,
+        "diabetes": false,
+        "vasomotorSymptoms": "moderate",
+        "genitourinarySymptoms": true,
+        "sleepDisturbance": true,
+        "moodSymptoms": true,
+        "patientPreference": "hormonal",
+        "bmi": 26,
+        "breastfeeding": false,
+        "timeSinceMenopause": 3
+      },
+      "expectedOutput": {
+        "primaryRecommendationType": "no_hrt_contraindicated",
+        "primaryRecommendationTitle": "HRT Not Recommended",
+        "safetyLevel": "avoid",
+        "safetyColor": "red",
+        "expectedSafetyFlags": 1,
+        "expectedContraindications": ["Active liver disease"],
+        "expectedAlternatives": ["ssri_snri_alternative", "vaginal_estrogen_alternative"],
+        "triggeredRules": ["RULE_004"]
+      }
+    }
+  ]
+}

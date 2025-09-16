@@ -1,0 +1,63 @@
+{
+  "priorities": ["contraindication", "high_risk", "drug_interaction", "moderate_risk", "default"],
+  "contraindication": [
+    {
+      "id": "active_breast_cancer",
+      "condition": { "breast_cancer_active": true },
+      "action": { "recommendation": "Avoid systemic estrogen and combined HRT", "suitability": "Contraindicated", "rationale": "Active breast cancer is a contraindication to systemic estrogen/progestogen therapy." }
+    },
+    {
+      "id": "recent_vte",
+      "condition": { "Wells_category": "high", "wells_recent_event": true },
+      "action": { "recommendation": "Avoid oral estrogen; consider non-hormonal or transdermal if necessary", "suitability": "Contraindicated", "rationale": "Recent VTE is a contraindication to systemic estrogen." }
+    }
+  ],
+  "high_risk": [
+    {
+      "id": "ascvd_high",
+      "condition": { "ASCVD_category": "high" },
+      "action": { "recommendation": "Prefer non-hormonal therapies; if HRT required, use lowest effective dose, consider transdermal", "suitability": "Use with caution", "rationale": "High ASCVD risk increases cardiovascular events with systemic HRT; prefer non-hormonal options." }
+    },
+    {
+      "id": "breast_high",
+      "condition": { "Gail_category": "high", "TyrerCuzick_category": "high" },
+      "action": { "recommendation": "Avoid estrogen-based therapies; consider non-hormonal options and specialist referral", "suitability": "Contraindicated", "rationale": "High breast cancer risk — avoid estrogen exposure." }
+    },
+    {
+      "id": "frx_high",
+      "condition": { "FRAX_category": "high" },
+      "action": { "recommendation": "Prioritize osteoporosis therapy (bisphosphonate/denosumab as appropriate) and bone protective measures", "suitability": "Suitable (for osteoporosis therapy)", "rationale": "High FRAX risk requires fracture prevention therapy." }
+    }
+  ],
+  "drug_interaction": [
+    {
+      "id": "anticoagulant_vs_estrogen",
+      "condition": { "meds_include": "anticoagulants", "therapy_selected": ["estrogen_oral", "estrogen_systemic"] },
+      "action": { "recommendation": "Avoid systemic estrogen; prefer non-hormonal or consult specialist", "suitability": "Contraindicated", "rationale": "Anticoagulants increase bleeding risk; systemic estrogen may increase risk." }
+    },
+    {
+      "id": "anticonvulsant_vs_estrogen",
+      "condition": { "meds_include": "anticonvulsants", "therapy_selected": ["estrogen_oral"] },
+      "action": { "recommendation": "Estrogen efficacy may be reduced; consider transdermal or adjust plan", "suitability": "Use with caution", "rationale": "Certain anticonvulsants induce hepatic enzymes that reduce oral estrogen levels." }
+    }
+  ],
+  "moderate_risk": [
+    {
+      "id": "ascvd_intermediate",
+      "condition": { "ASCVD_category": "intermediate" },
+      "action": { "recommendation": "Consider risk factors modification; if HRT needed, consider transdermal", "suitability": "Use with caution", "rationale": "Intermediate CVD risk — weigh benefits vs risk and favor transdermal." }
+    }
+  ],
+  "default": [
+    {
+      "id": "general_mild_symptoms",
+      "condition": { "symptom_severity": { "lte": 3 } },
+      "action": { "recommendation": "Offer lifestyle measures, non-hormonal symptomatic therapy", "suitability": "Suitable", "rationale": "Mild symptoms — conservative measures first." }
+    },
+    {
+      "id": "general_moderate_severe",
+      "condition": { "symptom_severity": { "gte": 4 } },
+      "action": { "recommendation": "Consider HRT if no contraindication; choose route per VTE/CVD risk", "suitability": "Suitable", "rationale": "Moderate to severe symptoms may benefit from HRT when safe." }
+    }
+  ]
+}

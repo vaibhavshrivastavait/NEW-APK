@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "contraindications": [
+    { 
+      "id": "C_ABS_BREAST_CANCER", 
+      "condition": "active_breast_cancer", 
+      "type": "absolute", 
+      "message": "Active breast cancer — DO NOT prescribe HRT." 
+    },
+    { 
+      "id": "C_ABS_VTE", 
+      "condition": "active_vte", 
+      "type": "absolute", 
+      "message": "Active VTE/DVT/PE — DO NOT prescribe systemic estrogen." 
+    },
+    { 
+      "id": "C_ABS_PREGNANCY", 
+      "condition": "pregnancy", 
+      "type": "absolute", 
+      "message": "Pregnancy — DO NOT prescribe HRT." 
+    },
+    { 
+      "id": "C_REL_HTN", 
+      "condition": "uncontrolled_hypertension", 
+      "type": "relative", 
+      "message": "Uncontrolled hypertension — use caution and treat BP first." 
+    },
+    { 
+      "id": "C_REL_LIVER", 
+      "condition": "severe_liver_disease", 
+      "type": "relative", 
+      "message": "Severe hepatic impairment — avoid systemic HRT." 
+    }
+  ]
+}

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHT Assessment - Clinical Decision Support</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #FFF0F5;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .app-container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: white;
+            height: 100vh;
+            overflow-y: auto;
+            border-left: 1px solid #e0e0e0;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .header {
+            background: #D81B60;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        
+        .navigation-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 390px;
+            width: 100%;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            padding: 12px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 100;
+        }
+        
+        .nav-button {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-button.active {
+            color: #D81B60;
+            background: #FFF0F5;
+        }
+        
+        .nav-button:hover {
+            background: #f5f5f5;
+        }
+        
+        .nav-icon {
+            font-size: 18px;
+        }
+        
+        .screen-container {
+            min-height: calc(100vh - 160px);
+        }
+        
+        /* Home Screen Styles */
+        .home-welcome {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .welcome-icon {
+            background: white;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            font-size: 40px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        
+        .primary-button {
+            background: #D81B60;
+            color: white;
+            border: none;
+            padding: 18px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .primary-button:hover {
+            background: #C2185B;
+        }
+        
+        .secondary-button {
+            background: white;
+            color: #D81B60;
+            border: 2px solid #FFC1CC;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-button:hover {
+            background: #FFF0F5;
+        }
+        
+        /* Patient Details Styles */
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 8px;
+        }
+        
+        .calculator-section {
+            margin-bottom: 20px;
+        }
+        
+        .calculator-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .calculator-grid {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .calculator-item {
+            flex: 1;
+            background: #f9f9f9;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .calculator-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .calculator-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .calculator-category {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .category-low {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .category-moderate {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .category-high {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .alert-item {
+            display: flex;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 1px solid;
+        }
+        
+        .alert-relative {
+            background-color: #fff3e0;
+            border-color: #FF9800;
+        }
+        
+        .alert-content {
+            flex: 1;
+            margin-left: 12px;
+        }
+        
+        .alert-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        
+        .alert-message {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .recommendation-item {
+            background: #f9f9f9;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .recommendation-text {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .patient-info {
+            background: #e3f2fd;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .patient-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+        
+        .patient-details {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* CME Screen Styles */
+        .cme-overview {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #D81B60;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .module-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .module-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+        
+        .module-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .action-button {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+        
+        .learn-button {
+            background: #FFF5F7;
+            color: #D81B60;
+            border: 1px solid #D81B60;
+        }
+        
+        .quiz-button {
+            background: #D81B60;
+            color: white;
+        }
+        
+        /* Guidelines Screen */
+        .guideline-item {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .guideline-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .guideline-text {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* Back button */
+        .back-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 18px;
+            color: #D81B60;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Sample patient data
+        const samplePatient = {
+            name: "Sarah M.",
+            age: 58,
+            weight: 78,
+            height: 165,
+            bmi: 28.5,
+            menopausalStatus: "postmenopausal",
+            smoking: false,
+            diabetes: false,
+            hypertension: true,
+            familyHistoryBreastCancer: true,
+            personalHistoryBreastCancer: false,
+            personalHistoryDVT: false,
+            thrombophilia: false,
+            hysterectomy: false
+        };
+
+        // Risk calculation results (simulated)
+        const riskResults = {
+            framingham: { risk: 12.1, category: 'Intermediate' },
+            ascvd: { risk: 8.2, category: 'Intermediate' },
+            gail: { risk: 2.8, category: 'Moderate' },
+            tyrerCuzick: { risk: 4.2, category: 'Moderate' },
+            wells: { score: 2, category: 'Low' },
+            frax: { majorFractureRisk: 8.5, category: 'Low' }
+        };
+
+        // CME modules data
+        const cmeModules = [
+            {
+                id: 1,
+                title: "Introduction to MHT",
+                description: "Fundamental concepts of menopausal hormone therapy",
+                credits: 2,
+                estimatedMinutes: 30,
+                completed: false
+            },
+            {
+                id: 2,
+                title: "Risk Assessment in MHT",
+                description: "Clinical decision making and risk stratification",
+                credits: 3,
+                estimatedMinutes: 45,
+                completed: true,
+                score: 85
+            }
+        ];
+
+        function MHTAssessmentApp() {
+            const [currentScreen, setCurrentScreen] = useState('home');
+            const [loading, setLoading] = useState(false);
+
+            const navigateTo = (screen) => {
+                setLoading(true);
+                setTimeout(() => {
+                    setCurrentScreen(screen);
+                    setLoading(false);
+                }, 300);
+            };
+
+            const getCategoryStyle = (category) => {
+                switch (category.toLowerCase()) {
+                    case 'low': return 'category-low';
+                    case 'moderate':
+                    case 'intermediate': return 'category-moderate';
+                    case 'high': return 'category-high';
+                    default: return 'category-moderate';
+                }
+            };
+
+            const renderNavigation = () => (
+                <div className="navigation-bar">
+                    <button 
+                        className={`nav-button ${currentScreen === 'home' ? 'active' : ''}`}
+                        onClick={() => navigateTo('home')}
+                    >
+                        <span className="nav-icon">🏠</span>
+                        <span>Home</span>
+                    </button>
+                    <button 
+                        className={`nav-button ${currentScreen === 'patients' ? 'active' : ''}`}
+                        onClick={() => navigateTo('patients')}
+                    >
+                        <span className="nav-icon">👥</span>
+                        <span>Patients</span>
+                    </button>
+                    <button 
+                        className={`nav-button ${currentScreen === 'guidelines' ? 'active' : ''}`}
+                        onClick={() => navigateTo('guidelines')}
+                    >
+                        <span className="nav-icon">📚</span>
+                        <span>Guidelines</span>
+                    </button>
+                    <button 
+                        className={`nav-button ${currentScreen === 'cme' ? 'active' : ''}`}
+                        onClick={() => navigateTo('cme')}
+                    >
+                        <span className="nav-icon">🎓</span>
+                        <span>CME</span>
+                    </button>
+                </div>
+            );
+
+            const renderHomeScreen = () => (
+                <div className="screen-container">
+                    <div className="home-welcome">
+                        <div className="welcome-icon">🏥</div>
+                        <h2 style={{color: '#D81B60', marginBottom: '8px'}}>MHT Assessment</h2>
+                        <p style={{color: '#666', lineHeight: '1.4'}}>
+                            Professional clinical decision support for menopausal hormone therapy
+                        </p>
+                    </div>
+                    
+                    <div className="action-buttons">
+                        <button className="primary-button" onClick={() => navigateTo('assessment')}>
+                            <span>📝</span>
+                            Start New Assessment
+                        </button>
+                        <button className="secondary-button" onClick={() => navigateTo('patients')}>
+                            <span>👥</span>
+                            Patient Records
+                        </button>
+                        <button className="secondary-button" onClick={() => navigateTo('guidelines')}>
+                            <span>📚</span>
+                            MHT Guidelines
+                        </button>
+                        <button className="secondary-button" onClick={() => navigateTo('cme')}>
+                            <span>🎓</span>
+                            CME Mode
+                        </button>
+                    </div>
+                </div>
+            );
+
+            const renderPatientScreen = () => (
+                <div className="screen-container">
+                    <button className="back-button" onClick={() => navigateTo('home')}>←</button>
+                    <div className="patient-info">
+                        <div className="patient-name">{samplePatient.name}, Age {samplePatient.age}</div>
+                        <div className="patient-details">
+                            {samplePatient.menopausalStatus} • BMI {samplePatient.bmi} • Height {samplePatient.height}cm • Weight {samplePatient.weight}kg
+                        </div>
+                    </div>
+
+                    {/* Risk Calculators */}
+                    <div className="section">
+                        <div className="section-header">
+                            <span style={{fontSize: '24px'}}>📊</span>
+                            <h2 className="section-title">Risk Calculators</h2>
+                        </div>
+                        
+                        <div className="calculator-section">
+                            <h3 className="calculator-title">Cardiovascular Risk Assessment</h3>
+                            <div className="calculator-grid">
+                                <div className="calculator-item">
+                                    <div className="calculator-label">ASCVD Score</div>
+                                    <div className="calculator-value">{riskResults.ascvd.risk}%</div>
+                                    <span className={`calculator-category ${getCategoryStyle(riskResults.ascvd.category)}`}>
+                                        {riskResults.ascvd.category}
+                                    </span>
+                                </div>
+                                <div className="calculator-item">
+                                    <div className="calculator-label">Framingham Score</div>
+                                    <div className="calculator-value">{riskResults.framingham.risk}%</div>
+                                    <span className={`calculator-category ${getCategoryStyle(riskResults.framingham.category)}`}>
+                                        {riskResults.framingham.category}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="calculator-section">
+                            <h3 className="calculator-title">Breast Cancer Risk Assessment</h3>
+                            <div className="calculator-grid">
+                                <div className="calculator-item">
+                                    <div className="calculator-label">Gail Risk</div>
+                                    <div className="calculator-value">{riskResults.gail.risk}%</div>
+                                    <span className={`calculator-category ${getCategoryStyle(riskResults.gail.category)}`}>
+                                        {riskResults.gail.category}
+                                    </span>
+                                </div>
+                                <div className="calculator-item">
+                                    <div className="calculator-label">Tyrer-Cuzick Risk</div>
+                                    <div className="calculator-value">{riskResults.tyrerCuzick.risk}%</div>
+                                    <span className={`calculator-category ${getCategoryStyle(riskResults.tyrerCuzick.category)}`}>
+                                        {riskResults.tyrerCuzick.category}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="calculator-section">
+                            <h3 className="calculator-title">VTE & Fracture Risk Assessment</h3>
+                            <div className="calculator-grid">
+                                <div className="calculator-item">
+                                    <div className="calculator-label">Wells VTE Score</div>
+                                    <div className="calculator-value">{riskResults.wells.score}</div>
+                                    <span className={`calculator-category ${getCategoryStyle(riskResults.wells.category)}`}>
+                                        {riskResults.wells.category}
+                                    </span>
+                                </div>
+                                <div className="calculator-item">
+                                    <div className="calculator-label">FRAX 10-Year Risk</div>
+                                    <div className="calculator-value">{riskResults.frax.majorFractureRisk}%</div>
+                                    <span className={`calculator-category ${getCategoryStyle(riskResults.frax.category)}`}>
+                                        {riskResults.frax.category}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Clinical Alerts */}
+                    <div className="section">
+                        <div className="section-header">
+                            <span style={{fontSize: '24px'}}>⚠️</span>
+                            <h2 className="section-title">Clinical Alerts</h2>
+                        </div>
+                        
+                        <div className="alert-item alert-relative">
+                            <span style={{fontSize: '20px'}}>⚠️</span>
+                            <div className="alert-content">
+                                <div className="alert-title">CAUTION: Family History of Breast Cancer</div>
+                                <div className="alert-message">Strong family history increases risk with HRT use. Consider genetic counseling and enhanced surveillance.</div>
+                            </div>
+                        </div>
+                        
+                        <div className="alert-item alert-relative">
+                            <span style={{fontSize: '20px'}}>🩺</span>
+                            <div className="alert-content">
+                                <div className="alert-title">CAUTION: Hypertension</div>
+                                <div className="alert-message">Ensure optimal BP control before initiating HRT. Monitor closely during treatment.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Treatment Recommendations */}
+                    <div className="section">
+                        <div className="section-header">
+                            <span style={{fontSize: '24px'}}>💊</span>
+                            <h2 className="section-title">Treatment Recommendations</h2>
+                        </div>
+                        
+                        <div className="recommendation-item">
+                            <div className="recommendation-text">Combined estrogen-progestogen therapy (EPT) required for uterine protection</div>
+                        </div>
+                        
+                        <div className="recommendation-item">
+                            <div className="recommendation-text">Transdermal route preferred to minimize VTE risk</div>
+                        </div>
+                        
+                        <div className="recommendation-item">
+                            <div className="recommendation-text">Micronized progesterone preferred for lower VTE risk</div>
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const renderCmeScreen = () => (
+                <div className="screen-container">
+                    <button className="back-button" onClick={() => navigateTo('home')}>←</button>
+                    
+                    <div className="cme-overview">
+                        <h3 style={{color: '#D81B60', marginBottom: '16px'}}>Your Progress</h3>
+                        <div className="stats-row">
+                            <div className="stat-item">
+                                <div className="stat-number">3</div>
+                                <div className="stat-label">Credits Earned</div>
+                            </div>
+                            <div className="stat-item">
+                                <div className="stat-number">50%</div>
+                                <div className="stat-label">Complete</div>
+                            </div>
+                            <div className="stat-item">
+                                <div className="stat-number">Today</div>
+                                <div className="stat-label">Last Activity</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style={{color: '#D81B60', marginBottom: '16px'}}>Learning Modules</h3>
+                    
+                    {cmeModules.map(module => (
+                        <div key={module.id} className="module-card">
+                            <div className="module-header">
+                                <span style={{color: module.completed ? '#4CAF50' : '#D81B60'}}>
+                                    {module.completed ? '✅' : '📖'}
+                                </span>
+                                <span style={{fontSize: '12px', color: '#666'}}>
+                                    {module.credits} Credit{module.credits !== 1 ? 's' : ''}
+                                </span>
+                            </div>
+                            <div className="module-title">{module.title}</div>
+                            <div className="module-description">{module.description}</div>
+                            <div style={{fontSize: '12px', color: '#999', marginBottom: '12px'}}>
+                                ~{module.estimatedMinutes} min
+                                {module.completed && ` • Score: ${module.score}%`}
+                            </div>
+                            <div className="module-actions">
+                                <button className="action-button learn-button">
+                                    {module.completed ? 'Review' : 'Start'}
+                                </button>
+                                <button className="action-button quiz-button">
+                                    Take Quiz
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            );
+
+            const renderGuidelinesScreen = () => (
+                <div className="screen-container">
+                    <button className="back-button" onClick={() => navigateTo('home')}>←</button>
+                    
+                    <h3 style={{color: '#D81B60', marginBottom: '16px'}}>MHT Clinical Guidelines</h3>
+                    
+                    <div className="guideline-item">
+                        <div className="guideline-title">IMS Guidelines 2023</div>
+                        <div className="guideline-text">
+                            Latest International Menopause Society recommendations for hormone therapy initiation, contraindications, and monitoring.
+                        </div>
+                    </div>
+                    
+                    <div className="guideline-item">
+                        <div className="guideline-title">NAMS Position Statement</div>
+                        <div className="guideline-text">
+                            North American Menopause Society evidence-based recommendations for menopause management and hormone therapy.
+                        </div>
+                    </div>
+                    
+                    <div className="guideline-item">
+                        <div className="guideline-title">Risk Stratification Protocol</div>
+                        <div className="guideline-text">
+                            Systematic approach to cardiovascular, breast cancer, VTE, and fracture risk assessment in perimenopausal and postmenopausal women.
+                        </div>
+                    </div>
+                    
+                    <div className="guideline-item">
+                        <div className="guideline-title">Treatment Individualization</div>
+                        <div className="guideline-text">
+                            Evidence-based approach to personalizing hormone therapy based on individual risk profile, symptoms, and preferences.
+                        </div>
+                    </div>
+                </div>
+            );
+
+            const renderAssessmentScreen = () => (
+                <div className="screen-container">
+                    <button className="back-button" onClick={() => navigateTo('home')}>←</button>
+                    <div style={{textAlign: 'center', padding: '40px 20px'}}>
+                        <div style={{fontSize: '60px', marginBottom: '20px'}}>📝</div>
+                        <h3 style={{color: '#D81B60', marginBottom: '16px'}}>Patient Assessment</h3>
+                        <p style={{color: '#666', lineHeight: '1.4', marginBottom: '24px'}}>
+                            Complete assessment workflow includes demographics, symptoms evaluation, risk factors assessment, and clinical decision support.
+                        </p>
+                        <button className="primary-button" onClick={() => navigateTo('patients')}>
+                            View Sample Patient with Risk Analysis
+                        </button>
+                    </div>
+                </div>
+            );
+
+            const renderCurrentScreen = () => {
+                if (loading) {
+                    return <div className="loading">Loading...</div>;
+                }
+
+                switch (currentScreen) {
+                    case 'home': return renderHomeScreen();
+                    case 'patients': return renderPatientScreen();
+                    case 'cme': return renderCmeScreen();
+                    case 'guidelines': return renderGuidelinesScreen();
+                    case 'assessment': return renderAssessmentScreen();
+                    default: return renderHomeScreen();
+                }
+            };
+
+            return (
+                <div className="app-container">
+                    <div className="header" style={{position: 'relative'}}>
+                        <h1>🏥 MHT Assessment</h1>
+                        <p>Clinical Decision Support System</p>
+                    </div>
+                    
+                    <div className="content">
+                        {renderCurrentScreen()}
+                    </div>
+                    
+                    {renderNavigation()}
+                </div>
+            );
+        }
+
+        ReactDOM.render(<MHTAssessmentApp />, document.getElementById('app'));
+    </script>
+</body>
+</html>

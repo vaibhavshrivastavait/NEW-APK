@@ -1,0 +1,54 @@
+# ================================
+# MHT Assessment Final APK Repository - .gitignore
+# Complete project with AsyncStorage fixes
+# ================================
+
+# Dependencies (will be installed with npm/yarn install)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Expo cache and build outputs
+.expo/
+.expo-shared/
+.metro-cache/
+dist/
+web-build/
+
+# Android build cache (keep project structure)
+android/app/build/
+android/build/
+android/.gradle/
+
+# iOS build cache
+ios/build/
+ios/Pods/
+
+# Cache and temporary files
+.cache/
+tmp/
+.tmp/
+*.log
+*.tmp
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Keep all essential files:
+# ✅ All source code (.tsx, .ts, .jsx, .js)
+# ✅ All configuration files (.json, .xml, .gradle)
+# ✅ All documentation (.md files)
+# ✅ All assets (images, data files)
+# ✅ Android project structure
+# ✅ AsyncStorage fixes and utilities
+

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHT Assessment - Drug Interaction Checker Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #F5F5F5;
+            max-width: 390px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 16px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #D81B60;
+            margin: 8px 0;
+        }
+        .header-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .section-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        .category-card {
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left-width: 4px;
+        }
+        .category-card:hover {
+            border-color: #D81B60;
+            background-color: #FFF5F7;
+        }
+        .category-card.selected {
+            border-color: #D81B60;
+            background-color: #FFF5F7;
+        }
+        .category-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+        .category-card.selected .category-title {
+            color: #D81B60;
+        }
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .checking-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        .checking-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background: #F9F9F9;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .status-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        .drug-info {
+            flex: 1;
+        }
+        .drug-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .legend-section {
+            background: #F9F9F9;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .legend-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .legend-circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+        .legend-label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .legend-description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        .disclaimer-section {
+            background: #FFF8E1;
+            border-left: 4px solid #FF9800;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+        .disclaimer-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #E65100;
+            margin-bottom: 8px;
+        }
+        .disclaimer-text {
+            font-size: 12px;
+            color: #BF360C;
+            line-height: 1.5;
+        }
+        .disclaimer-bold {
+            font-weight: bold;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="font-size: 32px; color: #667eea;">🏥</div>
+        <div class="header-title">Drug Interaction Checker</div>
+        <div class="header-subtitle">Professional Category-Based Assessment</div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Primary Treatment Categories</div>
+        <div class="section-subtitle">Select your main treatment category</div>
+        
+        <div class="category-card" onclick="selectMain('hrt')" id="main-hrt" style="border-left-color: #E91E63;">
+            <div class="category-title">Hormone Replacement Therapy (HRT)</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Optional Medicines</div>
+        <div class="section-subtitle">Select medicines to check for interactions</div>
+        
+        <div class="category-card" onclick="toggleOptional('anticoagulants')" id="opt-anticoagulants" style="border-left-color: #9C27B0;">
+            <div class="category-title">Anticoagulants</div>
+        </div>
+        
+        <div class="category-card" onclick="toggleOptional('nsaids')" id="opt-nsaids" style="border-left-color: #FF9800;">
+            <div class="category-title">NSAIDs</div>
+        </div>
+    </div>
+
+    <div class="results-section hidden" id="results">
+        <div class="checking-title">Checking</div>
+        <div class="section-subtitle">Displaying severity for each selected optional medicine (1:1 mapping)</div>
+        
+        <div id="results-container">
+            <!-- Results will be populated here -->
+        </div>
+
+        <!-- Severity Legend -->
+        <div class="legend-section">
+            <div class="legend-title">Severity Legend</div>
+            
+            <div class="legend-item">
+                <div class="legend-circle" style="background-color: #FFC107;"></div>
+                <div>
+                    <div class="legend-label">LOW</div>
+                    <div class="legend-description">
+                        Minimal clinical concern. Interaction is unlikely to cause harm but may need awareness or routine monitoring.
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-circle" style="background-color: #FF9800;"></div>
+                <div>
+                    <div class="legend-label">MODERATE</div>
+                    <div class="legend-description">
+                        Potentially significant. Interaction may require dose adjustment, monitoring, or considering an alternative if risk factors present.
+                    </div>
+                </div>
+            </div>
+
+            <div class="legend-item">
+                <div class="legend-circle" style="background-color: #F44336;"></div>
+                <div>
+                    <div class="legend-label">HIGH</div>
+                    <div class="legend-description">
+                        Clinically serious. Interaction may be dangerous, should usually be avoided, or requires close supervision if unavoidable.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Section -->
+        <div class="disclaimer-section">
+            <div class="disclaimer-title">Disclaimer</div>
+            <div class="disclaimer-text">
+                The severity ratings shown (Low / Moderate / High) represent <span class="disclaimer-bold">1:1 interactions between a main medicine and each optional medicine</span>. They are not cumulative or combined effects. Clinical judgment is required to interpret results in the context of the full patient profile. This tool does not replace professional medical advice.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Drug interaction data
+        const interactions = [
+            {
+                "primary": "Hormone Replacement Therapy (HRT)",
+                "interaction_with": "Anticoagulants",
+                "severity": "HIGH",
+                "rationale": "Increased risk of clotting and altered INR stability",
+                "recommended_action": "Avoid or monitor INR closely"
+            },
+            {
+                "primary": "Hormone Replacement Therapy (HRT)",
+                "interaction_with": "NSAIDs",
+                "severity": "LOW",
+                "rationale": "Minor bleeding risk when used alone",
+                "recommended_action": "Caution if combined with anticoagulants"
+            }
+        ];
+
+        let selectedMain = null;
+        let selectedOptionals = [];
+
+        function selectMain(medicine) {
+            selectedMain = medicine;
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById('main-' + medicine).classList.add('selected');
+            updateResults();
+        }
+
+        function toggleOptional(medicine) {
+            const index = selectedOptionals.indexOf(medicine);
+            const card = document.getElementById('opt-' + medicine);
+            
+            if (index > -1) {
+                selectedOptionals.splice(index, 1);
+                card.classList.remove('selected');
+            } else {
+                selectedOptionals.push(medicine);
+                card.classList.add('selected');
+            }
+            updateResults();
+        }
+
+        function getSeverityColor(severity) {
+            switch (severity.toUpperCase()) {
+                case 'LOW': return '#FFC107';
+                case 'MODERATE': return '#FF9800';
+                case 'HIGH': return '#F44336';
+                default: return '#9E9E9E';
+            }
+        }
+
+        function getMedicineName(key) {
+            const names = {
+                'anticoagulants': 'Anticoagulants',
+                'nsaids': 'NSAIDs'
+            };
+            return names[key] || key;
+        }
+
+        function updateResults() {
+            const resultsDiv = document.getElementById('results');
+            const resultsContainer = document.getElementById('results-container');
+            
+            if (!selectedMain || selectedOptionals.length === 0) {
+                resultsDiv.classList.add('hidden');
+                return;
+            }
+
+            resultsDiv.classList.remove('hidden');
+            resultsContainer.innerHTML = '';
+
+            selectedOptionals.forEach(optional => {
+                const medicineName = getMedicineName(optional);
+                const interaction = interactions.find(i => 
+                    i.primary === "Hormone Replacement Therapy (HRT)" && 
+                    i.interaction_with === medicineName
+                );
+
+                const severity = interaction ? interaction.severity : 'UNKNOWN';
+                const color = getSeverityColor(severity);
+
+                const resultHTML = `
+                    <div class="checking-item">
+                        <div class="status-icon" style="background-color: ${color};"></div>
+                        <div class="drug-info">
+                            <div class="drug-name">${medicineName}</div>
+                            <div class="severity-badge" style="background-color: ${color};">
+                                ${severity}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                resultsContainer.innerHTML += resultHTML;
+            });
+        }
+    </script>
+</body>
+</html>

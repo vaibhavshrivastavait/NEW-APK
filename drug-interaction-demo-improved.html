@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHT Assessment - Improved Drug Interaction UI</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #F5F5F5;
+            max-width: 390px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+            padding: 16px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #D81B60;
+            margin: 8px 0;
+        }
+        .header-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .section-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+        .checking-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        /* New improved checking item layout */
+        .checking-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .medicine-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .medicine-name-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            margin-right: 16px;
+            min-width: 200px;
+        }
+        
+        .status-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        
+        .drug-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212529;
+            flex: 1;
+        }
+        
+        .severity-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            min-width: 80px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .text-block {
+            margin-top: 4px;
+            padding-left: 24px; /* Align with medicine name */
+        }
+        
+        .rationale-and-action {
+            font-size: 12px;
+            line-height: 18px;
+        }
+        
+        .rationale {
+            color: #666666;
+            font-style: italic;
+        }
+        
+        .action-label {
+            font-weight: bold;
+            color: #E91E63;
+        }
+        
+        .action-text {
+            color: #333333;
+        }
+        
+        /* Severity colors with proper contrast */
+        .severity-low {
+            background-color: #FFD966;
+            color: #6B4800;
+        }
+        
+        .severity-moderate {
+            background-color: #F4B183;
+            color: #5A2E00;
+        }
+        
+        .severity-high {
+            background-color: #E74C3C;
+            color: #FFFFFF;
+        }
+        
+        .disclaimer-section {
+            background: #FFF8E1;
+            border-left: 4px solid #FF9800;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+        
+        .disclaimer-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #E65100;
+            margin-bottom: 8px;
+        }
+        
+        .disclaimer-text {
+            font-size: 12px;
+            color: #BF360C;
+            line-height: 1.5;
+        }
+        
+        .disclaimer-bold {
+            font-weight: bold;
+        }
+        
+        /* Responsive behavior for narrow screens */
+        @media (max-width: 350px) {
+            .medicine-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .medicine-name-container {
+                margin-right: 0;
+                margin-bottom: 8px;
+                min-width: auto;
+            }
+            
+            .severity-badge {
+                align-self: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div style="font-size: 32px; color: #667eea;">🏥</div>
+        <div class="header-title">Drug Interaction Checker</div>
+        <div class="header-subtitle">Improved UI with Better Spacing</div>
+    </div>
+
+    <div class="section">
+        <div class="checking-title">Checking</div>
+        <div class="section-subtitle">Displaying severity for each selected optional medicine (1:1 mapping)</div>
+        
+        <!-- Example 1: HIGH severity with rationale and action -->
+        <div class="checking-item" role="listitem" aria-label="Anticoagulants. Severity: High. Increased risk of clotting and altered INR stability. Action: Avoid or monitor INR closely">
+            <div class="medicine-row">
+                <div class="medicine-name-container">
+                    <div class="status-icon severity-high"></div>
+                    <div class="drug-name">Anticoagulants</div>
+                </div>
+                <div class="severity-badge severity-high" aria-label="Severity: High">
+                    High
+                </div>
+            </div>
+            <div class="text-block">
+                <div class="rationale-and-action">
+                    <span class="rationale">Increased risk of clotting and altered INR stability</span>
+                    <span class="separator"> </span>
+                    <span class="action-label">Action: </span>
+                    <span class="action-text">Avoid or monitor INR closely</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Example 2: LOW severity with rationale and action -->
+        <div class="checking-item" role="listitem" aria-label="NSAIDs. Severity: Low. Minor bleeding risk when used alone. Action: Caution if combined with anticoagulants">
+            <div class="medicine-row">
+                <div class="medicine-name-container">
+                    <div class="status-icon severity-low"></div>
+                    <div class="drug-name">NSAIDs</div>
+                </div>
+                <div class="severity-badge severity-low" aria-label="Severity: Low">
+                    Low
+                </div>
+            </div>
+            <div class="text-block">
+                <div class="rationale-and-action">
+                    <span class="rationale">Minor bleeding risk when used alone</span>
+                    <span class="separator"> </span>
+                    <span class="action-label">Action: </span>
+                    <span class="action-text">Caution if combined with anticoagulants</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Example 3: MODERATE severity with long text to test wrapping -->
+        <div class="checking-item" role="listitem" aria-label="Beta Blockers. Severity: Moderate. May require monitoring for blood pressure changes and potential interactions with cardiovascular medications. Action: Monitor blood pressure and adjust dosage as needed with regular follow-up">
+            <div class="medicine-row">
+                <div class="medicine-name-container">
+                    <div class="status-icon severity-moderate"></div>
+                    <div class="drug-name">Beta Blockers (Long Name Example)</div>
+                </div>
+                <div class="severity-badge severity-moderate" aria-label="Severity: Moderate">
+                    Moderate
+                </div>
+            </div>
+            <div class="text-block">
+                <div class="rationale-and-action">
+                    <span class="rationale">May require monitoring for blood pressure changes and potential interactions with cardiovascular medications</span>
+                    <span class="separator"> </span>
+                    <span class="action-label">Action: </span>
+                    <span class="action-text">Monitor blood pressure and adjust dosage as needed with regular follow-up</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disclaimer Section -->
+    <div class="disclaimer-section">
+        <div class="disclaimer-title">Disclaimer</div>
+        <div class="disclaimer-text">
+            The severity ratings shown (Low / Moderate / High) represent <span class="disclaimer-bold">1:1 interactions between a main medicine and each optional medicine</span>. They are not cumulative or combined effects. Clinical judgment is required to interpret results in the context of the full patient profile. This tool does not replace professional medical advice.
+        </div>
+    </div>
+
+    <div style="margin-top: 24px; padding: 16px; background: #E8F5E8; border-radius: 8px;">
+        <h3 style="color: #2E7D32; margin: 0 0 8px 0;">✅ UI Improvements Implemented:</h3>
+        <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #1B5E20;">
+            <li><strong>Improved Layout:</strong> Medicine name and severity badge in separate row</li>
+            <li><strong>Clear Spacing:</strong> 16px gap between badge and text block</li>
+            <li><strong>Accessibility:</strong> Proper aria-labels and screen reader support</li>
+            <li><strong>Better Colors:</strong> WCAG AA compliant contrast ratios</li>
+            <li><strong>Responsive Design:</strong> Stacks on narrow screens with 8px vertical spacing</li>
+            <li><strong>Text Wrapping:</strong> Long rationale/action text wraps properly</li>
+            <li><strong>Visual Hierarchy:</strong> Clear separation between badge and text</li>
+        </ul>
+    </div>
+</body>
+</html>

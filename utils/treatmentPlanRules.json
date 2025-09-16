@@ -1,0 +1,172 @@
+{
+  "medicationInteractions": {
+    "HRT_ESTROGEN": {
+      "interactsWith": ["ANTICOAGULANT", "ANTIDEPRESSANT_SSRI", "ANTIEPILEPTIC"],
+      "severity": {
+        "ANTICOAGULANT": "HIGH",
+        "ANTIDEPRESSANT_SSRI": "MODERATE", 
+        "ANTIEPILEPTIC": "HIGH"
+      },
+      "warnings": {
+        "ANTICOAGULANT": "Increased bleeding risk. Monitor INR closely if on warfarin.",
+        "ANTIDEPRESSANT_SSRI": "May reduce HRT effectiveness. Monitor symptoms.",
+        "ANTIEPILEPTIC": "May reduce HRT effectiveness. Consider non-hormonal alternatives."
+      }
+    },
+    "HRT_PROGESTOGEN": {
+      "interactsWith": ["ANTICOAGULANT", "ANTIDIABETIC", "ANTIHYPERTENSIVE"],
+      "severity": {
+        "ANTICOAGULANT": "MODERATE",
+        "ANTIDIABETIC": "MODERATE",
+        "ANTIHYPERTENSIVE": "LOW"
+      },
+      "warnings": {
+        "ANTICOAGULANT": "Monitor bleeding parameters.",
+        "ANTIDIABETIC": "May affect glucose control. Monitor blood sugar.",
+        "ANTIHYPERTENSIVE": "Monitor blood pressure regularly."
+      }
+    },
+    "HERBAL_SUPPLEMENT": {
+      "interactsWith": ["HRT_ESTROGEN", "HRT_PROGESTOGEN", "ANTICOAGULANT", "ANTIDEPRESSANT_SSRI"],
+      "severity": {
+        "HRT_ESTROGEN": "MODERATE",
+        "HRT_PROGESTOGEN": "MODERATE", 
+        "ANTICOAGULANT": "HIGH",
+        "ANTIDEPRESSANT_SSRI": "MODERATE"
+      },
+      "warnings": {
+        "HRT_ESTROGEN": "Herbal supplements may interact with hormones. Limited evidence.",
+        "HRT_PROGESTOGEN": "Herbal supplements may interact with hormones. Limited evidence.",
+        "ANTICOAGULANT": "St. John's Wort and other herbs may affect bleeding. Consult pharmacist.",
+        "ANTIDEPRESSANT_SSRI": "Some herbs may interact with antidepressants. Monitor mood."
+      }
+    },
+    "ANTIDEPRESSANT_SSRI": {
+      "interactsWith": ["HRT_ESTROGEN", "HERBAL_SUPPLEMENT"],
+      "severity": {
+        "HRT_ESTROGEN": "MODERATE",
+        "HERBAL_SUPPLEMENT": "MODERATE"
+      },
+      "warnings": {
+        "HRT_ESTROGEN": "May interact with hormone levels. Monitor mood and symptoms.",
+        "HERBAL_SUPPLEMENT": "St. John's Wort contraindicated with SSRIs."
+      }
+    }
+  },
+  "contraindications": {
+    "HRT_ESTROGEN": {
+      "absolute": [
+        "ACTIVE_BREAST_CANCER",
+        "ACTIVE_ENDOMETRIAL_CANCER", 
+        "ACTIVE_DVT_PE",
+        "ACUTE_LIVER_DISEASE",
+        "UNEXPLAINED_VAGINAL_BLEEDING"
+      ],
+      "relative": [
+        "HISTORY_BREAST_CANCER",
+        "HISTORY_DVT_PE",
+        "GALLBLADDER_DISEASE",
+        "HYPERTRIGLYCERIDEMIA",
+        "MIGRAINE_WITH_AURA"
+      ]
+    },
+    "HRT_PROGESTOGEN": {
+      "absolute": [
+        "ACUTE_LIVER_DISEASE",
+        "ACTIVE_BREAST_CANCER"
+      ],
+      "relative": [
+        "HISTORY_BREAST_CANCER",
+        "DEPRESSION_HISTORY"
+      ]
+    }
+  },
+  "recommendations": {
+    "NO_MEDICATIONS": {
+      "title": "General Menopause Management",
+      "actions": [
+        "Consider lifestyle modifications: regular exercise, healthy diet, stress management",
+        "Evaluate symptom severity and impact on quality of life",
+        "Discuss treatment options: hormonal vs. non-hormonal approaches",
+        "Consider baseline assessments: mammography, bone density, cardiovascular risk"
+      ],
+      "alternatives": [
+        "Cognitive behavioral therapy for hot flashes",
+        "Regular exercise program",
+        "Dietary modifications: limit caffeine, alcohol, spicy foods",
+        "Stress reduction techniques: meditation, yoga"
+      ],
+      "monitoring": [
+        "Annual clinical assessment",
+        "Symptom diary for 2-4 weeks",
+        "Follow-up in 3 months to reassess symptoms"
+      ]
+    },
+    "HRT_ONLY": {
+      "title": "Hormone Replacement Therapy Plan",
+      "actions": [
+        "Initiate low-dose estrogen therapy with appropriate progestogen if uterus intact",
+        "Start with lowest effective dose",
+        "Consider transdermal route if cardiovascular risk factors present",
+        "Schedule baseline investigations: mammography, cervical screening"
+      ],
+      "alternatives": [
+        "Non-hormonal options: SSRIs/SNRIs for vasomotor symptoms",
+        "Vaginal estrogen for genitourinary symptoms only",
+        "Gabapentin for hot flashes if HRT contraindicated"
+      ],
+      "monitoring": [
+        "Clinical review at 3 months, then 6 months, then annually",
+        "Mammography as per national guidelines",
+        "Monitor for side effects and symptom improvement",
+        "Annual risk-benefit assessment"
+      ]
+    },
+    "MIXED_MEDICATIONS": {
+      "title": "Complex Medication Management",
+      "actions": [
+        "Review all current medications for interactions",
+        "Consider medication optimization and rationalization",
+        "Coordinate with prescribing physicians",
+        "Implement gradual introduction of new therapies"
+      ],
+      "alternatives": [
+        "Non-pharmacological approaches where possible",
+        "Alternative medication classes with fewer interactions",
+        "Specialist referral for complex cases"
+      ],
+      "monitoring": [
+        "Increased monitoring frequency initially",
+        "Regular medication review",
+        "Monitor for drug interactions and side effects",
+        "Coordinate care with other specialists"
+      ]
+    }
+  },
+  "herbalSupplementNotes": {
+    "general": "Herbal supplement — evidence limited, consult pharmacist/clinician.",
+    "commonInteractions": [
+      "St. John's Wort: Interacts with many medications including HRT and antidepressants",
+      "Black Cohosh: May interact with estrogen therapy",
+      "Red Clover: Contains phytoestrogens, may interact with HRT",
+      "Ginkgo: May increase bleeding risk with anticoagulants"
+    ],
+    "recommendations": [
+      "Inform all healthcare providers about herbal supplement use",
+      "Monitor for changes in medication effectiveness",
+      "Consider stopping herbal supplements 2 weeks before surgery",
+      "Buy from reputable sources with quality assurance"
+    ]
+  },
+  "severityColors": {
+    "HIGH": "#F44336",
+    "MODERATE": "#FF9800", 
+    "LOW": "#FFC107"
+  },
+  "guidelineReferences": {
+    "IMS_2016": "International Menopause Society recommendations on women's midlife health (2016)",
+    "NAMS_2017": "North American Menopause Society position statement (2017)", 
+    "NICE_2015": "NICE guideline: Menopause diagnosis and management (2015)",
+    "WHO_2015": "WHO recommendations on health promotion interventions for maternal and newborn health (2015)"
+  }
+}

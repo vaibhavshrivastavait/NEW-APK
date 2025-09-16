@@ -1,0 +1,509 @@
+[
+  {
+    "id": "R001",
+    "conditions": {
+      "all": [
+        { "field": "ASCVD_percent", "op": ">=", "value": 20 },
+        { "field": "selected_medications", "contains": "HRT_Estrogen" }
+      ]
+    },
+    "severity": "Critical",
+    "severity_priority": 3,
+    "title": "High ASCVD risk + HRT",
+    "message": "ASCVD ≥20% — HRT not recommended. Prioritize CVD risk reduction; consider non-hormonal therapy.",
+    "action": "Avoid HRT; cardiology referral; treat CVD risk factors first",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R002",
+    "conditions": {
+      "all": [
+        { "field": "ASCVD_percent", "op": ">=", "value": 10 },
+        { "field": "ASCVD_percent", "op": "<", "value": 20 },
+        { "field": "selected_medications", "contains": "HRT_Estrogen" }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Intermediate ASCVD risk + HRT",
+    "message": "Intermediate CVD risk — weigh risks/benefits; consider safer HRT routes after specialist discussion.",
+    "action": "Shared decision making; consider low-dose transdermal estrogen if indicated & risk mitigated",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R003",
+    "conditions": {
+      "all": [
+        { "field": "age", "op": ">=", "value": 70 },
+        { "field": "selected_medications", "contains": "HRT_Estrogen" }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Age ≥70 + HRT",
+    "message": "Age ≥70: increased risks with HRT; prefer alternatives.",
+    "action": "Generally avoid systemic HRT; specialist input",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R004",
+    "conditions": {
+      "all": [
+        { "field": "systolic_bp", "op": ">=", "value": 160 },
+        { "field": "selected_medications", "contains": "HRT_Estrogen" }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Uncontrolled hypertension + HRT",
+    "message": "Uncontrolled HTN — treat hypertension before HRT due to increased risk.",
+    "action": "Control BP before considering HRT",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R010",
+    "conditions": {
+      "any": [
+        { "field": "wells_score", "op": ">=", "value": 4 },
+        { "field": "acute_vte_risk", "op": "=", "value": true }
+      ],
+      "all": [
+        { "field": "selected_medications", "contains": "HRT_Estrogen" }
+      ]
+    },
+    "severity": "Critical",
+    "severity_priority": 3,
+    "title": "High VTE risk + HRT",
+    "message": "High VTE risk — HRT contraindicated.",
+    "action": "Avoid HRT; urgent evaluation for thrombotic risk",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R011",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains_any": ["Warfarin", "Apixaban", "Rivaroxaban", "Dabigatran", "Edoxaban"] },
+        { "field": "selected_medications", "contains_any": ["Ibuprofen", "Naproxen", "Diclofenac", "Aspirin", "Celecoxib"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Anticoagulant + NSAID",
+    "message": "Anticoagulant + NSAID — increased bleeding risk. Prefer non-NSAID analgesics.",
+    "action": "Avoid concurrent NSAIDs; use acetaminophen/alternative analgesic; check INR if warfarin",
+    "source": "Local rules (drug interaction)"
+  },
+  {
+    "id": "R012",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains_any": ["Warfarin", "Apixaban", "Rivaroxaban", "Dabigatran"] },
+        { "field": "selected_medications", "contains": "Aspirin" }
+      ]
+    },
+    "severity": "Moderate",
+    "severity_priority": 1,
+    "title": "Anticoagulant + Aspirin",
+    "message": "Dual antithrombotic therapy increases bleeding risk — review indication.",
+    "action": "Review bleeding vs thrombotic benefit; specialist advice",
+    "source": "Local rules (drug interaction)"
+  },
+  {
+    "id": "R020",
+    "conditions": {
+      "any": [
+        { "field": "gail_score", "op": ">=", "value": 1.67 },
+        { "field": "family_history_breast_cancer", "op": "=", "value": true }
+      ],
+      "all": [
+        { "field": "selected_medications", "contains": "HRT_Estrogen" }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Elevated breast cancer risk + HRT",
+    "message": "Elevated breast cancer risk — HRT increases risk; consider alternatives & enhanced screening.",
+    "action": "Caution — discuss breast screening; consider non-hormonal therapy",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R021",
+    "conditions": {
+      "all": [
+        { "field": "breast_cancer_history", "op": "=", "value": true },
+        { "field": "selected_medications", "contains_any": ["HRT_Estrogen", "HRT_Combined", "HRT_Progesterone"] }
+      ]
+    },
+    "severity": "Critical",
+    "severity_priority": 3,
+    "title": "Breast cancer history + HRT",
+    "message": "History of breast cancer — HRT generally contraindicated.",
+    "action": "HRT contraindicated unless specialist consensus",
+    "source": "Local rules (contraindication)"
+  },
+  {
+    "id": "R030",
+    "conditions": {
+      "any": [
+        { "field": "frax_major_fracture", "op": ">=", "value": 20 },
+        { "field": "frax_hip_fracture", "op": ">=", "value": 3 }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "High fracture risk",
+    "message": "High fracture risk — initiate bone-protective therapy and reduce fall risk.",
+    "action": "Consider osteoporosis therapy (bisphosphonates) and fall risk assessment",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R031",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "HRT_Estrogen" },
+        { "field": "frax_major_fracture", "op": "<", "value": 10 },
+        { "field": "indication_bone_protection", "op": "=", "value": true }
+      ]
+    },
+    "severity": "Minor",
+    "severity_priority": 0,
+    "title": "HRT for bone protection with low fracture risk",
+    "message": "Low fracture risk — HRT for osteoporosis prevention not recommended.",
+    "action": "HRT not indicated solely for bone protection if risk low",
+    "source": "Local rules (guideline)"
+  },
+  {
+    "id": "R040",
+    "conditions": {
+      "all": [
+        { "field": "egfr", "op": "<", "value": 30 },
+        { "field": "selected_medications", "contains_any": ["Apixaban", "Rivaroxaban", "Dabigatran", "Metformin", "ACE_Inhibitor"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Severe renal impairment + renally cleared medication",
+    "message": "Severe renal impairment — adjust dose or avoid medication.",
+    "action": "Dose-adjust or avoid; nephrology consult",
+    "source": "Local rules (dosing)"
+  },
+  {
+    "id": "R041",
+    "conditions": {
+      "all": [
+        { "field": "alt_level", "op": ">=", "value": 120 },
+        { "field": "selected_medications", "contains_any": ["HRT_Estrogen", "Atorvastatin", "Simvastatin", "Acetaminophen"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Elevated liver enzymes + hepatotoxic medication",
+    "message": "Significant hepatic impairment — caution with hepatically-metabolized drugs.",
+    "action": "Avoid or monitor closely; consider hepatology input",
+    "source": "Local rules (dosing)"
+  },
+  {
+    "id": "R050",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "Tamoxifen" },
+        { "field": "selected_medications", "contains_any": ["Paroxetine", "Fluoxetine", "Bupropion"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Tamoxifen + CYP2D6 inhibitor",
+    "message": "CYP2D6 inhibitor reduces tamoxifen efficacy — avoid or use alternative.",
+    "action": "Avoid combination; choose alternative SSRI (e.g., citalopram) or adjust therapy",
+    "source": "Local rules (drug interaction)"
+  },
+  {
+    "id": "R051",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains_any": ["Atorvastatin", "Simvastatin"] },
+        { "field": "selected_medications", "contains_any": ["Clarithromycin", "Erythromycin", "Ritonavir", "Itraconazole"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Statin + CYP3A4 inhibitor",
+    "message": "Risk of severe myopathy — avoid or change statin.",
+    "action": "Avoid combination or use statin not metabolized by CYP3A4 (pravastatin)",
+    "source": "Local rules (drug interaction)"
+  },
+  {
+    "id": "R052",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "HRT_Estrogen" },
+        { "field": "smoking", "op": "=", "value": true },
+        { "field": "age", "op": ">", "value": 35 }
+      ]
+    },
+    "severity": "Critical",
+    "severity_priority": 3,
+    "title": "Smoking + HRT over age 35",
+    "message": "Smoking + estrogen >35 increases thrombotic risk — HRT contraindicated.",
+    "action": "Stop smoking & avoid systemic HRT; consider non-hormonal options",
+    "source": "Local rules (contraindication)"
+  },
+  {
+    "id": "R053",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "HRT_Estrogen" },
+        { "field": "selected_medications", "contains": "Tamoxifen" }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "HRT + Tamoxifen interaction",
+    "message": "HRT may counteract tamoxifen effects — specialist review required.",
+    "action": "Avoid combining unless under specialist advice (contradictory effects)",
+    "source": "Local rules (drug interaction)"
+  },
+  {
+    "id": "R060",
+    "conditions": {
+      "any": [
+        { "field": "selected_medications", "contains_multiple": ["Sertraline", "Fluoxetine"] },
+        { "field": "selected_medications", "contains_multiple": ["Citalopram", "Escitalopram"] },
+        { "field": "selected_medications", "contains_multiple": ["Paroxetine", "Venlafaxine"] }
+      ]
+    },
+    "severity": "Moderate",
+    "severity_priority": 1,
+    "title": "Duplicate SSRI/SNRI therapy",
+    "message": "Duplicate therapy — risk of serotonin syndrome; avoid combined SSRIs.",
+    "action": "Avoid duplicate therapy; choose one agent",
+    "source": "Local rules (duplication)"
+  },
+  {
+    "id": "R061",
+    "conditions": {
+      "any": [
+        { "field": "selected_medications", "contains_multiple": ["Lorazepam", "Diazepam"] },
+        { "field": "selected_medications", "contains_multiple": ["Alprazolam", "Clonazepam"] },
+        { "field": "selected_medications", "contains_any": ["Zolpidem", "Zopiclone"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Multiple sedative medications",
+    "message": "Additive sedation — avoid combined sedative agents.",
+    "action": "Avoid co-prescribing due to sedation/respiratory depression",
+    "source": "Local rules (duplication)"
+  },
+  {
+    "id": "R070",
+    "conditions": {
+      "all": [
+        { "field": "pregnancy_status", "op": "=", "value": true },
+        { "field": "selected_medications", "contains_any": ["HRT_Estrogen", "Valproate", "Warfarin", "ACE_Inhibitor"] }
+      ]
+    },
+    "severity": "Critical",
+    "severity_priority": 3,
+    "title": "Pregnancy + teratogenic medication",
+    "message": "Teratogenic risk — medication contraindicated in pregnancy.",
+    "action": "Stop teratogenic med; urgent specialist review",
+    "source": "Local rules (contraindication)"
+  },
+  {
+    "id": "R071",
+    "conditions": {
+      "all": [
+        { "field": "breastfeeding", "op": "=", "value": true },
+        { "field": "selected_medications", "contains_any": ["Sertraline", "Fluoxetine", "Lorazepam", "Codeine"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Breastfeeding + medication excreted in milk",
+    "message": "Potential infant exposure via breastmilk — specialist counseling needed.",
+    "action": "Discuss risks vs benefits; consider alternatives or monitoring",
+    "source": "Local rules (safety)"
+  },
+  {
+    "id": "R080",
+    "conditions": {
+      "all": [
+        { "field": "seizure_history", "op": "=", "value": true },
+        { "field": "selected_medications", "contains_any": ["Bupropion", "Tramadol", "Clomipramine"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Seizure history + pro-convulsant medication",
+    "message": "Seizure risk increased — avoid medications that lower seizure threshold.",
+    "action": "Avoid medication or use caution with neurology advice",
+    "source": "Local rules (contraindication)"
+  },
+  {
+    "id": "R081",
+    "conditions": {
+      "all": [
+        { "field": "severe_depression", "op": "=", "value": true },
+        { "field": "selected_medications", "contains_any": ["Sertraline", "Fluoxetine", "Paroxetine"] },
+        { "field": "age", "op": "<=", "value": 25 }
+      ]
+    },
+    "severity": "Moderate",
+    "severity_priority": 1,
+    "title": "Young adult depression + antidepressant",
+    "message": "Start antidepressants with close follow-up in high-risk individuals.",
+    "action": "Monitor closely; safety plan",
+    "source": "Local rules (monitoring)"
+  },
+  {
+    "id": "R090",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "StJohnsWort" },
+        { "field": "selected_medications", "contains_any": ["OCP", "Tamoxifen", "Warfarin"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "St John's wort interactions",
+    "message": "St John's wort reduces effectiveness of many meds — avoid if on OCP/tamoxifen/warfarin.",
+    "action": "Avoid due to CYP interactions (reduced efficacy)",
+    "source": "Local rules (herbal interaction)"
+  },
+  {
+    "id": "R091",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "GreenTeaExtract" },
+        { "field": "selected_medications", "contains": "Warfarin" }
+      ]
+    },
+    "severity": "Moderate",
+    "severity_priority": 1,
+    "title": "Green tea extract + Warfarin",
+    "message": "Green tea extracts may affect INR stability.",
+    "action": "Monitor INR; counsel on interaction",
+    "source": "Local rules (herbal interaction)"
+  },
+  {
+    "id": "R100",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains_any": ["Ibuprofen", "Naproxen", "Diclofenac"] },
+        { "field": "selected_medications", "contains_any": ["Lisinopril", "Enalapril", "Ramipril"] },
+        { "field": "selected_medications", "contains_any": ["Furosemide", "Hydrochlorothiazide"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Triple whammy: NSAID + ACE inhibitor + Diuretic",
+    "message": "NSAID + ACEi + diuretic increases AKI risk — review therapy.",
+    "action": "Avoid combination or monitor renal function",
+    "source": "Local rules (drug interaction)"
+  },
+  {
+    "id": "R101",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains_any": ["Ibuprofen", "Naproxen", "Diclofenac", "Aspirin"] },
+        { "field": "peptic_ulcer_disease", "op": "=", "value": true }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "NSAID + active peptic ulcer disease",
+    "message": "NSAIDs contraindicated in active PUD — avoid.",
+    "action": "Avoid NSAIDs; consider PPI or alternate analgesic",
+    "source": "Local rules (contraindication)"
+  },
+  {
+    "id": "R110",
+    "conditions": {
+      "all": [
+        { "field": "age", "op": ">=", "value": 75 },
+        { "field": "medication_count", "op": ">=", "value": 5 }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Polypharmacy in elderly",
+    "message": "Polypharmacy in older adult — perform comprehensive med review.",
+    "action": "Medication review; deprescribing considered",
+    "source": "Local rules (polypharmacy)"
+  },
+  {
+    "id": "R111",
+    "conditions": {
+      "all": [
+        { "field": "fall_history", "op": "=", "value": true },
+        { "field": "selected_medications", "contains_any": ["Lorazepam", "Diazepam", "Zolpidem", "Diphenhydramine"] }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "Fall risk + sedative medications",
+    "message": "Falls risk increased by sedatives — consider alternatives.",
+    "action": "Avoid/adjust sedatives; fall-prevention measures",
+    "source": "Local rules (fall risk)"
+  },
+  {
+    "id": "R120",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains_any": ["Lisinopril", "Enalapril", "Ramipril"] },
+        { "field": "potassium_level", "op": ">", "value": 5.0 }
+      ]
+    },
+    "severity": "Major",
+    "severity_priority": 2,
+    "title": "ACE inhibitor + hyperkalemia",
+    "message": "Hyperkalemia — ACE inhibitors may worsen K+; correct and reassess.",
+    "action": "Correct hyperkalemia before ACEi; nephrology input",
+    "source": "Local rules (lab monitoring)"
+  },
+  {
+    "id": "R121",
+    "conditions": {
+      "all": [
+        { "field": "selected_medications", "contains": "Warfarin" },
+        { "field": "inr_available", "op": "=", "value": false }
+      ]
+    },
+    "severity": "Moderate",
+    "severity_priority": 1,
+    "title": "Warfarin without INR monitoring",
+    "message": "Ensure INR monitoring after initiating warfarin.",
+    "action": "Baseline INR and frequent monitoring",
+    "source": "Local rules (monitoring)"
+  },
+  {
+    "id": "R130",
+    "conditions": {
+      "all": [
+        { "field": "vasomotor_symptoms_severe", "op": "=", "value": true },
+        { "field": "hrt_contraindicated", "op": "=", "value": true }
+      ]
+    },
+    "severity": "Moderate",
+    "severity_priority": 1,
+    "title": "Severe vasomotor symptoms + HRT contraindicated",
+    "message": "HRT contraindicated — consider venlafaxine, gabapentin or CBT for symptom relief.",
+    "action": "Offer non-hormonal options: SSRI/SNRI (venlafaxine), gabapentin, behavioural therapy",
+    "source": "Local rules (alternative therapy)"
+  },
+  {
+    "id": "R131",
+    "conditions": {
+      "all": [
+        { "field": "hot_flashes_insomnia", "op": "=", "value": true }
+      ]
+    },
+    "severity": "Minor",
+    "severity_priority": 0,
+    "title": "Hot flash-related insomnia",
+    "message": "Non-pharmacological measures first; consider gabapentin if severe.",
+    "action": "Sleep hygiene; consider low-dose gabapentin if appropriate",
+    "source": "Local rules (symptom management)"
+  }
+]

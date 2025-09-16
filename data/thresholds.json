@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "risk_thresholds": {
+    "ASCVD": { 
+      "units": "percent", 
+      "cutoffs": { "low": 7.5, "high": 20 }, 
+      "labels": { 
+        "low": "Low (<7.5%)", 
+        "intermediate": "Intermediate (7.5–20%)", 
+        "high": "High (>=20%)" 
+      } 
+    },
+    "Framingham": { 
+      "units": "percent", 
+      "cutoffs": { "moderate": 10, "high": 20 } 
+    },
+    "FRAX_major": { 
+      "units": "percent", 
+      "cutoffs": { "moderate": 10, "high": 20 } 
+    },
+    "FRAX_hip": { 
+      "units": "percent", 
+      "cutoffs": { "high": 3 } 
+    },
+    "GAIL_5yr": { 
+      "units": "percent", 
+      "cutoffs": { "elevated_5yr": 1.7 } 
+    },
+    "WELLS_VTE": { 
+      "units": "score", 
+      "cutoffs": { "low": 0, "moderate": 2, "high": 3 } 
+    }
+  },
+  "actions": {
+    "ASCVD_high": [
+      "Avoid estrogen-based HRT", 
+      "Recommend non-hormonal alternatives", 
+      "Cardiology review"
+    ],
+    "ASCVD_intermediate": [
+      "Weigh risks/benefits of HRT", 
+      "Consider cardiology consult"
+    ],
+    "FRAX_high": [
+      "Initiate osteoporosis management", 
+      "Prioritize bone-protection strategies"
+    ],
+    "GAIL_elevated": [
+      "Breast risk specialist review", 
+      "Exercise caution with combined HRT"
+    ],
+    "WELLS_high": [
+      "Avoid estrogen-based therapy", 
+      "Urgent VTE evaluation"
+    ]
+  },
+  "defaults": {
+    "insufficient_data": "Insufficient data — clinician review required"
+  },
+  "precedence": [
+    "absolute_contraindications", 
+    "interactions_high", 
+    "risk_high", 
+    "risk_moderate", 
+    "symptom_guided"
+  ]
+}

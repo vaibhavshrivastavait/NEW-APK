@@ -1,0 +1,65 @@
+# Git LFS (Large File Storage) Configuration
+# Files tracked by Git LFS to handle large files efficiently
+
+# Binary executables and packages
+*.apk filter=lfs diff=lfs merge=lfs -text
+*.ipa filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+*.aar filter=lfs diff=lfs merge=lfs -text
+# Media files
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.avi filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.webp filter=lfs diff=lfs merge=lfs -text
+*.svg filter=lfs diff=lfs merge=lfs -text
+# Large JSON files and data files (excluding critical config files)
+drug_interactions.json filter=lfs diff=lfs merge=lfs -text
+cme-content.json filter=lfs diff=lfs merge=lfs -text
+cme-content-merged.json filter=lfs diff=lfs merge=lfs -text
+guidelines.json filter=lfs diff=lfs merge=lfs -text
+decision_rules.json filter=lfs diff=lfs merge=lfs -text
+optional_medicines.json filter=lfs diff=lfs merge=lfs -text
+risk_thresholds.json filter=lfs diff=lfs merge=lfs -text
+treatment_rules.json filter=lfs diff=lfs merge=lfs -text
+contraindications.json filter=lfs diff=lfs merge=lfs -text
+example_cases.json filter=lfs diff=lfs merge=lfs -text
+interactions.json filter=lfs diff=lfs merge=lfs -text
+thresholds.json filter=lfs diff=lfs merge=lfs -text
+testVectors.json filter=lfs diff=lfs merge=lfs -text
+testVectorsExtended.json filter=lfs diff=lfs merge=lfs -text
+treatmentPlanRules.json filter=lfs diff=lfs merge=lfs -text
+treatmentPlanTestCases.json filter=lfs diff=lfs merge=lfs -text
+treatment_plan_testcases.json filter=lfs diff=lfs merge=lfs -text
+treatmentPlanTestVectors.json filter=lfs diff=lfs merge=lfs -text
+treatmentRules.json filter=lfs diff=lfs merge=lfs -text
+# Font files
+*.ttf filter=lfs diff=lfs merge=lfs -text
+*.otf filter=lfs diff=lfs merge=lfs -text
+*.woff filter=lfs diff=lfs merge=lfs -text
+*.woff2 filter=lfs diff=lfs merge=lfs -text
+# Audio files
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.flac filter=lfs diff=lfs merge=lfs -text
+*.aac filter=lfs diff=lfs merge=lfs -text
+# Documentation and PDFs
+*.pdf filter=lfs diff=lfs merge=lfs -text
+# Database files
+*.db filter=lfs diff=lfs merge=lfs -text
+*.sqlite filter=lfs diff=lfs merge=lfs -text
+*.sqlite3 filter=lfs diff=lfs merge=lfs -text
+# Large log files
+*.log filter=lfs diff=lfs merge=lfs -text
+
+# CRITICAL: DO NOT track these in LFS (needed as regular files)
+# package.json - Required by npm as regular file
+# tsconfig.json - Required by TypeScript compiler
+# app.json - Required by Expo CLI
+# babel.config.js - Required by Babel
+# metro.config.js - Required by Metro bundler

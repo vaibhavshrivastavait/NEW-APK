@@ -1,0 +1,207 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2025-01-11",
+  "description": "Optional medicines for Evidence-Based Decision Support with display names, aliases, and default severity",
+  "medicines": [
+    {
+      "id": "ibuprofen",
+      "key": "nsaid",
+      "displayName": "Ibuprofen",
+      "aliases": ["advil", "motrin", "brufen"],
+      "category": "anti_inflammatory",
+      "defaultSeverity": "medium",
+      "description": "Non-steroidal anti-inflammatory drug"
+    },
+    {
+      "id": "aspirin",
+      "key": "nsaid",
+      "displayName": "Aspirin",
+      "aliases": ["acetylsalicylic acid", "asa"],
+      "category": "anti_inflammatory",
+      "defaultSeverity": "medium",
+      "description": "Anti-inflammatory and antiplatelet agent"
+    },
+    {
+      "id": "warfarin",
+      "key": "anticoagulant",
+      "displayName": "Warfarin",
+      "aliases": ["coumadin", "marevan"],
+      "category": "anticoagulant",
+      "defaultSeverity": "high",
+      "description": "Oral anticoagulant"
+    },
+    {
+      "id": "sertraline",
+      "key": "ssri",
+      "displayName": "Sertraline",
+      "aliases": ["zoloft"],
+      "category": "antidepressant",
+      "defaultSeverity": "medium",
+      "description": "Selective serotonin reuptake inhibitor"
+    },
+    {
+      "id": "escitalopram",
+      "key": "ssri",
+      "displayName": "Escitalopram",
+      "aliases": ["lexapro", "cipralex"],
+      "category": "antidepressant",
+      "defaultSeverity": "medium",
+      "description": "Selective serotonin reuptake inhibitor"
+    },
+    {
+      "id": "estradiol",
+      "key": "HRT_Estrogen",
+      "displayName": "Estradiol",
+      "aliases": ["oestradiol", "estrace"],
+      "category": "hormone",
+      "defaultSeverity": "medium",
+      "description": "Estrogen hormone replacement"
+    },
+    {
+      "id": "conjugated_estrogens",
+      "key": "HRT_Estrogen",
+      "displayName": "Conjugated Estrogens",
+      "aliases": ["premarin"],
+      "category": "hormone",
+      "defaultSeverity": "medium",
+      "description": "Mixed estrogen preparation"
+    },
+    {
+      "id": "simvastatin",
+      "key": "statin",
+      "displayName": "Simvastatin",
+      "aliases": ["zocor"],
+      "category": "lipid_lowering",
+      "defaultSeverity": "low",
+      "description": "HMG-CoA reductase inhibitor"
+    },
+    {
+      "id": "atorvastatin",
+      "key": "statin",
+      "displayName": "Atorvastatin",
+      "aliases": ["lipitor"],
+      "category": "lipid_lowering",
+      "defaultSeverity": "low",
+      "description": "HMG-CoA reductase inhibitor"
+    },
+    {
+      "id": "metformin",
+      "key": "antidiabetic",
+      "displayName": "Metformin",
+      "aliases": ["glucophage"],
+      "category": "antidiabetic",
+      "defaultSeverity": "low",
+      "description": "Biguanide antidiabetic agent"
+    },
+    {
+      "id": "levothyroxine",
+      "key": "thyroid_hormone",
+      "displayName": "Levothyroxine",
+      "aliases": ["synthroid", "eltroxin"],
+      "category": "hormone",
+      "defaultSeverity": "medium",
+      "description": "Thyroid hormone replacement"
+    },
+    {
+      "id": "amlodipine",
+      "key": "calcium_channel_blocker",
+      "displayName": "Amlodipine",
+      "aliases": ["norvasc"],
+      "category": "cardiovascular",
+      "defaultSeverity": "low",
+      "description": "Calcium channel blocker"
+    },
+    {
+      "id": "apixaban",
+      "key": "Apixaban",
+      "displayName": "Apixaban",
+      "aliases": ["eliquis"],
+      "category": "anticoagulant",
+      "defaultSeverity": "high",
+      "description": "Direct oral anticoagulant (DOAC)"
+    },
+    {
+      "id": "rivaroxaban",
+      "key": "Rivaroxaban",
+      "displayName": "Rivaroxaban",
+      "aliases": ["xarelto"],
+      "category": "anticoagulant",
+      "defaultSeverity": "high",
+      "description": "Direct oral anticoagulant (DOAC)"
+    },
+    {
+      "id": "dabigatran",
+      "key": "Dabigatran",
+      "displayName": "Dabigatran",
+      "aliases": ["pradaxa"],
+      "category": "anticoagulant",
+      "defaultSeverity": "high",
+      "description": "Direct oral anticoagulant (DOAC)"
+    },
+    {
+      "id": "naproxen",
+      "key": "Naproxen",
+      "displayName": "Naproxen",
+      "aliases": ["aleve", "naprosyn"],
+      "category": "anti_inflammatory",
+      "defaultSeverity": "medium",
+      "description": "Non-steroidal anti-inflammatory drug"
+    },
+    {
+      "id": "diclofenac",
+      "key": "Diclofenac",
+      "displayName": "Diclofenac",
+      "aliases": ["voltaren"],
+      "category": "anti_inflammatory", 
+      "defaultSeverity": "medium",
+      "description": "Non-steroidal anti-inflammatory drug"
+    },
+    {
+      "id": "tamoxifen",
+      "key": "Tamoxifen",
+      "displayName": "Tamoxifen",
+      "aliases": ["nolvadex"],
+      "category": "hormone_blocker",
+      "defaultSeverity": "high",
+      "description": "Selective estrogen receptor modulator"
+    },
+    {
+      "id": "lisinopril",
+      "key": "Lisinopril",
+      "displayName": "Lisinopril",
+      "aliases": ["prinivil", "zestril"],
+      "category": "ace_inhibitor",
+      "defaultSeverity": "medium",
+      "description": "ACE inhibitor"
+    },
+    {
+      "id": "furosemide",
+      "key": "Furosemide",
+      "displayName": "Furosemide",
+      "aliases": ["lasix"],
+      "category": "diuretic",
+      "defaultSeverity": "medium",
+      "description": "Loop diuretic"
+    }
+  ],
+  "severityLevels": [
+    {
+      "value": "low",
+      "label": "Low",
+      "color": "#4CAF50",
+      "description": "Minor clinical significance"
+    },
+    {
+      "value": "medium",
+      "label": "Medium",
+      "color": "#FF9800",
+      "description": "Moderate clinical significance"
+    },
+    {
+      "value": "high",
+      "label": "High",
+      "color": "#F44336",
+      "description": "High clinical significance"
+    }
+  ]
+}

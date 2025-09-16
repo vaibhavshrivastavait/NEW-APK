@@ -1,0 +1,331 @@
+{
+  "version": "2025.01.15",
+  "lastUpdated": "2025-01-15T00:00:00Z",
+  "sections": [
+    {
+      "id": "eligibility",
+      "title": "Eligibility & Contraindications",
+      "icon": "security",
+      "body_md": "## Absolute Contraindications\n\n**Current or Past Conditions (MHT Contraindicated):**\n- Current or past breast cancer (except in specialized circumstances with oncology input)\n- Current or past endometrial cancer (unless stage 1 with specialized management)\n- Active liver disease or severe hepatic impairment\n- Unexplained vaginal bleeding (investigate first)\n- Active venous thromboembolism (VTE) or high ongoing risk\n- Known thrombophilia with contraindication to systemic MHT\n- Acute myocardial infarction or acute stroke (recent)\n- Known or suspected estrogen-dependent malignancies\n\n## Relative Contraindications\n\n**Conditions Requiring Specialist Input:**\n- History of VTE (>5 years ago, assess individual risk)\n- High cardiovascular disease risk (multiple risk factors)\n- Severe migraine with aura (consider transdermal route)\n- Gallbladder disease (consider transdermal route)\n- Severe hypertriglyceridemia\n- History of cholestatic jaundice during pregnancy\n- Large uterine fibroids (monitor growth)\n- Endometriosis (may worsen with estrogen)\n\n## Baseline Evaluation\n\n**Essential History & Examination:**\n- Comprehensive medical and family history\n- Menstrual history and menopausal symptoms\n- Previous hormone use and contraceptive history\n- Cardiovascular risk assessment\n- Breast and gynecological examination\n- Blood pressure measurement\n- BMI calculation\n\n**Laboratory Investigations (If Indicated):**\n- No routine labs required for healthy women\n- Consider: lipid profile (CVD risk), LFTs (liver disease history), mammography (age-appropriate screening)\n- FSH/LH generally not needed for diagnosis >50 years with typical symptoms\n\n**Shared Decision-Making Framework:**\n- Discuss individual benefits and risks\n- Review patient preferences and concerns\n- Document risk-benefit discussion\n- Provide written information resources\n- Schedule appropriate follow-up",
+      "bullets": [
+        "Always exclude pregnancy in women <50 years",
+        "Investigate unexplained bleeding before starting MHT", 
+        "Assess VTE risk using validated tools",
+        "Consider individual cardiovascular risk factors",
+        "Document contraindications and risk factors clearly"
+      ],
+      "tables": [
+        {
+          "title": "Contraindications Summary",
+          "columns": ["Category", "Condition", "Action Required"],
+          "rows": [
+            ["Absolute", "Current breast/endometrial cancer", "Avoid MHT entirely"],
+            ["Absolute", "Active VTE or high ongoing risk", "Avoid systemic MHT"],
+            ["Absolute", "Unexplained vaginal bleeding", "Investigate first"],
+            ["Relative", "History of VTE (remote)", "Specialist assessment"],
+            ["Relative", "High CVD risk", "Consider transdermal route"],
+            ["Relative", "Migraine with aura", "Prefer transdermal/avoid oral"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "NAMS 2022 Position Statement", "url": "https://www.menopause.org/publications/clinical-care-recommendations" },
+        { "label": "IMS 2023 Global Consensus", "url": "https://www.imsociety.org/statements/" },
+        { "label": "NICE 2015 (Updated 2024)", "url": "https://www.nice.org.uk/guidance/ng23" }
+      ]
+    },
+    {
+      "id": "therapy-types",
+      "title": "Therapy Types & Indications", 
+      "icon": "local-hospital",
+      "body_md": "## Estrogen-Only Therapy (ET)\n\n**Indications:**\n- Women with hysterectomy (no uterus)\n- Vasomotor symptoms, genitourinary syndrome, bone health\n- Premature ovarian insufficiency/early menopause\n\n**Formulations Available:**\n- **Oral:** Estradiol 1-2mg daily, conjugated estrogens 0.3-0.625mg daily\n- **Transdermal:** Patches (25-100mcg twice weekly), gels (0.5-1.5g daily)\n- **Nasal spray:** Estradiol 150-300mcg daily\n- **Vaginal:** Ring (50-100mcg), tablets, creams (for local symptoms)\n\n## Estrogen + Progestogen Therapy (EPT)\n\n**Indications:**\n- Women with intact uterus (endometrial protection required)\n- Same symptom indications as ET\n\n**Regimen Options:**\n- **Continuous Combined:** Daily estrogen + progestogen (preferred if >2 years postmenopausal)\n- **Cyclic/Sequential:** Estrogen days 1-28, progestogen days 15-28 (perimenopause/early menopause)\n\n**Progestogen Types:**\n- **Micronized Progesterone:** 100-200mg daily (preferred - most body-identical)\n- **Dydrogesterone:** 5-10mg daily (good safety profile)\n- **Levonorgestrel IUS:** 20mcg daily (contraceptive benefit + endometrial protection)\n- **Norethisterone:** 0.5-1mg daily (androgenic effects)\n\n## Vaginal/Local Therapy\n\n**Indications:**\n- **Primary:** Genitourinary syndrome of menopause (GSM)\n- **Symptoms:** Vaginal dryness, dyspareunia, urinary urgency/frequency\n- **Adjunctive:** Persistent GSM despite systemic MHT\n\n**Formulations:**\n- **Vaginal estradiol:** Tablets 10mcg, rings 7.5mcg daily\n- **Estriol cream:** 0.5mg 2-3x weekly maintenance\n- **Conjugated estrogens cream:** 0.5-2g 1-3x weekly\n\n**Advantages:**\n- Minimal systemic absorption with low-dose preparations\n- Suitable for women with contraindications to systemic MHT\n- Can be used long-term without increased systemic risks",
+      "bullets": [
+        "ET only for women without uterus - never give unopposed estrogen with intact uterus",
+        "EPT requires adequate progestogen for endometrial protection",
+        "Micronized progesterone preferred - most physiological",
+        "Vaginal therapy first-line for isolated genitourinary symptoms",
+        "Local therapy can supplement systemic treatment if needed"
+      ],
+      "tables": [
+        {
+          "title": "Therapy Selection Guide",
+          "columns": ["Uterus Status", "Preferred Therapy", "Key Considerations"],
+          "rows": [
+            ["Present (intact)", "EPT (estrogen + progestogen)", "Endometrial protection essential"],
+            ["Absent (hysterectomy)", "ET (estrogen only)", "No progestogen needed"],
+            ["Present + contraindicated systemic", "Vaginal therapy only", "Local treatment for GSM"],
+            ["Present + high VTE/CVD risk", "Consider vaginal first", "Avoid systemic if high risk"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "Cochrane Review 2023", "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004143" },
+        { "label": "NAMS 2022 GSM Position", "url": "https://www.menopause.org/publications/clinical-care-recommendations" },
+        { "label": "Endocrine Society 2023", "url": "https://www.endocrine.org/clinical-practice-guidelines" }
+      ]
+    },
+    {
+      "id": "routes",
+      "title": "Routes of Administration",
+      "icon": "directions", 
+      "body_md": "## Oral Route\n\n**Standard Option:**\n- Convenient, familiar to patients\n- Good for vasomotor symptoms and bone health\n- Requires daily administration\n\n**Metabolic Effects:**\n- First-pass hepatic metabolism\n- Increases hepatic protein synthesis (SHBG, clotting factors)\n- May affect lipid profile (↑HDL, ↑triglycerides)\n- Increased VTE risk compared to transdermal\n\n**Best Suited For:**\n- Low cardiovascular and VTE risk patients\n- No history of gallbladder disease\n- No migraine with aura\n- Good GI tolerance\n\n## Transdermal Route\n\n**Formulations:**\n- **Patches:** Applied twice weekly, steady hormone delivery\n- **Gels:** Daily application, flexible dosing\n- **Sprays:** Daily use, rapid absorption\n\n**Advantages:**\n- Avoids first-pass hepatic metabolism\n- Lower impact on clotting factors and SHBG\n- Reduced VTE risk compared to oral\n- Better for migraine sufferers\n- Maintains more physiological hormone levels\n\n**Disadvantages:**\n- Skin irritation (5-10% of users)\n- Application site rotation needed\n- Potential transfer to others (gels)\n- May be more expensive\n\n## Route Selection Guidelines\n\n**Prefer Transdermal When:**\n- Moderate to high VTE risk\n- Moderate to high cardiovascular risk\n- History of migraine with aura\n- Gallbladder disease\n- Hypertriglyceridemia (>4.5mmol/L)\n- GI intolerance to oral preparations\n- Hepatic enzyme induction (drug interactions)\n\n**Oral Appropriate When:**\n- Low VTE and cardiovascular risk\n- Patient preference for convenience\n- No contraindications to oral route\n- Cost considerations\n\n## Other Routes\n\n**Vaginal:**\n- For genitourinary symptoms primarily\n- Minimal systemic absorption with low doses\n- Can combine with systemic therapy\n\n**Nasal:**\n- Rapid absorption, short half-life\n- May suit women with skin sensitivity\n- Limited long-term data\n\n**Sublingual/Buccal:**\n- Avoids GI tract and first-pass metabolism\n- Limited availability and evidence",
+      "bullets": [
+        "Transdermal preferred for VTE/CVD risk reduction",
+        "Oral suitable for low-risk patients seeking convenience", 
+        "Route can be switched based on tolerability and risk changes",
+        "Patch rotation prevents skin irritation",
+        "Gel transfer prevention - wash hands, cover application site"
+      ],
+      "tables": [
+        {
+          "title": "Route Comparison",
+          "columns": ["Route", "VTE Risk", "CVD Impact", "Convenience", "Best For"],
+          "rows": [
+            ["Oral", "Higher", "↑clotting factors", "High", "Low-risk patients"],
+            ["Transdermal", "Lower", "Minimal impact", "Moderate", "Moderate-high risk"],
+            ["Vaginal", "Minimal", "None", "Moderate", "GSM symptoms"],
+            ["Nasal", "Unknown", "Unknown", "High", "Skin sensitivity"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "BMJ 2019 VTE Risk Analysis", "url": "https://www.bmj.com/content/364/bmj.k4810" },
+        { "label": "Circulation 2020", "url": "https://www.ahajournals.org/journal/circ" },
+        { "label": "Menopause 2023 Routes Review", "url": "https://journals.lww.com/menopausejournal" }
+      ]
+    },
+    {
+      "id": "dosing",
+      "title": "Dosing & Initiation",
+      "icon": "calculate",
+      "body_md": "## Starting Doses\n\n**Estrogen-Only Therapy (ET):**\n- **Oral estradiol:** 1mg daily (can start 0.5mg if concerned about side effects)\n- **Transdermal patches:** 25-50mcg twice weekly\n- **Transdermal gel:** 0.5-1mg daily (1 pump/measure)\n- **Conjugated estrogens:** 0.3-0.625mg daily\n\n**Estrogen + Progestogen Therapy (EPT):**\n- **Continuous combined:** Start with standard doses (e.g., 1mg estradiol + 2.5mg norethisterone)\n- **Sequential:** Estradiol 1-2mg daily + micronized progesterone 100-200mg days 1-12 each month\n\n## Dose Titration\n\n**Upward Titration (if symptoms persist after 3 months):**\n- Oral estradiol: 1mg → 2mg daily\n- Patches: 25mcg → 50mcg → 100mcg twice weekly\n- Gels: Increase by 0.5mg increments\n\n**Downward Titration (for side effects):**\n- Reduce to lowest effective dose\n- Consider route change if oral not tolerated\n- May use intermittent dosing in some cases\n\n## Managing Common Side Effects\n\n**Breakthrough Bleeding:**\n- **Continuous EPT:** Common first 3-6 months, usually resolves\n- **Persistent bleeding:** Exclude pathology, consider progestogen dose increase\n- **Action:** Increase progestogen or switch to sequential if perimenopausal\n\n**Breast Tenderness:**\n- Often settles within 2-3 months\n- Consider dose reduction or topical progesterone\n- Ensure well-fitting bra, reduce caffeine\n\n**Nausea (oral preparations):**\n- Take with food or at bedtime\n- Consider transdermal route\n- Usually improves within 4-6 weeks\n\n**Headaches:**\n- **New/worsening headaches:** Consider dose reduction or route change\n- **Migraine with aura:** Switch to transdermal immediately\n- Monitor pattern - may indicate contraindication\n\n## Initiation Timing\n\n**Perimenopause:**\n- Can start with irregular periods if bothersome symptoms\n- Use sequential EPT if uterus present\n- Consider lower doses initially\n\n**Postmenopause:**\n- Can start any time if <60 years or <10 years since menopause\n- Use continuous combined EPT if >2 years amenorrheic\n- **>60 years or >10 years postmenopausal:** Careful risk-benefit assessment\n\n**Surgical Menopause:**\n- Start immediately post-surgery if no contraindications\n- Higher doses may be needed initially\n- Consider testosterone if libido concerns (specialist input)\n\n## Add-on Therapies\n\n**Persistent Genitourinary Symptoms:**\n- Add vaginal estradiol 10mcg twice weekly\n- Continue alongside systemic MHT\n- Safe for long-term use\n\n**Mood Symptoms:**\n- Ensure adequate estradiol levels\n- Consider testosterone (specialist)\n- May need additional antidepressant therapy",
+      "bullets": [
+        "Start low, go slow - especially in older women or those >10 years postmenopausal",
+        "Allow 3 months minimum trial before declaring treatment failure",
+        "Side effects usually settle within first 3-6 months",
+        "Bleeding patterns take time to establish - patience required",
+        "Consider alternative routes before stopping treatment for side effects"
+      ],
+      "tables": [
+        {
+          "title": "Standard Starting Doses",
+          "columns": ["Formulation", "Starting Dose", "Maximum Dose", "Notes"],
+          "rows": [
+            ["Oral estradiol", "1mg daily", "2mg daily", "Take with food if nausea"],
+            ["Estradiol patches", "25-50mcg 2x/week", "100mcg 2x/week", "Rotate application sites"],
+            ["Estradiol gel", "0.5-1mg daily", "1.5mg daily", "Apply to clean, dry skin"],
+            ["Micronized progesterone", "100mg daily", "200mg daily", "Take at bedtime"],
+            ["Vaginal estradiol", "10mcg daily x 2 weeks", "10mcg 2x/week maintenance", "For GSM symptoms"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "NAMS 2022 Dosing Guidelines", "url": "https://www.menopause.org/publications/clinical-care-recommendations" },
+        { "label": "Maturitas 2023 Titration", "url": "https://www.maturitas.org" },
+        { "label": "Climacteric 2023", "url": "https://www.tandfonline.com/toc/icmt20/current" }
+      ]
+    },
+    {
+      "id": "monitoring",
+      "title": "Duration, Monitoring & Follow-up",
+      "icon": "schedule",
+      "body_md": "## Follow-up Schedule\n\n**1 Month Follow-up:**\n- **Purpose:** Assess tolerability and early side effects\n- **Focus:** Bleeding patterns, breast tenderness, nausea, headaches\n- **Actions:** Dose adjustment if needed, reassurance about common early effects\n- **Safety:** BP check, weight if relevant\n\n**3 Month Follow-up:**\n- **Purpose:** Evaluate symptom control and treatment response\n- **Assessment:** Vasomotor symptoms, sleep, mood, genitourinary symptoms\n- **Bleeding:** Should be settling if continuous combined EPT\n- **Adherence:** Address any compliance issues\n\n**6 Month Follow-up:**\n- **Purpose:** Comprehensive review of benefits and risks\n- **Symptoms:** Full symptom assessment - are treatment goals met?\n- **Safety:** BP, weight, breast examination\n- **Investigations:** Only if clinically indicated (no routine labs)\n- **Patient satisfaction:** Quality of life improvements\n\n**12 Month Review:**\n- **Purpose:** Annual risk-benefit assessment and treatment planning\n- **Risk factors:** Reassess cardiovascular and VTE risk\n- **Family history:** Any new relevant family history\n- **Investigations:** Age-appropriate screening (mammography, cervical screening)\n- **Future planning:** Discuss continuation vs stopping\n\n**Ongoing Monitoring:**\n- **Annual reviews** minimum once established\n- **Breast awareness** education and annual examination\n- **BP monitoring** especially first year\n- **Symptom tracking** - may use apps/diaries\n\n## Duration of Treatment\n\n**General Principles:**\n- **No arbitrary time limit** - individualized approach\n- **Benefits usually outweigh risks** for most women <60 years\n- **Reassess annually** - risks and benefits change with age\n- **Minimum effective dose** principle\n\n**Factors Influencing Duration:**\n- **Age at initiation:** Earlier start allows longer safe use\n- **Symptom severity:** Severe symptoms may justify longer use\n- **Bone health:** Consider if high osteoporosis risk\n- **Quality of life impact:** Weigh against increasing age-related risks\n\n## Stopping MHT\n\n**Indications to Stop:**\n- Development of absolute contraindication\n- Unacceptable side effects despite optimization\n- Patient choice after informed discussion\n- Risks outweigh benefits (usually age-related)\n\n**Stopping Strategies:**\n- **Gradual reduction:** Reduce dose over 2-3 months then stop\n- **Abrupt cessation:** If urgent (e.g., VTE, breast cancer diagnosis)\n- **Treatment breaks:** Trial periods off treatment to assess ongoing need\n\n**Managing Symptom Recurrence:**\n- **Expect some return** of menopausal symptoms (50-80%)\n- **Timing:** Usually within days to weeks of stopping\n- **Options:** Restart MHT, try alternatives, lifestyle measures\n- **Reassess:** May need to restart if symptoms significantly impact QoL\n\n## Special Monitoring Situations\n\n**High-Risk Patients:**\n- **CVD risk factors:** More frequent BP and lipid monitoring\n- **VTE risk:** Annual risk assessment, consider thrombophilia testing\n- **Migraine:** Headache diary, neurology input if worsening\n- **Liver disease:** LFTs if history of hepatic problems\n\n**Breast Cancer Surveillance:**\n- **Annual mammography** as per national guidelines\n- **Clinical breast examination** annually\n- **Patient education** on breast self-awareness\n- **Prompt investigation** of any breast changes",
+      "bullets": [
+        "Regular follow-up essential - don't prescribe and forget",
+        "Early follow-up (1-3 months) crucial for treatment optimization", 
+        "Annual reviews minimum once treatment established",
+        "No routine blood tests needed for healthy women on MHT",
+        "Individualize duration - no arbitrary time limits",
+        "Stopping symptoms may recur - plan management strategy"
+      ],
+      "tables": [
+        {
+          "title": "Follow-up Schedule",
+          "columns": ["Timing", "Focus", "Assessments", "Actions"],
+          "rows": [
+            ["1 month", "Tolerability", "Side effects, BP", "Dose adjustment PRN"],
+            ["3 months", "Efficacy", "Symptom control", "Optimize regimen"],
+            ["6 months", "Safety review", "BP, examination", "Risk assessment"],
+            ["12 months", "Annual review", "Full assessment", "Continue/modify/stop"],
+            ["Ongoing", "Maintenance", "Annual minimum", "Risk-benefit updates"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "IMS 2023 Monitoring Guidelines", "url": "https://www.imsociety.org/statements/" },
+        { "label": "NAMS 2022 Follow-up", "url": "https://www.menopause.org/publications/clinical-care-recommendations" },
+        { "label": "Menopause Int 2023", "url": "https://journals.sagepub.com/home/min" }
+      ]
+    },
+    {
+      "id": "risks-benefits", 
+      "title": "Risks & Benefits",
+      "icon": "balance",
+      "body_md": "## Benefits of MHT\n\n**Vasomotor Symptoms:**\n- **Most effective treatment** for hot flushes and night sweats\n- **75-90% reduction** in symptom frequency and severity\n- **Quality of life improvement** - sleep, mood, relationships\n- **Effect size:** Large and clinically meaningful\n\n**Sleep and Mood:**\n- Improved sleep quality and duration\n- Reduced irritability and mood swings\n- **Not primary treatment for depression** but may help mood in menopause context\n- Better cognitive function (subjective)\n\n**Genitourinary Health:**\n- **Highly effective** for vaginal dryness and dyspareunia\n- Reduces urinary urgency and frequency\n- Prevents vaginal atrophy progression\n- Improves sexual function and satisfaction\n\n**Bone Health:**\n- **Prevents bone loss** and reduces fracture risk\n- **Hip fracture reduction:** ~30% in appropriate users\n- **Vertebral fracture reduction:** ~35% \n- Effect maintained during treatment, reduces after stopping\n\n**Cardiovascular (Timing Hypothesis):**\n- **May be cardioprotective** if started <60 years or <10 years postmenopausal\n- **No benefit if started late** (>60 years or >10 years postmenopausal)\n- Transdermal route preferred for CVD risk reduction\n\n## Risks of MHT\n\n**Breast Cancer:**\n- **EPT (combined):** Small increased risk after 5+ years use\n- **Absolute risk increase:** ~1-2 extra cases per 1000 women over 5 years\n- **ET (estrogen-only):** Minimal or no increased risk\n- **Risk factors:** Duration of use, family history, age at initiation\n\n**Venous Thromboembolism (VTE):**\n- **Oral MHT:** 2-3 fold increased risk\n- **Transdermal MHT:** Minimal increased risk (preferred route)\n- **Absolute risk:** ~1-2 extra cases per 1000 women per year\n- **Highest risk:** First year of use\n\n**Stroke:**\n- **Oral estrogen:** Small increased risk of ischemic stroke\n- **Transdermal:** May have lower stroke risk\n- **Age-dependent:** Higher absolute risk in older women\n- **Timing matters:** Risk-benefit less favorable if started >60 years\n\n**Gallbladder Disease:**\n- **Oral estrogen:** 2-3 fold increased risk\n- **Transdermal:** Lower risk due to avoiding first-pass metabolism\n- **Absolute risk:** Low in most populations\n\n## Risk Mitigation Strategies\n\n**Route Selection:**\n- **Transdermal preferred** for VTE/CVD/stroke risk reduction\n- **Oral acceptable** in low-risk women\n- **Vaginal therapy** for isolated GSM symptoms\n\n**Dose Optimization:**\n- **Lowest effective dose** principle\n- **Start low, increase if needed**\n- **Regular review** and dose adjustment\n\n**Duration Management:**\n- **Individualized approach** - no arbitrary limits\n- **Regular reassessment** of risk-benefit ratio\n- **Consider stopping** if risks begin to outweigh benefits\n\n**Patient Selection:**\n- **Careful screening** for contraindications\n- **Risk factor assessment** before initiation\n- **Shared decision-making** with full risk disclosure\n\n## Shared Decision-Making Framework\n\n**Information Provision:**\n- Discuss both benefits and risks quantitatively\n- Use visual aids and decision tools\n- Provide written information to take home\n- Allow time for questions and family discussion\n\n**Documentation:**\n- Record risk-benefit discussion in notes\n- Document patient understanding and consent\n- Note any specific concerns or preferences\n- Include family history and risk factors\n\n**Risk Communication:**\n- Use **absolute risks** rather than relative risks\n- Provide **natural frequencies** (e.g., \"1 in 1000\")\n- **Compare to everyday risks** for perspective\n- **Acknowledge uncertainty** where evidence limited",
+      "bullets": [
+        "Benefits most significant for quality of life and symptom control",
+        "Risks are generally small and often overstated in media",
+        "Route selection crucial for risk minimization", 
+        "Timing of initiation affects risk-benefit ratio",
+        "Individual risk assessment essential - not population averages",
+        "Shared decision-making and documentation vital"
+      ],
+      "tables": [
+        {
+          "title": "Risk-Benefit Summary",
+          "columns": ["Outcome", "Benefit/Risk", "Absolute Effect (per 1000 women over 5 years)", "Notes"],
+          "rows": [
+            ["Vasomotor symptoms", "Major benefit", "750-900 improved", "Most effective treatment"],
+            ["Hip fracture", "Benefit", "3-5 prevented", "Significant if high osteoporosis risk"],
+            ["Breast cancer (EPT)", "Small risk", "1-2 extra cases", "After 5+ years use"],
+            ["VTE (oral)", "Risk", "2-4 extra cases", "Transdermal much lower risk"],
+            ["Stroke (oral)", "Small risk", "1-2 extra cases", "Age-dependent"],
+            ["Quality of life", "Major benefit", "Most women", "Sleep, mood, relationships"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "WHI 2017 Update", "url": "https://www.whi.org/" },
+        { "label": "Lancet 2019 Breast Cancer", "url": "https://www.thelancet.com/journals/lancet/home" },
+        { "label": "Cochrane 2023 Systematic Review", "url": "https://www.cochranelibrary.com/" },
+        { "label": "NAMS 2022 Risk Assessment", "url": "https://www.menopause.org/publications/clinical-care-recommendations" }
+      ]
+    },
+    {
+      "id": "special-populations",
+      "title": "Special Populations", 
+      "icon": "group",
+      "body_md": "## Premature Ovarian Insufficiency (POI) / Early Menopause\n\n**Definition:**\n- **POI:** Menopause <40 years\n- **Early menopause:** 40-45 years\n- May be spontaneous or iatrogenic\n\n**Management Principles:**\n- **MHT strongly recommended** unless contraindicated\n- **Replace to natural menopause age** (average 51 years)\n- **Higher doses often needed** than standard menopause\n- **Cardiovascular and bone protection** critical\n\n**Dosing Considerations:**\n- **Estradiol 2mg daily** or equivalent often needed\n- **Testosterone replacement** may be beneficial (specialist input)\n- **Calcium and vitamin D** supplementation\n- **Lifestyle optimization** crucial\n\n## Surgical Menopause\n\n**Bilateral Oophorectomy:**\n- **Immediate, severe hormone deficiency**\n- **Start MHT immediately** post-surgery if no contraindications\n- **Higher doses initially** may be required\n- **Consider testosterone** if bilateral oophorectomy <45 years\n\n**Hysterectomy with Ovarian Conservation:**\n- May have earlier menopause due to reduced blood supply\n- **Estrogen-only therapy** appropriate (no progestogen needed)\n- Monitor for menopausal symptoms earlier than expected\n\n## High BMI and Metabolic Syndrome\n\n**Considerations:**\n- **Increased VTE risk** with higher BMI\n- **Prefer transdermal route** to minimize VTE risk\n- **Cardiovascular risk assessment** essential\n- **Weight management** counseling important\n\n**Dosing:**\n- May need **higher doses** for symptom control\n- **Transdermal absorption** may be variable\n- **Monitor response** closely\n\n## Cardiovascular Disease Risk Factors\n\n**Hypertension:**\n- **Not a contraindication** if well-controlled\n- **Prefer transdermal** to avoid BP effects\n- **Monitor BP** more frequently initially\n- **Optimize other CVD risk factors**\n\n**Diabetes:**\n- **MHT generally safe** in well-controlled diabetes\n- **May improve insulin sensitivity**\n- **Transdermal preferred** especially if complications present\n- **Annual CVD risk assessment**\n\n**Previous VTE (Remote):**\n- **Specialist assessment** essential\n- **Consider thrombophilia testing**\n- **Transdermal route only** if MHT used\n- **May prefer vaginal therapy** for GSM symptoms only\n\n## Migraine\n\n**Migraine Without Aura:**\n- **MHT generally safe**\n- **May improve** migraine frequency\n- **Estrogen withdrawal** can trigger migraine\n- **Continuous regimens** preferred over cyclical\n\n**Migraine With Aura:**\n- **Oral estrogen contraindicated** (stroke risk)\n- **Transdermal estrogen** may be considered with neurology input\n- **Low-dose options** preferred\n- **Close monitoring** essential\n\n## Liver Disease\n\n**Mild Liver Disease:**\n- **Transdermal route preferred** (avoids first-pass metabolism)\n- **Monitor liver function** if history of hepatic problems\n- **Avoid oral preparations**\n\n**Active/Severe Liver Disease:**\n- **Absolute contraindication** to MHT\n- **Consider non-hormonal alternatives**\n- **Specialist hepatology input** required\n\n## Cancer Survivors\n\n**Breast Cancer History:**\n- **Generally contraindicated** unless exceptional circumstances\n- **Oncology input essential** for any consideration\n- **Vaginal therapy** may be considered for severe GSM\n- **Non-hormonal alternatives** preferred\n\n**Endometrial Cancer (Stage 1):**\n- **May be considered** in low-grade, stage 1 disease\n- **Gynecological oncology input** essential\n- **Careful patient selection** and counseling\n- **Close surveillance** required\n\n**Other Cancers:**\n- **Case-by-case assessment**\n- **Oncology team involvement**\n- **Consider hormone receptor status**\n- **Document decision-making clearly**\n\n## Thrombophilia\n\n**Known Thrombophilia:**\n- **High-risk thrombophilias:** Avoid systemic MHT\n- **Lower-risk variants:** Specialist hematology assessment\n- **Vaginal therapy only** may be appropriate\n- **Family history assessment** important\n\n**Testing Indications:**\n- **Strong family history** of VTE\n- **Previous unprovoked VTE**\n- **Recurrent pregnancy loss**\n- **Not routine screening** for all women",
+      "bullets": [
+        "POI/early menopause - MHT strongly recommended until natural menopause age",
+        "Surgical menopause - start MHT immediately post-op if no contraindications",
+        "High BMI - prefer transdermal route for VTE risk reduction",
+        "Migraine with aura - oral estrogen contraindicated, transdermal with caution",
+        "Cancer survivors - generally avoid MHT, oncology input essential",
+        "Thrombophilia - specialist assessment needed, may contraindicate systemic MHT"
+      ],
+      "tables": [
+        {
+          "title": "Special Population Guidelines",
+          "columns": ["Population", "Key Consideration", "Preferred Approach", "Specialist Input"],
+          "rows": [
+            ["POI/Early menopause", "Replace until age 51", "Higher dose MHT", "Endocrinology PRN"],
+            ["Surgical menopause", "Immediate severe deficiency", "Start post-op", "Consider testosterone"],
+            ["High BMI", "Increased VTE risk", "Transdermal route", "Weight management"],
+            ["Migraine + aura", "Stroke risk", "Avoid oral, consider transdermal", "Neurology input"],
+            ["Breast cancer history", "Generally contraindicated", "Non-hormonal alternatives", "Oncology essential"],
+            ["Thrombophilia", "VTE risk assessment", "Avoid systemic if high-risk", "Hematology input"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "ESC 2023 POI Guidelines", "url": "https://www.escardio.org/Guidelines" },
+        { "label": "RCOG 2023 Special Populations", "url": "https://www.rcog.org.uk/guidelines/" },
+        { "label": "IMS 2023 Cancer Survivors", "url": "https://www.imsociety.org/statements/" },
+        { "label": "Thrombosis Haemostasis 2023", "url": "https://www.thieme.de/en/thieme-connect/" }
+      ]
+    },
+    {
+      "id": "alternatives",
+      "title": "Non-hormonal Alternatives",
+      "icon": "healing",
+      "body_md": "## Evidence-Based Pharmacological Options\n\n**Selective Serotonin Reuptake Inhibitors (SSRIs):**\n- **Paroxetine (Brisdelle):** FDA-approved for vasomotor symptoms, 7.5mg daily\n- **Citalopram:** 10-20mg daily, good evidence for hot flushes\n- **Escitalopram:** 10-20mg daily, similar efficacy to citalopram\n- **Efficacy:** 50-65% reduction in hot flush frequency/severity\n- **Onset:** 2-4 weeks for full effect\n\n**Serotonin-Norepinephrine Reuptake Inhibitors (SNRIs):**\n- **Venlafaxine:** 37.5-75mg daily, good evidence base\n- **Desvenlafaxine:** 50-100mg daily, metabolite of venlafaxine\n- **Duloxetine:** 30-60mg daily, may help mood and pain\n- **Efficacy:** Similar to SSRIs, 50-60% symptom reduction\n\n**Gabapentinoids:**\n- **Gabapentin:** 300-900mg daily (start 300mg, increase gradually)\n- **Pregabalin:** 75-150mg twice daily\n- **Efficacy:** Comparable to antidepressants for vasomotor symptoms\n- **Benefits:** May improve sleep, neuropathic pain\n- **Side effects:** Sedation, dizziness, weight gain\n\n**Clonidine:**\n- **Dose:** 0.1-0.2mg daily (oral or transdermal patch)\n- **Mechanism:** Central alpha-2 agonist\n- **Efficacy:** Modest (20-40% improvement)\n- **Side effects:** Hypotension, dry mouth, sedation\n- **Use:** Second-line option\n\n## Behavioral and Lifestyle Interventions\n\n**Cognitive Behavioral Therapy (CBT):**\n- **Specific CBT for menopause** - evidence-based approach\n- **Focus:** Changing thoughts and behaviors around hot flushes\n- **Efficacy:** Reduces hot flush bothersomeness and mood symptoms\n- **Duration:** Usually 6-8 sessions\n- **Delivery:** Individual, group, or online formats available\n\n**Mindfulness and Relaxation:**\n- **Mindfulness-Based Stress Reduction (MBSR)**\n- **Progressive muscle relaxation**\n- **Deep breathing exercises**\n- **Yoga and meditation**\n- **Evidence:** Modest benefits for symptom management\n\n**Lifestyle Modifications:**\n- **Temperature regulation:** Layered clothing, cooling strategies\n- **Dietary triggers:** Avoid spicy foods, caffeine, alcohol\n- **Regular exercise:** May reduce hot flush frequency\n- **Weight management:** Obesity worsens vasomotor symptoms\n- **Smoking cessation:** Improves symptoms and general health\n\n## Complementary and Alternative Medicine\n\n**Phytoestrogens:**\n- **Soy isoflavones:** 40-80mg daily, modest benefits\n- **Red clover:** Limited evidence for efficacy\n- **Dietary sources:** Soy products, legumes, flax seeds\n- **Note:** Effects variable, not regulated as medications\n\n**Herbal Preparations:**\n- **Black cohosh:** Some evidence for short-term use\n- **St. John's Wort:** May help mood symptoms\n- **Evening primrose oil:** Limited evidence\n- **Caution:** Drug interactions, quality control issues\n\n**Acupuncture:**\n- **Evidence:** Mixed results, some studies show benefit\n- **Mechanism:** Unclear, may affect neurotransmitters\n- **Safety:** Generally safe with qualified practitioners\n- **Duration:** Usually requires multiple sessions\n\n## Genitourinary Syndrome Management\n\n**Non-hormonal Vaginal Options:**\n- **Regular sexual activity** - maintains vaginal health\n- **Vaginal moisturizers:** Hyaluronic acid, polycarbophil-based\n- **Vaginal lubricants:** Water or silicone-based for sexual activity\n- **Vaginal pH products:** May help restore acidic environment\n\n**Physical Therapies:**\n- **Pelvic floor physiotherapy**\n- **Vaginal dilators** for dyspareunia\n- **Laser therapy:** CO2 laser - emerging evidence\n- **Radiofrequency therapy:** Limited long-term data\n\n## Treatment Algorithm for Non-hormonal Approaches\n\n**First-line:**\n- Lifestyle modifications + CBT\n- SSRI/SNRI if mood symptoms prominent\n- Gabapentin if sleep disturbance prominent\n\n**Second-line:**\n- Alternative antidepressant\n- Clonidine\n- Combination approaches\n\n**Adjunctive:**\n- Complementary therapies\n- Mindfulness/relaxation techniques\n- Acupuncture\n\n**For GSM specifically:**\n- Vaginal moisturizers and lubricants first-line\n- Physical therapies if pelvic floor involvement\n- Consider newer technologies with appropriate counseling\n\n## Comparative Efficacy\n\n**Vasomotor Symptoms (% reduction vs placebo):**\n- **MHT:** 75-90% (gold standard)\n- **SSRIs/SNRIs:** 50-65%\n- **Gabapentin:** 45-60%\n- **Clonidine:** 20-40%\n- **CBT:** 30-50% (bothersomeness)\n- **Lifestyle alone:** 10-25%",
+      "bullets": [
+        "SSRIs/SNRIs first-line non-hormonal treatment for vasomotor symptoms",
+        "CBT addresses symptom bothersomeness even if not frequency",
+        "Gabapentin useful if sleep disturbance prominent",
+        "Lifestyle modifications help but limited efficacy alone",
+        "Non-hormonal options generally less effective than MHT",
+        "Combination approaches may be more effective than monotherapy"
+      ],
+      "tables": [
+        {
+          "title": "Non-hormonal Treatment Options",
+          "columns": ["Treatment", "Efficacy (%)", "Time to Effect", "Main Side Effects"],
+          "rows": [
+            ["Paroxetine 7.5mg", "50-65%", "2-4 weeks", "Nausea, sexual dysfunction"],
+            ["Venlafaxine 75mg", "50-60%", "2-4 weeks", "Nausea, hypertension"],
+            ["Gabapentin 900mg", "45-60%", "1-2 weeks", "Sedation, dizziness"],
+            ["Clonidine 0.1mg", "20-40%", "1-2 weeks", "Hypotension, dry mouth"],
+            ["CBT (6-8 sessions)", "30-50%*", "6-8 weeks", "Time commitment"],
+            ["Lifestyle changes", "10-25%", "Variable", "None"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "NAMS 2023 Non-hormonal Statement", "url": "https://www.menopause.org/publications/clinical-care-recommendations" },
+        { "label": "Cochrane 2023 Antidepressants", "url": "https://www.cochranelibrary.com/" },
+        { "label": "Menopause 2023 CBT Review", "url": "https://journals.lww.com/menopausejournal" },
+        { "label": "JAMA 2023 Lifestyle Interventions", "url": "https://jamanetwork.com/" }
+      ]
+    },
+    {
+      "id": "red-flags",
+      "title": "Red-Flag Symptoms & Escalation",
+      "icon": "warning", 
+      "body_md": "## Immediate Red-Flag Symptoms\n\n**Breast-Related Concerns:**\n- **New breast lump or thickening**\n- **Nipple discharge (especially bloody)**\n- **Breast skin changes** (peau d'orange, dimpling)\n- **New breast pain** (unilateral, persistent)\n- **Lymph node enlargement** (axillary, supraclavicular)\n\n**Cardiovascular/Respiratory:**\n- **Chest pain** (especially with exertion)\n- **Sudden shortness of breath**\n- **Unilateral leg swelling, pain, redness**\n- **Sudden severe headache**\n- **Visual changes or speech disturbance**\n- **Sudden weakness or numbness**\n\n**Gynecological:**\n- **Unexpected heavy vaginal bleeding**\n- **Postmenopausal bleeding** (if not on MHT or unusual pattern)\n- **Severe pelvic pain**\n- **Abdominal distension with pain**\n\n**Hepatic:**\n- **Jaundice** (yellowing of skin/eyes)\n- **Dark urine with pale stools**\n- **Severe right upper quadrant pain**\n- **Nausea and vomiting with abdominal pain**\n\n**Neurological:**\n- **New or worsening severe headaches**\n- **Migraine with new aura pattern**\n- **Sudden confusion or memory loss**\n- **Seizures**\n- **Loss of consciousness**\n\n## Immediate Actions Required\n\n**Same-Day Assessment Needed:**\n- **Chest pain with SOB:** Consider PE/MI - immediate medical assessment\n- **Unilateral leg symptoms:** VTE assessment - same-day ultrasound\n- **Severe headache with neurological signs:** Stroke assessment - immediate\n- **Heavy vaginal bleeding:** Assessment for structural causes\n\n**48-Hour Assessment:**\n- **New breast lump:** Clinical examination ± imaging\n- **Postmenopausal bleeding:** Gynecological assessment\n- **Persistent severe abdominal pain:** Exclude serious pathology\n- **Jaundice:** Liver function assessment\n\n**1-Week Assessment:**\n- **New persistent breast pain**\n- **Worsening headache pattern**\n- **Unusual bleeding patterns**\n- **Persistent nausea/vomiting**\n\n## Clinical Assessment Protocols\n\n**Suspected VTE:**\n- **Stop MHT immediately**\n- **Wells score assessment**\n- **D-dimer if appropriate**\n- **Urgent doppler ultrasound** (DVT) or **CTPA** (PE)\n- **Anticoagulation** if high suspicion\n\n**Suspected Stroke/TIA:**\n- **Stop MHT immediately**\n- **FAST assessment**\n- **Urgent imaging** (CT/MRI)\n- **Specialist neurology input**\n- **Aspirin** if appropriate\n\n**Breast Concerns:**\n- **Clinical examination**\n- **Imaging:** Mammography/ultrasound as appropriate\n- **Urgent referral** if suspicious features\n- **Continue MHT** unless malignancy confirmed\n\n**Abnormal Bleeding:**\n- **Pelvic examination**\n- **Cervical screening** if due\n- **Endometrial assessment:** USS ± biopsy\n- **Consider infectious causes**\n- **Modify MHT regimen** if appropriate\n\n## Referral Pathways\n\n**Urgent (Same Day):**\n- **Suspected stroke/TIA:** Acute stroke unit\n- **Suspected MI:** Emergency cardiology\n- **Suspected PE:** Emergency medicine/respiratory\n- **Severe bleeding:** Gynecology emergency\n\n**Urgent (2 weeks):**\n- **Suspected breast cancer:** Breast unit\n- **Suspected gynecological cancer:** Gynecological oncology\n- **Unexplained symptoms with cancer concern**\n\n**Routine Specialist Referral:**\n- **Complex MHT management:** Menopause specialist\n- **Thrombophilia assessment:** Hematology\n- **Cardiovascular risk:** Cardiology\n- **Hepatic concerns:** Hepatology/gastroenterology\n\n## Documentation Requirements\n\n**For All Red-Flag Symptoms:**\n- **Detailed symptom history** and timeline\n- **Physical examination findings**\n- **Current medications** including MHT regimen\n- **Action taken** and rationale\n- **Safety netting advice** given to patient\n\n**MHT-Related Decisions:**\n- **Whether MHT stopped** and why\n- **Alternative arrangements** for symptom management\n- **Follow-up plans** and responsibility\n- **Patient understanding** of risks and actions\n\n## Patient Safety Netting\n\n**Patient Education Points:**\n- **When to seek immediate help** - clear scenarios\n- **Contact information** for urgent advice\n- **What symptoms to monitor**\n- **Understanding of medication changes**\n\n**Provide Written Information:**\n- **Red-flag symptom checklist**\n- **Emergency contact numbers**\n- **Clear instructions** about MHT continuation/cessation\n- **Follow-up appointment details**\n\n## Risk Communication\n\n**Key Messages:**\n- **Most symptoms are not serious** but need assessment\n- **Early detection improves outcomes**\n- **When in doubt, seek advice**\n- **MHT can usually be restarted** if symptoms unrelated\n\n**Avoid:**\n- **Dismissing concerns** as 'just menopause'\n- **Delayed assessment** of concerning symptoms\n- **Continuing MHT** without proper evaluation of red flags\n- **Poor documentation** of decision-making",
+      "bullets": [
+        "Any new breast lump needs urgent assessment - don't delay",
+        "Chest pain + SOB = PE until proven otherwise - stop MHT, investigate urgently",
+        "Unilateral leg symptoms = DVT risk - same-day vascular assessment",
+        "Severe headache with neurological signs = stroke risk - immediate assessment",
+        "Unexpected bleeding needs gynecological evaluation - exclude malignancy",
+        "Document clearly and provide safety-netting advice to patients"
+      ],
+      "tables": [
+        {
+          "title": "Red-Flag Symptoms and Actions",
+          "columns": ["Symptom Category", "Key Features", "Urgency", "Immediate Action"],
+          "rows": [
+            ["Breast changes", "New lump, nipple discharge", "48 hours", "Clinical exam + imaging"],
+            ["VTE symptoms", "Leg swelling, chest pain + SOB", "Same day", "Stop MHT, urgent imaging"],
+            ["Neurological", "Severe headache, weakness", "Immediate", "Stop MHT, stroke assessment"],
+            ["Bleeding", "Heavy/unexpected bleeding", "Same day", "Pelvic exam, exclude cancer"],
+            ["Hepatic", "Jaundice, RUQ pain", "48 hours", "LFTs, hepatology input"],
+            ["Cardiac", "Chest pain, palpitations", "Same day", "ECG, cardiology assessment"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "NICE 2019 VTE Guidelines", "url": "https://www.nice.org.uk/guidance/ng89" },
+        { "label": "RCGP 2023 Safety Netting", "url": "https://www.rcgp.org.uk/clinical-and-research/resources/" },
+        { "label": "RCP 2023 Acute Medicine", "url": "https://www.rcplondon.ac.uk/guidelines/" },
+        { "label": "SIGN 2023 Emergency Care", "url": "https://www.sign.ac.uk/" }
+      ]
+    },
+    {
+      "id": "quick-reference",
+      "title": "Quick Reference & Flowcharts", 
+      "icon": "account-tree",
+      "body_md": "## MHT Decision Flowchart\n\n### Step 1: Initial Assessment\n**Is patient suitable for MHT?**\n- ✅ **YES:** Menopausal symptoms + no absolute contraindications → Continue to Step 2\n- ❌ **NO:** Absolute contraindications present → Non-hormonal alternatives\n\n### Step 2: Uterus Status\n**Does patient have uterus?**\n- ✅ **YES (Uterus intact):** EPT required (estrogen + progestogen) → Step 3\n- ❌ **NO (Hysterectomy):** ET suitable (estrogen only) → Step 4\n\n### Step 3: EPT Route Selection\n**Assess VTE/CVD Risk:**\n- 🔴 **HIGH RISK:** Transdermal EPT or vaginal therapy only\n- 🟡 **MODERATE RISK:** Prefer transdermal EPT\n- 🟢 **LOW RISK:** Oral or transdermal EPT acceptable\n\n### Step 4: ET Route Selection  \n**Assess VTE/CVD Risk:**\n- 🔴 **HIGH RISK:** Transdermal ET or vaginal therapy only\n- 🟡 **MODERATE RISK:** Prefer transdermal ET\n- 🟢 **LOW RISK:** Oral or transdermal ET acceptable\n\n### Step 5: Symptom-Specific Considerations\n**Primary symptom pattern:**\n- **Vasomotor dominant:** Systemic MHT (as above)\n- **GU symptoms dominant:** Consider vaginal therapy first\n- **Both equally:** Systemic + vaginal if needed\n\n## Risk Assessment Quick Reference\n\n### VTE Risk Factors (Choose Route)\n**HIGH RISK (Transdermal/Vaginal only):**\n- Previous VTE (any time)\n- Known thrombophilia\n- Active cancer\n- Immobilization\n\n**MODERATE RISK (Prefer Transdermal):**\n- BMI ≥30\n- Current smoking\n- Age >60 years\n- Family history VTE\n\n**LOW RISK (Oral Acceptable):**\n- BMI <30\n- Non-smoker\n- Age <60 years\n- No VTE history/family history\n\n### CVD Risk Factors (Choose Route)\n**HIGH RISK (Transdermal/Vaginal only):**\n- Established CVD\n- Diabetes with complications\n- Multiple risk factors\n\n**MODERATE RISK (Prefer Transdermal):**\n- Hypertension\n- Diabetes without complications  \n- High cholesterol\n- Smoking\n\n**LOW RISK (Oral Acceptable):**\n- No CVD risk factors\n- Well-controlled single risk factor\n\n## Dosing Quick Reference\n\n### Standard Starting Doses\n**Oral Preparations:**\n- Estradiol: 1mg daily\n- Conjugated estrogens: 0.625mg daily\n- + Micronized progesterone: 100mg daily\n\n**Transdermal Preparations:**\n- Estradiol patches: 25-50mcg twice weekly\n- Estradiol gel: 0.5-1mg daily\n- + Micronized progesterone: 100mg daily\n\n**Vaginal Preparations:**\n- Estradiol tablets: 10mcg daily x 2 weeks, then 2x weekly\n- Estriol cream: 0.5mg daily x 2-3 weeks, then 2x weekly\n\n### Dose Adjustments\n**Increase Dose If (after 3 months):**\n- Persistent vasomotor symptoms\n- Inadequate symptom relief\n- Good tolerability\n\n**Decrease Dose If:**\n- Side effects (breast tenderness, bloating)\n- Breakthrough bleeding persistent\n- Patient preference for lower dose\n\n## Contraindication Checklist\n\n### Absolute Contraindications ❌\n- [ ] Current/past breast cancer\n- [ ] Current/past endometrial cancer  \n- [ ] Active liver disease\n- [ ] Unexplained vaginal bleeding\n- [ ] Active VTE\n- [ ] Known high-risk thrombophilia\n- [ ] Acute MI or stroke\n\n### Relative Contraindications ⚠️\n- [ ] Remote history VTE\n- [ ] High CVD risk\n- [ ] Migraine with aura  \n- [ ] Gallbladder disease\n- [ ] Severe liver disease (past)\n- [ ] Large fibroids\n\n## Follow-up Schedule\n\n### Timeline Checklist\n- **1 Month:** ✅ Tolerability, side effects, BP\n- **3 Months:** ✅ Symptom control, bleeding pattern\n- **6 Months:** ✅ Safety review, examination\n- **12 Months:** ✅ Annual risk-benefit assessment\n- **Annually:** ✅ Ongoing monitoring\n\n### What to Assess\n- **Efficacy:** Symptom improvement, QoL\n- **Safety:** BP, weight, breast exam\n- **Adherence:** Compliance, tolerability\n- **Risks:** New risk factors, family history\n- **Satisfaction:** Patient preference, concerns\n\n## Emergency Action Cards\n\n### 🚨 STOP MHT IMMEDIATELY if:\n- Suspected VTE (leg swelling, chest pain + SOB)\n- Suspected stroke (sudden neurological symptoms)\n- Suspected MI (chest pain with cardiac features)\n- New breast cancer diagnosis\n- Severe liver dysfunction\n\n### ⚠️ URGENT ASSESSMENT if:\n- New breast lump\n- Unexpected heavy bleeding  \n- Severe persistent headache\n- Abdominal pain + jaundice\n- New neurological symptoms\n\n### 📞 ROUTINE REVIEW if:\n- Persistent side effects\n- Inadequate symptom control\n- Patient concerns about continuation\n- New medications started\n- Lifestyle changes affecting risk\n\n## Treatment Algorithms\n\n### Algorithm 1: First-Time MHT User\n1. **Assess contraindications** → Absolute = Stop, Relative = Specialist\n2. **Uterus present?** → Yes = EPT, No = ET  \n3. **Risk assessment** → High/Moderate = Transdermal, Low = Oral OK\n4. **Start standard dose** → Review at 1 month\n5. **Optimize at 3 months** → Adjust dose/route if needed\n\n### Algorithm 2: MHT Side Effects\n1. **Identify side effect** → Bleeding, breast pain, nausea, headache\n2. **Timing assessment** → Early (<3 months) vs Late (>3 months)\n3. **Severity assessment** → Mild = Reassure, Severe = Modify\n4. **Modification options** → Dose, route, preparation, timing\n5. **Review response** → Continue, switch, or stop\n\n### Algorithm 3: Stopping MHT\n1. **Indication to stop** → Contraindication, choice, age-related\n2. **Stopping method** → Gradual vs abrupt\n3. **Symptom monitoring** → Expect return in 50-80%\n4. **Management options** → Restart, alternatives, lifestyle\n5. **Long-term plan** → Bone health, CVD prevention",
+      "bullets": [
+        "Uterus present = EPT required (never give unopposed estrogen)",
+        "High VTE/CVD risk = transdermal route preferred",
+        "GU symptoms dominant = consider vaginal therapy first",
+        "Stop MHT immediately for VTE, stroke, MI, or breast cancer",
+        "Most side effects settle within 3 months - patience required",
+        "Annual risk-benefit review essential for all users"
+      ],
+      "tables": [
+        {
+          "title": "Quick Decision Matrix",
+          "columns": ["Clinical Scenario", "First Choice", "Alternative", "Avoid"],
+          "rows": [
+            ["Hysterectomy + low risk", "Oral ET", "Transdermal ET", "EPT"],
+            ["Uterus intact + low risk", "Oral EPT", "Transdermal EPT", "ET alone"],
+            ["High VTE risk", "Transdermal", "Vaginal only", "Oral preparations"],
+            ["Migraine + aura", "Transdermal", "Vaginal only", "Oral estrogen"],
+            ["GSM symptoms only", "Vaginal therapy", "Low-dose systemic", "High-dose systemic"],
+            ["Breast cancer history", "Non-hormonal", "Vaginal (oncology input)", "Systemic MHT"]
+          ]
+        }
+      ],
+      "citations": [
+        { "label": "IMS 2023 Quick Reference", "url": "https://www.imsociety.org/statements/" },
+        { "label": "NAMS 2022 Clinical Guide", "url": "https://www.menopause.org/publications/clinical-care-recommendations" },
+        { "label": "NICE 2024 Quick Reference", "url": "https://www.nice.org.uk/guidance/ng23" },
+        { "label": "RCGP 2023 Toolkit", "url": "https://www.rcgp.org.uk/clinical-and-research/resources/" }
+      ]
+    }
+  ]
+}

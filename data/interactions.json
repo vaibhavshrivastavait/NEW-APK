@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "interactions": [
+    { 
+      "id": "I_HI_EST_WARF", 
+      "drug_a": "Estrogen (systemic)", 
+      "drug_b": "Warfarin", 
+      "severity": "high", 
+      "action": "avoid", 
+      "message": "Estrogen alters warfarin metabolism; avoid or consult haematology." 
+    },
+    { 
+      "id": "I_MOD_STJ_COC", 
+      "drug_a": "St John's Wort", 
+      "drug_b": "Combined oral contraceptives", 
+      "severity": "moderate", 
+      "action": "warn", 
+      "message": "CYP induction reduces contraceptive efficacy — counsel on pregnancy risk." 
+    },
+    { 
+      "id": "I_HI_PAX_TAM", 
+      "drug_a": "Paroxetine (SSRI)", 
+      "drug_b": "Tamoxifen", 
+      "severity": "high", 
+      "action": "avoid", 
+      "message": "Paroxetine reduces tamoxifen activation; use alternative antidepressant." 
+    },
+    { 
+      "id": "I_MOD_HERB_AC", 
+      "drug_a": "Herbal supplement (general)", 
+      "drug_b": "Anticoagulant", 
+      "severity": "moderate", 
+      "action": "warn", 
+      "message": "Herbals (ginkgo, garlic) may increase bleeding risk with anticoagulants." 
+    },
+    { 
+      "id": "I_LOW_ACE_SPIRON", 
+      "drug_a": "ACE inhibitor", 
+      "drug_b": "Spironolactone", 
+      "severity": "low", 
+      "action": "monitor", 
+      "message": "Monitor potassium levels." 
+    }
+  ]
+}

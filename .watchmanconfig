@@ -1,0 +1,11 @@
+{
+  "ignore_dirs": [
+    "node_modules/*/node_modules",
+    "scripts",
+    "__tests__",
+    ".git",
+    ".expo",
+    "build",
+    "dist"
+  ]
+}

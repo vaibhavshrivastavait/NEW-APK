@@ -1,0 +1,1829 @@
+{
+  "version": "2025.01.15-popular-2025.01.16",
+  "releasedAt": "2025-01-15T00:00:00Z",
+  "checksum": "cme_v2025_01_15_sha256",
+  "metadata": {
+    "totalModules": 15,
+    "totalCredits": 10.5,
+    "estimatedHours": 4.5,
+    "accreditationProvider": "Practice Credits",
+    "validUntil": "2026-01-15",
+    "popularQuizzesAdded": 9,
+    "mergedAt": "2025-09-09T00:35:29.274Z"
+  },
+  "modules": [
+    {
+      "id": "basics-menopause-mht",
+      "title": "Basics of Menopause & MHT",
+      "description": "Fundamental concepts of menopause physiology and hormone therapy principles",
+      "credits": 1,
+      "estimatedMinutes": 45,
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Understanding Menopause",
+          "body_md": "## Definition and Physiology\n\n**Menopause** is the permanent cessation of menstruation resulting from loss of ovarian follicular activity, confirmed after 12 consecutive months of amenorrhea.\n\n### Key Physiological Changes:\n- **Estradiol decline:** From ~100-200 pg/mL to <20 pg/mL\n- **FSH elevation:** Rising to >25-30 mIU/mL\n- **LH elevation:** Increased but less dramatic than FSH\n- **Inhibin B loss:** Earliest marker of ovarian aging\n\n### Timeline:\n- **Perimenopause:** Variable cycles, declining fertility (2-10 years)\n- **Menopause:** Final menstrual period (average age 51 years)\n- **Postmenopause:** All subsequent years",
+          "bullets": [
+            "Average age of natural menopause: 51 years (range 45-55)",
+            "Perimenopause symptoms can begin 2-10 years before final period",
+            "Smoking advances menopause by 1-2 years",
+            "Genetics account for ~50% of timing variation"
+          ],
+          "citations": [
+            {
+              "label": "NAMS 2022 Position Statement",
+              "year": "2022",
+              "url": "https://www.menopause.org"
+            }
+          ]
+        },
+        {
+          "id": "slide-2",
+          "title": "Menopausal Symptoms",
+          "body_md": "## Symptom Categories\n\n### Vasomotor Symptoms (75-85% prevalence)\n- **Hot flushes:** Sudden sensation of heat, flushing, sweating\n- **Night sweats:** Nocturnal hot flushes disrupting sleep\n- **Duration:** Average 7-9 years, can persist >10 years\n\n### Genitourinary Syndrome (50-70% prevalence)\n- **Vaginal symptoms:** Dryness, irritation, dyspareunia\n- **Urinary symptoms:** Urgency, frequency, recurrent UTIs\n- **Progressive condition:** Worsens without treatment\n\n### Other Common Symptoms\n- Sleep disturbances, mood changes, cognitive concerns\n- Joint aches, skin changes, weight gain\n- Reduced libido, breast tenderness",
+          "bullets": [
+            "Vasomotor symptoms peak in early postmenopause",
+            "GSM symptoms are progressive and do not resolve without treatment",
+            "Sleep disruption compounds other menopausal symptoms",
+            "Individual symptom severity varies greatly"
+          ]
+        },
+        {
+          "id": "slide-3",
+          "title": "Introduction to MHT",
+          "body_md": "## What is Menopause Hormone Therapy?\n\n**MHT** involves the use of estrogen, with or without progestogen, to treat menopausal symptoms and prevent long-term complications.\n\n### Primary Indications:\n1. **Vasomotor symptom relief** (most effective treatment)\n2. **Genitourinary syndrome management**\n3. **Bone health preservation**\n4. **Quality of life improvement**\n\n### MHT Components:\n- **Estrogen:** The primary active component\n- **Progestogen:** Added for endometrial protection when uterus present\n- **Route options:** Oral, transdermal, vaginal, nasal\n\n### Timing Considerations:\n- **Best started <60 years or <10 years postmenopausal**\n- **Risk-benefit ratio** most favorable when started early",
+          "bullets": [
+            "MHT is the most effective treatment for vasomotor symptoms",
+            "Progestogen is essential when uterus is present",
+            "Timing of initiation affects safety profile",
+            "Individual risk assessment guides treatment decisions"
+          ]
+        },
+        {
+          "id": "slide-4",
+          "title": "Benefits of MHT",
+          "body_md": "## Established Benefits\n\n### Symptom Relief (Primary Benefits)\n- **Vasomotor symptoms:** 75-90% reduction in frequency/severity\n- **Sleep quality:** Significant improvement in most users\n- **Genitourinary symptoms:** Highly effective for GSM\n- **Quality of life:** Substantial improvement in wellbeing\n\n### Long-term Health Benefits\n- **Bone health:** 30-35% reduction in hip/vertebral fractures\n- **Colorectal cancer:** Reduced risk with combined therapy\n- **Type 2 diabetes:** Possible reduced incidence\n\n### Cardiovascular (Timing Hypothesis)\n- **May be protective** if started <60 years\n- **No benefit** if started >60 years or >10 years postmenopausal",
+          "bullets": [
+            "Symptom relief is the primary indication for MHT",
+            "Bone protection is an important secondary benefit",
+            "Cardiovascular effects depend on timing of initiation",
+            "Quality of life improvements are substantial and consistent"
+          ]
+        },
+        {
+          "id": "slide-5",
+          "title": "Types of MHT",
+          "body_md": "## Main MHT Categories\n\n### Estrogen-Only Therapy (ET)\n- **For women with hysterectomy**\n- **No progestogen needed** (no uterus to protect)\n- **Formulations:** Oral, patches, gels, sprays\n- **Lower breast cancer risk** compared to combined therapy\n\n### Combined Estrogen-Progestogen Therapy (EPT)\n- **For women with intact uterus**\n- **Continuous combined:** Daily estrogen + progestogen\n- **Sequential:** Estrogen daily + progestogen 10-14 days/month\n- **Essential for endometrial protection**\n\n### Local/Vaginal Therapy\n- **For isolated genitourinary symptoms**\n- **Minimal systemic absorption** with low-dose preparations\n- **Can be used with systemic therapy** if needed",
+          "bullets": [
+            "Uterine status determines ET vs EPT selection",
+            "Never give unopposed estrogen to women with intact uterus",
+            "Local therapy is first-line for isolated GSM",
+            "Combined therapy requires adequate progestogen dosing"
+          ]
+        }
+      ],
+      "quizQuestions": [
+        {
+          "id": "q1",
+          "question": "What is the average age of natural menopause?",
+          "options": [
+            "47 years",
+            "49 years",
+            "51 years",
+            "53 years",
+            "55 years"
+          ],
+          "correctIndex": 2,
+          "explanation": "The average age of natural menopause is 51 years, with a normal range of 45-55 years. This timing is influenced by genetics (~50%), smoking (advances by 1-2 years), and other factors."
+        },
+        {
+          "id": "q2",
+          "question": "Which hormone change occurs earliest in perimenopause?",
+          "options": [
+            "Rising FSH",
+            "Declining estradiol",
+            "Declining inhibin B",
+            "Rising LH",
+            "Declining progesterone"
+          ],
+          "correctIndex": 2,
+          "explanation": "Declining inhibin B is the earliest marker of ovarian aging, occurring before significant changes in FSH or estradiol levels become apparent."
+        },
+        {
+          "id": "q3",
+          "question": "What percentage reduction in vasomotor symptoms can be expected with MHT?",
+          "options": [
+            "25-40%",
+            "45-60%",
+            "65-74%",
+            "75-90%",
+            "95-100%"
+          ],
+          "correctIndex": 3,
+          "explanation": "MHT typically provides 75-90% reduction in vasomotor symptom frequency and severity, making it the most effective treatment for hot flushes and night sweats."
+        },
+        {
+          "id": "q4",
+          "question": "When is progestogen NOT required in MHT?",
+          "options": [
+            "In women over 60 years",
+            "In women with hysterectomy",
+            "In women using transdermal estrogen",
+            "In women with low bleeding risk",
+            "Progestogen is always required"
+          ],
+          "correctIndex": 1,
+          "explanation": "Progestogen is not required in women with hysterectomy because there is no uterus to protect from unopposed estrogen stimulation. ET (estrogen-only therapy) is appropriate in this situation."
+        },
+        {
+          "id": "q5",
+          "question": "Which statement about genitourinary syndrome of menopause (GSM) is correct?",
+          "options": [
+            "It affects less than 25% of postmenopausal women",
+            "Symptoms typically resolve spontaneously over time",
+            "It is a progressive condition that worsens without treatment",
+            "It only affects urinary symptoms",
+            "It cannot be treated with local estrogen"
+          ],
+          "correctIndex": 2,
+          "explanation": "GSM is a progressive condition affecting 50-70% of postmenopausal women. Unlike vasomotor symptoms, GSM does not resolve spontaneously and typically worsens over time without treatment."
+        }
+      ]
+    },
+    {
+      "id": "risk-assessment",
+      "title": "Risk Assessment",
+      "description": "Comprehensive evaluation of breast cancer, cardiovascular, and VTE risks in MHT candidates",
+      "credits": 1,
+      "estimatedMinutes": 50,
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Breast Cancer Risk Assessment",
+          "body_md": "## Understanding Breast Cancer Risk with MHT\n\n### Risk Categories and Factors\n\n**HIGH RISK:**\n- Personal history of breast cancer\n- Family history + BMI ≥30 kg/m²\n- BRCA1/2 mutation carriers\n- Previous atypical hyperplasia or LCIS\n\n**MODERATE RISK:**\n- Family history of breast/ovarian cancer (without obesity)\n- BMI ≥30 kg/m² (without family history)\n- Dense breast tissue\n- Late menopause (>55 years)\n\n**LOW RISK:**\n- No personal or family history\n- BMI <30 kg/m²\n- Early first pregnancy (<30 years)\n- Breastfeeding history",
+          "bullets": [
+            "Personal history of breast cancer is usually an absolute contraindication",
+            "Family history significance depends on degree of relation and age at diagnosis",
+            "Obesity increases both baseline breast cancer risk and MHT-related risk",
+            "Risk assessment should be individualized using validated tools"
+          ],
+          "tables": [
+            {
+              "title": "MHT and Breast Cancer Risk",
+              "columns": [
+                "Therapy Type",
+                "Risk Level",
+                "Absolute Risk Increase",
+                "Clinical Action"
+              ],
+              "rows": [
+                [
+                  "ET (estrogen only)",
+                  "Minimal/None",
+                  "<1 per 1000 over 5 years",
+                  "Generally acceptable"
+                ],
+                [
+                  "EPT (combined)",
+                  "Small increase",
+                  "1-2 per 1000 over 5 years",
+                  "Risk-benefit assessment"
+                ],
+                [
+                  "High-risk patient",
+                  "Significant",
+                  "Varies by risk factors",
+                  "Usually avoid systemic MHT"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "slide-2",
+          "title": "Cardiovascular Risk Evaluation",
+          "body_md": "## CVD Risk Assessment for MHT\n\n### Risk Stratification\n\n**HIGH CVD RISK:**\n- Established cardiovascular disease\n- Diabetes with complications\n- Multiple risk factors (≥2): HTN, DM, smoking, dyslipidemia\n- 10-year CVD risk >20% (using risk calculators)\n\n**MODERATE CVD RISK:**\n- Single cardiovascular risk factor\n- Diabetes without complications\n- 10-year CVD risk 10-20%\n- Family history of premature CVD\n\n**LOW CVD RISK:**\n- No cardiovascular risk factors\n- 10-year CVD risk <10%\n- Age <60 years with healthy lifestyle\n\n### MHT Implications\n- **Timing hypothesis:** May be cardioprotective if started early\n- **Route matters:** Transdermal preferred for moderate-high risk",
+          "bullets": [
+            "Use validated CVD risk calculators (QRISK, Framingham, ASCVD)",
+            "Age at MHT initiation is critical for CVD outcomes",
+            "Transdermal estrogen has lower impact on clotting factors",
+            "Individual risk factors may outweigh potential benefits"
+          ]
+        },
+        {
+          "id": "slide-3",
+          "title": "VTE Risk Assessment",
+          "body_md": "## Venous Thromboembolism Risk\n\n### Risk Categories\n\n**HIGH VTE RISK:**\n- Previous VTE (any time)\n- Known thrombophilia (Factor V Leiden, Protein C/S deficiency)\n- Active cancer or recent major surgery\n- Prolonged immobilization\n\n**MODERATE VTE RISK:**\n- BMI ≥30 kg/m²\n- Current smoking\n- Age >60 years\n- Strong family history of VTE\n- Varicose veins\n\n**LOW VTE RISK:**\n- BMI <30 kg/m²\n- Non-smoker\n- Age <60 years\n- No personal/family history\n\n### Route Selection Impact\n- **Oral estrogen:** 2-3 fold increased VTE risk\n- **Transdermal estrogen:** Minimal/no increased VTE risk\n- **First year risk highest** with oral preparations",
+          "bullets": [
+            "Previous VTE is usually a contraindication to oral MHT",
+            "Transdermal route significantly reduces VTE risk",
+            "Thrombophilia testing may be indicated in high-risk patients",
+            "Multiple risk factors have cumulative effects"
+          ]
+        },
+        {
+          "id": "slide-4",
+          "title": "BMI and Metabolic Considerations",
+          "body_md": "## BMI Categories and MHT Implications\n\n### BMI Classifications\n- **Underweight:** <18.5 kg/m²\n- **Normal:** 18.5-24.9 kg/m²\n- **Overweight:** 25-29.9 kg/m²\n- **Obese:** ≥30 kg/m²\n\n### Obesity and MHT Considerations\n\n**Increased Risks with Obesity:**\n- Higher baseline breast cancer risk\n- Increased VTE risk (especially BMI >35)\n- Greater cardiovascular risk factors\n- Metabolic syndrome components\n\n**MHT Modifications for Obesity:**\n- **Prefer transdermal route** (reduced VTE risk)\n- **Higher doses may be needed** (increased distribution volume)\n- **Monitor absorption** (especially with patches/gels)\n- **Address lifestyle factors** concurrently",
+          "bullets": [
+            "BMI ≥30 kg/m² increases multiple MHT-related risks",
+            "Transdermal route is strongly preferred in obese women",
+            "Weight management counseling should be integrated",
+            "Metabolic syndrome components should be optimized"
+          ],
+          "tables": [
+            {
+              "title": "BMI and Route Selection",
+              "columns": [
+                "BMI Category",
+                "VTE Risk",
+                "Preferred Route",
+                "Monitoring"
+              ],
+              "rows": [
+                [
+                  "<25 kg/m²",
+                  "Low",
+                  "Oral or transdermal",
+                  "Standard"
+                ],
+                [
+                  "25-29.9 kg/m²",
+                  "Low-moderate",
+                  "Consider transdermal",
+                  "Annual assessment"
+                ],
+                [
+                  "30-34.9 kg/m²",
+                  "Moderate",
+                  "Transdermal preferred",
+                  "Frequent monitoring"
+                ],
+                [
+                  "≥35 kg/m²",
+                  "High",
+                  "Transdermal only",
+                  "Specialist input"
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "slide-5",
+          "title": "Integrated Risk Assessment",
+          "body_md": "## Combining Risk Factors\n\n### Decision Matrix Approach\n\n**When Multiple Risk Factors Present:**\n1. **Identify highest risk category** in any domain\n2. **Consider cumulative effects** of moderate risks  \n3. **Evaluate patient preference** and symptom severity\n4. **Select appropriate MHT approach** or alternatives\n\n### Treatment Pathways\n\n**Low Risk (all categories):**\n- Standard MHT approaches acceptable\n- Oral or transdermal routes\n- Regular monitoring sufficient\n\n**Moderate Risk (any category):**\n- Prefer transdermal route\n- Consider dose modifications\n- Enhanced monitoring\n- Risk-benefit discussion\n\n**High Risk (any category):**\n- Avoid systemic MHT or use with extreme caution\n- Consider local/vaginal therapy only\n- Specialist consultation recommended",
+          "bullets": [
+            "Use a systematic approach to risk evaluation",
+            "Document risk-benefit discussions clearly",
+            "Consider non-hormonal alternatives for high-risk patients",
+            "Regular reassessment as risks change with age"
+          ]
+        },
+        {
+          "id": "slide-6",
+          "title": "Risk Communication",
+          "body_md": "## Effective Risk Communication\n\n### Principles of Risk Discussion\n\n**Use Absolute Risks:**\n- Present risks as \"X per 1000 women over Y years\"\n- Avoid relative risk statistics (can be misleading)\n- Provide context with everyday risk comparisons\n\n**Visual Aids:**\n- Use icon arrays or natural frequencies\n- \"Out of 1000 women like you...\"\n- Show both benefits and risks together\n\n**Key Messages:**\n- **Risks are generally small** for appropriate candidates\n- **Benefits often outweigh risks** for symptomatic women\n- **Individual assessment** is essential\n- **Decisions can be revisited** as circumstances change\n\n### Documentation Requirements\n- Record specific risks discussed\n- Note patient understanding and questions\n- Document shared decision-making process\n- Include patient preferences and concerns",
+          "bullets": [
+            "Focus on absolute rather than relative risks",
+            "Use visual aids to enhance understanding",
+            "Allow time for questions and family discussion",
+            "Provide written information to take home"
+          ]
+        }
+      ],
+      "quizQuestions": [
+        {
+          "id": "q1",
+          "question": "A 54-year-old woman with BMI 32 kg/m² and family history of breast cancer (sister diagnosed at age 48) is considering MHT. What is her breast cancer risk category?",
+          "options": [
+            "Low risk",
+            "Moderate risk",
+            "High risk",
+            "Cannot be determined",
+            "Risk category is irrelevant"
+          ],
+          "correctIndex": 2,
+          "explanation": "This patient has HIGH breast cancer risk due to the combination of family history (first-degree relative with early-onset breast cancer) AND BMI ≥30 kg/m². This combination places her in the high-risk category."
+        },
+        {
+          "id": "q2",
+          "question": "Which factor contributes MOST to VTE risk with oral MHT?",
+          "options": [
+            "Patient age >50 years",
+            "Duration of MHT use >5 years",
+            "First year of treatment",
+            "Concurrent aspirin use",
+            "Evening dosing schedule"
+          ],
+          "correctIndex": 2,
+          "explanation": "The first year of oral MHT treatment carries the highest VTE risk, with risk being 2-3 times higher than baseline. Risk remains elevated but is highest in the initial period."
+        },
+        {
+          "id": "q3",
+          "question": "For a woman with BMI 35 kg/m² considering MHT, what is the preferred route?",
+          "options": [
+            "Oral estrogen (lowest cost)",
+            "Transdermal estrogen (reduced VTE risk)",
+            "Vaginal estrogen only",
+            "No MHT recommended",
+            "Route doesn't matter with obesity"
+          ],
+          "correctIndex": 1,
+          "explanation": "Transdermal estrogen is strongly preferred for women with BMI ≥30 kg/m² because it significantly reduces VTE risk compared to oral preparations while maintaining efficacy for symptom control."
+        },
+        {
+          "id": "q4",
+          "question": "A patient asks about breast cancer risk with MHT. What is the most accurate statement about EPT (combined therapy)?",
+          "options": [
+            "No increased risk with any duration of use",
+            "Significant risk increase starts immediately",
+            "Small risk increase (1-2 per 1000) after 5+ years of use",
+            "Risk is only present in women with family history",
+            "Risk doubles after 2 years of use"
+          ],
+          "correctIndex": 2,
+          "explanation": "EPT is associated with a small absolute risk increase of approximately 1-2 extra breast cancer cases per 1000 women over 5 years of use. This risk becomes apparent after several years of use, not immediately."
+        },
+        {
+          "id": "q5",
+          "question": "When communicating MHT risks to patients, which approach is most effective?",
+          "options": [
+            "Focus on relative risk increases (e.g., '2-fold higher')",
+            "Use absolute risks with natural frequencies (e.g., '2 per 1000 women')",
+            "Emphasize that risks are theoretical only",
+            "Avoid specific numbers to prevent anxiety",
+            "Compare only to other medications"
+          ],
+          "correctIndex": 1,
+          "explanation": "Using absolute risks with natural frequencies (e.g., '2 per 1000 women over 5 years') is the most effective way to communicate risk. This approach is more meaningful and less likely to be misinterpreted than relative risks."
+        }
+      ]
+    },
+    {
+      "id": "therapy-types-routes",
+      "title": "Therapy Types & Routes",
+      "description": "Comprehensive guide to MHT formulations, routes of administration, and selection criteria",
+      "credits": 1,
+      "estimatedMinutes": 55,
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Estrogen-Only Therapy (ET)",
+          "body_md": "## ET: For Women with Hysterectomy\n\n### Indications\n- **Post-hysterectomy** (no uterus present)\n- **Vasomotor symptoms** (hot flushes, night sweats)\n- **Genitourinary symptoms** (vaginal dryness, dyspareunia)\n- **Bone health preservation**\n- **Quality of life improvement**\n\n### Available Formulations\n\n**Oral Preparations:**\n- Estradiol 0.5-2mg daily\n- Conjugated estrogens 0.3-1.25mg daily\n- Estradiol valerate 1-2mg daily\n\n**Transdermal Options:**\n- Patches: 25-100mcg twice weekly\n- Gels: 0.5-1.5mg daily\n- Sprays: 1-3 sprays daily\n\n### Key Advantages of ET\n- **No progestogen needed** (no endometrial risk)\n- **Lower breast cancer risk** compared to EPT\n- **Fewer side effects** (no progestogen-related effects)",
+          "bullets": [
+            "ET is only appropriate for women without a uterus",
+            "Never give unopposed estrogen to women with intact uterus",
+            "Breast cancer risk with ET is minimal or none",
+            "Dosing can be more flexible without progestogen concerns"
+          ]
+        },
+        {
+          "id": "slide-2",
+          "title": "Combined Therapy (EPT)",
+          "body_md": "## EPT: Estrogen + Progestogen for Uterine Protection\n\n### Regimen Types\n\n**Continuous Combined EPT:**\n- Daily estrogen + daily progestogen\n- **Best for:** >2 years postmenopausal\n- **Advantage:** Eventual amenorrhea in most women\n- **Initial bleeding** common for 3-6 months\n\n**Sequential/Cyclic EPT:**\n- Daily estrogen + progestogen days 1-12 or 14 each month\n- **Best for:** Perimenopause or early postmenopause\n- **Expected:** Withdrawal bleeding each cycle\n- **Advantage:** More physiological pattern\n\n### Progestogen Options\n\n**Micronized Progesterone:** 100-200mg daily\n- Most body-identical\n- Best safety profile\n- May improve sleep\n\n**Synthetic Progestogens:**\n- Norethisterone 0.5-1mg daily\n- Dydrogesterone 5-10mg daily\n- Levonorgestrel (oral or IUS)",
+          "bullets": [
+            "Progestogen is essential for endometrial protection",
+            "Micronized progesterone is preferred when available",
+            "Bleeding patterns take 3-6 months to stabilize",
+            "LNG-IUS provides excellent progestogen protection"
+          ]
+        },
+        {
+          "id": "slide-3",
+          "title": "Vaginal/Local Therapy",
+          "body_md": "## Local Estrogen for Genitourinary Symptoms\n\n### Indications\n- **Primary:** Genitourinary syndrome of menopause (GSM)\n- **Isolated symptoms:** Vaginal dryness, dyspareunia, urinary urgency\n- **Contraindication to systemic MHT**\n- **Adjunct to systemic therapy** for persistent GSM\n\n### Formulations\n\n**Low-Dose Options (Minimal Systemic Absorption):**\n- Estradiol tablets 10mcg (Vagifem) - 2x weekly maintenance\n- Estradiol ring 7.5mcg daily (Estring) - 3-month duration\n- Estriol cream 0.5mg - 2-3x weekly maintenance\n\n**Higher-Dose Options:**\n- Conjugated estrogen cream - variable absorption\n- Estradiol cream - higher systemic levels\n\n### Clinical Advantages\n- **Highly effective** for GSM symptoms\n- **Safe for long-term use** with low-dose preparations\n- **Suitable for women with systemic MHT contraindications**\n- **Can be combined** with systemic therapy if needed",
+          "bullets": [
+            "Low-dose vaginal estrogen is first-line for isolated GSM",
+            "Minimal systemic absorption with modern low-dose preparations",
+            "Safe for indefinite use in most women",
+            "May be added to systemic MHT for persistent symptoms"
+          ]
+        },
+        {
+          "id": "slide-4",
+          "title": "Oral Route: Benefits and Considerations",
+          "body_md": "## Oral Estrogen: The Traditional Route\n\n### Advantages\n- **Convenience:** Once daily dosing\n- **Familiarity:** Well-established use\n- **Cost:** Often less expensive\n- **Compliance:** Easy to remember and take\n- **Efficacy:** Excellent for vasomotor symptoms\n\n### Pharmacology\n- **First-pass hepatic metabolism**\n- **Hepatic protein synthesis stimulation**\n  - Increased SHBG, CBG\n  - Increased clotting factors (VII, X, fibrinogen)\n  - Increased HDL, decreased LDL\n  - Increased triglycerides\n\n### Clinical Implications\n- **VTE risk:** 2-3 fold increase vs transdermal\n- **Gallbladder disease:** Increased risk\n- **Migraine:** May worsen in susceptible women\n- **Lipid effects:** Generally favorable but mixed\n\n### Best Candidates for Oral Route\n- Low VTE and CVD risk\n- No history of gallbladder disease\n- No migraine with aura\n- Good GI tolerance",
+          "bullets": [
+            "Oral route is appropriate for low-risk women",
+            "First-pass metabolism causes both benefits and risks",
+            "VTE risk is higher with oral vs transdermal estrogen",
+            "Consider patient preference and risk factors together"
+          ]
+        },
+        {
+          "id": "slide-5",
+          "title": "Transdermal Route: Avoiding First-Pass Effects",
+          "body_md": "## Transdermal Estrogen: Physiological Delivery\n\n### Formulations\n\n**Patches:**\n- Matrix or reservoir systems\n- Applied twice weekly (most brands)\n- Steady hormone delivery\n- Different sizes for dose adjustment\n\n**Gels:**\n- Daily application\n- Flexible dosing (pumps or sachets)\n- Applied to arms, thighs, or abdomen\n- Absorption within 1-2 hours\n\n**Sprays:**\n- Metered-dose delivery\n- Applied to inner forearm\n- Quick-drying formulation\n- 1-3 sprays daily\n\n### Pharmacological Advantages\n- **Avoids first-pass metabolism**\n- **Lower impact on clotting factors**\n- **Reduced SHBG elevation**\n- **More physiological estradiol levels**\n- **Lower VTE risk**\n\n### Preferred Scenarios for Transdermal\n- VTE risk factors (obesity, smoking, age >60)\n- CVD risk factors\n- Migraine with aura\n- Gallbladder disease history\n- Hypertriglyceridemia",
+          "bullets": [
+            "Transdermal estrogen bypasses hepatic first-pass metabolism",
+            "VTE risk is significantly lower than oral route",
+            "Preferred for women with cardiovascular risk factors",
+            "Application site rotation prevents skin irritation"
+          ]
+        },
+        {
+          "id": "slide-6",
+          "title": "Route Selection Algorithm",
+          "body_md": "## Clinical Decision Making for Route Selection\n\n### Patient Assessment Framework\n\n**Step 1: Risk Stratification**\n- Assess VTE, CVD, and breast cancer risks\n- Consider age, BMI, comorbidities\n- Review contraindications\n\n**Step 2: Symptom Analysis**\n- Primary symptoms (vasomotor vs GSM)\n- Symptom severity and impact\n- Previous treatment responses\n\n**Step 3: Route Selection**\n\n**Choose Oral When:**\n- Low VTE and CVD risk\n- Patient preference for convenience\n- Cost considerations important\n- No contraindications to oral route\n\n**Choose Transdermal When:**\n- VTE risk factors present\n- CVD risk factors present  \n- Migraine with aura\n- Gallbladder disease history\n- Hypertriglyceridemia >4.5 mmol/L\n\n**Choose Vaginal When:**\n- Isolated GSM symptoms\n- Contraindications to systemic MHT\n- Patient preference for local treatment",
+          "bullets": [
+            "Use systematic risk assessment to guide route selection",
+            "Patient preference should be considered alongside medical factors",
+            "Route can be changed based on tolerance and response",
+            "Document rationale for route selection in clinical notes"
+          ],
+          "tables": [
+            {
+              "title": "Route Selection Guide",
+              "columns": [
+                "Risk Level",
+                "VTE Factors",
+                "CVD Factors",
+                "Recommended Route"
+              ],
+              "rows": [
+                [
+                  "Low",
+                  "None",
+                  "None",
+                  "Oral or transdermal"
+                ],
+                [
+                  "Moderate",
+                  "BMI >30 or smoking",
+                  "HTN or DM",
+                  "Transdermal preferred"
+                ],
+                [
+                  "High",
+                  "Previous VTE",
+                  "Established CVD",
+                  "Avoid systemic or transdermal only"
+                ],
+                [
+                  "Variable",
+                  "N/A",
+                  "N/A",
+                  "Vaginal for GSM only"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "quizQuestions": [
+        {
+          "id": "q1",
+          "question": "A 55-year-old woman had hysterectomy 3 years ago for benign fibroids. She has severe hot flushes. What is the most appropriate MHT?",
+          "options": [
+            "Combined EPT (estrogen + progestogen)",
+            "Estrogen-only therapy (ET)",
+            "Vaginal estrogen only",
+            "No hormone therapy recommended",
+            "Progestogen-only therapy"
+          ],
+          "correctIndex": 1,
+          "explanation": "Estrogen-only therapy (ET) is appropriate for women with hysterectomy as there is no uterus requiring progestogen protection. EPT would unnecessarily expose her to progestogen-related side effects and risks."
+        },
+        {
+          "id": "q2",
+          "question": "What is the main advantage of transdermal estrogen over oral estrogen?",
+          "options": [
+            "Better efficacy for vasomotor symptoms",
+            "Lower cost and greater convenience",
+            "Avoids first-pass hepatic metabolism and reduces VTE risk",
+            "Faster onset of symptom relief",
+            "Can be used without progestogen in women with intact uterus"
+          ],
+          "correctIndex": 2,
+          "explanation": "Transdermal estrogen avoids first-pass hepatic metabolism, resulting in lower impact on clotting factors and significantly reduced VTE risk compared to oral estrogen. This makes it preferred for women with VTE or CVD risk factors."
+        },
+        {
+          "id": "q3",
+          "question": "A 52-year-old woman with intact uterus, BMI 28, and history of migraine with aura is considering MHT. What is the most appropriate approach?",
+          "options": [
+            "Oral combined EPT",
+            "Transdermal EPT",
+            "Estrogen-only therapy",
+            "Vaginal estrogen only",
+            "MHT is contraindicated"
+          ],
+          "correctIndex": 1,
+          "explanation": "Transdermal EPT is most appropriate. She needs progestogen protection (intact uterus), and migraine with aura is a relative contraindication to oral estrogen due to stroke risk. Transdermal route is preferred in this scenario."
+        },
+        {
+          "id": "q4",
+          "question": "When is continuous combined EPT preferred over sequential EPT?",
+          "options": [
+            "In all postmenopausal women regardless of timing",
+            "In women >2 years postmenopausal to minimize bleeding",
+            "In women with severe vasomotor symptoms only",
+            "In women who cannot tolerate progestogen",
+            "When using transdermal estrogen"
+          ],
+          "correctIndex": 1,
+          "explanation": "Continuous combined EPT is preferred in women >2 years postmenopausal because it typically leads to amenorrhea after an initial adjustment period, avoiding monthly withdrawal bleeding that occurs with sequential regimens."
+        },
+        {
+          "id": "q5",
+          "question": "Which progestogen option is generally preferred in EPT when available?",
+          "options": [
+            "Norethisterone (synthetic progestogen)",
+            "Medroxyprogesterone acetate",
+            "Micronized progesterone (body-identical)",
+            "Levonorgestrel oral",
+            "All progestogens are equivalent"
+          ],
+          "correctIndex": 2,
+          "explanation": "Micronized progesterone is generally preferred when available because it is body-identical (bioidentical), has the best safety profile, may improve sleep, and has fewer metabolic side effects compared to synthetic progestogens."
+        }
+      ]
+    },
+    {
+      "id": "guideline-essentials",
+      "title": "Guideline Essentials",
+      "description": "Key recommendations from NAMS, IMS, NICE, and IMS-India with evidence summaries",
+      "credits": 1,
+      "estimatedMinutes": 50,
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "NAMS 2022 Position Statement",
+          "body_md": "## North American Menopause Society Guidelines\n\n### Key Recommendations\n\n**MHT Initiation:**\n- **Timing window:** <60 years or <10 years postmenopausal\n- **Individualized approach:** Risk-benefit assessment for each patient\n- **Lowest effective dose** for shortest duration needed\n\n**Contraindications:**\n- Undiagnosed vaginal bleeding\n- Active liver disease\n- Current or history of breast cancer\n- Active VTE or high risk\n- Active CVD (recent MI, stroke)\n\n**Route Selection:**\n- **Transdermal preferred** for VTE risk factors\n- **Oral acceptable** for low-risk women\n- **Vaginal estrogen** safe for GSM in most women\n\n### Evidence Strength\n- **A-level evidence:** Vasomotor symptom efficacy\n- **B-level evidence:** Bone protection, GSM treatment\n- **C-level evidence:** Cardiovascular timing hypothesis",
+          "bullets": [
+            "NAMS emphasizes individualized risk-benefit assessment",
+            "Timing window concept strongly supported",
+            "Transdermal route increasingly preferred",
+            "Regular reassessment recommended annually"
+          ],
+          "citations": [
+            {
+              "label": "NAMS 2022 Position Statement",
+              "year": "2022",
+              "url": "https://www.menopause.org/docs/default-source/professional/namspositionstatement.pdf"
+            }
+          ]
+        },
+        {
+          "id": "slide-2",
+          "title": "IMS 2023 Global Recommendations",
+          "body_md": "## International Menopause Society Guidelines\n\n### Global Perspective\n\n**Cultural Considerations:**\n- **Symptom perception** varies across cultures\n- **Treatment preferences** influenced by cultural beliefs\n- **Healthcare access** affects treatment choices\n- **Family dynamics** impact decision-making\n\n**Key Global Recommendations:**\n- MHT remains **first-line treatment** for vasomotor symptoms\n- **Quality of life** is a valid indication for MHT\n- **Bone health** benefit established across populations\n- **Cardiovascular timing hypothesis** applies globally\n\n**Regional Adaptations:**\n- **Asian populations:** Lower baseline breast cancer risk\n- **African descent:** Higher VTE baseline risk\n- **Mediterranean:** Traditional phytoestrogen use\n- **Northern climates:** Vitamin D deficiency considerations\n\n### IMS Consensus Points\n1. **Individualized care** remains paramount\n2. **Shared decision-making** essential\n3. **Regular monitoring** required\n4. **Non-hormonal options** valid alternatives",
+          "bullets": [
+            "IMS provides global perspective on MHT use",
+            "Cultural factors significantly influence treatment decisions",
+            "Quality of life is a valid primary indication",
+            "Regional risk factors should guide therapy selection"
+          ]
+        },
+        {
+          "id": "slide-3",
+          "title": "NICE Guidelines 2024",
+          "body_md": "## UK National Institute for Health & Care Excellence\n\n### NICE Recommendations\n\n**Clinical Assessment:**\n- **History and examination** sufficient for diagnosis\n- **FSH testing** not routinely required >45 years\n- **Risk assessment tools** should be used\n\n**First-Line Treatments:**\n1. **HRT (MHT)** for vasomotor symptoms\n2. **Vaginal estrogen** for genitourinary symptoms  \n3. **CBT** for mood/anxiety symptoms\n4. **Lifestyle modifications** for all women\n\n**Monitoring Requirements:**\n- **Annual review** of symptoms, risks, benefits\n- **Breast awareness** education and mammography\n- **Blood pressure** monitoring with oral estrogen\n- **VTE risk** reassessment annually\n\n### NICE Quality Standards\n- **Information provision:** Written materials required\n- **Specialist referral** criteria defined\n- **Follow-up protocols** standardized\n- **Patient choice** respected in treatment decisions",
+          "bullets": [
+            "NICE emphasizes evidence-based diagnosis",
+            "HRT is established first-line for vasomotor symptoms",
+            "Structured monitoring protocols required",
+            "Patient education and choice prioritized"
+          ],
+          "citations": [
+            {
+              "label": "NICE Menopause Guideline",
+              "year": "2024",
+              "url": "https://www.nice.org.uk/guidance/ng23"
+            }
+          ]
+        },
+        {
+          "id": "slide-4",
+          "title": "IMS-India Position Statement",
+          "body_md": "## Indian Menopause Society Guidelines\n\n### Regional Considerations for India\n\n**Population Characteristics:**\n- **Earlier menopause:** Average age 46-47 years\n- **Lower BMI:** Different risk profile\n- **Genetic factors:** Unique BRCA mutations\n- **Dietary patterns:** High phytoestrogen intake\n\n**Treatment Adaptations:**\n- **Lower estrogen doses** often effective\n- **Transdermal preferred** due to VTE concerns\n- **Traditional remedies** integration considerations\n- **Family involvement** in decision-making\n\n**Specific Recommendations:**\n1. **Start low, go slow** dosing approach\n2. **Comprehensive family history** essential\n3. **Lifestyle counseling** culturally appropriate  \n4. **Regular bone density** screening\n5. **Thyroid assessment** routine\n\n### Healthcare System Integration\n- **Primary care education** on menopause\n- **Specialist availability** in major cities\n- **Cost considerations** for treatment selection\n- **Generic formulations** quality assurance",
+          "bullets": [
+            "IMS-India addresses unique regional factors",
+            "Earlier menopause age requires adjusted approach",
+            "Cultural sensitivity important in treatment planning",
+            "Healthcare access variations considered"
+          ]
+        },
+        {
+          "id": "slide-5",
+          "title": "Comparative Guidelines Analysis",
+          "body_md": "## Consensus and Differences Across Guidelines\n\n### Universal Consensus\n1. **MHT is effective** for vasomotor symptoms\n2. **Individualized assessment** required\n3. **Timing matters** for safety/efficacy\n4. **Quality of life** is valid indication\n5. **Regular monitoring** essential\n\n### Regional Variations\n\n**Risk Thresholds:**\n- **NAMS:** Conservative US litigation environment\n- **IMS:** Global applicability, more flexible\n- **NICE:** Evidence-based pragmatic approach\n- **IMS-India:** Population-specific risk factors\n\n**Treatment Preferences:**\n- **Route selection** varies by region\n- **Duration recommendations** differ slightly\n- **Monitoring frequency** varies\n- **Specialist referral** thresholds different\n\n### Practical Integration\n- **Local guidelines** should adapt to population\n- **Clinical judgment** remains paramount\n- **Patient preference** universally important\n- **Resource availability** influences recommendations",
+          "bullets": [
+            "Core principles are consistent across guidelines",
+            "Regional adaptations reflect population differences",
+            "Clinical experience should guide local implementation",
+            "Patient-centered care is universal theme"
+          ],
+          "tables": [
+            {
+              "title": "Guideline Comparison",
+              "columns": [
+                "Guideline",
+                "Key Strength",
+                "Regional Focus",
+                "Update Frequency"
+              ],
+              "rows": [
+                [
+                  "NAMS 2022",
+                  "Evidence synthesis",
+                  "North America",
+                  "3-5 years"
+                ],
+                [
+                  "IMS 2023",
+                  "Global perspective",
+                  "International",
+                  "4-6 years"
+                ],
+                [
+                  "NICE 2024",
+                  "Health economics",
+                  "UK/Europe",
+                  "3-5 years"
+                ],
+                [
+                  "IMS-India",
+                  "Population specific",
+                  "South Asia",
+                  "5-7 years"
+                ]
+              ]
+            }
+          ]
+        }
+      ],
+      "quizQuestions": [
+        {
+          "id": "q1",
+          "question": "According to NAMS 2022, what is the optimal timing window for MHT initiation?",
+          "options": [
+            "Any time after menopause diagnosis",
+            "<60 years OR <10 years postmenopausal",
+            "<55 years OR <5 years postmenopausal",
+            "<65 years OR <15 years postmenopausal",
+            "Timing is not relevant to safety"
+          ],
+          "correctIndex": 1,
+          "explanation": "NAMS 2022 establishes the timing window as <60 years old OR <10 years postmenopausal for optimal risk-benefit ratio. This reflects the 'timing hypothesis' supported by current evidence."
+        },
+        {
+          "id": "q2",
+          "question": "What level of evidence supports MHT for vasomotor symptom treatment?",
+          "options": [
+            "C-level (expert opinion)",
+            "B-level (moderate quality evidence)",
+            "A-level (high quality evidence)",
+            "D-level (insufficient evidence)",
+            "Evidence level varies by guideline"
+          ],
+          "correctIndex": 2,
+          "explanation": "MHT for vasomotor symptoms has A-level (highest quality) evidence across all major guidelines. This is based on numerous high-quality RCTs consistently demonstrating efficacy."
+        },
+        {
+          "id": "q3",
+          "question": "According to IMS-India, what is a key consideration for MHT use in the Indian population?",
+          "options": [
+            "Higher baseline breast cancer risk",
+            "Later average menopause age (52-53 years)",
+            "Earlier menopause age (46-47 years) requiring adjusted approach",
+            "Lower VTE risk than Western populations",
+            "No population-specific considerations needed"
+          ],
+          "correctIndex": 2,
+          "explanation": "IMS-India guidelines highlight that Indian women experience menopause 4-5 years earlier (average 46-47 years) than Western populations, requiring adjusted treatment approaches and earlier intervention consideration."
+        },
+        {
+          "id": "q4",
+          "question": "Which statement best represents the NICE 2024 approach to menopause diagnosis?",
+          "options": [
+            "FSH testing required for all women over 45",
+            "History and examination sufficient; FSH testing not routinely required >45 years",
+            "Hormone testing essential before any treatment",
+            "Specialist referral required for diagnosis",
+            "Symptom diary mandatory for 6 months"
+          ],
+          "correctIndex": 1,
+          "explanation": "NICE 2024 emphasizes that clinical history and examination are sufficient for menopause diagnosis in women >45 years, with FSH testing not routinely required. This reflects evidence-based, practical approach."
+        },
+        {
+          "id": "q5",
+          "question": "What is consistent across all major international menopause guidelines?",
+          "options": [
+            "Identical contraindications to MHT",
+            "Same monitoring frequency requirements",
+            "Individualized risk-benefit assessment for each patient",
+            "Uniform treatment duration recommendations",
+            "Identical route preferences"
+          ],
+          "correctIndex": 2,
+          "explanation": "All major guidelines (NAMS, IMS, NICE, IMS-India) consistently emphasize individualized risk-benefit assessment for each patient as the cornerstone of menopause care, despite variations in specific recommendations."
+        }
+      ]
+    },
+    {
+      "id": "case-scenarios",
+      "title": "Case Scenarios",
+      "description": "Real-world clinical cases demonstrating MHT decision-making and treatment selection",
+      "credits": 1,
+      "estimatedMinutes": 60,
+      "slides": [
+        {
+          "id": "case-1",
+          "title": "Case 1: Low-Risk Candidate",
+          "body_md": "## Case Presentation\n\n**Patient Profile:**\n- **Age:** 52 years\n- **BMI:** 24 kg/m² (normal weight)\n- **Menopausal status:** 18 months postmenopausal\n- **Uterine status:** Intact uterus\n- **Symptoms:** Severe hot flushes (8/10), night sweats disrupting sleep\n- **Medical history:** No significant medical history\n- **Family history:** No breast cancer, ovarian cancer, or VTE\n- **Social history:** Non-smoker, moderate exercise, social alcohol use\n\n### Risk Assessment\n- **Breast cancer risk:** LOW (no personal/family history, normal BMI)\n- **CVD risk:** LOW (no risk factors, normal BMI, non-smoker)\n- **VTE risk:** LOW (no history, normal BMI, non-smoker, age <60)\n\n### Clinical Decision\nThis represents an **ideal candidate** for MHT with multiple route options available.",
+          "bullets": [
+            "Multiple vasomotor symptoms significantly impacting quality of life",
+            "All risk categories are low, maximizing treatment options",
+            "Intact uterus requires progestogen protection",
+            "Young age and symptom severity strongly favor treatment"
+          ]
+        },
+        {
+          "id": "case-1-decision",
+          "title": "Case 1: Treatment Decision",
+          "body_md": "## Recommended Treatment Plan\n\n### MHT Recommendation: **EPT (Combined Therapy)**\n- **Type:** Estrogen + Progestogen therapy\n- **Route:** **ORAL** (patient choice, low risk profile)\n- **Progestogen:** **Micronized progesterone** 100mg daily\n\n### Specific Regimen Options\n1. **Continuous combined EPT:**\n   - Estradiol 1mg + micronized progesterone 100mg daily\n   - Expected amenorrhea after 3-6 months\n\n2. **Sequential EPT (alternative):**\n   - Estradiol 2mg daily + progesterone 100mg days 1-12\n   - Monthly withdrawal bleeding expected\n\n### Rationale\n- **Low risk profile** allows oral route\n- **Intact uterus** requires progestogen protection\n- **Severe symptoms** justify systemic therapy\n- **Patient preference** for oral convenience acceptable\n\n### Monitoring Plan\n- **1 month:** Symptom response, side effects, BP\n- **6 months:** Full review, breast examination\n- **12 months:** Annual comprehensive review",
+          "bullets": [
+            "Oral route is safe and effective for low-risk patients",
+            "Micronized progesterone preferred for safety profile",
+            "Continuous combined suitable for established postmenopause",
+            "Regular monitoring ensures safety and efficacy"
+          ]
+        },
+        {
+          "id": "case-2",
+          "title": "Case 2: Hysterectomy with CVD Risk",
+          "body_md": "## Case Presentation\n\n**Patient Profile:**\n- **Age:** 58 years\n- **BMI:** 31 kg/m² (obese)\n- **Menopausal status:** 4 years postmenopausal\n- **Surgical history:** Total hysterectomy 3 years ago (benign fibroids)\n- **Symptoms:** Moderate hot flushes (6/10), sleep disruption\n- **Medical history:** Hypertension (well controlled), prediabetes\n- **Family history:** Father died of MI at age 65\n- **Social history:** Ex-smoker (quit 2 years ago), sedentary lifestyle\n\n### Risk Assessment\n- **Breast cancer risk:** MODERATE (obesity BMI ≥30)\n- **CVD risk:** HIGH (obesity + HTN + prediabetes + family history)\n- **VTE risk:** MODERATE (obesity, age approaching 60)\n\n### Clinical Considerations\n- **Post-hysterectomy:** No progestogen needed\n- **CVD risk factors:** Route selection critical\n- **Timing:** Still within window (<60 years, <10 years postmenopausal)",
+          "bullets": [
+            "Hysterectomy simplifies hormone selection (ET only)",
+            "Multiple CVD risk factors require careful route selection",
+            "Obesity increases multiple hormone-related risks",
+            "Still within timing window for MHT initiation"
+          ]
+        },
+        {
+          "id": "case-2-decision",
+          "title": "Case 2: Treatment Decision",
+          "body_md": "## Recommended Treatment Plan\n\n### MHT Recommendation: **ET (Estrogen-Only)**\n- **Type:** Estrogen therapy only (post-hysterectomy)\n- **Route:** **TRANSDERMAL** (CVD/VTE risk reduction)\n- **No progestogen needed** (no uterus)\n\n### Specific Regimen\n- **Estradiol patch** 50mcg twice weekly OR\n- **Estradiol gel** 1mg daily\n- **Start low dose** due to obesity (may need adjustment)\n\n### Rationale for Transdermal Route\n- **Reduces VTE risk** compared to oral (crucial with obesity)\n- **Lower impact on BP** (important with hypertension)\n- **Avoids first-pass hepatic effects** (beneficial with metabolic issues)\n- **More stable hormone levels** may improve efficacy\n\n### Concurrent Management\n- **Lifestyle counseling:** Weight management, exercise program\n- **CVD risk optimization:** Continue BP management, diabetes prevention\n- **Monitoring:** Enhanced frequency due to risk factors\n\n### Follow-up Schedule\n- **2 weeks:** BP check, application site assessment\n- **1 month:** Symptom response, side effects\n- **3 months:** Weight, BP, symptom assessment\n- **6 months:** Comprehensive review including metabolic parameters",
+          "bullets": [
+            "Transdermal route significantly reduces VTE risk in obese women",
+            "No progestogen needed simplifies regimen and reduces risks",
+            "Integrated approach addresses multiple cardiovascular risk factors",
+            "Enhanced monitoring appropriate for higher-risk patient"
+          ]
+        },
+        {
+          "id": "case-3",
+          "title": "Case 3: High Breast Cancer Risk",
+          "body_md": "## Case Presentation\n\n**Patient Profile:**\n- **Age:** 55 years\n- **BMI:** 29 kg/m² (overweight)\n- **Menopausal status:** 2 years postmenopausal\n- **Family history:** Mother diagnosed with breast cancer at age 48, sister with ovarian cancer at 52\n- **Genetic testing:** BRCA1/2 negative, but strong family history remains\n- **Symptoms:** Severe hot flushes (9/10), significant vaginal dryness, mood changes\n- **Medical history:** Anxiety, takes sertraline\n- **Social history:** Non-smoker, moderate alcohol, regular exercise\n\n### Risk Assessment\n- **Breast cancer risk:** HIGH (strong family history of breast and ovarian cancer)\n- **CVD risk:** LOW (no risk factors, exercises regularly)\n- **VTE risk:** LOW (normal BMI, non-smoker, exercises)\n\n### Clinical Dilemma\n- **Severe symptoms** significantly impacting quality of life\n- **High breast cancer risk** suggests caution with systemic estrogen\n- **Intact uterus** would require progestogen if systemic therapy chosen",
+          "bullets": [
+            "Strong family history creates high breast cancer risk despite negative BRCA",
+            "Severe symptoms causing significant quality of life impact",
+            "Risk-benefit calculation becomes complex",
+            "Alternative approaches need consideration"
+          ]
+        },
+        {
+          "id": "case-3-decision",
+          "title": "Case 3: Treatment Decision",
+          "body_md": "## Recommended Treatment Plan\n\n### Primary Recommendation: **Vaginal Estrogen + Non-Hormonal Systemic**\n\n**For Genitourinary Symptoms:**\n- **Vaginal estradiol** 10mcg tablets 2x weekly (minimal systemic absorption)\n- **Safe even with breast cancer history** due to local action\n\n**For Vasomotor Symptoms:**\n- **Venlafaxine XR** 75mg daily (proven efficacy for hot flushes)\n- **Gabapentin** 300mg TID (alternative if venlafaxine not tolerated)\n- **Cognitive Behavioral Therapy** for menopause\n\n### Alternative Consideration: **Short-term Transdermal EPT**\n- **IF** patient strongly prefers hormonal approach after detailed counseling\n- **Transdermal** estradiol + micronized progesterone\n- **Shortest duration** possible (6-12 months maximum)\n- **Enhanced monitoring** with 3-monthly reviews\n- **Mammography** every 12 months\n\n### Rationale\n- **Breast cancer risk** makes systemic estrogen high-risk\n- **Vaginal estrogen** addresses GSM safely\n- **Non-hormonal options** effective for vasomotor symptoms\n- **Shared decision-making** essential with full risk disclosure",
+          "bullets": [
+            "Vaginal estrogen is safe even in high breast cancer risk patients",
+            "Non-hormonal systemic treatments can be highly effective",
+            "Short-term hormonal therapy possible if strongly preferred",
+            "Enhanced surveillance required if hormonal approach chosen"
+          ]
+        },
+        {
+          "id": "case-4",
+          "title": "Case 4: Perimenopause with Migraine",
+          "body_md": "## Case Presentation\n\n**Patient Profile:**\n- **Age:** 49 years\n- **BMI:** 26 kg/m² (overweight)\n- **Menstrual status:** Irregular cycles, 3-6 month gaps (perimenopause)\n- **Symptoms:** Hot flushes (7/10), severe PMS-like symptoms, mood swings\n- **Medical history:** Migraine with aura since age 25, well-controlled with topiramate\n- **Family history:** Maternal aunt had stroke at age 67\n- **Social history:** Non-smoker, social drinker, office worker\n\n### Risk Assessment\n- **Stroke risk:** ELEVATED (migraine with aura + family history)\n- **CVD risk:** LOW-MODERATE (slightly overweight, sedentary)\n- **VTE risk:** LOW (normal BMI, non-smoker)\n- **Breast cancer risk:** LOW (no significant risk factors)\n\n### Clinical Considerations\n- **Perimenopause** presents unique challenges\n- **Migraine with aura** is relative contraindication to oral estrogen\n- **Intact uterus** requires endometrial protection\n- **Fluctuating hormones** may worsen migraine pattern",
+          "bullets": [
+            "Perimenopause requires different approach than established menopause",
+            "Migraine with aura increases stroke risk with oral estrogen",
+            "Hormone fluctuations can worsen existing migraine patterns",
+            "Treatment must address both menopausal and migraine concerns"
+          ]
+        },
+        {
+          "id": "case-4-decision",
+          "title": "Case 4: Treatment Decision",
+          "body_md": "## Recommended Treatment Plan\n\n### MHT Recommendation: **Transdermal EPT with Caution**\n- **Route:** **TRANSDERMAL ONLY** (avoids oral estrogen stroke risk)\n- **Regimen:** Transdermal estradiol + micronized progesterone\n- **Monitoring:** Enhanced migraine monitoring\n\n### Specific Approach\n**Estrogen:**\n- **Estradiol patch** 25mcg twice weekly (low dose start)\n- **Continuous application** to avoid hormone fluctuations\n\n**Progestogen:**\n- **Micronized progesterone** 100mg daily (continuous)\n- **Avoid synthetic progestogens** (may worsen migraines)\n\n### Alternative Approaches\n1. **Non-hormonal first-line:**\n   - Venlafaxine XR for hot flushes\n   - Magnesium supplementation\n   - Lifestyle modifications\n\n2. **LNG-IUS + Transdermal Estrogen:**\n   - Mirena coil for endometrial protection\n   - May help with heavy perimenopausal bleeding\n   - Steady progestogen delivery\n\n### Monitoring Protocol\n- **2 weeks:** Migraine frequency/severity assessment\n- **1 month:** Full symptom review, migraine diary\n- **3 months:** Neurological review if migraine changes\n- **6 months:** Comprehensive assessment\n\n**Red flags for discontinuation:**\n- Increase in migraine frequency/severity\n- New neurological symptoms\n- Change in aura pattern",
+          "bullets": [
+            "Transdermal route essential to minimize stroke risk",
+            "Continuous hormone delivery may stabilize migraine pattern",
+            "Non-hormonal alternatives should be strongly considered",
+            "Enhanced neurological monitoring required"
+          ]
+        },
+        {
+          "id": "case-5",
+          "title": "Case 5: GSM-Predominant Symptoms",
+          "body_md": "## Case Presentation\n\n**Patient Profile:**\n- **Age:** 60 years\n- **BMI:** 33 kg/m² (obese)\n- **Menopausal status:** 8 years postmenopausal\n- **Primary symptoms:** Severe vaginal dryness, dyspareunia, recurrent UTIs\n- **Vasomotor symptoms:** Minimal (2/10 hot flushes, well-tolerated)\n- **Medical history:** Type 2 diabetes, previous DVT 5 years ago\n- **Current medications:** Metformin, rivaroxaban (discontinued 2 years ago)\n- **Relationship status:** Married, sexually active\n\n### Risk Assessment\n- **VTE risk:** VERY HIGH (previous DVT, obesity, diabetes)\n- **CVD risk:** HIGH (diabetes, obesity, age)\n- **Breast cancer risk:** MODERATE (obesity)\n\n### Clinical Focus\n- **Isolated GSM symptoms** with minimal systemic needs\n- **Previous VTE** contraindicates systemic estrogen\n- **Quality of life** significantly impacted by sexual dysfunction\n- **Partner relationship** affected by dyspareunia",
+          "bullets": [
+            "GSM-predominant presentation ideal for local therapy",
+            "Previous VTE makes systemic estrogen inappropriate",
+            "Sexual health significantly impacting relationship quality",
+            "Local therapy can be highly effective and safe"
+          ]
+        },
+        {
+          "id": "case-5-decision",
+          "title": "Case 5: Treatment Decision",
+          "body_md": "## Recommended Treatment Plan\n\n### Primary Recommendation: **Vaginal Estrogen Therapy**\n- **First-line:** Low-dose vaginal estradiol tablets 10mcg\n- **Regimen:** 2x weekly long-term (safe for indefinite use)\n- **Minimal systemic absorption** even with VTE history\n\n### Treatment Protocol\n**Initiation Phase (2 weeks):**\n- Vaginal estradiol 10mcg daily\n- Monitor for initial response\n\n**Maintenance Phase:**\n- Reduce to 2x weekly\n- Continue indefinitely as needed\n- No routine monitoring required\n\n### Adjunctive Measures\n1. **Vaginal moisturizers** (hyaluronic acid-based) for daily use\n2. **Personal lubricants** for sexual activity\n3. **Pelvic floor physiotherapy** if indicated\n4. **Sexual counseling** if relationship issues persist\n\n### Why Vaginal Route is Safe\n- **Minimal systemic absorption** with low-dose preparations\n- **Local tissue benefits** without systemic risks\n- **Safe even with VTE history** (established evidence)\n- **No increased thrombotic risk** with vaginal estrogen\n\n### Expected Outcomes\n- **Symptom improvement** within 2-4 weeks\n- **Continued benefit** with regular use\n- **No systemic hormone effects**\n- **Safe for long-term use**\n\n### Follow-up\n- **6 weeks:** Initial response assessment\n- **6 months:** Full review of symptoms and tolerability\n- **Annually:** Routine gynecological assessment",
+          "bullets": [
+            "Vaginal estrogen is first-line and safe for isolated GSM",
+            "Minimal systemic absorption makes it safe even with VTE history",
+            "Adjunctive measures enhance overall treatment success",
+            "Long-term use is safe and often necessary for symptom control"
+          ]
+        }
+      ],
+      "quizQuestions": [
+        {
+          "id": "q1",
+          "question": "For the 52-year-old low-risk patient (Case 1) with intact uterus and severe vasomotor symptoms, what is the most appropriate MHT?",
+          "options": [
+            "Estrogen-only therapy (ET)",
+            "Combined EPT with oral route",
+            "Vaginal estrogen only",
+            "Transdermal EPT only",
+            "No hormone therapy recommended"
+          ],
+          "correctIndex": 1,
+          "explanation": "Combined EPT (estrogen + progestogen) is appropriate for women with intact uterus. The oral route is acceptable given her low risk profile (no VTE, CVD, or breast cancer risk factors). Progestogen is essential for endometrial protection."
+        },
+        {
+          "id": "q2",
+          "question": "Why is transdermal estrogen preferred for the 58-year-old post-hysterectomy patient with obesity and hypertension (Case 2)?",
+          "options": [
+            "Better efficacy for vasomotor symptoms",
+            "Lower cost than oral preparations",
+            "Avoids first-pass metabolism and reduces VTE risk",
+            "Required after hysterectomy",
+            "Progestogen not needed with transdermal route"
+          ],
+          "correctIndex": 2,
+          "explanation": "Transdermal estrogen avoids first-pass hepatic metabolism, resulting in lower impact on clotting factors and significantly reduced VTE risk. This is crucial for obese patients who have inherently higher VTE risk."
+        },
+        {
+          "id": "q3",
+          "question": "For the high breast cancer risk patient (Case 3), what is the safest approach for managing genitourinary symptoms?",
+          "options": [
+            "Avoid all estrogen preparations",
+            "Use systemic EPT at lowest dose",
+            "Vaginal estrogen with minimal systemic absorption",
+            "Progestogen-only therapy",
+            "Non-hormonal treatments only"
+          ],
+          "correctIndex": 2,
+          "explanation": "Low-dose vaginal estrogen (e.g., 10mcg estradiol tablets) has minimal systemic absorption and is considered safe even in women with breast cancer history. It effectively treats GSM without significant systemic estrogen exposure."
+        },
+        {
+          "id": "q4",
+          "question": "Why is oral estrogen contraindicated in the perimenopausal patient with migraine with aura (Case 4)?",
+          "options": [
+            "Oral estrogen is ineffective in perimenopause",
+            "Increased stroke risk with migraine with aura",
+            "Worsens perimenopause symptoms",
+            "Cannot be used with migraine medications",
+            "Only applies to women over 55 years"
+          ],
+          "correctIndex": 1,
+          "explanation": "Migraine with aura is associated with increased stroke risk, and oral estrogen further increases this risk through effects on clotting factors. Transdermal estrogen avoids first-pass hepatic effects and is safer in this context."
+        },
+        {
+          "id": "q5",
+          "question": "For the 60-year-old with previous DVT and isolated GSM symptoms (Case 5), what makes vaginal estrogen safe?",
+          "options": [
+            "Previous DVT occurred >2 years ago",
+            "Patient is over 60 years old",
+            "Minimal systemic absorption with low-dose vaginal preparations",
+            "GSM symptoms reduce VTE risk",
+            "Vaginal route prevents all systemic effects"
+          ],
+          "correctIndex": 2,
+          "explanation": "Low-dose vaginal estrogen preparations (10mcg tablets) have minimal systemic absorption and do not increase VTE risk, making them safe even in women with previous VTE. This is supported by extensive evidence and guidelines."
+        }
+      ]
+    },
+    {
+      "id": "non-hormonal-options",
+      "title": "Non-hormonal Options & Red Flags",
+      "description": "Alternative treatments for menopausal symptoms and recognition of concerning symptoms requiring urgent evaluation",
+      "credits": 1,
+      "estimatedMinutes": 40,
+      "slides": [
+        {
+          "id": "slide-1",
+          "title": "Non-hormonal Treatments for Vasomotor Symptoms",
+          "body_md": "## Evidence-Based Non-hormonal Options\n\n### First-Line Pharmacological Treatments\n\n**SSRIs/SNRIs:**\n- **Venlafaxine XR:** 75mg daily (most evidence)\n- **Paroxetine:** 7.5mg daily (FDA-approved for hot flushes)\n- **Escitalopram:** 10mg daily\n- **Efficacy:** 50-65% reduction in hot flush frequency\n\n**Gabapentinoids:**\n- **Gabapentin:** 300mg TID (build up gradually)\n- **Pregabalin:** 75mg BID\n- **Efficacy:** 45-60% reduction, also improves sleep\n\n**Other Options:**\n- **Clonidine:** 0.1mg BID (modest efficacy, side effects)\n- **Oxybutynin:** 2.5mg BID (off-label use)\n\n### Mechanism of Action\n- **SSRIs/SNRIs:** Modulate thermoregulatory centers\n- **Gabapentinoids:** Reduce neuronal excitability\n- **Clonidine:** Central α2-agonist effects",
+          "bullets": [
+            "Venlafaxine has the strongest evidence base",
+            "Paroxetine is the only FDA-approved non-hormonal treatment",
+            "Gabapentin particularly useful if sleep disturbance prominent",
+            "Lower efficacy than MHT but significant benefit for many women"
+          ]
+        },
+        {
+          "id": "slide-2",
+          "title": "Complementary and Lifestyle Approaches",
+          "body_md": "## Evidence-Based Lifestyle Interventions\n\n### Behavioral Approaches\n\n**Cognitive Behavioral Therapy (CBT):**\n- **Menopause-specific CBT** protocols available\n- **Group or individual** sessions\n- **Efficacy:** Reduces symptom bother and improves coping\n- **Particularly effective** for mood symptoms\n\n**Mindfulness and Relaxation:**\n- **Mindfulness-based stress reduction** (MBSR)\n- **Progressive muscle relaxation**\n- **Breathing techniques**\n- **Yoga and tai chi**\n\n### Dietary Modifications\n\n**Phytoestrogens:**\n- **Soy isoflavones:** 50-100mg daily\n- **Red clover:** Limited evidence\n- **Modest efficacy** (20-30% reduction in hot flushes)\n- **Population variation** (Asian populations more responsive)\n\n**Other Supplements:**\n- **Black cohosh:** Variable evidence, hepatotoxicity concerns\n- **Evening primrose oil:** Limited evidence\n- **Vitamin E:** Minimal benefit",
+          "bullets": [
+            "CBT for menopause shows consistent benefit in trials",
+            "Soy isoflavones have the best evidence among botanicals",
+            "Individual response to supplements varies greatly",
+            "Lifestyle approaches are safe and can be combined with other treatments"
+          ]
+        },
+        {
+          "id": "slide-3",
+          "title": "Non-hormonal Treatments for GSM",
+          "body_md": "## Managing Genitourinary Syndrome Non-hormonally\n\n### Vaginal Moisturizers (First-line)\n\n**Daily Use Products:**\n- **Hyaluronic acid-based:** Superior hydration\n- **Polycarbophil-based:** Longer-lasting effect\n- **Apply 2-3 times weekly** for maintenance\n- **pH-balanced** formulations preferred\n\n### Personal Lubricants\n\n**For Sexual Activity:**\n- **Water-based:** Compatible with condoms\n- **Silicone-based:** Longer-lasting\n- **Avoid:** Glycerin, parabens, petroleum-based products\n- **pH 3.8-4.5** ideal for vaginal health\n\n### Advanced Therapies\n\n**Vaginal Laser Therapy:**\n- **CO2 fractional laser** (MonaLisa Touch)\n- **Er:YAG laser** treatments\n- **Limited long-term data** but promising results\n- **3-session protocol** typically used\n\n**Other Modalities:**\n- **Radiofrequency** treatments\n- **Pelvic floor physiotherapy**\n- **Dilator therapy** for narrowing",
+          "bullets": [
+            "Vaginal moisturizers are essential first-line therapy",
+            "Regular use more effective than intermittent application",
+            "Laser therapies show promise but need long-term safety data",
+            "Combined approaches often most effective"
+          ]
+        },
+        {
+          "id": "slide-4",
+          "title": "Red Flag Symptoms Requiring Urgent Evaluation",
+          "body_md": "## Warning Signs in Menopausal Women\n\n### Gynecological Red Flags\n\n**Postmenopausal Bleeding (PMB):**\n- **ANY bleeding >12 months after LMP**\n- **Endometrial cancer risk:** 5-10% of PMB cases\n- **Urgent referral required** (2-week rule)\n- **Transvaginal ultrasound + biopsy** indicated\n\n**Pelvic Mass:**\n- **New palpable mass** on examination\n- **Ovarian cancer risk** increases with age\n- **CA-125 + imaging** required\n- **Urgent gynecological referral**\n\n**Persistent Pelvic Pain:**\n- **New, severe, or worsening** pelvic pain\n- **Not responsive** to standard treatments\n- **May indicate** malignancy or serious pathology\n\n### Breast-Related Red Flags\n- **New breast lump** or thickening\n- **Skin changes** (peau d'orange, dimpling)\n- **Nipple discharge** (especially bloody)\n- **Nipple retraction** or skin ulceration",
+          "bullets": [
+            "Postmenopausal bleeding always requires investigation",
+            "New pelvic masses need urgent gynecological assessment",
+            "Breast changes require triple assessment",
+            "Early detection significantly improves outcomes"
+          ]
+        },
+        {
+          "id": "slide-5",
+          "title": "Cardiovascular and Other Red Flags",
+          "body_md": "## Systemic Red Flag Symptoms\n\n### Cardiovascular Warning Signs\n\n**Chest Pain/Discomfort:**\n- **New angina** symptoms\n- **Atypical presentations** common in women\n- **Associated symptoms:** Jaw pain, arm pain, nausea\n- **ECG + troponins** if suspected ACS\n\n**Sudden Severe Headache:**\n- **\"Thunderclap\" headache** (subarachnoid hemorrhage)\n- **New severe headache** in migraine sufferers\n- **Associated neurological symptoms**\n- **Immediate medical attention** required\n\n### Neurological Red Flags\n\n**Stroke Symptoms (FAST):**\n- **F**ace drooping\n- **A**rm weakness\n- **S**peech difficulty\n- **T**ime to call emergency services\n\n**New Neurological Symptoms:**\n- **Visual disturbances** (new or worsening)\n- **Weakness or numbness**\n- **Coordination problems**\n- **Memory/cognitive changes** (sudden onset)\n\n### Thromboembolic Red Flags\n\n**Deep Vein Thrombosis:**\n- **Unilateral leg swelling**\n- **Pain, warmth, redness**\n- **Positive Homan's sign**\n\n**Pulmonary Embolism:**\n- **Sudden breathlessness**\n- **Chest pain** (pleuritic)\n- **Hemoptysis**\n- **Tachycardia, hypotension**",
+          "bullets": [
+            "Women may have atypical cardiac symptoms",
+            "New severe headaches always require investigation",
+            "Stroke symptoms require immediate emergency response",
+            "VTE symptoms need urgent anticoagulation assessment"
+          ]
+        },
+        {
+          "id": "slide-6",
+          "title": "When to Stop MHT: Clinical Decision Points",
+          "body_md": "## Indications for MHT Discontinuation\n\n### Absolute Indications to Stop\n\n**New Cancer Diagnosis:**\n- **Breast cancer** (hormone-sensitive)\n- **Endometrial cancer**\n- **Ovarian cancer**\n- **Other estrogen-sensitive malignancies**\n\n**Thrombotic Events:**\n- **Venous thromboembolism** (DVT/PE)\n- **Stroke or TIA**\n- **Myocardial infarction**\n- **Retinal vein thrombosis**\n\n### Relative Indications to Stop\n\n**Worsening Risk Factors:**\n- **Uncontrolled hypertension**\n- **New diabetes with complications**\n- **Severe liver dysfunction**\n- **Unexplained abnormal bleeding**\n\n### Planned Discontinuation\n\n**Gradual Withdrawal:**\n- **Reduce dose** rather than abrupt stop\n- **Monitor for symptom return**\n- **Support with non-hormonal options**\n\n**Timing Considerations:**\n- **Annual risk-benefit review**\n- **Consider stopping >65 years** (individual basis)\n- **Major surgery** (temporary cessation)\n- **Patient preference** for discontinuation",
+          "bullets": [
+            "New hormone-sensitive cancers require immediate MHT cessation",
+            "Thrombotic events contraindicate continued use",
+            "Gradual withdrawal preferred to minimize symptom rebound",
+            "Regular reassessment ensures appropriate continuation"
+          ]
+        }
+      ],
+      "quizQuestions": [
+        {
+          "id": "q1",
+          "question": "Which non-hormonal medication has the strongest evidence for treating vasomotor symptoms?",
+          "options": [
+            "Gabapentin 300mg TID",
+            "Venlafaxine XR 75mg daily",
+            "Clonidine 0.1mg BID",
+            "Paroxetine 20mg daily",
+            "Black cohosh supplements"
+          ],
+          "correctIndex": 1,
+          "explanation": "Venlafaxine XR 75mg daily has the strongest evidence base for treating vasomotor symptoms, showing 50-65% reduction in hot flush frequency in multiple high-quality trials."
+        },
+        {
+          "id": "q2",
+          "question": "What is the most concerning red flag symptom in a postmenopausal woman?",
+          "options": [
+            "Worsening hot flushes",
+            "Any vaginal bleeding >12 months after LMP",
+            "New joint aches and pains",
+            "Mood changes and irritability",
+            "Sleep disturbances"
+          ],
+          "correctIndex": 1,
+          "explanation": "Postmenopausal bleeding (any bleeding >12 months after last menstrual period) is a red flag requiring urgent investigation, as it may indicate endometrial cancer in 5-10% of cases."
+        },
+        {
+          "id": "q3",
+          "question": "For first-line non-hormonal management of GSM, what is most appropriate?",
+          "options": [
+            "Systemic hormone therapy",
+            "Vaginal moisturizers used 2-3 times weekly",
+            "Antibiotics for recurrent infections",
+            "Laser therapy as first-line treatment",
+            "Surgical intervention"
+          ],
+          "correctIndex": 1,
+          "explanation": "Vaginal moisturizers, particularly hyaluronic acid-based products used 2-3 times weekly, are first-line non-hormonal treatment for GSM and can provide significant symptom relief."
+        },
+        {
+          "id": "q4",
+          "question": "Which supplement has the best evidence for menopausal symptom management?",
+          "options": [
+            "Black cohosh extract",
+            "Evening primrose oil",
+            "Soy isoflavones 50-100mg daily",
+            "Vitamin E supplements",
+            "St. John's wort"
+          ],
+          "correctIndex": 2,
+          "explanation": "Soy isoflavones (50-100mg daily) have the best evidence among botanical supplements, showing 20-30% reduction in hot flushes, particularly in Asian populations due to genetic factors affecting metabolism."
+        },
+        {
+          "id": "q5",
+          "question": "What is an absolute indication to immediately stop MHT?",
+          "options": [
+            "Patient reaches age 60",
+            "Mild worsening of hypertension",
+            "New diagnosis of hormone-sensitive breast cancer",
+            "Weight gain of 5kg",
+            "Patient preference after 2 years of use"
+          ],
+          "correctIndex": 2,
+          "explanation": "New diagnosis of hormone-sensitive breast cancer is an absolute contraindication requiring immediate cessation of MHT, as continued estrogen exposure could promote tumor growth."
+        }
+      ]
+    }
+  ],
+  "lastUpdated": "2025-09-09T00:35:29.273Z",
+  "popularQuizzes": {
+    "category": "Popular CME",
+    "totalQuizzes": 9,
+    "totalQuestions": 90,
+    "estimatedHours": 3,
+    "difficulty": "Intermediate",
+    "updatedApp": "MHT Assessment v2.0",
+    "quizzes": [
+      {
+        "id": "menopause-basics-quiz",
+        "version": "1.0.0",
+        "title": "Menopause Basics",
+        "description": "Definition, staging, laboratory tests, and fundamental concepts",
+        "category": "Popular CME",
+        "tags": [
+          "menopause",
+          "basics",
+          "staging",
+          "labs"
+        ],
+        "estimatedMinutes": 15,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Beginner",
+        "questions": [
+          {
+            "id": "mb-q1",
+            "question": "What is the clinical definition of menopause?",
+            "options": [
+              "6 months of amenorrhea with vasomotor symptoms",
+              "12 consecutive months of amenorrhea",
+              "FSH levels >40 mIU/mL with irregular cycles",
+              "Estradiol <30 pg/mL with hot flashes",
+              "Age >50 with vasomotor symptoms"
+            ],
+            "correctIndex": 1,
+            "explanation": "Menopause is clinically defined as 12 consecutive months of amenorrhea resulting from loss of ovarian follicular activity, confirmed retrospectively."
+          },
+          {
+            "id": "mb-q2",
+            "question": "Which hormone change is the earliest marker of perimenopause?",
+            "options": [
+              "Declining estradiol",
+              "Rising FSH",
+              "Declining inhibin B",
+              "Rising LH",
+              "Declining AMH"
+            ],
+            "correctIndex": 2,
+            "explanation": "Declining inhibin B is the earliest biochemical marker of ovarian aging, occurring before significant changes in FSH or estradiol."
+          },
+          {
+            "id": "mb-q3",
+            "question": "What is the average duration of perimenopause?",
+            "options": [
+              "6 months to 1 year",
+              "1-2 years",
+              "2-4 years",
+              "4-8 years",
+              "8-12 years"
+            ],
+            "correctIndex": 3,
+            "explanation": "Perimenopause typically lasts 4-8 years, with variable cycle patterns and declining fertility during this transition period."
+          },
+          {
+            "id": "mb-q4",
+            "question": "Which laboratory test is most reliable for confirming menopause?",
+            "options": [
+              "Single elevated FSH level",
+              "Low estradiol level",
+              "Elevated LH level",
+              "Clinical assessment - no single test is definitive",
+              "AMH level <0.1 ng/mL"
+            ],
+            "correctIndex": 3,
+            "explanation": "No single laboratory test is definitive for menopause diagnosis. Clinical assessment based on age, amenorrhea duration, and symptoms is most reliable."
+          },
+          {
+            "id": "mb-q5",
+            "question": "What factor most significantly affects the timing of natural menopause?",
+            "options": [
+              "Body weight",
+              "Physical activity level",
+              "Genetic factors",
+              "Dietary habits",
+              "Stress levels"
+            ],
+            "correctIndex": 2,
+            "explanation": "Genetic factors account for approximately 50% of the variation in timing of natural menopause, making it the most significant factor."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "hrt-indications-contraindications-quiz",
+        "version": "1.0.0",
+        "title": "HRT Indications & Contraindications",
+        "description": "Evidence-based indications and absolute/relative contraindications for hormone replacement therapy",
+        "category": "Popular CME",
+        "tags": [
+          "HRT",
+          "indications",
+          "contraindications",
+          "safety"
+        ],
+        "estimatedMinutes": 20,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Intermediate",
+        "questions": [
+          {
+            "id": "hic-q1",
+            "question": "What is the primary indication for systemic HRT?",
+            "options": [
+              "Prevention of cardiovascular disease",
+              "Prevention of osteoporosis in all postmenopausal women",
+              "Treatment of moderate to severe vasomotor symptoms",
+              "Prevention of cognitive decline",
+              "Weight management in menopause"
+            ],
+            "correctIndex": 2,
+            "explanation": "The primary indication for systemic HRT is treatment of moderate to severe vasomotor symptoms that impact quality of life."
+          },
+          {
+            "id": "hic-q2",
+            "question": "Which is an absolute contraindication to estrogen therapy?",
+            "options": [
+              "Family history of breast cancer",
+              "Controlled hypertension",
+              "Active or recent venous thromboembolism",
+              "Migraine without aura",
+              "Diabetes mellitus"
+            ],
+            "correctIndex": 2,
+            "explanation": "Active or recent venous thromboembolism (within 6 months) is an absolute contraindication to estrogen therapy due to increased VTE risk."
+          },
+          {
+            "id": "hic-q3",
+            "question": "For a woman with intact uterus, what is required with estrogen therapy?",
+            "options": [
+              "Annual endometrial biopsy",
+              "Concurrent progestogen therapy",
+              "Low-dose aspirin",
+              "Annual pelvic ultrasound",
+              "Calcium supplementation"
+            ],
+            "correctIndex": 1,
+            "explanation": "Women with intact uterus require concurrent progestogen therapy with estrogen to prevent endometrial hyperplasia and cancer."
+          },
+          {
+            "id": "hic-q4",
+            "question": "What is the 'window of opportunity' concept for HRT initiation?",
+            "options": [
+              "Starting HRT within 1 year of menopause",
+              "Starting HRT before age 60 or within 10 years of menopause",
+              "Starting HRT only during perimenopause",
+              "Starting HRT within 5 years of menopause regardless of age",
+              "Starting HRT at any age if symptomatic"
+            ],
+            "correctIndex": 1,
+            "explanation": "The 'window of opportunity' refers to starting HRT before age 60 or within 10 years of menopause when the benefit-risk ratio is most favorable."
+          },
+          {
+            "id": "hic-q5",
+            "question": "Which condition is a relative contraindication requiring careful risk-benefit assessment?",
+            "options": [
+              "Well-controlled hypertension",
+              "Osteoporosis",
+              "Strong family history of breast cancer",
+              "Previous hysterectomy",
+              "Vasomotor symptoms"
+            ],
+            "correctIndex": 2,
+            "explanation": "Strong family history of breast cancer is a relative contraindication requiring careful individualized risk-benefit assessment and possibly genetic counseling."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "cardiovascular-risk-hrt-quiz",
+        "version": "1.0.0",
+        "title": "Cardiovascular Risk & HRT",
+        "description": "ASCVD basics, cardiovascular effects of HRT, and risk stratification",
+        "category": "Popular CME",
+        "tags": [
+          "cardiovascular",
+          "ASCVD",
+          "HRT",
+          "risk"
+        ],
+        "estimatedMinutes": 20,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Intermediate",
+        "questions": [
+          {
+            "id": "cvr-q1",
+            "question": "What is the primary cardiovascular benefit of early HRT initiation?",
+            "options": [
+              "Reduction in acute myocardial infarction",
+              "Prevention of stroke in all women",
+              "Potential cardioprotective effect when started early",
+              "Reversal of existing coronary artery disease",
+              "Prevention of heart failure"
+            ],
+            "correctIndex": 2,
+            "explanation": "Early HRT initiation (within 10 years of menopause or before age 60) may have cardioprotective effects, but is not recommended for primary CVD prevention."
+          },
+          {
+            "id": "cvr-q2",
+            "question": "What ASCVD risk threshold requires caution with oral estrogen?",
+            "options": [
+              ">5% 10-year risk",
+              ">7.5% 10-year risk",
+              ">10% 10-year risk",
+              ">15% 10-year risk",
+              ">20% 10-year risk"
+            ],
+            "correctIndex": 2,
+            "explanation": "Women with >10% 10-year ASCVD risk require careful consideration, and transdermal estrogen may be preferred over oral due to lower VTE risk."
+          },
+          {
+            "id": "cvr-q3",
+            "question": "Why might transdermal estrogen be preferred in women with cardiovascular risk factors?",
+            "options": [
+              "Better symptom relief",
+              "Lower cost",
+              "Easier administration",
+              "Avoids hepatic first-pass metabolism",
+              "Higher bioavailability"
+            ],
+            "correctIndex": 3,
+            "explanation": "Transdermal estrogen avoids hepatic first-pass metabolism, resulting in less impact on clotting factors, triglycerides, and inflammatory markers."
+          },
+          {
+            "id": "cvr-q4",
+            "question": "According to WHI findings, what was the cardiovascular outcome with oral CEE/MPA in older women?",
+            "options": [
+              "Significant cardiovascular benefit",
+              "No effect on cardiovascular outcomes",
+              "Increased risk of coronary events, especially in early years",
+              "Reduced stroke risk",
+              "Improved overall cardiovascular mortality"
+            ],
+            "correctIndex": 2,
+            "explanation": "WHI showed increased risk of coronary events with oral CEE/MPA, particularly in the early years of treatment in older postmenopausal women."
+          },
+          {
+            "id": "cvr-q5",
+            "question": "What is the recommended approach for HRT in women with established cardiovascular disease?",
+            "options": [
+              "Standard dose oral estrogen",
+              "High-dose transdermal estrogen",
+              "Generally not recommended for cardioprotection",
+              "Low-dose estrogen with aspirin",
+              "Estrogen-only therapy regardless of uterine status"
+            ],
+            "correctIndex": 2,
+            "explanation": "HRT is generally not recommended for cardioprotection in women with established cardiovascular disease, though may be considered for severe symptoms with careful monitoring."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "vte-risk-wells-score-quiz",
+        "version": "1.0.0",
+        "title": "VTE Risk & Wells Score",
+        "description": "Venous thromboembolism risk assessment, Wells Score application, and HRT considerations",
+        "category": "Popular CME",
+        "tags": [
+          "VTE",
+          "thrombosis",
+          "Wells",
+          "risk assessment"
+        ],
+        "estimatedMinutes": 15,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Intermediate",
+        "questions": [
+          {
+            "id": "vte-q1",
+            "question": "Which route of estrogen administration has the lowest VTE risk?",
+            "options": [
+              "Oral estradiol",
+              "Transdermal estradiol",
+              "Sublingual estradiol",
+              "Nasal estradiol",
+              "All routes have equal risk"
+            ],
+            "correctIndex": 1,
+            "explanation": "Transdermal estradiol has the lowest VTE risk as it bypasses hepatic first-pass metabolism and has less impact on clotting factors."
+          },
+          {
+            "id": "vte-q2",
+            "question": "What is a high Wells Score for PE (pulmonary embolism)?",
+            "options": [
+              ">2 points",
+              ">4 points",
+              ">6 points",
+              ">8 points",
+              ">10 points"
+            ],
+            "correctIndex": 2,
+            "explanation": "Wells Score >6 points indicates high probability of PE, warranting immediate anticoagulation and imaging studies."
+          },
+          {
+            "id": "vte-q3",
+            "question": "Which factor increases VTE risk most significantly with HRT?",
+            "options": [
+              "Age >50",
+              "BMI >25",
+              "Personal history of VTE",
+              "Family history of VTE",
+              "Smoking"
+            ],
+            "correctIndex": 2,
+            "explanation": "Personal history of VTE is the strongest risk factor and is generally an absolute contraindication to estrogen therapy."
+          },
+          {
+            "id": "vte-q4",
+            "question": "What is the relative risk increase of VTE with oral estrogen?",
+            "options": [
+              "1.5-2 fold",
+              "2-4 fold",
+              "4-6 fold",
+              "6-8 fold",
+              "8-10 fold"
+            ],
+            "correctIndex": 1,
+            "explanation": "Oral estrogen increases VTE risk approximately 2-4 fold, with highest risk in the first year of use."
+          },
+          {
+            "id": "vte-q5",
+            "question": "Which clinical scenario requires VTE risk assessment before HRT?",
+            "options": [
+              "All women considering HRT",
+              "Only women >60 years",
+              "Only women with BMI >30",
+              "Only women with family history",
+              "Only symptomatic women"
+            ],
+            "correctIndex": 0,
+            "explanation": "All women considering HRT should undergo VTE risk assessment including personal/family history, risk factors, and consideration of alternative routes."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "osteoporosis-frax-interpretation-quiz",
+        "version": "1.0.0",
+        "title": "Osteoporosis & FRAX Interpretation",
+        "description": "Bone health assessment, FRAX score interpretation, and HRT for osteoporosis prevention",
+        "category": "Popular CME",
+        "tags": [
+          "osteoporosis",
+          "FRAX",
+          "bone health",
+          "prevention"
+        ],
+        "estimatedMinutes": 18,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Intermediate",
+        "questions": [
+          {
+            "id": "frax-q1",
+            "question": "What does FRAX calculate?",
+            "options": [
+              "Current bone mineral density",
+              "Risk of falls in elderly",
+              "10-year probability of major osteoporotic fracture",
+              "Vitamin D deficiency risk",
+              "Calcium absorption rate"
+            ],
+            "correctIndex": 2,
+            "explanation": "FRAX calculates the 10-year probability of major osteoporotic fracture and hip fracture based on clinical risk factors with or without BMD."
+          },
+          {
+            "id": "frax-q2",
+            "question": "At what FRAX score is pharmacological intervention typically recommended?",
+            "options": [
+              ">5% 10-year risk",
+              ">10% 10-year risk",
+              ">15% 10-year risk",
+              ">20% 10-year risk",
+              ">25% 10-year risk"
+            ],
+            "correctIndex": 3,
+            "explanation": "Pharmacological intervention is typically recommended when FRAX shows >20% 10-year risk of major osteoporotic fracture or >3% risk of hip fracture."
+          },
+          {
+            "id": "frax-q3",
+            "question": "Which is NOT a FRAX input variable?",
+            "options": [
+              "Age",
+              "Previous fracture",
+              "Parental hip fracture",
+              "Vitamin D level",
+              "Glucocorticoid use"
+            ],
+            "correctIndex": 3,
+            "explanation": "Vitamin D level is not a direct input variable in FRAX calculation, though vitamin D deficiency can be a secondary cause of osteoporosis."
+          },
+          {
+            "id": "frax-q4",
+            "question": "What is the effect of HRT on fracture risk?",
+            "options": [
+              "No effect on fracture risk",
+              "Increases fracture risk",
+              "Reduces vertebral fractures only",
+              "Reduces both vertebral and non-vertebral fractures",
+              "Only prevents hip fractures"
+            ],
+            "correctIndex": 3,
+            "explanation": "HRT reduces both vertebral and non-vertebral fractures, including hip fractures, by maintaining bone mineral density."
+          },
+          {
+            "id": "frax-q5",
+            "question": "When should bone density screening begin in average-risk women?",
+            "options": [
+              "Age 50",
+              "Age 60",
+              "Age 65",
+              "At menopause",
+              "Age 70"
+            ],
+            "correctIndex": 2,
+            "explanation": "Bone density screening should begin at age 65 in average-risk women, or earlier (age 50-64) if risk factors are present."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "breast-cancer-risk-screening-quiz",
+        "version": "1.0.0",
+        "title": "Breast Cancer Risk Screening",
+        "description": "Gail and Tyrer-Cuzick model basics for breast cancer risk assessment",
+        "category": "Popular CME",
+        "tags": [
+          "breast cancer",
+          "Gail",
+          "Tyrer-Cuzick",
+          "screening"
+        ],
+        "estimatedMinutes": 15,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Intermediate",
+        "questions": [
+          {
+            "id": "bcr-q1",
+            "question": "What is the primary output of the Gail model?",
+            "options": [
+              "Lifetime breast cancer risk",
+              "5-year breast cancer risk",
+              "Risk relative to population average",
+              "Genetic mutation probability",
+              "Screening recommendation"
+            ],
+            "correctIndex": 1,
+            "explanation": "The Gail model primarily calculates 5-year breast cancer risk, though it can also estimate lifetime risk."
+          },
+          {
+            "id": "bcr-q2",
+            "question": "Which model is better for women with strong family history of breast/ovarian cancer?",
+            "options": [
+              "Gail model",
+              "Tyrer-Cuzick (IBIS) model",
+              "Framingham model",
+              "FRAX model",
+              "Both are equally good"
+            ],
+            "correctIndex": 1,
+            "explanation": "The Tyrer-Cuzick (IBIS) model is superior for women with strong family history as it includes more detailed family history information."
+          },
+          {
+            "id": "bcr-q3",
+            "question": "At what 5-year risk threshold is enhanced screening typically considered?",
+            "options": [
+              ">1.0%",
+              ">1.67%",
+              ">2.0%",
+              ">2.5%",
+              ">3.0%"
+            ],
+            "correctIndex": 1,
+            "explanation": "Enhanced screening (MRI) is typically considered when 5-year risk exceeds 1.67% (average population risk), or lifetime risk >20-25%."
+          },
+          {
+            "id": "bcr-q4",
+            "question": "Which factor is NOT included in the Gail model?",
+            "options": [
+              "Age at menarche",
+              "Age at first birth",
+              "Number of breast biopsies",
+              "BRCA mutation status",
+              "Family history of breast cancer"
+            ],
+            "correctIndex": 3,
+            "explanation": "BRCA mutation status is not included in the Gail model calculation, though it would significantly impact risk assessment."
+          },
+          {
+            "id": "bcr-q5",
+            "question": "How does HRT affect breast cancer risk assessment?",
+            "options": [
+              "No effect on breast cancer risk",
+              "Reduces breast cancer risk",
+              "Slightly increases risk, especially with combined HRT",
+              "Only increases risk with estrogen-only therapy",
+              "Effect depends on route of administration only"
+            ],
+            "correctIndex": 2,
+            "explanation": "HRT, particularly combined estrogen-progestogen therapy, slightly increases breast cancer risk. This should be factored into risk-benefit discussions."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "drug-interactions-hrt-quiz",
+        "version": "1.0.0",
+        "title": "Drug Interactions & HRT",
+        "description": "Common drug interactions with hormone replacement therapy",
+        "category": "Popular CME",
+        "tags": [
+          "drug interactions",
+          "HRT",
+          "medications",
+          "safety"
+        ],
+        "estimatedMinutes": 12,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Beginner",
+        "questions": [
+          {
+            "id": "di-q1",
+            "question": "Which enzyme system is primarily responsible for estrogen metabolism?",
+            "options": [
+              "CYP1A2",
+              "CYP2D6",
+              "CYP3A4",
+              "CYP2C9",
+              "CYP2C19"
+            ],
+            "correctIndex": 2,
+            "explanation": "CYP3A4 is the primary enzyme system responsible for estrogen metabolism, making it susceptible to drug interactions with CYP3A4 inducers and inhibitors."
+          },
+          {
+            "id": "di-q2",
+            "question": "Which medication may reduce the effectiveness of oral estrogen?",
+            "options": [
+              "Fluconazole",
+              "Phenytoin",
+              "Metformin",
+              "Atorvastatin",
+              "Lisinopril"
+            ],
+            "correctIndex": 1,
+            "explanation": "Phenytoin is a CYP3A4 inducer that increases estrogen metabolism, potentially reducing its effectiveness and requiring dose adjustment."
+          },
+          {
+            "id": "di-q3",
+            "question": "What is the concern with concurrent warfarin and estrogen use?",
+            "options": [
+              "Increased bleeding risk",
+              "Reduced warfarin effectiveness",
+              "Altered INR requiring monitoring",
+              "Increased stroke risk",
+              "No significant interaction"
+            ],
+            "correctIndex": 2,
+            "explanation": "Estrogen can affect warfarin metabolism and increase clotting factor synthesis, potentially altering INR and requiring closer monitoring and dose adjustment."
+          },
+          {
+            "id": "di-q4",
+            "question": "Which route of estrogen administration has fewer drug interactions?",
+            "options": [
+              "Oral",
+              "Transdermal",
+              "Sublingual",
+              "Nasal",
+              "All routes have equal interactions"
+            ],
+            "correctIndex": 1,
+            "explanation": "Transdermal estrogen bypasses hepatic first-pass metabolism, resulting in fewer drug interactions compared to oral administration."
+          },
+          {
+            "id": "di-q5",
+            "question": "What should be monitored when starting HRT in a patient on thyroid hormone replacement?",
+            "options": [
+              "Liver function tests",
+              "Blood pressure",
+              "Thyroid function tests",
+              "Complete blood count",
+              "Lipid profile"
+            ],
+            "correctIndex": 2,
+            "explanation": "Estrogen increases thyroid-binding globulin levels, potentially requiring adjustment of thyroid hormone replacement dosing and monitoring of TSH levels."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "counseling-shared-decision-making-quiz",
+        "version": "1.0.0",
+        "title": "Counseling & Shared Decision Making",
+        "description": "Patient communication strategies and shared decision-making for HRT",
+        "category": "Popular CME",
+        "tags": [
+          "counseling",
+          "communication",
+          "shared decision making",
+          "patient care"
+        ],
+        "estimatedMinutes": 15,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Beginner",
+        "questions": [
+          {
+            "id": "sdm-q1",
+            "question": "What is the first step in shared decision making for HRT?",
+            "options": [
+              "Present treatment options",
+              "Assess patient's symptoms and impact on quality of life",
+              "Discuss risks and benefits",
+              "Determine patient preferences",
+              "Provide written information"
+            ],
+            "correctIndex": 1,
+            "explanation": "The first step is to thoroughly assess the patient's symptoms, their severity, and impact on quality of life to establish the need for treatment."
+          },
+          {
+            "id": "sdm-q2",
+            "question": "How should absolute risk be communicated to patients?",
+            "options": [
+              "Using percentages only",
+              "Using relative risk ratios",
+              "Using natural frequencies (e.g., 1 in 1000)",
+              "Using technical medical terms",
+              "Avoiding specific numbers"
+            ],
+            "correctIndex": 2,
+            "explanation": "Natural frequencies (e.g., '1 in 1000 women') are easier for patients to understand than percentages or relative risks and improve risk comprehension."
+          },
+          {
+            "id": "sdm-q3",
+            "question": "What should be included in HRT counseling?",
+            "options": [
+              "Only benefits of treatment",
+              "Only risks of treatment",
+              "Benefits, risks, and alternatives",
+              "Recommendation based on medical opinion only",
+              "Deferring decision to patient preference"
+            ],
+            "correctIndex": 2,
+            "explanation": "Comprehensive counseling should include benefits, risks, and alternatives to HRT, allowing for informed shared decision making."
+          },
+          {
+            "id": "sdm-q4",
+            "question": "When discussing HRT risks, what time frame should be emphasized?",
+            "options": [
+              "Lifetime risk only",
+              "1-year risk only",
+              "Both absolute risk and time frame of risk",
+              "Risk relative to other medications",
+              "Avoiding specific time frames"
+            ],
+            "correctIndex": 2,
+            "explanation": "Discussing both absolute risk and the time frame helps patients understand both the magnitude and temporal aspects of potential risks."
+          },
+          {
+            "id": "sdm-q5",
+            "question": "What is an effective way to address patient anxiety about HRT risks?",
+            "options": [
+              "Minimize risk discussions",
+              "Use scientific studies to reassure",
+              "Acknowledge concerns and provide balanced information",
+              "Recommend against HRT to avoid liability",
+              "Refer to online resources only"
+            ],
+            "correctIndex": 2,
+            "explanation": "Acknowledging patient concerns while providing balanced, evidence-based information helps address anxiety and builds trust in the decision-making process."
+          }
+        ],
+        "conflictResolution": "none"
+      },
+      {
+        "id": "emergency-scenarios-referral-quiz",
+        "version": "1.0.0",
+        "title": "Emergency Scenarios & Referrals",
+        "description": "Recognition of acute VTE, emergency management, and appropriate referral guidelines",
+        "category": "Popular CME",
+        "tags": [
+          "emergency",
+          "VTE",
+          "referral",
+          "acute care"
+        ],
+        "estimatedMinutes": 18,
+        "passingScore": 80,
+        "timeLimit": null,
+        "difficulty": "Advanced",
+        "questions": [
+          {
+            "id": "es-q1",
+            "question": "A patient on HRT presents with sudden onset chest pain and shortness of breath. What is the priority action?",
+            "options": [
+              "Continue HRT and monitor symptoms",
+              "Stop HRT and schedule follow-up",
+              "Immediate evaluation for pulmonary embolism",
+              "Prescribe bronchodilator",
+              "Order chest X-ray in 24 hours"
+            ],
+            "correctIndex": 2,
+            "explanation": "Sudden chest pain and shortness of breath in a patient on HRT should raise immediate suspicion for pulmonary embolism requiring urgent evaluation."
+          },
+          {
+            "id": "es-q2",
+            "question": "What is the most appropriate immediate management for suspected PE in HRT user?",
+            "options": [
+              "Discontinue HRT and monitor",
+              "Reduce HRT dose",
+              "Anticoagulation if high clinical probability",
+              "Schedule outpatient CT angiogram",
+              "Prescribe pain medication"
+            ],
+            "correctIndex": 2,
+            "explanation": "High clinical probability PE warrants immediate anticoagulation while awaiting definitive imaging, especially in HRT users with increased VTE risk."
+          },
+          {
+            "id": "es-q3",
+            "question": "When should a patient on HRT be referred to hematology?",
+            "options": [
+              "All patients before starting HRT",
+              "Recurrent VTE on anticoagulation",
+              "Family history of VTE only",
+              "Age >65 years",
+              "BMI >30"
+            ],
+            "correctIndex": 1,
+            "explanation": "Recurrent VTE despite anticoagulation warrants hematology referral for thrombophilia evaluation and specialist management."
+          },
+          {
+            "id": "es-q4",
+            "question": "What constitutes a red flag symptom requiring immediate evaluation?",
+            "options": [
+              "Mild leg cramping",
+              "Unilateral leg swelling and pain",
+              "Hot flashes",
+              "Breast tenderness",
+              "Mood changes"
+            ],
+            "correctIndex": 1,
+            "explanation": "Unilateral leg swelling and pain raises concern for deep vein thrombosis, especially in HRT users, requiring immediate evaluation."
+          },
+          {
+            "id": "es-q5",
+            "question": "When can HRT be safely resumed after VTE treatment?",
+            "options": [
+              "After 1 month of anticoagulation",
+              "After 3 months of anticoagulation",
+              "Generally not recommended",
+              "After switching to transdermal route",
+              "After adding aspirin"
+            ],
+            "correctIndex": 2,
+            "explanation": "HRT is generally not recommended after VTE due to high recurrence risk. Alternative therapies should be considered for symptom management."
+          }
+        ],
+        "conflictResolution": "none"
+      }
+    ]
+  }
+}

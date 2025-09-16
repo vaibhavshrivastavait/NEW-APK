@@ -1,0 +1,52 @@
+{
+  "drugClasses": {
+    "anticoagulants": {
+      "interactions": {
+        "estrogen_systemic": "increased_bleeding_risk",
+        "progestogen_systemic": "increased_bleeding_risk"
+      },
+      "severity": "high"
+    },
+    "anticonvulsants": {
+      "interactions": {
+        "estrogen_oral": "reduced_estrogen_effectiveness",
+        "herbal": "variable"
+      },
+      "severity": "medium"
+    },
+    "herbal": {
+      "interactions": {
+        "estrogen_oral": "variable",
+        "progestogen": "variable"
+      },
+      "severity": "low"
+    },
+    "ppis": {
+      "interactions": {},
+      "severity": "low"
+    },
+    "antibiotics_rifamycins": {
+      "interactions": {
+        "estrogen_oral": "reduced_estrogen_effectiveness"
+      },
+      "severity": "medium"
+    },
+    "antifungals_strongCYP3A4": {
+      "interactions": {
+        "hormone_metabolism": "inhibited",
+        "progestogen_oral": "increased_levels"
+      },
+      "severity": "medium"
+    },
+    "statins": {
+      "interactions": {},
+      "severity": "low"
+    }
+  },
+  "therapyRoutes": {
+    "estrogen_oral": { "notes": "higher VTE risk vs transdermal" },
+    "estrogen_transdermal": { "notes": "lower VTE risk, preferred if VTE risk present" },
+    "progestogen_oral": {},
+    "non_hormonal": {}
+  }
+}

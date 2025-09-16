@@ -1,0 +1,339 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-15",
+  "description": "Evidence-based Treatment Plan Generator Rules for MHT Assessment",
+  "guidelines": {
+    "NICE": "https://www.nice.org.uk/guidance/ng23",
+    "ACOG": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2014/01/hormone-therapy-and-heart-disease",
+    "EndocrineSociety": "https://www.endocrine.org/clinical-practice-guidelines",
+    "IMS": "https://www.imsociety.org/manage/guidelines/"
+  },
+  "riskThresholds": {
+    "ascvd": {
+      "low": 5,
+      "moderate": 10,
+      "high": 20
+    },
+    "framingham": {
+      "low": 10,
+      "moderate": 20,
+      "high": 30
+    },
+    "wells": {
+      "low": 1,
+      "moderate": 3,
+      "high": 6
+    },
+    "frax": {
+      "majorFracture": {
+        "low": 10,
+        "moderate": 15,
+        "high": 20
+      },
+      "hipFracture": {
+        "low": 3,
+        "moderate": 5,
+        "high": 10
+      }
+    },
+    "gail": {
+      "low": 1.67,
+      "moderate": 2.5,
+      "high": 3.5
+    }
+  },
+  "absoluteContraindications": [
+    {
+      "id": "active_breast_cancer",
+      "condition": "personalHistoryBreastCancer",
+      "value": true,
+      "rule": "RULE_001",
+      "severity": "absolute",
+      "recommendation": "Do not start systemic HRT",
+      "alternatives": ["vaginal_estrogen", "ssri_snri", "cbt", "lifestyle"],
+      "rationale": "Active or recent breast cancer is an absolute contraindication to systemic HRT",
+      "guidelines": ["NICE", "ACOG", "EndocrineSociety"],
+      "references": ["NICE NG23 1.4.1", "ACOG Committee Opinion 565"]
+    },
+    {
+      "id": "active_vte",
+      "condition": "personalHistoryDVT",
+      "value": true,
+      "rule": "RULE_002",
+      "severity": "absolute",
+      "recommendation": "Do not start systemic HRT - consider alternatives",
+      "alternatives": ["vaginal_estrogen", "ssri_snri", "clonidine", "lifestyle"],
+      "rationale": "Active or recent VTE is an absolute contraindication to systemic HRT",
+      "guidelines": ["NICE", "ACOG"],
+      "references": ["NICE NG23 1.4.2", "ACOG Practice Bulletin 141"]
+    },
+    {
+      "id": "unexplained_bleeding",
+      "condition": "unexplainedVaginalBleeding",
+      "value": true,
+      "rule": "RULE_003",
+      "severity": "absolute",
+      "recommendation": "Investigate unexplained bleeding before considering HRT",
+      "alternatives": ["bleeding_investigation"],
+      "rationale": "Unexplained vaginal bleeding requires investigation before HRT initiation",
+      "guidelines": ["NICE", "ACOG"],
+      "references": ["NICE NG23 1.4.3"]
+    },
+    {
+      "id": "active_liver_disease",
+      "condition": "liverDisease",
+      "value": true,
+      "rule": "RULE_004",
+      "severity": "absolute",
+      "recommendation": "Do not start HRT with active liver disease",
+      "alternatives": ["liver_assessment", "non_hormonal"],
+      "rationale": "Active liver disease is a contraindication to HRT",
+      "guidelines": ["NICE"],
+      "references": ["NICE NG23 1.4.4"]
+    }
+  ],
+  "relativeContraindications": [
+    {
+      "id": "high_ascvd_risk",
+      "conditions": [
+        {"field": "ascvdResult.tenYearRisk", "operator": ">", "value": 20}
+      ],
+      "rule": "RULE_101",
+      "severity": "high",
+      "recommendation": "Consider alternatives to systemic HRT due to high cardiovascular risk",
+      "alternatives": ["transdermal_hrt", "ssri_snri", "lifestyle", "cardiology_consult"],
+      "rationale": "ASCVD risk >20% suggests increased cardiovascular risk with systemic HRT",
+      "guidelines": ["ACOG", "EndocrineSociety"],
+      "references": ["ACOG Committee Opinion 565"],
+      "monitoring": "Cardiology evaluation recommended"
+    },
+    {
+      "id": "high_wells_score",
+      "conditions": [
+        {"field": "wellsScore", "operator": ">=", "value": 6}
+      ],
+      "rule": "RULE_102",
+      "severity": "high",
+      "recommendation": "High VTE risk - avoid oral HRT, consider transdermal if appropriate",
+      "alternatives": ["transdermal_hrt", "vaginal_estrogen", "ssri_snri"],
+      "rationale": "High Wells score indicates elevated VTE risk with oral HRT",
+      "guidelines": ["NICE"],
+      "references": ["NICE NG23 1.5.2"],
+      "monitoring": "Consider thrombophilia screening"
+    },
+    {
+      "id": "smoking_over_35",
+      "conditions": [
+        {"field": "smoking", "operator": "==", "value": true},
+        {"field": "age", "operator": ">", "value": 35}
+      ],
+      "rule": "RULE_103",
+      "severity": "moderate",
+      "recommendation": "Smoking increases HRT risks - prioritize smoking cessation",
+      "alternatives": ["smoking_cessation", "transdermal_hrt", "non_hormonal"],
+      "rationale": "Smoking combined with HRT increases cardiovascular and VTE risks",
+      "guidelines": ["NICE", "ACOG"],
+      "references": ["NICE NG23 1.5.3"],
+      "monitoring": "Smoking cessation support essential"
+    },
+    {
+      "id": "high_frax_score",
+      "conditions": [
+        {"field": "fraxResult.majorFractureRisk", "operator": ">", "value": 20}
+      ],
+      "rule": "RULE_104",
+      "severity": "low",
+      "recommendation": "Consider HRT benefits for bone protection in high fracture risk",
+      "alternatives": ["hrt_for_bones", "bisphosphonates", "denosumab"],
+      "rationale": "High FRAX score may justify HRT for bone protection benefits",
+      "guidelines": ["EndocrineSociety", "IMS"],
+      "references": ["Endocrine Society Clinical Practice Guideline"],
+      "monitoring": "Bone density monitoring recommended"
+    }
+  ],
+  "primaryRecommendations": [
+    {
+      "id": "low_risk_severe_symptoms",
+      "conditions": [
+        {"field": "ascvdResult.tenYearRisk", "operator": "<=", "value": 10},
+        {"field": "wellsScore", "operator": "<=", "value": 2},
+        {"field": "personalHistoryBreastCancer", "operator": "==", "value": false},
+        {"field": "personalHistoryDVT", "operator": "==", "value": false},
+        {"field": "vasomotorSymptoms", "operator": "in", "value": ["moderate", "severe"]}
+      ],
+      "rule": "RULE_201",
+      "severity": "preferred",
+      "recommendation": "Consider systemic HRT - lowest effective dose, shortest duration",
+      "details": {
+        "firstLine": "Oral estradiol with progestogen (if uterus present) OR transdermal estradiol",
+        "dosing": "Start with lowest effective dose - estradiol 1mg daily or 25-50mcg patch",
+        "duration": "Review annually, consider duration vs benefits",
+        "route": "Oral or transdermal - patient preference and risk factors"
+      },
+      "alternatives": ["transdermal_hrt", "vaginal_estrogen", "ssri_snri"],
+      "rationale": "Low risk profile with significant symptoms supports HRT as first-line therapy",
+      "guidelines": ["NICE", "ACOG", "IMS"],
+      "references": ["NICE NG23 1.2.1", "IMS Global Consensus Statement"],
+      "monitoring": "Baseline: BP, BMI, breast exam. Follow-up: 3 months, then annually"
+    },
+    {
+      "id": "moderate_risk_moderate_symptoms",
+      "conditions": [
+        {"field": "ascvdResult.tenYearRisk", "operator": "<=", "value": 15},
+        {"field": "wellsScore", "operator": "<=", "value": 3},
+        {"field": "age", "operator": "<=", "value": 60},
+        {"field": "vasomotorSymptoms", "operator": "in", "value": ["moderate"]}
+      ],
+      "rule": "RULE_202",
+      "severity": "consider",
+      "recommendation": "HRT may be considered with enhanced monitoring",
+      "details": {
+        "firstLine": "Transdermal estradiol preferred to minimize VTE risk",
+        "dosing": "Conservative dosing - estradiol 25mcg patch twice weekly",
+        "duration": "Limit duration, review every 6 months",
+        "route": "Transdermal preferred over oral"
+      },
+      "alternatives": ["ssri_snri", "vaginal_estrogen", "lifestyle"],
+      "rationale": "Moderate risk requires careful risk-benefit assessment",
+      "guidelines": ["NICE", "ACOG"],
+      "references": ["NICE NG23 1.2.2"],
+      "monitoring": "Enhanced monitoring: 3 months, 6 months, then 6-monthly"
+    },
+    {
+      "id": "low_risk_mild_symptoms",
+      "conditions": [
+        {"field": "ascvdResult.tenYearRisk", "operator": "<=", "value": 10},
+        {"field": "vasomotorSymptoms", "operator": "==", "value": "mild"}
+      ],
+      "rule": "RULE_203",
+      "severity": "alternative",
+      "recommendation": "Consider non-hormonal options first for mild symptoms",
+      "details": {
+        "firstLine": "Lifestyle modifications, SSRIs/SNRIs, or CBT",
+        "secondLine": "HRT if non-hormonal options ineffective",
+        "approach": "Step-wise approach starting with lowest-risk options"
+      },
+      "alternatives": ["lifestyle", "ssri_snri", "cbt", "systemic_hrt"],
+      "rationale": "Mild symptoms may respond to lower-risk interventions",
+      "guidelines": ["NICE"],
+      "references": ["NICE NG23 1.1.1"],
+      "monitoring": "Symptom assessment at 6-8 weeks, consider HRT if inadequate response"
+    }
+  ],
+  "alternativeTreatments": {
+    "vaginal_estrogen": {
+      "name": "Vaginal Estrogen",
+      "indication": "Genitourinary symptoms, safe with contraindications",
+      "dosing": "Estradiol vaginal tablets 10mcg daily for 2 weeks, then twice weekly",
+      "benefits": "Minimal systemic absorption, effective for urogenital symptoms",
+      "risks": "Minimal systemic effects, local irritation possible",
+      "monitoring": "Annual review, no routine endometrial monitoring needed"
+    },
+    "ssri_snri": {
+      "name": "SSRIs/SNRIs",
+      "indication": "Vasomotor symptoms when HRT contraindicated",
+      "options": "Paroxetine 7.5mg, Venlafaxine XR 37.5-75mg, Citalopram 10-20mg",
+      "benefits": "No cancer or VTE risk, may help mood symptoms",
+      "risks": "Sexual dysfunction, GI effects, drug interactions",
+      "monitoring": "2-4 week review, then 3-monthly"
+    },
+    "clonidine": {
+      "name": "Clonidine",
+      "indication": "Vasomotor symptoms, particularly when HRT contraindicated",
+      "dosing": "50-75mcg twice daily, maximum 150mcg twice daily",
+      "benefits": "No hormonal effects, may help sleep",
+      "risks": "Hypotension, dry mouth, sedation, rebound hypertension",
+      "monitoring": "BP monitoring essential, gradual withdrawal required"
+    },
+    "lifestyle": {
+      "name": "Lifestyle Modifications",
+      "indication": "All patients, particularly mild symptoms",
+      "interventions": "Weight management, regular exercise, smoking cessation, stress reduction",
+      "benefits": "Overall health benefits, no medication risks",
+      "evidence": "Moderate evidence for symptom improvement",
+      "monitoring": "Ongoing support and review"
+    },
+    "cbt": {
+      "name": "Cognitive Behavioral Therapy",
+      "indication": "Psychological symptoms, hot flashes",
+      "approach": "Structured CBT program for menopause symptoms",
+      "benefits": "Addresses psychological aspects, no medication risks",
+      "evidence": "Good evidence for hot flash reduction and mood improvement",
+      "monitoring": "Regular sessions with trained therapist"
+    },
+    "bisphosphonates": {
+      "name": "Bisphosphonates",
+      "indication": "Osteoporosis prevention/treatment",
+      "options": "Alendronate 70mg weekly, Risedronate 35mg weekly",
+      "benefits": "Proven fracture reduction, no cancer risk",
+      "risks": "GI intolerance, osteonecrosis of jaw (rare), atypical fractures",
+      "monitoring": "Annual bone density, dental assessment"
+    }
+  },
+  "monitoringProtocols": {
+    "baseline_hrt": {
+      "name": "Baseline Assessment for HRT",
+      "timepoint": "Before HRT initiation",
+      "assessments": [
+        "Blood pressure measurement",
+        "BMI calculation",
+        "Breast examination",
+        "Cervical screening if due",
+        "Family history review",
+        "Baseline symptom assessment"
+      ],
+      "optional": [
+        "Mammography if overdue",
+        "Bone density if indicated",
+        "Lipid profile if cardiovascular risk factors",
+        "LFTs if liver concerns"
+      ]
+    },
+    "early_followup": {
+      "name": "Early Follow-up",
+      "timepoint": "3 months after HRT initiation",
+      "assessments": [
+        "Symptom response assessment",
+        "Side effect evaluation",
+        "Blood pressure check",
+        "Adherence review",
+        "Dose adjustment if needed"
+      ]
+    },
+    "annual_review": {
+      "name": "Annual Review",
+      "timepoint": "Annually while on HRT",
+      "assessments": [
+        "Comprehensive symptom assessment",
+        "Risk-benefit reassessment",
+        "Blood pressure and BMI",
+        "Breast examination",
+        "Mammography as per guidelines",
+        "Duration of therapy review"
+      ]
+    }
+  },
+  "patientCounseling": {
+    "hrt_benefits": [
+      "Effective relief of vasomotor symptoms (hot flashes, night sweats)",
+      "Improvement in sleep quality and mood",
+      "Prevention of bone loss and fracture risk reduction",
+      "Improvement in genitourinary symptoms",
+      "Potential cardiovascular benefits if started early"
+    ],
+    "hrt_risks": [
+      "Small increased risk of breast cancer with long-term use",
+      "Increased risk of VTE, particularly with oral preparations",
+      "Possible increased stroke risk in older women",
+      "Return of menstrual bleeding with some regimens",
+      "Breast tenderness and mood changes possible"
+    ],
+    "shared_decision_points": [
+      "Individual risk-benefit profile varies significantly",
+      "Lowest effective dose for shortest duration principle",
+      "Regular review and reassessment essential",
+      "Alternative treatments available if HRT unsuitable",
+      "Patient preferences and values crucial in decision-making"
+    ]
+  }
+}

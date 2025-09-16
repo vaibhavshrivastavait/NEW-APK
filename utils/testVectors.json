@@ -1,0 +1,235 @@
+{
+  "description": "QA Test Vectors for Validated Risk Calculators",
+  "version": "1.0",
+  "lastUpdated": "2025-09-08",
+  "testCases": {
+    "ascvd": [
+      {
+        "name": "Low Risk - Young Female",
+        "description": "45yo white female, no risk factors",
+        "input": {
+          "age": 45,
+          "gender": "female",
+          "race": "white",
+          "totalCholesterol": 180,
+          "hdlCholesterol": 55,
+          "systolicBP": 120,
+          "hypertensionTreated": false,
+          "diabetes": false,
+          "smoking": false
+        },
+        "expectedRisk": 2.8,
+        "expectedCategory": "Low",
+        "tolerance": 1.0,
+        "notes": "Should be <5% risk for low category"
+      },
+      {
+        "name": "Intermediate Risk - Multiple Factors",
+        "description": "60yo white female, hypertension, diabetes",
+        "input": {
+          "age": 60,
+          "gender": "female", 
+          "race": "white",
+          "totalCholesterol": 220,
+          "hdlCholesterol": 40,
+          "systolicBP": 140,
+          "hypertensionTreated": true,
+          "diabetes": true,
+          "smoking": false
+        },
+        "expectedRisk": 15.2,
+        "expectedCategory": "Intermediate",
+        "tolerance": 2.0,
+        "notes": "Should be 7.5-19.9% for intermediate"
+      },
+      {
+        "name": "High Risk - Multiple High Risk Factors", 
+        "description": "70yo black male, smoker, diabetes, high BP",
+        "input": {
+          "age": 70,
+          "gender": "male",
+          "race": "black", 
+          "totalCholesterol": 240,
+          "hdlCholesterol": 35,
+          "systolicBP": 160,
+          "hypertensionTreated": true,
+          "diabetes": true,
+          "smoking": true
+        },
+        "expectedRisk": 25.8,
+        "expectedCategory": "High",
+        "tolerance": 3.0,
+        "notes": "Should be ≥20% for high risk"
+      }
+    ],
+    "frax": [
+      {
+        "name": "Low Risk - Young Healthy Female", 
+        "description": "55yo female, BMI 24, no risk factors",
+        "input": {
+          "age": 55,
+          "gender": "female",
+          "weight": 65,
+          "height": 165,
+          "priorFracture": false,
+          "parentalHipFracture": false,
+          "smoking": false,
+          "glucocorticoids": false,
+          "rheumatoidArthritis": false,
+          "secondaryOsteoporosis": false,
+          "alcoholUnits": 1
+        },
+        "expectedMajorFracture": 5.1,
+        "expectedHipFracture": 0.7,
+        "expectedCategory": "Low",
+        "tolerance": 1.5,
+        "notes": "Should be <10% major fracture risk"
+      },
+      {
+        "name": "Moderate Risk - Some Risk Factors",
+        "description": "70yo female, prior fracture, smoking",
+        "input": {
+          "age": 70,
+          "gender": "female",
+          "weight": 55,
+          "height": 160,
+          "priorFracture": true,
+          "parentalHipFracture": false,
+          "smoking": true,
+          "glucocorticoids": false,
+          "rheumatoidArthritis": false,
+          "secondaryOsteoporosis": false,
+          "alcoholUnits": 0
+        },
+        "expectedMajorFracture": 18.5,
+        "expectedHipFracture": 2.8,
+        "expectedCategory": "Moderate",
+        "tolerance": 3.0,
+        "notes": "Should be 10-20% major fracture risk"
+      },
+      {
+        "name": "High Risk - Multiple Risk Factors",
+        "description": "75yo female, prior fracture, parental hip fracture, low BMI, steroids",
+        "input": {
+          "age": 75,
+          "gender": "female",
+          "weight": 45,  
+          "height": 155,
+          "priorFracture": true,
+          "parentalHipFracture": true,
+          "smoking": false,
+          "glucocorticoids": true,
+          "rheumatoidArthritis": false,
+          "secondaryOsteoporosis": true,
+          "alcoholUnits": 0,
+          "femmoralNeckBMD": -2.5
+        },
+        "expectedMajorFracture": 35.2,
+        "expectedHipFracture": 8.1,
+        "expectedCategory": "High",
+        "tolerance": 5.0,
+        "notes": "Should be >20% major fracture risk"
+      }
+    ],
+    "gail": [
+      {
+        "name": "Average Risk - Typical Profile",
+        "description": "50yo white female, menarche 13, first birth 25, no family history",
+        "input": {
+          "age": 50,
+          "gender": "female",
+          "ethnicity": "white",
+          "ageAtMenarche": 13,
+          "ageAtFirstBirth": 25,
+          "firstDegreeRelativesBC": 0,
+          "breastBiopsies": 0,
+          "atypicalHyperplasia": false
+        },
+        "expectedFiveYear": 1.4,
+        "expectedLifetime": 12.4,
+        "expectedCategory": "Low",
+        "tolerance": 0.3,
+        "notes": "Should match population average"
+      },
+      {
+        "name": "Moderate Risk - Family History",
+        "description": "55yo white female, early menarche, 1 relative with BC",
+        "input": {
+          "age": 55,
+          "gender": "female",
+          "ethnicity": "white",
+          "ageAtMenarche": 11,
+          "ageAtFirstBirth": 30,
+          "firstDegreeRelativesBC": 1,
+          "breastBiopsies": 1,
+          "atypicalHyperplasia": false
+        },
+        "expectedFiveYear": 2.2,
+        "expectedLifetime": 18.5,
+        "expectedCategory": "Moderate",
+        "tolerance": 0.4,
+        "notes": "Should be moderately elevated due to family history"
+      },
+      {
+        "name": "High Risk - Multiple Risk Factors",
+        "description": "60yo white female, nulliparous, 2 relatives with BC, atypical hyperplasia",
+        "input": {
+          "age": 60,
+          "gender": "female", 
+          "ethnicity": "white",
+          "ageAtMenarche": 11,
+          "ageAtFirstBirth": null,
+          "firstDegreeRelativesBC": 2,
+          "breastBiopsies": 2,
+          "atypicalHyperplasia": true
+        },
+        "expectedFiveYear": 4.8,
+        "expectedLifetime": 28.1,
+        "expectedCategory": "High",
+        "tolerance": 0.8,
+        "notes": "Should be high risk due to multiple factors"
+      }
+    ]
+  },
+  "populationBaselines": {
+    "description": "Expected population baseline values for comparison testing",
+    "ascvd": {
+      "50yo_female": 4.1,
+      "60yo_female": 7.9,
+      "70yo_male": 25.0
+    },
+    "frax": {
+      "60yo_female_major": 7.8,
+      "70yo_female_major": 15.8,
+      "75yo_female_hip": 6.9
+    },
+    "gail": {
+      "50yo_white_female": 1.4,
+      "60yo_white_female": 2.0,
+      "55yo_asian_female": 0.9
+    }
+  },
+  "validationCriteria": {
+    "ascvd": {
+      "ageRange": [40, 79],
+      "riskRange": [0, 60],
+      "categories": ["Low", "Borderline", "Intermediate", "High"],
+      "categoryThresholds": [5, 7.5, 20]
+    },
+    "frax": {
+      "ageRange": [40, 90],
+      "majorFractureRange": [0, 60],
+      "hipFractureRange": [0, 40], 
+      "categories": ["Low", "Moderate", "High"],
+      "majorFractureThresholds": [10, 20],
+      "hipFractureThresholds": [1.5, 3]
+    },
+    "gail": {
+      "ageRange": [35, 85],
+      "fiveYearRange": [0, 10],
+      "lifetimeRange": [0, 85],
+      "categories": ["Low", "Moderate", "High"],
+      "fiveYearThresholds": [1.7, 3.0]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "primary": "Hormone Replacement Therapy (HRT)",
+    "interaction_with": "Anticoagulants",
+    "severity": "HIGH",
+    "rationale": "Increased risk of clotting and altered INR stability.",
+    "recommended_action": "Avoid or monitor INR closely."
+  },
+  {
+    "primary": "Hormone Replacement Therapy (HRT)",
+    "interaction_with": "NSAIDs",
+    "severity": "LOW",
+    "rationale": "Minor bleeding risk when used alone.",
+    "recommended_action": "Caution if combined with anticoagulants."
+  }
+]

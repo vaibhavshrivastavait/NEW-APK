@@ -1,0 +1,318 @@
+#!/bin/bash
+
+# MHT Assessment - GitHub Repository Sync Script
+# This script prepares and pushes the complete project to GitHub
+# Version: 1.0
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Functions
+print_header() {
+    echo -e "${CYAN}=================================${NC}"
+    echo -e "${CYAN}$1${NC}"
+    echo -e "${CYAN}=================================${NC}"
+}
+
+print_success() {
+    echo -e "${GREEN}✅ $1${NC}"
+}
+
+print_error() {
+    echo -e "${RED}❌ $1${NC}"
+}
+
+print_warning() {
+    echo -e "${YELLOW}⚠️  $1${NC}"
+}
+
+print_info() {
+    echo -e "${BLUE}ℹ️  $1${NC}"
+}
+
+# Parse command line arguments
+REPO_URL=""
+BRANCH="main"
+COMMIT_MESSAGE="Complete MHT Assessment app with APK build environment"
+FORCE_PUSH=false
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -r|--repo)
+            REPO_URL="$2"
+            shift 2
+            ;;
+        -b|--branch)
+            BRANCH="$2"
+            shift 2
+            ;;
+        -m|--message)
+            COMMIT_MESSAGE="$2"
+            shift 2
+            ;;
+        -f|--force)
+            FORCE_PUSH=true
+            shift
+            ;;
+        -h|--help)
+            echo "Usage: $0 [OPTIONS]"
+            echo ""
+            echo "Options:"
+            echo "  -r, --repo URL      GitHub repository URL (required)"
+            echo "  -b, --branch NAME   Branch name (default: main)"
+            echo "  -m, --message MSG   Commit message"
+            echo "  -f, --force         Force push (use with caution)"
+            echo "  -h, --help          Show this help message"
+            echo ""
+            echo "Examples:"
+            echo "  $0 -r https://github.com/username/mht-assessment.git"
+            echo "  $0 -r git@github.com:username/mht-assessment.git -b develop"
+            exit 0
+            ;;
+        *)
+            print_error "Unknown option: $1"
+            echo "Use -h or --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Validate repository URL
+if [[ -z "$REPO_URL" ]]; then
+    print_error "Repository URL is required!"
+    echo "Use -r or --repo to specify the GitHub repository URL"
+    echo "Example: $0 -r https://github.com/username/mht-assessment.git"
+    exit 1
+fi
+
+print_header "MHT ASSESSMENT - GITHUB SYNC"
+echo "Repository: $REPO_URL"
+echo "Branch: $BRANCH"
+echo "Commit Message: $COMMIT_MESSAGE"
+echo ""
+
+# Change to project directory
+cd /app
+
+print_info "Checking project structure..."
+
+# Verify we're in the right directory
+if [[ ! -f "package.json" ]] || [[ ! -f "app.json" ]]; then
+    print_error "Not in a valid Expo project directory!"
+    print_error "Make sure you're running this from the MHT Assessment project root"
+    exit 1
+fi
+
+print_success "Project structure verified"
+
+# Initialize git if not already initialized
+if [[ ! -d ".git" ]]; then
+    print_info "Initializing Git repository..."
+    git init
+    print_success "Git repository initialized"
+else
+    print_success "Git repository already initialized"
+fi
+
+# Create or update .gitignore
+print_info "Setting up .gitignore..."
+
+cat > .gitignore << 'EOL'
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Expo
+.expo/
+dist/
+web-build/
+.expo-shared/
+
+# Build outputs
+android/app/build/
+android/build/
+ios/build/
+*.apk
+*.aab
+*.ipa
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# nyc test coverage
+.nyc_output/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Bundle artifacts
+*.jsbundle
+
+# Metro bundler cache
+.metro-health-check*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Python cache (for any Python scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development
+*.local
+
+# Test results
+test_result.md.backup
+
+# Build scripts output
+*.err
+*.out
+
+# APK build temporary files
+android/app/src/main/assets/index.android.bundle*
+android/app/src/main/res/drawable-*
+android/app/src/main/res/raw/
+EOL
+
+print_success ".gitignore configured"
+
+# Add files to git
+print_info "Adding files to Git..."
+git add .
+print_success "Files added to Git staging"
+
+# Check for changes
+if git diff --cached --quiet; then
+    print_warning "No changes to commit"
+else
+    print_info "Committing changes..."
+    git commit -m "$COMMIT_MESSAGE"
+    print_success "Changes committed"
+fi
+
+# Configure remote
+print_info "Configuring remote repository..."
+if git remote get-url origin >/dev/null 2>&1; then
+    print_info "Updating existing remote origin..."
+    git remote set-url origin "$REPO_URL"
+else
+    print_info "Adding remote origin..."
+    git remote add origin "$REPO_URL"
+fi
+print_success "Remote repository configured"
+
+# Push to GitHub
+print_info "Pushing to GitHub..."
+
+if [[ "$FORCE_PUSH" == "true" ]]; then
+    print_warning "Force pushing to $BRANCH..."
+    git push origin "$BRANCH" --force
+else
+    # Try normal push first
+    if git push origin "$BRANCH" 2>/dev/null; then
+        print_success "Successfully pushed to $BRANCH"
+    else
+        print_warning "Normal push failed, trying to set upstream..."
+        if git push --set-upstream origin "$BRANCH" 2>/dev/null; then
+            print_success "Successfully pushed with upstream set"
+        else
+            print_error "Push failed!"
+            print_info "This might be because:"
+            print_info "1. The repository doesn't exist on GitHub"
+            print_info "2. You don't have push permissions"
+            print_info "3. There are conflicts with existing commits"
+            print_info ""
+            print_info "Solutions:"
+            print_info "1. Create the repository on GitHub first"
+            print_info "2. Use --force flag if you want to overwrite remote history"
+            print_info "3. Check your GitHub credentials and permissions"
+            exit 1
+        fi
+    fi
+fi
+
+print_success "Repository successfully synced to GitHub!"
+print_info "Repository URL: $REPO_URL"
+print_info "Branch: $BRANCH"
+
+print_header "NEXT STEPS FOR LOCAL DEVELOPMENT"
+echo ""
+print_info "To clone and build APK on your local Windows machine:"
+echo ""
+echo "1. Run the environment setup script:"
+echo "   PowerShell -ExecutionPolicy Bypass -File scripts/windows-complete-environment-setup.ps1 -AutoInstall"
+echo ""
+echo "2. Clone the repository:"
+echo "   git clone $REPO_URL"
+echo "   cd $(basename $REPO_URL .git)"
+echo ""
+echo "3. Install dependencies:"
+echo "   npm install"
+echo ""
+echo "4. Build the Android bundle:"
+echo "   npm run bundle:android"
+echo ""
+echo "5. Build the APK:"
+echo "   cd android"
+echo "   ./gradlew assembleDebug"
+echo ""
+echo "6. Find your APK at:"
+echo "   android/app/build/outputs/apk/debug/app-debug.apk"
+echo ""
+
+print_success "GitHub sync completed successfully!"

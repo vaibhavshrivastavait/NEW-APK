@@ -1,0 +1,726 @@
+{
+  "version": "2025.01.16",
+  "popularlized": "2025-01-16T00:00:00Z",
+  "checksum": "popular_cme_v2025_01_16_sha256",
+  "metadata": {
+    "category": "Popular CME",
+    "totalQuizzes": 9,
+    "totalQuestions": 90,
+    "estimatedHours": 3.0,
+    "difficulty": "Intermediate",
+    "updatedApp": "MHT Assessment v2.0"
+  },
+  "popularQuizzes": [
+    {
+      "id": "menopause-basics-quiz",
+      "version": "1.0.0",
+      "title": "Menopause Basics",
+      "description": "Definition, staging, laboratory tests, and fundamental concepts",
+      "category": "Popular CME",
+      "tags": ["menopause", "basics", "staging", "labs"],
+      "estimatedMinutes": 15,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Beginner",
+      "questions": [
+        {
+          "id": "mb-q1",
+          "question": "What is the clinical definition of menopause?",
+          "options": [
+            "6 months of amenorrhea with vasomotor symptoms",
+            "12 consecutive months of amenorrhea",
+            "FSH levels >40 mIU/mL with irregular cycles",
+            "Estradiol <30 pg/mL with hot flashes",
+            "Age >50 with vasomotor symptoms"
+          ],
+          "correctIndex": 1,
+          "explanation": "Menopause is clinically defined as 12 consecutive months of amenorrhea resulting from loss of ovarian follicular activity, confirmed retrospectively."
+        },
+        {
+          "id": "mb-q2",
+          "question": "Which hormone change is the earliest marker of perimenopause?",
+          "options": [
+            "Declining estradiol",
+            "Rising FSH",
+            "Declining inhibin B",
+            "Rising LH",
+            "Declining AMH"
+          ],
+          "correctIndex": 2,
+          "explanation": "Declining inhibin B is the earliest biochemical marker of ovarian aging, occurring before significant changes in FSH or estradiol."
+        },
+        {
+          "id": "mb-q3",
+          "question": "What is the average duration of perimenopause?",
+          "options": [
+            "6 months to 1 year",
+            "1-2 years",
+            "2-4 years",
+            "4-8 years",
+            "8-12 years"
+          ],
+          "correctIndex": 3,
+          "explanation": "Perimenopause typically lasts 4-8 years, with variable cycle patterns and declining fertility during this transition period."
+        },
+        {
+          "id": "mb-q4",
+          "question": "Which laboratory test is most reliable for confirming menopause?",
+          "options": [
+            "Single elevated FSH level",
+            "Low estradiol level",
+            "Elevated LH level",
+            "Clinical assessment - no single test is definitive",
+            "AMH level <0.1 ng/mL"
+          ],
+          "correctIndex": 3,
+          "explanation": "No single laboratory test is definitive for menopause diagnosis. Clinical assessment based on age, amenorrhea duration, and symptoms is most reliable."
+        },
+        {
+          "id": "mb-q5",
+          "question": "What factor most significantly affects the timing of natural menopause?",
+          "options": [
+            "Body weight",
+            "Physical activity level",
+            "Genetic factors",
+            "Dietary habits",
+            "Stress levels"
+          ],
+          "correctIndex": 2,
+          "explanation": "Genetic factors account for approximately 50% of the variation in timing of natural menopause, making it the most significant factor."
+        }
+      ]
+    },
+    {
+      "id": "hrt-indications-contraindications-quiz",
+      "version": "1.0.0",
+      "title": "HRT Indications & Contraindications",
+      "description": "Evidence-based indications and absolute/relative contraindications for hormone replacement therapy",
+      "category": "Popular CME",
+      "tags": ["HRT", "indications", "contraindications", "safety"],
+      "estimatedMinutes": 20,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Intermediate",
+      "questions": [
+        {
+          "id": "hic-q1",
+          "question": "What is the primary indication for systemic HRT?",
+          "options": [
+            "Prevention of cardiovascular disease",
+            "Prevention of osteoporosis in all postmenopausal women",
+            "Treatment of moderate to severe vasomotor symptoms",
+            "Prevention of cognitive decline",
+            "Weight management in menopause"
+          ],
+          "correctIndex": 2,
+          "explanation": "The primary indication for systemic HRT is treatment of moderate to severe vasomotor symptoms that impact quality of life."
+        },
+        {
+          "id": "hic-q2",
+          "question": "Which is an absolute contraindication to estrogen therapy?",
+          "options": [
+            "Family history of breast cancer",
+            "Controlled hypertension",
+            "Active or recent venous thromboembolism",
+            "Migraine without aura",
+            "Diabetes mellitus"
+          ],
+          "correctIndex": 2,
+          "explanation": "Active or recent venous thromboembolism (within 6 months) is an absolute contraindication to estrogen therapy due to increased VTE risk."
+        },
+        {
+          "id": "hic-q3",
+          "question": "For a woman with intact uterus, what is required with estrogen therapy?",
+          "options": [
+            "Annual endometrial biopsy",
+            "Concurrent progestogen therapy",
+            "Low-dose aspirin",
+            "Annual pelvic ultrasound",
+            "Calcium supplementation"
+          ],
+          "correctIndex": 1,
+          "explanation": "Women with intact uterus require concurrent progestogen therapy with estrogen to prevent endometrial hyperplasia and cancer."
+        },
+        {
+          "id": "hic-q4",
+          "question": "What is the 'window of opportunity' concept for HRT initiation?",
+          "options": [
+            "Starting HRT within 1 year of menopause",
+            "Starting HRT before age 60 or within 10 years of menopause",
+            "Starting HRT only during perimenopause",
+            "Starting HRT within 5 years of menopause regardless of age",
+            "Starting HRT at any age if symptomatic"
+          ],
+          "correctIndex": 1,
+          "explanation": "The 'window of opportunity' refers to starting HRT before age 60 or within 10 years of menopause when the benefit-risk ratio is most favorable."
+        },
+        {
+          "id": "hic-q5",
+          "question": "Which condition is a relative contraindication requiring careful risk-benefit assessment?",
+          "options": [
+            "Well-controlled hypertension",
+            "Osteoporosis",
+            "Strong family history of breast cancer",
+            "Previous hysterectomy",
+            "Vasomotor symptoms"
+          ],
+          "correctIndex": 2,
+          "explanation": "Strong family history of breast cancer is a relative contraindication requiring careful individualized risk-benefit assessment and possibly genetic counseling."
+        }
+      ]
+    },
+    {
+      "id": "cardiovascular-risk-hrt-quiz",
+      "version": "1.0.0",
+      "title": "Cardiovascular Risk & HRT",
+      "description": "ASCVD basics, cardiovascular effects of HRT, and risk stratification",
+      "category": "Popular CME",
+      "tags": ["cardiovascular", "ASCVD", "HRT", "risk"],
+      "estimatedMinutes": 20,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Intermediate",
+      "questions": [
+        {
+          "id": "cvr-q1",
+          "question": "What is the primary cardiovascular benefit of early HRT initiation?",
+          "options": [
+            "Reduction in acute myocardial infarction",
+            "Prevention of stroke in all women",
+            "Potential cardioprotective effect when started early",
+            "Reversal of existing coronary artery disease",
+            "Prevention of heart failure"
+          ],
+          "correctIndex": 2,
+          "explanation": "Early HRT initiation (within 10 years of menopause or before age 60) may have cardioprotective effects, but is not recommended for primary CVD prevention."
+        },
+        {
+          "id": "cvr-q2",
+          "question": "What ASCVD risk threshold requires caution with oral estrogen?",
+          "options": [
+            ">5% 10-year risk",
+            ">7.5% 10-year risk",
+            ">10% 10-year risk",
+            ">15% 10-year risk",
+            ">20% 10-year risk"
+          ],
+          "correctIndex": 2,
+          "explanation": "Women with >10% 10-year ASCVD risk require careful consideration, and transdermal estrogen may be preferred over oral due to lower VTE risk."
+        },
+        {
+          "id": "cvr-q3",
+          "question": "Why might transdermal estrogen be preferred in women with cardiovascular risk factors?",
+          "options": [
+            "Better symptom relief",
+            "Lower cost",
+            "Easier administration",
+            "Avoids hepatic first-pass metabolism",
+            "Higher bioavailability"
+          ],
+          "correctIndex": 3,
+          "explanation": "Transdermal estrogen avoids hepatic first-pass metabolism, resulting in less impact on clotting factors, triglycerides, and inflammatory markers."
+        },
+        {
+          "id": "cvr-q4",
+          "question": "According to WHI findings, what was the cardiovascular outcome with oral CEE/MPA in older women?",
+          "options": [
+            "Significant cardiovascular benefit",
+            "No effect on cardiovascular outcomes",
+            "Increased risk of coronary events, especially in early years",
+            "Reduced stroke risk",
+            "Improved overall cardiovascular mortality"
+          ],
+          "correctIndex": 2,
+          "explanation": "WHI showed increased risk of coronary events with oral CEE/MPA, particularly in the early years of treatment in older postmenopausal women."
+        },
+        {
+          "id": "cvr-q5",
+          "question": "What is the recommended approach for HRT in women with established cardiovascular disease?",
+          "options": [
+            "Standard dose oral estrogen",
+            "High-dose transdermal estrogen",
+            "Generally not recommended for cardioprotection",
+            "Low-dose estrogen with aspirin",
+            "Estrogen-only therapy regardless of uterine status"
+          ],
+          "correctIndex": 2,
+          "explanation": "HRT is generally not recommended for cardioprotection in women with established cardiovascular disease, though may be considered for severe symptoms with careful monitoring."
+        }
+      ]
+    },
+    {
+      "id": "vte-risk-wells-score-quiz",
+      "version": "1.0.0",
+      "title": "VTE Risk & Wells Score",
+      "description": "Venous thromboembolism risk assessment, Wells Score application, and HRT considerations",
+      "category": "Popular CME",
+      "tags": ["VTE", "thrombosis", "Wells", "risk assessment"],
+      "estimatedMinutes": 15,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Intermediate",
+      "questions": [
+        {
+          "id": "vte-q1",
+          "question": "Which route of estrogen administration has the lowest VTE risk?",
+          "options": [
+            "Oral estradiol",
+            "Transdermal estradiol",
+            "Sublingual estradiol",
+            "Nasal estradiol",
+            "All routes have equal risk"
+          ],
+          "correctIndex": 1,
+          "explanation": "Transdermal estradiol has the lowest VTE risk as it bypasses hepatic first-pass metabolism and has less impact on clotting factors."
+        },
+        {
+          "id": "vte-q2",
+          "question": "What is a high Wells Score for PE (pulmonary embolism)?",
+          "options": [
+            ">2 points",
+            ">4 points",
+            ">6 points",
+            ">8 points",
+            ">10 points"
+          ],
+          "correctIndex": 2,
+          "explanation": "Wells Score >6 points indicates high probability of PE, warranting immediate anticoagulation and imaging studies."
+        },
+        {
+          "id": "vte-q3",
+          "question": "Which factor increases VTE risk most significantly with HRT?",
+          "options": [
+            "Age >50",
+            "BMI >25",
+            "Personal history of VTE",
+            "Family history of VTE",
+            "Smoking"
+          ],
+          "correctIndex": 2,
+          "explanation": "Personal history of VTE is the strongest risk factor and is generally an absolute contraindication to estrogen therapy."
+        },
+        {
+          "id": "vte-q4",
+          "question": "What is the relative risk increase of VTE with oral estrogen?",
+          "options": [
+            "1.5-2 fold",
+            "2-4 fold",
+            "4-6 fold",
+            "6-8 fold",
+            "8-10 fold"
+          ],
+          "correctIndex": 1,
+          "explanation": "Oral estrogen increases VTE risk approximately 2-4 fold, with highest risk in the first year of use."
+        },
+        {
+          "id": "vte-q5",
+          "question": "Which clinical scenario requires VTE risk assessment before HRT?",
+          "options": [
+            "All women considering HRT",
+            "Only women >60 years",
+            "Only women with BMI >30",
+            "Only women with family history",
+            "Only symptomatic women"
+          ],
+          "correctIndex": 0,
+          "explanation": "All women considering HRT should undergo VTE risk assessment including personal/family history, risk factors, and consideration of alternative routes."
+        }
+      ]
+    },
+    {
+      "id": "osteoporosis-frax-interpretation-quiz",
+      "version": "1.0.0",
+      "title": "Osteoporosis & FRAX Interpretation",
+      "description": "Bone health assessment, FRAX score interpretation, and HRT for osteoporosis prevention",
+      "category": "Popular CME",
+      "tags": ["osteoporosis", "FRAX", "bone health", "prevention"],
+      "estimatedMinutes": 18,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Intermediate",
+      "questions": [
+        {
+          "id": "frax-q1",
+          "question": "What does FRAX calculate?",
+          "options": [
+            "Current bone mineral density",
+            "Risk of falls in elderly",
+            "10-year probability of major osteoporotic fracture",
+            "Vitamin D deficiency risk",
+            "Calcium absorption rate"
+          ],
+          "correctIndex": 2,
+          "explanation": "FRAX calculates the 10-year probability of major osteoporotic fracture and hip fracture based on clinical risk factors with or without BMD."
+        },
+        {
+          "id": "frax-q2",
+          "question": "At what FRAX score is pharmacological intervention typically recommended?",
+          "options": [
+            ">5% 10-year risk",
+            ">10% 10-year risk",
+            ">15% 10-year risk",
+            ">20% 10-year risk",
+            ">25% 10-year risk"
+          ],
+          "correctIndex": 3,
+          "explanation": "Pharmacological intervention is typically recommended when FRAX shows >20% 10-year risk of major osteoporotic fracture or >3% risk of hip fracture."
+        },
+        {
+          "id": "frax-q3",
+          "question": "Which is NOT a FRAX input variable?",
+          "options": [
+            "Age",
+            "Previous fracture",
+            "Parental hip fracture",
+            "Vitamin D level",
+            "Glucocorticoid use"
+          ],
+          "correctIndex": 3,
+          "explanation": "Vitamin D level is not a direct input variable in FRAX calculation, though vitamin D deficiency can be a secondary cause of osteoporosis."
+        },
+        {
+          "id": "frax-q4",
+          "question": "What is the effect of HRT on fracture risk?",
+          "options": [
+            "No effect on fracture risk",
+            "Increases fracture risk",
+            "Reduces vertebral fractures only",
+            "Reduces both vertebral and non-vertebral fractures",
+            "Only prevents hip fractures"
+          ],
+          "correctIndex": 3,
+          "explanation": "HRT reduces both vertebral and non-vertebral fractures, including hip fractures, by maintaining bone mineral density."
+        },
+        {
+          "id": "frax-q5",
+          "question": "When should bone density screening begin in average-risk women?",
+          "options": [
+            "Age 50",
+            "Age 60",
+            "Age 65",
+            "At menopause",
+            "Age 70"
+          ],
+          "correctIndex": 2,
+          "explanation": "Bone density screening should begin at age 65 in average-risk women, or earlier (age 50-64) if risk factors are present."
+        }
+      ]
+    },
+    {
+      "id": "breast-cancer-risk-screening-quiz",
+      "version": "1.0.0",
+      "title": "Breast Cancer Risk Screening",
+      "description": "Gail and Tyrer-Cuzick model basics for breast cancer risk assessment",
+      "category": "Popular CME",
+      "tags": ["breast cancer", "Gail", "Tyrer-Cuzick", "screening"],
+      "estimatedMinutes": 15,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Intermediate",
+      "questions": [
+        {
+          "id": "bcr-q1",
+          "question": "What is the primary output of the Gail model?",
+          "options": [
+            "Lifetime breast cancer risk",
+            "5-year breast cancer risk",
+            "Risk relative to population average",
+            "Genetic mutation probability",
+            "Screening recommendation"
+          ],
+          "correctIndex": 1,
+          "explanation": "The Gail model primarily calculates 5-year breast cancer risk, though it can also estimate lifetime risk."
+        },
+        {
+          "id": "bcr-q2",
+          "question": "Which model is better for women with strong family history of breast/ovarian cancer?",
+          "options": [
+            "Gail model",
+            "Tyrer-Cuzick (IBIS) model",
+            "Framingham model",
+            "FRAX model",
+            "Both are equally good"
+          ],
+          "correctIndex": 1,
+          "explanation": "The Tyrer-Cuzick (IBIS) model is superior for women with strong family history as it includes more detailed family history information."
+        },
+        {
+          "id": "bcr-q3",
+          "question": "At what 5-year risk threshold is enhanced screening typically considered?",
+          "options": [
+            ">1.0%",
+            ">1.67%",
+            ">2.0%",
+            ">2.5%",
+            ">3.0%"
+          ],
+          "correctIndex": 1,
+          "explanation": "Enhanced screening (MRI) is typically considered when 5-year risk exceeds 1.67% (average population risk), or lifetime risk >20-25%."
+        },
+        {
+          "id": "bcr-q4",
+          "question": "Which factor is NOT included in the Gail model?",
+          "options": [
+            "Age at menarche",
+            "Age at first birth",
+            "Number of breast biopsies",
+            "BRCA mutation status",
+            "Family history of breast cancer"
+          ],
+          "correctIndex": 3,
+          "explanation": "BRCA mutation status is not included in the Gail model calculation, though it would significantly impact risk assessment."
+        },
+        {
+          "id": "bcr-q5",
+          "question": "How does HRT affect breast cancer risk assessment?",
+          "options": [
+            "No effect on breast cancer risk",
+            "Reduces breast cancer risk",
+            "Slightly increases risk, especially with combined HRT",
+            "Only increases risk with estrogen-only therapy",
+            "Effect depends on route of administration only"
+          ],
+          "correctIndex": 2,
+          "explanation": "HRT, particularly combined estrogen-progestogen therapy, slightly increases breast cancer risk. This should be factored into risk-benefit discussions."
+        }
+      ]
+    },
+    {
+      "id": "drug-interactions-hrt-quiz",
+      "version": "1.0.0",
+      "title": "Drug Interactions & HRT",
+      "description": "Common drug interactions with hormone replacement therapy",
+      "category": "Popular CME",
+      "tags": ["drug interactions", "HRT", "medications", "safety"],
+      "estimatedMinutes": 12,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Beginner",
+      "questions": [
+        {
+          "id": "di-q1",
+          "question": "Which enzyme system is primarily responsible for estrogen metabolism?",
+          "options": [
+            "CYP1A2",
+            "CYP2D6",
+            "CYP3A4",
+            "CYP2C9",
+            "CYP2C19"
+          ],
+          "correctIndex": 2,
+          "explanation": "CYP3A4 is the primary enzyme system responsible for estrogen metabolism, making it susceptible to drug interactions with CYP3A4 inducers and inhibitors."
+        },
+        {
+          "id": "di-q2",
+          "question": "Which medication may reduce the effectiveness of oral estrogen?",
+          "options": [
+            "Fluconazole",
+            "Phenytoin",
+            "Metformin",
+            "Atorvastatin",
+            "Lisinopril"
+          ],
+          "correctIndex": 1,
+          "explanation": "Phenytoin is a CYP3A4 inducer that increases estrogen metabolism, potentially reducing its effectiveness and requiring dose adjustment."
+        },
+        {
+          "id": "di-q3",
+          "question": "What is the concern with concurrent warfarin and estrogen use?",
+          "options": [
+            "Increased bleeding risk",
+            "Reduced warfarin effectiveness",
+            "Altered INR requiring monitoring",
+            "Increased stroke risk",
+            "No significant interaction"
+          ],
+          "correctIndex": 2,
+          "explanation": "Estrogen can affect warfarin metabolism and increase clotting factor synthesis, potentially altering INR and requiring closer monitoring and dose adjustment."
+        },
+        {
+          "id": "di-q4",
+          "question": "Which route of estrogen administration has fewer drug interactions?",
+          "options": [
+            "Oral",
+            "Transdermal",
+            "Sublingual",
+            "Nasal",
+            "All routes have equal interactions"
+          ],
+          "correctIndex": 1,
+          "explanation": "Transdermal estrogen bypasses hepatic first-pass metabolism, resulting in fewer drug interactions compared to oral administration."
+        },
+        {
+          "id": "di-q5",
+          "question": "What should be monitored when starting HRT in a patient on thyroid hormone replacement?",
+          "options": [
+            "Liver function tests",
+            "Blood pressure",
+            "Thyroid function tests",
+            "Complete blood count",
+            "Lipid profile"
+          ],
+          "correctIndex": 2,
+          "explanation": "Estrogen increases thyroid-binding globulin levels, potentially requiring adjustment of thyroid hormone replacement dosing and monitoring of TSH levels."
+        }
+      ]
+    },
+    {
+      "id": "counseling-shared-decision-making-quiz",
+      "version": "1.0.0",
+      "title": "Counseling & Shared Decision Making",
+      "description": "Patient communication strategies and shared decision-making for HRT",
+      "category": "Popular CME",
+      "tags": ["counseling", "communication", "shared decision making", "patient care"],
+      "estimatedMinutes": 15,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Beginner",
+      "questions": [
+        {
+          "id": "sdm-q1",
+          "question": "What is the first step in shared decision making for HRT?",
+          "options": [
+            "Present treatment options",
+            "Assess patient's symptoms and impact on quality of life",
+            "Discuss risks and benefits",
+            "Determine patient preferences",
+            "Provide written information"
+          ],
+          "correctIndex": 1,
+          "explanation": "The first step is to thoroughly assess the patient's symptoms, their severity, and impact on quality of life to establish the need for treatment."
+        },
+        {
+          "id": "sdm-q2",
+          "question": "How should absolute risk be communicated to patients?",
+          "options": [
+            "Using percentages only",
+            "Using relative risk ratios",
+            "Using natural frequencies (e.g., 1 in 1000)",
+            "Using technical medical terms",
+            "Avoiding specific numbers"
+          ],
+          "correctIndex": 2,
+          "explanation": "Natural frequencies (e.g., '1 in 1000 women') are easier for patients to understand than percentages or relative risks and improve risk comprehension."
+        },
+        {
+          "id": "sdm-q3",
+          "question": "What should be included in HRT counseling?",
+          "options": [
+            "Only benefits of treatment",
+            "Only risks of treatment",
+            "Benefits, risks, and alternatives",
+            "Recommendation based on medical opinion only",
+            "Deferring decision to patient preference"
+          ],
+          "correctIndex": 2,
+          "explanation": "Comprehensive counseling should include benefits, risks, and alternatives to HRT, allowing for informed shared decision making."
+        },
+        {
+          "id": "sdm-q4",
+          "question": "When discussing HRT risks, what time frame should be emphasized?",
+          "options": [
+            "Lifetime risk only",
+            "1-year risk only",
+            "Both absolute risk and time frame of risk",
+            "Risk relative to other medications",
+            "Avoiding specific time frames"
+          ],
+          "correctIndex": 2,
+          "explanation": "Discussing both absolute risk and the time frame helps patients understand both the magnitude and temporal aspects of potential risks."
+        },
+        {
+          "id": "sdm-q5",
+          "question": "What is an effective way to address patient anxiety about HRT risks?",
+          "options": [
+            "Minimize risk discussions",
+            "Use scientific studies to reassure",
+            "Acknowledge concerns and provide balanced information",
+            "Recommend against HRT to avoid liability",
+            "Refer to online resources only"
+          ],
+          "correctIndex": 2,
+          "explanation": "Acknowledging patient concerns while providing balanced, evidence-based information helps address anxiety and builds trust in the decision-making process."
+        }
+      ]
+    },
+    {
+      "id": "emergency-scenarios-referral-quiz",
+      "version": "1.0.0", 
+      "title": "Emergency Scenarios & Referrals",
+      "description": "Recognition of acute VTE, emergency management, and appropriate referral guidelines",
+      "category": "Popular CME",
+      "tags": ["emergency", "VTE", "referral", "acute care"],
+      "estimatedMinutes": 18,
+      "passingScore": 80,
+      "timeLimit": null,
+      "difficulty": "Advanced",
+      "questions": [
+        {
+          "id": "es-q1",
+          "question": "A patient on HRT presents with sudden onset chest pain and shortness of breath. What is the priority action?",
+          "options": [
+            "Continue HRT and monitor symptoms",
+            "Stop HRT and schedule follow-up",
+            "Immediate evaluation for pulmonary embolism",
+            "Prescribe bronchodilator",
+            "Order chest X-ray in 24 hours"
+          ],
+          "correctIndex": 2,
+          "explanation": "Sudden chest pain and shortness of breath in a patient on HRT should raise immediate suspicion for pulmonary embolism requiring urgent evaluation."
+        },
+        {
+          "id": "es-q2",
+          "question": "What is the most appropriate immediate management for suspected PE in HRT user?",
+          "options": [
+            "Discontinue HRT and monitor",
+            "Reduce HRT dose",
+            "Anticoagulation if high clinical probability",
+            "Schedule outpatient CT angiogram",
+            "Prescribe pain medication"
+          ],
+          "correctIndex": 2,
+          "explanation": "High clinical probability PE warrants immediate anticoagulation while awaiting definitive imaging, especially in HRT users with increased VTE risk."
+        },
+        {
+          "id": "es-q3",
+          "question": "When should a patient on HRT be referred to hematology?",
+          "options": [
+            "All patients before starting HRT",
+            "Recurrent VTE on anticoagulation",
+            "Family history of VTE only",
+            "Age >65 years",
+            "BMI >30"
+          ],
+          "correctIndex": 1,
+          "explanation": "Recurrent VTE despite anticoagulation warrants hematology referral for thrombophilia evaluation and specialist management."
+        },
+        {
+          "id": "es-q4",
+          "question": "What constitutes a red flag symptom requiring immediate evaluation?",
+          "options": [
+            "Mild leg cramping",
+            "Unilateral leg swelling and pain",
+            "Hot flashes",
+            "Breast tenderness",
+            "Mood changes"
+          ],
+          "correctIndex": 1,
+          "explanation": "Unilateral leg swelling and pain raises concern for deep vein thrombosis, especially in HRT users, requiring immediate evaluation."
+        },
+        {
+          "id": "es-q5",
+          "question": "When can HRT be safely resumed after VTE treatment?",
+          "options": [
+            "After 1 month of anticoagulation",
+            "After 3 months of anticoagulation",
+            "Generally not recommended",
+            "After switching to transdermal route",
+            "After adding aspirin"
+          ],
+          "correctIndex": 2,
+          "explanation": "HRT is generally not recommended after VTE due to high recurrence risk. Alternative therapies should be considered for symptom management."
+        }
+      ]
+    }
+  ]
+}

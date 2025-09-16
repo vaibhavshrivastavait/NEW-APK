@@ -1,0 +1,53 @@
+<analysis>
+The AI engineer's work spanned multiple critical areas: stabilizing the Generate Treatment Plan flow, developing a deterministic decision engine, fixing frontend preview issues, and enhancing GitHub synchronization capabilities. Initial work focused on resolving  blank screens and refactoring  to . A major bug causing blank web previews due to Metro bundler's file watcher limits (ENOSPC error) consumed significant effort, leading to multiple failed attempts,  invocation, and temporary workarounds like static HTML. Concurrently, a rule-driven treatment plan engine was developed, incorporating JSON data for contraindications and risk thresholds, and a  with a Simulate mode. The most recent efforts centered on improving the GitHub sync script for the containerized environment, addressing issues like  not being set, user-provided sensitive tokens, and repository creation conflicts, the last of which is currently being resolved.
+</analysis>
+
+<product_requirements>
+The MHT Assessment app is an offline-first, testable, accessible, and performant React Native/Expo (SDK 50) clinical decision support tool for Menopause Hormone Therapy. It aims to display calculated risk scores, provide personalized risk calculators, offer evidence-based decision support (including drug interaction checker), and generate clinician-friendly treatment plans that can be saved and exported as PDFs. Data persistence is handled locally with encrypted SQLite or AsyncStorage. Key technical requirements include native-safe code for Android APK builds, unit/E2E testing, CME dashboard features, and self-contained Android APK generation.
+
+Work done so far includes resolving Metro bundler issues, restoring app display, implementing comprehensive PDF export, removing extraneous UI texts/buttons, addressing platform-specific export limitations, renaming Settings to About and adding a Disclaimer screen. The primary focus of the detailed trajectory was to stabilize the Decision Support - Treatment Plan flow, which previously crashed or showed blank screens, and ensure it produces medicine-based plans with interaction checks. More recently, the user explicitly requested a deterministic Treatment Plan & Risk Decision Engine, including a new  with a Simulate mode, rule-driven evaluation from JSON files (thresholds, contraindications, interactions, example cases), and unit tests.
+</product_requirements>
+
+<key_technical_concepts>
+- **React Native/Expo (SDK 50)**: Cross-platform mobile development with Expo Router.
+- **Metro Bundler**: JavaScript bundler for React Native, with  file watcher challenges.
+- **Zustand/AsyncStorage**: State management and offline data persistence.
+- **TypeScript**: Type-safe codebase.
+- **Rule-Driven Engine**: Deterministic logic for risk, contraindications, drug interactions from JSON.
+- **Offline-First**: Core logic runs locally without server dependency.
+- **PDF Generation**: Client-side PDF creation (initially).
+</key_technical_concepts>
+
+<code_architecture>
+
+
+-   ****: Central configuration for Expo.
+    -   *Summary of changes*: Updated  array to include  for iOS compatibility and adjusted  property multiple times between  and  to debug preview issues.
+-   ****: Main React Native component.
+    -   *Summary of changes*: Added a new  for  to the navigation stack.
+-   ****: Displays decision support.
+    -   *Summary of changes*: Added a View Decision Support button which navigates to . Corresponding styles were added.
+-   ****: (NEW) Displays comprehensive decision support, including input summary, primary recommendation, fired rules, alternatives, monitoring plan, and a Simulate mode.
+-   ****, ****, ****, ****: (NEW) JSON files used by the new deterministic treatment plan engine for rules and test cases.
+-   ****: (NEW) Core logic for the deterministic treatment plan engine, processing inputs against rule JSONs to generate recommendations.
+-   ****: (NEW) Implements local risk calculators (ASCVD, Framingham, etc.) and handles precedence for external vs. computed scores.
+-   ****: (NEW) Unit tests for the  using .
+-   ****: FastAPI backend.
+    -   *Summary of changes*: Verified and restarted multiple times due to  errors.
+-   ****: Manages project dependencies.
+    -   *Summary of changes*: Added  scripts, , ,  (later removed).
+-   ****: Metro bundler configuration.
+    -   *Summary of changes*: Repeatedly modified to add aggressive  and  exclusions, and to experiment with  to mitigate  errors. Configuration was simplified to a minimal setup.
+-   ****: (NEW) Configuration for Watchman (file watcher).
+    -   *Summary of changes*: Added  to limit file watching scope.
+-   **** / ****: (NEW) Scripts for checking Windows build prerequisites.
+-   **** / ****: (NEW) Scripts to facilitate GitHub synchronization from the container, including handling of large files, authentication, and robust Git operations.  replaced  for improved security.
+</code_architecture>
+
+<pending_tasks>
+- Add visible flagging for drug interactions and contraindications within the UI and exported PDF.
+- Provide a Save button on the Treatment Plan screen to persist the generated plan locally.
+- Generate a sample exported PDF of a medicine-based treatment plan.
+- Final testing of the self-contained Android APK on physical devices.
+- Implementation of the remaining comprehensive product specifications (e.g., Knowledge Hub, encrypted SQLite, E2E tests).
+- Implement the Reset

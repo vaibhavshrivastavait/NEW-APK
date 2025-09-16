@@ -1,0 +1,206 @@
+{
+  "testCases": [
+    {
+      "id": "case_1_low_severity_conservative",
+      "description": "Low severity case produces conservative lifestyle-first plan",
+      "input": {
+        "age": 48,
+        "gender": "female",
+        "symptoms": {
+          "severity": 4,
+          "vasomotorSymptoms": 3,
+          "sleepDisturbances": 2
+        },
+        "history": {
+          "VTE": false,
+          "breastCancer_active": false,
+          "cardiovascular": false
+        },
+        "riskScores": {
+          "ASCVD": 5.2,
+          "Framingham": 4.1,
+          "FRAX": 8.0
+        },
+        "currentMedications": [],
+        "medicineType": "none",
+        "preferences": {
+          "contraindication_sensitivity": "conservative"
+        }
+      },
+      "expectedChecks": {
+        "hasLifestyleRecommendation": true,
+        "urgentRecommendations": 0,
+        "topRecommendationType": "Lifestyle",
+        "confidenceRange": [0.6, 0.8],
+        "generalPlanLength": 3
+      }
+    },
+    {
+      "id": "case_2_hrt_vte_contraindication",
+      "description": "HRT + VTE history produces contraindication + referral",
+      "input": {
+        "age": 54,
+        "gender": "female",
+        "symptoms": {
+          "severity": 8,
+          "vasomotorSymptoms": 9,
+          "sleepDisturbances": 7
+        },
+        "history": {
+          "VTE": true,
+          "breastCancer_active": false,
+          "cardiovascular": false
+        },
+        "riskScores": {
+          "ASCVD": 8.5,
+          "Wells": 2.0
+        },
+        "currentMedications": [],
+        "medicineType": "HRT"
+      },
+      "expectedChecks": {
+        "hasContraindication": true,
+        "urgentRecommendations": 1,
+        "topRecommendationType": "Urgent",
+        "confidenceRange": [0.9, 1.0],
+        "containsText": "contraindicated",
+        "flagsUrgent": true
+      }
+    },
+    {
+      "id": "case_3_herbal_warfarin_interaction",
+      "description": "Herbal + warfarin shows interaction + avoids HRT suggestions that interact",
+      "input": {
+        "age": 62,
+        "gender": "female",
+        "symptoms": {
+          "severity": 6,
+          "vasomotorSymptoms": 5
+        },
+        "history": {
+          "VTE": false,
+          "breastCancer_active": false,
+          "cardiovascular": true
+        },
+        "currentMedications": ["warfarin", "metoprolol"],
+        "medicineType": "HerbalSupplement",
+        "riskScores": {
+          "ASCVD": 12.5
+        }
+      },
+      "expectedChecks": {
+        "hasInteractionWarning": true,
+        "urgentRecommendations": 1,
+        "topRecommendationType": "Urgent",
+        "containsText": "interaction",
+        "avoidsHRT": true,
+        "confidenceRange": [0.85, 0.95]
+      }
+    },
+    {
+      "id": "case_4_missing_critical_inputs",
+      "description": "Missing critical inputs prompt for completion rather than defaulting values",
+      "input": {
+        "gender": "female",
+        "symptoms": {
+          "severity": 6
+        },
+        "history": {},
+        "currentMedications": [],
+        "medicineType": "HRT"
+      },
+      "expectedChecks": {
+        "validationFails": true,
+        "missingFields": ["age"],
+        "hasDataRequirementWarning": true,
+        "noDefaultedValues": true,
+        "flagsMissingData": true
+      }
+    },
+    {
+      "id": "case_5_complete_assessment_high_risk",
+      "description": "Complete assessment with high risk factors shows comprehensive recommendations",
+      "input": {
+        "age": 58,
+        "gender": "female",
+        "weight": 75,
+        "height": 165,
+        "BMI": 27.5,
+        "symptoms": {
+          "severity": 7,
+          "vasomotorSymptoms": 8,
+          "sleepDisturbances": 6,
+          "moodChanges": 5,
+          "vaginalDryness": 7
+        },
+        "history": {
+          "VTE": false,
+          "breastCancer_active": false,
+          "breastCancer_history": true,
+          "cardiovascular": false,
+          "diabetes": true,
+          "hypertension": true
+        },
+        "currentMedications": ["metformin", "lisinopril"],
+        "allergies": ["penicillin"],
+        "medicineType": "HRT",
+        "labs": {
+          "cholesterol": 220,
+          "hdl": 45,
+          "ldl": 140,
+          "glucose": 110,
+          "hba1c": 6.2
+        },
+        "riskScores": {
+          "ASCVD": 15.8,
+          "Framingham": 12.5,
+          "FRAX": 18.2,
+          "GailTyrer": 3.2
+        },
+        "preferences": {
+          "contraindication_sensitivity": "moderate"
+        }
+      },
+      "expectedChecks": {
+        "inputSnapshotMatches": true,
+        "hasCardiologyReferral": true,
+        "recommendationsCount": [3, 6],
+        "specificOptionsCount": [2, 5],
+        "evidenceProvided": true,
+        "auditTrailComplete": true,
+        "confidenceRange": [0.7, 0.9]
+      }
+    }
+  ],
+  "validationRules": {
+    "outputStructure": {
+      "required": [
+        "planId",
+        "timestamp",
+        "inputSnapshot",
+        "recommendations",
+        "summary",
+        "flags",
+        "generalPlan",
+        "specificOptions",
+        "auditTrail"
+      ],
+      "recommendations": {
+        "required": ["type", "priority", "text", "rationale", "evidence", "confidenceScore"]
+      },
+      "flags": {
+        "required": ["urgent", "contraindicated", "missingData"]
+      },
+      "auditTrail": {
+        "required": ["rulesMatched", "evidenceUsed", "evaluationTime", "knowledgeVersion"]
+      }
+    },
+    "businessRules": {
+      "evaluationTimeLimit": 200,
+      "generalPlanBullets": 3,
+      "minConfidenceScore": 0.0,
+      "maxConfidenceScore": 1.0,
+      "urgentTypesRequireHighConfidence": 0.8
+    }
+  }
+}

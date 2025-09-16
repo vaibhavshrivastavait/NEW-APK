@@ -1,0 +1,331 @@
+{
+  "description": "QA Test Vectors for Clinical Calculators (BMI, BSA, eGFR, HRT)",
+  "version": "1.0",
+  "lastUpdated": "2025-01-15",
+  "testCases": {
+    "bmi": [
+      {
+        "name": "Normal BMI - Average Adult",
+        "description": "70kg, 175cm adult - should be normal BMI",
+        "input": {
+          "weight": 70,
+          "height": 175
+        },
+        "expectedBMI": 22.9,
+        "expectedCategory": "Normal",
+        "expectedHealthRisk": "Low",
+        "tolerance": 0.1,
+        "notes": "Should calculate to 22.9 BMI (normal weight)"
+      },
+      {
+        "name": "Underweight BMI",
+        "description": "45kg, 170cm adult - underweight",
+        "input": {
+          "weight": 45,
+          "height": 170
+        },
+        "expectedBMI": 15.6,
+        "expectedCategory": "Underweight",
+        "expectedHealthRisk": "Moderate",
+        "tolerance": 0.1,
+        "notes": "Should be classified as underweight"
+      },
+      {
+        "name": "Overweight BMI",
+        "description": "80kg, 165cm adult - overweight",
+        "input": {
+          "weight": 80,
+          "height": 165
+        },
+        "expectedBMI": 29.4,
+        "expectedCategory": "Overweight",
+        "expectedHealthRisk": "Moderate",
+        "tolerance": 0.1,
+        "notes": "Should be classified as overweight"
+      },
+      {
+        "name": "Obese Class I",
+        "description": "95kg, 170cm adult - obese class I",
+        "input": {
+          "weight": 95,
+          "height": 170
+        },
+        "expectedBMI": 32.9,
+        "expectedCategory": "Obese Class I",
+        "expectedHealthRisk": "High",
+        "tolerance": 0.1,
+        "notes": "Should be classified as obese class I"
+      },
+      {
+        "name": "Invalid Input - Zero Weight",
+        "description": "Should handle invalid input gracefully",
+        "input": {
+          "weight": 0,
+          "height": 170
+        },
+        "expectedBMI": 0,
+        "expectedCategory": "Normal",
+        "expectedHealthRisk": "Low",
+        "tolerance": 0,
+        "notes": "Should return 0 BMI for invalid input"
+      }
+    ],
+    "bsa": [
+      {
+        "name": "Average Adult BSA",
+        "description": "70kg, 175cm adult - normal BSA",
+        "input": {
+          "weight": 70,
+          "height": 175
+        },
+        "expectedBSA": 1.85,
+        "expectedMethod": "Du Bois Formula",
+        "tolerance": 0.05,
+        "notes": "Should calculate around 1.85 m² for average adult"
+      },
+      {
+        "name": "Small Adult BSA",
+        "description": "50kg, 155cm adult - smaller BSA",
+        "input": {
+          "weight": 50,
+          "height": 155
+        },
+        "expectedBSA": 1.46,
+        "expectedMethod": "Du Bois Formula",
+        "tolerance": 0.05,
+        "notes": "Should calculate smaller BSA"
+      },
+      {
+        "name": "Large Adult BSA",
+        "description": "100kg, 185cm adult - larger BSA",
+        "input": {
+          "weight": 100,
+          "height": 185
+        },
+        "expectedBSA": 2.25,
+        "expectedMethod": "Du Bois Formula",
+        "tolerance": 0.05,
+        "notes": "Should calculate larger BSA"
+      },
+      {
+        "name": "Invalid Input - Zero Height",
+        "description": "Should handle invalid input gracefully",
+        "input": {
+          "weight": 70,
+          "height": 0
+        },
+        "expectedBSA": 0,
+        "expectedMethod": "Du Bois Formula",
+        "tolerance": 0,
+        "notes": "Should return 0 BSA for invalid input"
+      }
+    ],
+    "egfr": [
+      {
+        "name": "Normal eGFR - Young Female",
+        "description": "30yo female, creatinine 0.8 mg/dL",
+        "input": {
+          "age": 30,
+          "gender": "female",
+          "creatinine": 0.8
+        },
+        "expectedeGFR": 105,
+        "expectedStage": "Normal",
+        "expectedCategory": "Normal",
+        "tolerance": 5,
+        "notes": "Should show normal kidney function"
+      },
+      {
+        "name": "Mild Decrease - Older Male",
+        "description": "65yo male, creatinine 1.1 mg/dL",
+        "input": {
+          "age": 65,
+          "gender": "male",
+          "creatinine": 1.1
+        },
+        "expectedeGFR": 75,
+        "expectedStage": "Mild Decrease",
+        "expectedCategory": "Mild",
+        "tolerance": 5,
+        "notes": "Should show mild decrease in kidney function"
+      },
+      {
+        "name": "Moderate Decrease - Female",
+        "description": "70yo female, creatinine 1.8 mg/dL",
+        "input": {
+          "age": 70,
+          "gender": "female",
+          "creatinine": 1.8
+        },
+        "expectedeGFR": 30,
+        "expectedStage": "Severe Decrease",
+        "expectedCategory": "Severe",
+        "tolerance": 5,
+        "notes": "Should show severe decrease with high creatinine"
+      },
+      {
+        "name": "Severe Decrease - Male",
+        "description": "75yo male, creatinine 3.5 mg/dL",
+        "input": {
+          "age": 75,
+          "gender": "male",
+          "creatinine": 3.5
+        },
+        "expectedeGFR": 20,
+        "expectedStage": "Severe Decrease",
+        "expectedCategory": "Severe",
+        "tolerance": 5,
+        "notes": "Should show severe decrease"
+      },
+      {
+        "name": "Invalid Input - Zero Age",
+        "description": "Should handle invalid input gracefully",
+        "input": {
+          "age": 0,
+          "gender": "female",
+          "creatinine": 1.0
+        },
+        "expectedeGFR": 0,
+        "expectedStage": "Normal",
+        "expectedCategory": "Normal",
+        "tolerance": 0,
+        "notes": "Should return 0 eGFR for invalid input"
+      }
+    ],
+    "hrt": [
+      {
+        "name": "Low Risk - Healthy Postmenopausal",
+        "description": "55yo, 2 years postmenopausal, no risk factors",
+        "input": {
+          "age": 55,
+          "timeSinceMenopause": 2,
+          "personalHistoryBC": false,
+          "familyHistoryBC": false,
+          "personalHistoryVTE": false,
+          "smoking": false,
+          "hypertension": false,
+          "diabetes": false,
+          "bmi": 24
+        },
+        "expectedOverallRisk": "Low",
+        "expectedBreastCancerRisk": 1.0,
+        "expectedVTERisk": 1.0,
+        "expectedStrokeRisk": 1.0,
+        "expectedContraindications": 0,
+        "tolerance": 0.1,
+        "notes": "Should be low risk for HRT"
+      },
+      {
+        "name": "Moderate Risk - Some Risk Factors",
+        "description": "62yo, 5 years postmenopausal, family history BC, BMI 32",
+        "input": {
+          "age": 62,
+          "timeSinceMenopause": 5,
+          "personalHistoryBC": false,
+          "familyHistoryBC": true,
+          "personalHistoryVTE": false,
+          "smoking": false,
+          "hypertension": false,
+          "diabetes": false,
+          "bmi": 32
+        },
+        "expectedOverallRisk": "Moderate",
+        "expectedBreastCancerRisk": 1.87,
+        "expectedVTERisk": 3.0,
+        "expectedStrokeRisk": 1.5,
+        "expectedContraindications": 0,
+        "tolerance": 0.2,
+        "notes": "Should be moderate risk due to age ≥60, family history, obesity"
+      },
+      {
+        "name": "High Risk - Personal History BC",
+        "description": "58yo, personal history breast cancer",
+        "input": {
+          "age": 58,
+          "timeSinceMenopause": 3,
+          "personalHistoryBC": true,
+          "familyHistoryBC": false,
+          "personalHistoryVTE": false,
+          "smoking": false,
+          "hypertension": false,
+          "diabetes": false,
+          "bmi": 26
+        },
+        "expectedOverallRisk": "High",
+        "expectedBreastCancerRisk": 0,
+        "expectedVTERisk": 1.0,
+        "expectedStrokeRisk": 1.0,
+        "expectedContraindications": 1,
+        "tolerance": 0.1,
+        "notes": "Should be high risk due to personal BC history - contraindicated"
+      },
+      {
+        "name": "High Risk - Personal History VTE + Smoking",
+        "description": "60yo, personal history VTE, smoker",
+        "input": {
+          "age": 60,
+          "timeSinceMenopause": 8,
+          "personalHistoryBC": false,
+          "familyHistoryBC": false,
+          "personalHistoryVTE": true,
+          "smoking": true,
+          "hypertension": false,
+          "diabetes": false,
+          "bmi": 28
+        },
+        "expectedOverallRisk": "High",
+        "expectedBreastCancerRisk": 1.3,
+        "expectedVTERisk": 0,
+        "expectedStrokeRisk": 2.7,
+        "expectedContraindications": 2,
+        "tolerance": 0.1,
+        "notes": "Should be high risk due to VTE history and smoking - contraindicated (age≥60 factor + smoking factor)"
+      }
+    ]
+  },
+  "validationCriteria": {
+    "bmi": {
+      "weightRange": [1, 500],
+      "heightRange": [50, 250],
+      "bmiRange": [10, 70],
+      "categories": ["Underweight", "Normal", "Overweight", "Obese Class I", "Obese Class II", "Obese Class III"],
+      "categoryThresholds": [18.5, 25, 30, 35, 40]
+    },
+    "bsa": {
+      "weightRange": [1, 500],
+      "heightRange": [50, 250],
+      "bsaRange": [0.5, 3.0],
+      "methods": ["Du Bois Formula", "Mosteller Formula"]
+    },
+    "egfr": {
+      "ageRange": [18, 120],
+      "creatinineRange": [0.3, 15.0],
+      "egfrRange": [5, 150],
+      "stages": ["Normal", "Mild Decrease", "Moderate Decrease", "Severe Decrease", "Kidney Failure"],
+      "stageThresholds": [90, 60, 30, 15]
+    },
+    "hrt": {
+      "ageRange": [40, 80],
+      "timeSinceMenopauseRange": [0, 30],
+      "bmiRange": [15, 50],
+      "overallRiskCategories": ["Low", "Moderate", "High"],
+      "relativeRiskRange": [0, 5.0]
+    }
+  },
+  "unitConversions": {
+    "weight": {
+      "lbToKg": 0.453592,
+      "kgToLb": 2.20462
+    },
+    "height": {
+      "inToCm": 2.54,
+      "cmToIn": 0.393701,
+      "ftToIn": 12,
+      "cmToFt": 0.0328084
+    },
+    "creatinine": {
+      "mgdlToUmoll": 88.4,
+      "umollToMgdl": 0.0113
+    }
+  }
+}

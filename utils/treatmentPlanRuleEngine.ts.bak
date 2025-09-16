@@ -1,0 +1,373 @@
+import { v4 as uuidv4 } from 'uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import treatmentRules from '../data/treatmentPlanRules.json';
+
+export interface PatientData {
+  age: number;
+  gender: string;
+  medicineType: string;
+  riskScores: {
+    ASCVD?: number | null;
+    Framingham?: number | null;
+    FRAX?: number | null;
+    GailTyrer?: number | null;
+    Wells?: number | null;
+  };
+  history: {
+    VTE?: boolean;
+    breastCancer_active?: boolean;
+    cardiovascular?: boolean;
+  };
+  symptoms?: {
+    severity?: string;
+    type?: string;
+    legSwelling?: boolean;
+    legPain?: boolean;
+  };
+  comorbidities?: {
+    renalImpairment?: boolean;
+    diabetes?: boolean;
+    hypertension?: boolean;
+  };
+  currentMedications?: string[];
+  medicationListContains?: string[];
+  dataCompleteness?: number;
+}
+
+export interface TreatmentRecommendation {
+  id: string;
+  recommendation: string;
+  rationale: string;
+  confidence: number;
+  urgency: 'low' | 'medium' | 'high';
+  category: string;
+  alternatives?: string[];
+  references?: string[];
+  ruleId: string;
+}
+
+export interface TreatmentPlan {
+  planId: string;
+  generatedAt: string;
+  patientData: PatientData;
+  primaryRecommendations: TreatmentRecommendation[];
+  alternativeTherapies: string[];
+  clinicalSummary: string;
+  actionItems: string[];
+  urgentFlags: string[];
+  auditTrail: {
+    inputSnapshot: PatientData;
+    firedRules: string[];
+    overallConfidence: number;
+  };
+}
+
+class TreatmentPlanRuleEngine {
+  private rules: any[];
+  private config: any;
+
+  constructor() {
+    this.rules = treatmentRules.rules;
+    this.config = treatmentRules.config;
+  }
+
+  /**
+   * Generate a complete treatment plan based on patient data
+   */
+  public generateTreatmentPlan(patientData: PatientData): TreatmentPlan {
+    console.log('🔍 Generating treatment plan for patient data:', patientData);
+
+    // Validate required data
+    const validationResult = this.validatePatientData(patientData);
+    if (!validationResult.isValid) {
+      throw new Error(`Incomplete data: ${validationResult.missingFields.join(', ')}`);
+    }
+
+    // Calculate data completeness
+    const dataCompleteness = this.calculateDataCompleteness(patientData);
+    const enrichedData = { ...patientData, dataCompleteness };
+
+    // Evaluate all rules
+    const firedRules: string[] = [];
+    const recommendations: TreatmentRecommendation[] = [];
+
+    for (const rule of this.rules) {
+      if (this.evaluateRule(rule, enrichedData)) {
+        firedRules.push(rule.id);
+        const recommendation = this.createRecommendation(rule, enrichedData);
+        recommendations.push(recommendation);
+      }
+    }
+
+    // Sort by urgency and confidence
+    recommendations.sort((a, b) => {
+      const urgencyOrder = { high: 3, medium: 2, low: 1 };
+      const urgencyDiff = urgencyOrder[b.urgency] - urgencyOrder[a.urgency];
+      if (urgencyDiff !== 0) return urgencyDiff;
+      return b.confidence - a.confidence;
+    });
+
+    // Generate plan components
+    const planId = uuidv4();
+    const alternativeTherapies = this.generateAlternatives(recommendations);
+    const clinicalSummary = this.generateClinicalSummary(enrichedData, recommendations);
+    const actionItems = this.generateActionItems(recommendations);
+    const urgentFlags = this.extractUrgentFlags(recommendations);
+
+    const plan: TreatmentPlan = {
+      planId,
+      generatedAt: new Date().toISOString(),
+      patientData: enrichedData,
+      primaryRecommendations: recommendations,
+      alternativeTherapies,
+      clinicalSummary,
+      actionItems,
+      urgentFlags,
+      auditTrail: {
+        inputSnapshot: enrichedData,
+        firedRules,
+        overallConfidence: this.calculateOverallConfidence(recommendations)
+      }
+    };
+
+    // Save to local storage
+    this.savePlanToStorage(plan);
+
+    console.log('✅ Treatment plan generated:', plan);
+    return plan;
+  }
+
+  /**
+   * Evaluate if a rule matches the patient data
+   */
+  private evaluateRule(rule: any, patientData: PatientData): boolean {
+    const conditions = rule.conditions;
+
+    for (const [key, value] of Object.entries(conditions)) {
+      if (!this.evaluateCondition(key, value, patientData)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * Evaluate individual condition
+   */
+  private evaluateCondition(key: string, expectedValue: any, patientData: PatientData): boolean {
+    const actualValue = this.getNestedValue(patientData, key);
+
+    if (typeof expectedValue === 'string' && expectedValue.startsWith('>')) {
+      const threshold = parseFloat(expectedValue.substring(1));
+      return actualValue !== null && actualValue !== undefined && actualValue > threshold;
+    }
+
+    if (typeof expectedValue === 'string' && expectedValue.startsWith('<')) {
+      const threshold = parseFloat(expectedValue.substring(1));
+      return actualValue !== null && actualValue !== undefined && actualValue < threshold;
+    }
+
+    if (Array.isArray(expectedValue)) {
+      return Array.isArray(actualValue) && expectedValue.some(item => actualValue.includes(item));
+    }
+
+    return actualValue === expectedValue;
+  }
+
+  /**
+   * Get nested property value from object
+   */
+  private getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((current, key) => current?.[key], obj);
+  }
+
+  /**
+   * Create recommendation from rule
+   */
+  private createRecommendation(rule: any, patientData: PatientData): TreatmentRecommendation {
+    return {
+      id: uuidv4(),
+      recommendation: rule.action.recommendation,
+      rationale: rule.action.rationale,
+      confidence: rule.action.confidence,
+      urgency: rule.action.urgency || 'medium',
+      category: rule.action.category || 'general',
+      alternatives: rule.action.alternatives || [],
+      references: rule.action.references || [],
+      ruleId: rule.id
+    };
+  }
+
+  /**
+   * Validate patient data completeness
+   */
+  private validatePatientData(data: PatientData): { isValid: boolean; missingFields: string[] } {
+    const requiredFields = ['age', 'gender'];
+    const missingFields: string[] = [];
+
+    for (const field of requiredFields) {
+      if (!data[field as keyof PatientData]) {
+        missingFields.push(field);
+      }
+    }
+
+    return {
+      isValid: missingFields.length === 0,
+      missingFields
+    };
+  }
+
+  /**
+   * Calculate data completeness percentage
+   */
+  private calculateDataCompleteness(data: PatientData): number {
+    const allFields = [
+      'age', 'gender', 'medicineType',
+      'riskScores.ASCVD', 'riskScores.Framingham', 'riskScores.FRAX',
+      'history.VTE', 'history.breastCancer_active',
+      'symptoms.severity'
+    ];
+
+    let completedFields = 0;
+    for (const field of allFields) {
+      const value = this.getNestedValue(data, field);
+      if (value !== null && value !== undefined && value !== '') {
+        completedFields++;
+      }
+    }
+
+    return Math.round((completedFields / allFields.length) * 100);
+  }
+
+  /**
+   * Generate alternative therapies
+   */
+  private generateAlternatives(recommendations: TreatmentRecommendation[]): string[] {
+    const alternatives = new Set<string>();
+
+    recommendations.forEach(rec => {
+      if (rec.alternatives) {
+        rec.alternatives.forEach(alt => alternatives.add(alt));
+      }
+    });
+
+    // Add generic alternatives
+    alternatives.add('Lifestyle modifications (diet, exercise, stress management)');
+    alternatives.add('Regular follow-up with healthcare provider');
+
+    return Array.from(alternatives);
+  }
+
+  /**
+   * Generate clinical summary
+   */
+  private generateClinicalSummary(data: PatientData, recommendations: TreatmentRecommendation[]): string {
+    const age = data.age;
+    const highRiskCount = recommendations.filter(r => r.urgency === 'high').length;
+    const avgConfidence = recommendations.reduce((sum, r) => sum + r.confidence, 0) / recommendations.length;
+
+    let summary = `Patient assessment for ${age}-year-old ${data.gender}. `;
+
+    if (highRiskCount > 0) {
+      summary += `⚠️ ${highRiskCount} high-priority recommendation(s) requiring immediate attention. `;
+    }
+
+    summary += `Generated ${recommendations.length} recommendations with average confidence of ${Math.round(avgConfidence)}%. `;
+    summary += 'All recommendations are advisory and require clinician review.';
+
+    return summary;
+  }
+
+  /**
+   * Generate action items
+   */
+  private generateActionItems(recommendations: TreatmentRecommendation[]): string[] {
+    const actionItems: string[] = [];
+
+    const highUrgency = recommendations.filter(r => r.urgency === 'high');
+    const mediumUrgency = recommendations.filter(r => r.urgency === 'medium');
+
+    if (highUrgency.length > 0) {
+      actionItems.push('🔴 URGENT: Schedule immediate clinician consultation');
+    }
+
+    if (mediumUrgency.length > 0) {
+      actionItems.push('🟡 Schedule clinician review within 2 weeks');
+    }
+
+    actionItems.push('📋 Discuss all recommendations with healthcare provider');
+    actionItems.push('📊 Complete any missing assessments or laboratory tests');
+
+    return actionItems;
+  }
+
+  /**
+   * Extract urgent flags
+   */
+  private extractUrgentFlags(recommendations: TreatmentRecommendation[]): string[] {
+    return recommendations
+      .filter(r => r.urgency === 'high')
+      .map(r => r.recommendation);
+  }
+
+  /**
+   * Calculate overall confidence
+   */
+  private calculateOverallConfidence(recommendations: TreatmentRecommendation[]): number {
+    if (recommendations.length === 0) return 0;
+    
+    const weightedSum = recommendations.reduce((sum, rec) => {
+      const urgencyWeight = { high: 3, medium: 2, low: 1 }[rec.urgency];
+      return sum + (rec.confidence * urgencyWeight);
+    }, 0);
+
+    const totalWeight = recommendations.reduce((sum, rec) => {
+      const urgencyWeight = { high: 3, medium: 2, low: 1 }[rec.urgency];
+      return sum + urgencyWeight;
+    }, 0);
+
+    return Math.round(weightedSum / totalWeight);
+  }
+
+  /**
+   * Save plan to local storage
+   */
+  private async savePlanToStorage(plan: TreatmentPlan): Promise<void> {
+    try {
+      const existingPlans = await this.getSavedPlans();
+      existingPlans.push(plan);
+      
+      // Keep only last 50 plans to manage storage
+      const recentPlans = existingPlans.slice(-50);
+      
+      await AsyncStorage.setItem('treatmentPlans', JSON.stringify(recentPlans));
+      console.log('✅ Treatment plan saved to local storage');
+    } catch (error) {
+      console.error('❌ Error saving treatment plan:', error);
+    }
+  }
+
+  /**
+   * Get saved plans from storage
+   */
+  public async getSavedPlans(): Promise<TreatmentPlan[]> {
+    try {
+      const plans = await AsyncStorage.getItem('treatmentPlans');
+      return plans ? JSON.parse(plans) : [];
+    } catch (error) {
+      console.error('❌ Error loading saved plans:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get plan by ID
+   */
+  public async getPlanById(planId: string): Promise<TreatmentPlan | null> {
+    const plans = await this.getSavedPlans();
+    return plans.find(plan => plan.planId === planId) || null;
+  }
+}
+
+export default TreatmentPlanRuleEngine;

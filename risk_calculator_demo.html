@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MHT Assessment - Risk Calculators Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 390px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: #D81B60;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .section {
+            margin-bottom: 24px;
+            padding: 16px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 8px;
+        }
+        
+        .calculator-section {
+            margin-bottom: 20px;
+        }
+        
+        .calculator-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .calculator-grid {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .calculator-item {
+            flex: 1;
+            background: white;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .calculator-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .calculator-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .calculator-category {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .category-low {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+        }
+        
+        .category-moderate {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+        
+        .category-high {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+        
+        .alert-item {
+            display: flex;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 1px solid;
+        }
+        
+        .alert-absolute {
+            background-color: #ffebee;
+            border-color: #F44336;
+        }
+        
+        .alert-relative {
+            background-color: #fff3e0;
+            border-color: #FF9800;
+        }
+        
+        .alert-content {
+            flex: 1;
+            margin-left: 12px;
+        }
+        
+        .alert-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+        }
+        
+        .alert-message {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        
+        .alert-recommendation {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            text-align: center;
+            line-height: 24px;
+            font-size: 18px;
+        }
+        
+        .patient-info {
+            background: #e3f2fd;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .patient-info h3 {
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+        
+        .patient-info p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 MHT Assessment</h1>
+            <p>Patient Risk Analysis</p>
+        </div>
+        
+        <div class="content">
+            <!-- Sample Patient Info -->
+            <div class="patient-info">
+                <h3>Sample Patient: Sarah M., Age 58</h3>
+                <p>Postmenopausal, BMI 28.5, Hypertension, Family history of breast cancer</p>
+            </div>
+            
+            <!-- Risk Calculators Section -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="icon">📊</span>
+                    <h2 class="section-title">Risk Calculators</h2>
+                </div>
+                
+                <!-- Cardiovascular Risk -->
+                <div class="calculator-section">
+                    <h3 class="calculator-title">Cardiovascular Risk Assessment</h3>
+                    <div class="calculator-grid">
+                        <div class="calculator-item">
+                            <div class="calculator-label">ASCVD Score</div>
+                            <div class="calculator-value">8.2%</div>
+                            <span class="calculator-category category-moderate">Intermediate</span>
+                        </div>
+                        <div class="calculator-item">
+                            <div class="calculator-label">Framingham Score</div>
+                            <div class="calculator-value">12.1%</div>
+                            <span class="calculator-category category-moderate">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Breast Cancer Risk -->
+                <div class="calculator-section">
+                    <h3 class="calculator-title">Breast Cancer Risk Assessment</h3>
+                    <div class="calculator-grid">
+                        <div class="calculator-item">
+                            <div class="calculator-label">Gail Risk</div>
+                            <div class="calculator-value">2.8%</div>
+                            <span class="calculator-category category-moderate">Moderate</span>
+                        </div>
+                        <div class="calculator-item">
+                            <div class="calculator-label">Tyrer-Cuzick Risk</div>
+                            <div class="calculator-value">4.2%</div>
+                            <span class="calculator-category category-moderate">Moderate</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VTE and Fracture Risk -->
+                <div class="calculator-section">
+                    <h3 class="calculator-title">VTE & Fracture Risk Assessment</h3>
+                    <div class="calculator-grid">
+                        <div class="calculator-item">
+                            <div class="calculator-label">Wells VTE Score</div>
+                            <div class="calculator-value">2</div>
+                            <span class="calculator-category category-low">Low</span>
+                        </div>
+                        <div class="calculator-item">
+                            <div class="calculator-label">FRAX 10-Year Risk</div>
+                            <div class="calculator-value">8.5%</div>
+                            <span class="calculator-category category-low">Low</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinical Alerts -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="icon">⚠️</span>
+                    <h2 class="section-title">Clinical Alerts</h2>
+                </div>
+                
+                <div class="alert-item alert-relative">
+                    <span class="icon">⚠️</span>
+                    <div class="alert-content">
+                        <div class="alert-title">CAUTION: Family History of Breast Cancer</div>
+                        <div class="alert-message">Strong family history of breast cancer increases risk with HRT use.</div>
+                        <div class="alert-recommendation">Discuss risks/benefits carefully. Consider genetic counseling. Enhanced surveillance recommended.</div>
+                    </div>
+                </div>
+                
+                <div class="alert-item alert-relative">
+                    <span class="icon">🩺</span>
+                    <div class="alert-content">
+                        <div class="alert-title">CAUTION: Hypertension</div>
+                        <div class="alert-message">Uncontrolled hypertension may increase cardiovascular risk with HRT.</div>
+                        <div class="alert-recommendation">Ensure optimal BP control before initiating HRT. Monitor closely.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Treatment Recommendations -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="icon">💊</span>
+                    <h2 class="section-title">Treatment Recommendations</h2>
+                </div>
+                
+                <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #2196F3;">
+                    <div style="font-size: 14px; color: #333; line-height: 1.4;">Combined estrogen-progestogen therapy (EPT) required for uterine protection</div>
+                </div>
+                
+                <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #2196F3;">
+                    <div style="font-size: 14px; color: #333; line-height: 1.4;">Transdermal route preferred to minimize VTE risk</div>
+                </div>
+                
+                <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #2196F3;">
+                    <div style="font-size: 14px; color: #333; line-height: 1.4;">Micronized progesterone preferred for lower VTE risk</div>
+                </div>
+            </div>
+
+            <!-- Features Summary -->
+            <div class="section">
+                <div class="section-header">
+                    <span class="icon">✨</span>
+                    <h2 class="section-title">Features Implemented</h2>
+                </div>
+                
+                <div style="font-size: 14px; color: #333; line-height: 1.6;">
+                    <p style="margin-bottom: 8px;"><strong>✅ AI-Powered Risk Assessment:</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 12px;">
+                        <li>Framingham & ASCVD cardiovascular risk</li>
+                        <li>Gail & Tyrer-Cuzick breast cancer risk</li>
+                        <li>Wells VTE risk stratification</li>
+                        <li>FRAX fracture risk assessment</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 8px;"><strong>✅ Evidence-Based Decision Support:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Real-time drug interaction checking</li>
+                        <li>Automated contraindication alerts</li>
+                        <li>Evidence-based treatment recommendations</li>
+                        <li>Professional clinical interface</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for calculator values
+        document.addEventListener('DOMContentLoaded', function() {
+            const values = document.querySelectorAll('.calculator-value');
+            values.forEach((value, index) => {
+                value.style.opacity = '0';
+                value.style.transform = 'translateY(10px)';
+                
+                setTimeout(() => {
+                    value.style.transition = 'all 0.3s ease';
+                    value.style.opacity = '1';
+                    value.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

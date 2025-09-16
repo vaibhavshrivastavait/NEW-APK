@@ -1,0 +1,209 @@
+{
+  "testCases": [
+    {
+      "id": "case_1_moderate_risk_hrt",
+      "description": "Age 62, female, ASCVD 15%, HRT selected, no VTE/breast cancer history",
+      "input": {
+        "age": 62,
+        "gender": "female",
+        "medicineType": "HRT",
+        "riskScores": {
+          "ASCVD": 15.2,
+          "Framingham": 12.8,
+          "FRAX": 8.5,
+          "GailTyrer": 2.1,
+          "Wells": 1.0
+        },
+        "history": {
+          "VTE": false,
+          "breastCancer_active": false,
+          "cardiovascular": false
+        },
+        "symptoms": {
+          "severity": "moderate"
+        }
+      },
+      "expectedRecommendations": [
+        "Consider cardiology consultation before HRT initiation due to elevated cardiovascular risk"
+      ],
+      "expectedConfidence": 80,
+      "expectedUrgency": "medium"
+    },
+    {
+      "id": "case_2_hrt_vte_contraindication", 
+      "description": "Age 55, female, history VTE = true, HRT selected",
+      "input": {
+        "age": 55,
+        "gender": "female", 
+        "medicineType": "HRT",
+        "history": {
+          "VTE": true,
+          "breastCancer_active": false
+        },
+        "symptoms": {
+          "severity": "severe"
+        }
+      },
+      "expectedRecommendations": [
+        "HRT is not recommended due to VTE history. Consider non-hormonal therapies after clinician review."
+      ],
+      "expectedConfidence": 90,
+      "expectedUrgency": "medium"
+    },
+    {
+      "id": "case_3_high_frax_bone_health",
+      "description": "Age 48, female, high FRAX > 20%, no contraindications",
+      "input": {
+        "age": 48,
+        "gender": "female",
+        "medicineType": "none",
+        "riskScores": {
+          "FRAX": 22.3,
+          "ASCVD": 5.2
+        },
+        "history": {
+          "VTE": false,
+          "breastCancer_active": false
+        }
+      },
+      "expectedRecommendations": [
+        "Consider referral to osteoporosis specialist for comprehensive bone health evaluation"
+      ],
+      "expectedConfidence": 85,
+      "expectedUrgency": "medium"
+    },
+    {
+      "id": "case_4_warfarin_herbal_interaction",
+      "description": "On warfarin + user selected herbal supplement",
+      "input": {
+        "age": 58,
+        "gender": "female",
+        "medicineType": "HerbalSupplement",
+        "currentMedications": ["warfarin", "metformin"],
+        "medicationListContains": ["warfarin"]
+      },
+      "expectedRecommendations": [
+        "Potential herb-drug interaction detected. Discuss with clinician before starting herbal supplements."
+      ],
+      "expectedConfidence": 85,
+      "expectedUrgency": "medium"
+    },
+    {
+      "id": "case_5_active_breast_cancer_hrt",
+      "description": "Active breast cancer history + HRT selected",
+      "input": {
+        "age": 52,
+        "gender": "female",
+        "medicineType": "HRT",
+        "history": {
+          "breastCancer_active": true,
+          "VTE": false
+        }
+      },
+      "expectedRecommendations": [
+        "HRT is contraindicated due to active breast cancer. Immediate clinician referral required."
+      ],
+      "expectedConfidence": 95,
+      "expectedUrgency": "high"
+    },
+    {
+      "id": "case_6_low_risk_lifestyle",
+      "description": "Low ASCVD + mild symptoms",
+      "input": {
+        "age": 45,
+        "gender": "female",
+        "riskScores": {
+          "ASCVD": 4.2,
+          "Framingham": 3.8
+        },
+        "symptoms": {
+          "severity": "mild"
+        },
+        "history": {
+          "VTE": false,
+          "breastCancer_active": false
+        }
+      },
+      "expectedRecommendations": [
+        "Consider lifestyle modifications as first-line approach given low cardiovascular risk and mild symptoms"
+      ],
+      "expectedConfidence": 70,
+      "expectedUrgency": "low"
+    },
+    {
+      "id": "case_7_ssri_interaction",
+      "description": "On SSRI + severe vasomotor symptoms",
+      "input": {
+        "age": 53,
+        "gender": "female",
+        "medicineType": "SSRI",
+        "currentMedications": ["warfarin", "tramadol"],
+        "symptoms": {
+          "severity": "severe",
+          "type": "vasomotor"
+        }
+      },
+      "expectedRecommendations": [
+        "Potential drug interactions with current medications. Discuss with clinician before SSRI initiation."
+      ],
+      "expectedConfidence": 80,
+      "expectedUrgency": "medium"
+    },
+    {
+      "id": "case_8_elderly_renal_impairment",
+      "description": "Elderly with renal impairment + medication suggestion",
+      "input": {
+        "age": 78,
+        "gender": "female",
+        "comorbidities": {
+          "renalImpairment": true,
+          "diabetes": true
+        },
+        "medicineType": "HRT"
+      },
+      "expectedRecommendations": [
+        "Consider nephrology consultation for medication dosing in elderly patients with renal impairment"
+      ],
+      "expectedConfidence": 75,
+      "expectedUrgency": "medium"
+    },
+    {
+      "id": "case_9_high_wells_urgent",
+      "description": "High Wells score",
+      "input": {
+        "age": 59,
+        "gender": "female",
+        "riskScores": {
+          "Wells": 7.5
+        },
+        "symptoms": {
+          "legSwelling": true,
+          "legPain": true
+        }
+      },
+      "expectedRecommendations": [
+        "Urgent thrombosis evaluation recommended. Contact clinician immediately."
+      ],
+      "expectedConfidence": 95,
+      "expectedUrgency": "high"
+    },
+    {
+      "id": "case_10_incomplete_data",
+      "description": "Ambiguous/missing data",
+      "input": {
+        "age": 56,
+        "gender": "female",
+        "dataCompleteness": 65,
+        "riskScores": {
+          "ASCVD": null,
+          "FRAX": null
+        }
+      },
+      "expectedRecommendations": [
+        "Complete additional assessments before generating specific recommendations. Generic lifestyle advice provided."
+      ],
+      "expectedConfidence": 60,
+      "expectedUrgency": "low"
+    }
+  ]
+}

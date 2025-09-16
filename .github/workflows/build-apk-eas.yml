@@ -1,0 +1,156 @@
+name: Build Android APK with EAS
+
+on:
+  push:
+    branches: [ main, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      build_profile:
+        description: 'EAS Build profile'
+        required: false
+        default: 'preview'
+        type: choice
+        options:
+        - preview
+        - production
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    
+    env:
+      NODE_VERSION: '20'
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      
+    steps:
+    - name: 📚 Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: 🏗️ Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: 📦 Install dependencies
+      run: npm ci
+      
+    - name: 🚀 Setup EAS CLI
+      run: npm install -g @expo/cli eas-cli
+      
+    - name: ⚙️ Configure EAS Build
+      run: |
+        # Create eas.json if it doesn't exist
+        if [ ! -f "eas.json" ]; then
+          cat > eas.json << 'EOF'
+        {
+          "cli": {
+            "version": ">= 5.2.0"
+          },
+          "build": {
+            "preview": {
+              "android": {
+                "buildType": "apk",
+                "gradleCommand": ":app:assembleDebug"
+              }
+            },
+            "production": {
+              "android": {
+                "buildType": "aab"
+              }
+            }
+          },
+          "submit": {
+            "production": {}
+          }
+        }
+        EOF
+        fi
+        
+    - name: 🔨 Build APK with EAS
+      run: |
+        BUILD_PROFILE="${{ github.event.inputs.build_profile || 'preview' }}"
+        echo "Building with profile: $BUILD_PROFILE"
+        
+        # Start EAS build
+        eas build --platform android --profile $BUILD_PROFILE --non-interactive --wait
+        
+    - name: 📥 Download APK
+      run: |
+        # Get the latest build URL
+        BUILD_URL=$(eas build:list --platform android --limit 1 --json | jq -r '.[0].artifacts.buildUrl')
+        
+        if [ "$BUILD_URL" != "null" ] && [ -n "$BUILD_URL" ]; then
+          echo "Downloading APK from: $BUILD_URL"
+          curl -L -o mht-assessment-eas.apk "$BUILD_URL"
+          
+          if [ -f "mht-assessment-eas.apk" ]; then
+            APK_SIZE=$(ls -lh mht-assessment-eas.apk | awk '{print $5}')
+            echo "✅ APK downloaded successfully! Size: $APK_SIZE"
+            echo "apk_path=mht-assessment-eas.apk" >> $GITHUB_OUTPUT
+            echo "apk_size=$APK_SIZE" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Failed to download APK"
+            exit 1
+          fi
+        else
+          echo "❌ No build URL found"
+          exit 1
+        fi
+        
+    - name: 📤 Upload APK artifact
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: mht-assessment-apk-eas
+        path: mht-assessment-eas.apk
+        retention-days: 30
+        
+    - name: 📋 Build Summary
+      if: success()
+      run: |
+        echo "## 🎉 EAS Android APK Build Complete!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Build Details:**" >> $GITHUB_STEP_SUMMARY
+        echo "- **APK Name:** mht-assessment-eas.apk" >> $GITHUB_STEP_SUMMARY
+        echo "- **APK Size:** $(ls -lh mht-assessment-eas.apk | awk '{print $5}')" >> $GITHUB_STEP_SUMMARY
+        echo "- **Build Profile:** ${{ github.event.inputs.build_profile || 'preview' }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Node Version:** ${{ env.NODE_VERSION }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Installation Instructions:**" >> $GITHUB_STEP_SUMMARY
+        echo "1. Download the APK from the artifacts section above" >> $GITHUB_STEP_SUMMARY
+        echo "2. Enable 'Unknown Sources' on your Android device" >> $GITHUB_STEP_SUMMARY
+        echo "3. Install the APK on your device" >> $GITHUB_STEP_SUMMARY
+        
+    - name: 🏷️ Create Release (on tag push)
+      if: startsWith(github.ref, 'refs/tags/v') && success()
+      uses: softprops/action-gh-release@v1
+      with:
+        files: mht-assessment-eas.apk
+        draft: false
+        prerelease: false
+        body: |
+          ## MHT Assessment - EAS Build Android APK
+          
+          **Build Information:**
+          - Built with Expo EAS Build
+          - APK Size: $(ls -lh mht-assessment-eas.apk | awk '{print $5}')
+          - Target SDK: Android 14 (API 34)
+          - Minimum SDK: Android 6.0 (API 23)
+          
+          **Installation:**
+          1. Download the APK file below
+          2. Enable "Unknown Sources" in Android settings
+          3. Install the APK on your device
+          
+          **Features:**
+          - Complete MHT Assessment functionality
+          - Drug Interaction Checker
+          - Patient data management
+          - PDF export capabilities
+          - Offline operation
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

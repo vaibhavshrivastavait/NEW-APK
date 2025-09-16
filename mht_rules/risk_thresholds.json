@@ -1,0 +1,8 @@
+{
+  "ASCVD": { "low": 0, "intermediate": 5, "high": 20 },
+  "Framingham": { "low": 0, "intermediate": 10, "high": 20 },
+  "Gail": { "low": 0, "intermediate": 1.7, "high": 3.0 },
+  "TyrerCuzick": { "low": 0, "intermediate": 10, "high": 20 },
+  "Wells": { "low": 0, "moderate": 1, "high": 3 },
+  "FRAX": { "low": 0, "intermediate": 10, "high": 20 }
+}

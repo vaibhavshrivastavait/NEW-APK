@@ -1,0 +1,262 @@
+MHT ASSESSMENT - REACT NATIVE SOURCE CODE
+========================================
+
+This file contains the complete source code for the MHT Assessment React Native/Expo app.
+Copy and paste each section into the appropriate files to recreate the project.
+
+=== PACKAGE.JSON ===
+{
+  "name": "mht-assessment",
+  "main": "./index.js",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^14.1.0",
+    "@react-native-async-storage/async-storage": "2.1.2",
+    "@react-native-picker/picker": "^2.11.1",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "expo": "53.0.22",
+    "expo-constants": "~17.1.7",
+    "expo-print": "^14.1.4",
+    "expo-sharing": "^13.1.5",
+    "expo-splash-screen": "~0.30.10",
+    "expo-status-bar": "~2.2.3",
+    "react": "19.0.0",
+    "react-native": "0.79.5",
+    "react-native-safe-area-context": "5.4.0",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@types/react": "~19.0.10",
+    "typescript": "~5.8.3"
+  },
+  "private": true
+}
+
+=== APP.JSON ===
+{
+  "expo": {
+    "name": "MHT Assessment",
+    "slug": "mht-assessment",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/branding/mht_logo_primary.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FDE7EF"
+    },
+    "icon": "./assets/images/branding/mht_logo_primary.png",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mht.assessment"
+    },
+    "android": {
+      "package": "com.mht.assessment",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/branding/mht_logo_primary.png",
+        "backgroundColor": "#FDE7EF"
+      },
+      "permissions": [
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": ["expo-print", "expo-sharing"]
+  }
+}
+
+=== EAS.JSON ===
+{
+  "cli": {"version": ">= 12.0.0"},
+  "build": {
+    "development": {
+      "extends": "debug",
+      "android": {"gradleCommand": ":app:assembleDebug", "buildType": "apk"},
+      "channel": "development"
+    },
+    "production": {
+      "android": {"buildType": "aab"}
+    }
+  }
+}
+
+=== INDEX.JS ===
+import { registerRootComponent } from 'expo';
+import App from './App';
+registerRootComponent(App);
+
+=== APP.TSX (MAIN APP COMPONENT) ===
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StatusBar } from 'expo-status-bar';
+
+// Import screens
+import HomeScreen from './screens/HomeScreen';
+import PatientIntakeScreen from './screens/PatientIntakeScreen';
+import PatientListScreen from './screens/PatientListScreen';
+import DemographicsScreen from './screens/DemographicsScreen';
+import SymptomsScreen from './screens/SymptomsScreen';
+import RiskFactorsScreen from './screens/RiskFactorsScreen';
+import ResultsScreen from './screens/ResultsScreen';
+import CmeScreen from './screens/CmeScreen';
+import GuidelinesScreen from './screens/GuidelinesScreen';
+import ExportScreen from './screens/ExportScreen';
+import PatientDetailsScreen from './screens/PatientDetailsScreen';
+import SettingsScreen from './screens/SettingsScreen';
+
+// Import splash screen
+import AnimatedSplash from './components/SplashScreen';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+  };
+
+  // Show splash screen first
+  if (showSplash) {
+    return <AnimatedSplash onAnimationComplete={handleSplashComplete} />;
+  }
+
+  return (
+    <NavigationContainer>
+      <StatusBar style="dark" backgroundColor="#FFC1CC" />
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#FFC1CC',
+          },
+          headerTintColor: '#D81B60',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerShown: false, // We handle headers in individual screens
+        }}>
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen}
+          options={{ title: 'MHT Assessment' }}
+        />
+        <Stack.Screen 
+          name="PatientIntake" 
+          component={PatientIntakeScreen}
+          options={{ title: 'New Assessment' }}
+        />
+        <Stack.Screen 
+          name="PatientList" 
+          component={PatientListScreen}
+          options={{ title: 'Patient List' }}
+        />
+        <Stack.Screen 
+          name="Demographics" 
+          component={DemographicsScreen}
+          options={{ title: 'Demographics' }}
+        />
+        <Stack.Screen 
+          name="Symptoms" 
+          component={SymptomsScreen}
+          options={{ title: 'Symptoms' }}
+        />
+        <Stack.Screen 
+          name="RiskFactors" 
+          component={RiskFactorsScreen}
+          options={{ title: 'Risk Factors' }}
+        />
+        <Stack.Screen 
+          name="Results" 
+          component={ResultsScreen}
+          options={{ title: 'Results' }}
+        />
+        <Stack.Screen 
+          name="Cme" 
+          component={CmeScreen}
+          options={{ title: 'CME Mode' }}
+        />
+        <Stack.Screen 
+          name="Guidelines" 
+          component={GuidelinesScreen}
+          options={{ title: 'MHT Guidelines' }}
+        />
+        <Stack.Screen 
+          name="Export" 
+          component={ExportScreen}
+          options={{ title: 'Export' }}
+        />
+        <Stack.Screen 
+          name="PatientDetails" 
+          component={PatientDetailsScreen}
+          options={{ title: 'Patient Details' }}
+        />
+        <Stack.Screen 
+          name="Settings" 
+          component={SettingsScreen}
+          options={{ title: 'Settings' }}
+        />
+        <Stack.Screen 
+          name="CmeModule" 
+          component={require('./screens/CmeModuleScreen').default}
+          options={{ title: 'CME Module' }}
+        />
+        <Stack.Screen 
+          name="CmeQuiz" 
+          component={require('./screens/CmeQuizScreen').default}
+          options={{ title: 'CME Quiz' }}
+        />
+        <Stack.Screen 
+          name="CmeCertificate" 
+          component={require('./screens/CmeCertificateScreen').default}
+          options={{ title: 'CME Certificate' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+=== QUICK SETUP INSTRUCTIONS ===
+
+1. Create new Expo project:
+   npx create-expo-app MHTAssessment --template blank-typescript
+
+2. Replace the generated files with the code above
+
+3. Create folder structure:
+   mkdir -p screens components store assets/images/branding
+
+4. Install dependencies:
+   npm install @expo/vector-icons @react-native-async-storage/async-storage @react-native-picker/picker @react-navigation/native @react-navigation/native-stack expo-print expo-sharing zustand
+
+5. Build APK:
+   npm install -g eas-cli
+   npx eas login
+   eas build --platform android --profile development
+
+=== NOTE ===
+This text file contains the core configuration to get started.
+The complete app has 15+ screen files, CME content JSON, and assets.
+Use this as a starting point and build out the screens based on the structure shown.
+
+=== ALTERNATIVE DOWNLOAD OPTIONS ===
+If you cannot download ZIP files from this platform, you can:
+1. Copy this text file content to recreate the basic structure
+2. Follow the EAS build instructions to generate real APK files
+3. Contact support for alternative file sharing methods

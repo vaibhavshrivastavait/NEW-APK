@@ -1,0 +1,22 @@
+[
+  {"id":"case-1","input":{"age":58,"ASCVD":25,"Gail":0.8,"TyrerCuzick":5,"Wells":0,"FRAX":8,"meds":["statins"],"therapy_selected":"estrogen_oral","symptom_severity":7}},
+  {"id":"case-2","input":{"age":62,"ASCVD":3,"Gail":4.0,"TyrerCuzick":22,"Wells":0,"FRAX":12,"meds":[],"therapy_selected":"estrogen_oral","symptom_severity":8}},
+  {"id":"case-3","input":{"age":49,"ASCVD":2,"Gail":0.3,"TyrerCuzick":1.2,"Wells":4,"wells_recent_event":true,"FRAX":2,"meds":["anticoagulants"],"therapy_selected":"estrogen_transdermal","symptom_severity":6}},
+  {"id":"case-4","input":{"age":51,"ASCVD":4,"Gail":0.5,"TyrerCuzick":2,"Wells":0,"FRAX":25,"meds":["calcium"],"therapy_selected":"none","symptom_severity":3}},
+  {"id":"case-5","input":{"age":44,"ASCVD":1,"Gail":0.2,"TyrerCuzick":0.5,"Wells":0,"FRAX":1,"meds":["anticonvulsants"],"therapy_selected":"estrogen_oral","symptom_severity":8}},
+  {"id":"case-6","input":{"age":55,"ASCVD":18,"Gail":1.0,"TyrerCuzick":5,"Wells":0,"FRAX":9,"meds":["ppis"],"therapy_selected":"estrogen_transdermal","symptom_severity":6}},
+  {"id":"case-7","input":{"age":60,"ASCVD":30,"Gail":2.0,"TyrerCuzick":12,"Wells":0,"FRAX":22,"meds":["anticoagulants"],"therapy_selected":"estrogen_oral","symptom_severity":9}},
+  {"id":"case-8","input":{"age":48,"ASCVD":2,"Gail":0.4,"TyrerCuzick":1.0,"Wells":0,"FRAX":2,"meds":["herbal"],"therapy_selected":"estrogen_oral","symptom_severity":5}},
+  {"id":"case-9","input":{"age":42,"ASCVD":0.5,"Gail":0.1,"TyrerCuzick":0.2,"Wells":0,"FRAX":0.2,"meds":[],"therapy_selected":"estrogen_transdermal","symptom_severity":9}},
+  {"id":"case-10","input":{"age":50,"ASCVD":7,"Gail":1.8,"TyrerCuzick":9,"Wells":2,"FRAX":7,"meds":["anticoagulants","statins"],"therapy_selected":"progestogen_oral","symptom_severity":6}},
+  {"id":"case-11","input":{"age":55,"ASCVD":12.1,"Gail":1.23,"TyrerCuzick":7.7,"Wells":0,"FRAX":5,"meds":["anticonvulsants"],"therapy_selected":"estrogen_transdermal","symptom_severity":7}},
+  {"id":"case-12","input":{"age":46,"ASCVD":0.9,"Gail":0.45,"TyrerCuzick":1.2,"Wells":0,"FRAX":1.2,"meds":["herbal"],"therapy_selected":"none","symptom_severity":2}},
+  {"id":"case-13","input":{"age":67,"ASCVD":22.4,"Gail":3.5,"TyrerCuzick":15.4,"Wells":1,"FRAX":18,"meds":["anticoagulants"],"therapy_selected":"estrogen_oral","symptom_severity":8}},
+  {"id":"case-14","input":{"age":39,"ASCVD":0.4,"Gail":0.05,"TyrerCuzick":0.1,"Wells":0,"FRAX":0.3,"meds":[],"therapy_selected":"non_hormonal","symptom_severity":5}},
+  {"id":"case-15","input":{"age":53,"ASCVD":9.6,"Gail":2.1,"TyrerCuzick":6.1,"Wells":0,"FRAX":11,"meds":["antibiotics_rifamycins"],"therapy_selected":"estrogen_oral","symptom_severity":7}},
+  {"id":"case-16","input":{"age":47,"ASCVD":3.2,"Gail":0.9,"TyrerCuzick":3.4,"Wells":0,"FRAX":4.0,"meds":["ppis"],"therapy_selected":"progestogen_oral","symptom_severity":4}},
+  {"id":"case-17","input":{"age":61,"ASCVD":17.5,"Gail":1.5,"TyrerCuzick":8.8,"Wells":0,"FRAX":16,"meds":["statins"],"therapy_selected":"estrogen_transdermal","symptom_severity":6}},
+  {"id":"case-18","input":{"age":68,"ASCVD":28,"Gail":4.2,"TyrerCuzick":21.0,"Wells":0,"FRAX":30,"meds":["anticoagulants","anticonvulsants"],"therapy_selected":"estrogen_oral","symptom_severity":9}},
+  {"id":"case-19","input":{"age":45,"ASCVD":2.3,"Gail":0.6,"TyrerCuzick":1.9,"Wells":0,"FRAX":2.5,"meds":["herbal"],"therapy_selected":"estrogen_oral","symptom_severity":3}},
+  {"id":"case-20","input":{"age":52,"ASCVD":14.7,"Gail":1.1,"TyrerCuzick":4.4,"Wells":0,"FRAX":9.9,"meds":["antifungals_strongCYP3A4"],"therapy_selected":"estrogen_oral","symptom_severity":8}}
+]

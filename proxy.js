@@ -1,0 +1,1 @@
+const http = require("http"); const httpProxy = require("http-proxy-middleware"); const express = require("express"); const app = express(); app.use("/", httpProxy.createProxyMiddleware({target: "http://localhost:8081", changeOrigin: true})); app.listen(3000);
