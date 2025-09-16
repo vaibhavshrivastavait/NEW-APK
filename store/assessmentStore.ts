@@ -425,102 +425,17 @@ const useAssessmentStore = create<AssessmentStore>()(
     }),
     {
       name: 'mht-assessment-storage',
-      storage: {
-        getItem: async (name) => {
-          try {
-            // Use direct AsyncStorage import for better reliability
-            const AsyncStorage = require('@react-native-async-storage/async-storage').default;
-            
-            if (!AsyncStorage) {
-              console.warn('AsyncStorage not available, returning empty state');
-              return null;
-            }
-
-            const value = await AsyncStorage.getItem(name);
-            if (!value) return null;
-            
-            const parsed = JSON.parse(value);
-            
-            // Convert date strings back to Date objects for patients
-            if (parsed?.state?.patients) {
-              parsed.state.patients = parsed.state.patients.map((patient: any) => ({
-                ...patient,
-                createdAt: patient.createdAt ? new Date(patient.createdAt) : new Date(),
-                updatedAt: patient.updatedAt ? new Date(patient.updatedAt) : new Date(),
-              }));
-            }
-            
-            // Handle follow-ups dates
-            if (parsed?.state?.followUps) {
-              parsed.state.followUps = parsed.state.followUps.map((followUp: any) => ({
-                ...followUp,
-                scheduledDate: followUp.scheduledDate ? new Date(followUp.scheduledDate) : new Date(),
-              }));
-            }
-            
-            // Handle assessments dates
-            if (parsed?.state?.assessments) {
-              parsed.state.assessments = parsed.state.assessments.map((assessment: any) => ({
-                ...assessment,
-                calculatedAt: assessment.calculatedAt ? new Date(assessment.calculatedAt) : new Date(),
-              }));
-            }
-            
-            return parsed;
-          } catch (error) {
-            console.error('Error parsing stored data:', error);
-            // Return a default state instead of null to prevent crashes
-            return {
-              state: {
-                currentPatient: null,
-                patients: [],
-                assessments: [],
-                recommendations: [],
-                followUps: [],
-                savedTreatmentPlans: [],
-              },
-              version: 0,
-            };
-          }
-        },
-        setItem: async (name, value) => {
-          try {
-            // Use direct AsyncStorage import for better reliability
-            const AsyncStorage = require('@react-native-async-storage/async-storage').default;
-            
-            if (!AsyncStorage) {
-              console.warn('AsyncStorage not available, cannot save data');
-              return;
-            }
-            
-            await AsyncStorage.setItem(name, JSON.stringify(value));
-          } catch (error) {
-            console.error('Error saving data to storage:', error);
-            // Don't throw error, just log it to prevent app crashes
-          }
-        },
-        removeItem: async (name) => {
-          try {
-            // Use direct AsyncStorage import for better reliability
-            const AsyncStorage = require('@react-native-async-storage/async-storage').default;
-            
-            if (!AsyncStorage) {
-              console.warn('AsyncStorage not available, cannot remove data');
-              return;
-            }
-            
-            await AsyncStorage.removeItem(name);
-          } catch (error) {
-            console.error('Error removing data from storage:', error);
-            // Don't throw error, just log it to prevent app crashes
-          }
-        },
-      },
-      // Add error handling and recovery options
+      // 🔧 Use createJSONStorage with lazy-loading (ChatGPT suggestion)
+      storage: createJSONStorage(() => {
+        console.log("🔍 createJSONStorage - initializing with safeStorage");
+        return safeStorage;
+      }),
+      // Enhanced error handling and recovery options
       onRehydrateStorage: () => {
+        console.log("🔍 onRehydrateStorage - starting store rehydration");
         return (state, error) => {
           if (error) {
-            console.error('Error rehydrating store:', error);
+            console.error('🚨 Error rehydrating store:', error);
             // Initialize with default values if rehydration fails
             return {
               currentPatient: null,
@@ -531,12 +446,14 @@ const useAssessmentStore = create<AssessmentStore>()(
               savedTreatmentPlans: [],
             };
           }
+          console.log("✅ Store rehydration successful");
           return state;
         };
       },
       skipHydration: false,
       version: 1,
       migrate: (persistedState: any, version: number) => {
+        console.log("🔍 Store migration - version:", version);
         // Handle version migrations if needed
         if (version === 0) {
           // Migrate from version 0 to 1
