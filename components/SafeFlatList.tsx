@@ -24,22 +24,28 @@ export default class SafeFlatList<T> extends Component<SafeFlatListProps<T>, Saf
   }
 
   static getDerivedStateFromError(error: Error): SafeFlatListState {
-    console.error('🚨 SafeFlatList: Caught critical error in render:', error);
+    console.error('🚨 SafeFlatList: Caught error in render:', error);
     
-    // Only catch specific storage-related errors and data rendering issues
+    // Only catch SPECIFIC storage-related errors, not general rendering errors
     const isStorageError = error.message.includes('AsyncStorage') || 
                           error.message.includes('getItem') || 
                           error.message.includes('setItem') ||
-                          error.message.includes('Cannot read property') ||
-                          error.message.includes('Cannot read properties of undefined') ||
-                          error.message.includes('Cannot read properties of null') ||
-                          error.name === 'TypeError';
+                          error.message.includes('removeItem') ||
+                          error.message.includes('Storage is not available') ||
+                          error.message.includes('Failed to initialize AsyncStorage');
     
-    if (isStorageError) {
+    // Only catch SPECIFIC fatal crashes that would crash the entire app
+    const isFatalCrash = error.name === 'ReferenceError' && 
+                        (error.message.includes('AsyncStorage is not defined') ||
+                         error.message.includes('Storage is not defined'));
+    
+    if (isStorageError || isFatalCrash) {
+      console.log('🛡️ SafeFlatList: Handling storage-specific error');
       return { hasError: true, error, retryCount: 0 };
     }
     
-    // Let other errors bubble up
+    // Let other errors (including rendering errors) bubble up naturally
+    console.log('🔄 SafeFlatList: Allowing non-storage error to bubble up');
     throw error;
   }
 
