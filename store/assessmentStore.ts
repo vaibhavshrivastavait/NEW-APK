@@ -454,18 +454,15 @@ const useAssessmentStore = create<AssessmentStore>()(
         },
         setItem: async (name, value) => {
           try {
-            // Additional safety check for crashProofStorage availability
-            if (!crashProofStorage || typeof crashProofStorage.setItem !== 'function') {
-              console.warn('crashProofStorage not available during setItem, cannot save data');
-              return;
-            }
-
-            const isAvailable = await crashProofStorage.isAvailable();
-            if (!isAvailable) {
+            // Use direct AsyncStorage import for better reliability
+            const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+            
+            if (!AsyncStorage) {
               console.warn('AsyncStorage not available, cannot save data');
               return;
             }
-            await crashProofStorage.setItem(name, JSON.stringify(value));
+            
+            await AsyncStorage.setItem(name, JSON.stringify(value));
           } catch (error) {
             console.error('Error saving data to storage:', error);
             // Don't throw error, just log it to prevent app crashes
