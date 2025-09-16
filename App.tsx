@@ -119,6 +119,11 @@ export default function App() {
           options={{ title: 'Patient Records' }}
         />
         <Stack.Screen 
+          name="PatientListTest" 
+          component={require('./screens/PatientListScreenTest').default}
+          options={{ title: 'Patient Records (Test)' }}
+        />
+        <Stack.Screen 
           name="Demographics" 
           component={DemographicsScreen}
           options={{ title: 'Patient Demographics' }}
