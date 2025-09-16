@@ -396,11 +396,18 @@ const useAssessmentStore = create<AssessmentStore>()(
       name: 'mht-assessment-storage',
       storage: {
         getItem: async (name) => {
-          const value = await crashProofStorage.getItem(name);
-          if (!value) return null;
-          
           try {
+            const isAvailable = await crashProofStorage.isAvailable();
+            if (!isAvailable) {
+              console.warn('AsyncStorage not available, returning empty state');
+              return null;
+            }
+
+            const value = await crashProofStorage.getItem(name);
+            if (!value) return null;
+            
             const parsed = JSON.parse(value);
+            
             // Convert date strings back to Date objects for patients
             if (parsed?.state?.patients) {
               parsed.state.patients = parsed.state.patients.map((patient: any) => ({
@@ -429,15 +436,81 @@ const useAssessmentStore = create<AssessmentStore>()(
             return parsed;
           } catch (error) {
             console.error('Error parsing stored data:', error);
-            return null;
+            // Return a default state instead of null to prevent crashes
+            return {
+              state: {
+                currentPatient: null,
+                patients: [],
+                assessments: [],
+                recommendations: [],
+                followUps: [],
+                savedTreatmentPlans: [],
+              },
+              version: 0,
+            };
           }
         },
         setItem: async (name, value) => {
-          await crashProofStorage.setItem(name, JSON.stringify(value));
+          try {
+            const isAvailable = await crashProofStorage.isAvailable();
+            if (!isAvailable) {
+              console.warn('AsyncStorage not available, cannot save data');
+              return;
+            }
+            await crashProofStorage.setItem(name, JSON.stringify(value));
+          } catch (error) {
+            console.error('Error saving data to storage:', error);
+            // Don't throw error, just log it to prevent app crashes
+          }
         },
         removeItem: async (name) => {
-          await crashProofStorage.removeItem(name);
+          try {
+            const isAvailable = await crashProofStorage.isAvailable();
+            if (!isAvailable) {
+              console.warn('AsyncStorage not available, cannot remove data');
+              return;
+            }
+            await crashProofStorage.removeItem(name);
+          } catch (error) {
+            console.error('Error removing data from storage:', error);
+            // Don't throw error, just log it to prevent app crashes
+          }
         },
+      },
+      // Add error handling and recovery options
+      onRehydrateStorage: () => {
+        return (state, error) => {
+          if (error) {
+            console.error('Error rehydrating store:', error);
+            // Initialize with default values if rehydration fails
+            return {
+              currentPatient: null,
+              patients: [],
+              assessments: [],
+              recommendations: [],
+              followUps: [],
+              savedTreatmentPlans: [],
+            };
+          }
+          return state;
+        };
+      },
+      skipHydration: false,
+      version: 1,
+      migrate: (persistedState: any, version: number) => {
+        // Handle version migrations if needed
+        if (version === 0) {
+          // Migrate from version 0 to 1
+          return {
+            ...persistedState,
+            patients: persistedState.patients || [],
+            assessments: persistedState.assessments || [],
+            recommendations: persistedState.recommendations || [],
+            followUps: persistedState.followUps || [],
+            savedTreatmentPlans: persistedState.savedTreatmentPlans || [],
+          };
+        }
+        return persistedState;
       },
     }
   )
