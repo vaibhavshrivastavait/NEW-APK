@@ -458,6 +458,12 @@ const useAssessmentStore = create<AssessmentStore>()(
         },
         setItem: async (name, value) => {
           try {
+            // Additional safety check for crashProofStorage availability
+            if (!crashProofStorage || typeof crashProofStorage.setItem !== 'function') {
+              console.warn('crashProofStorage not available during setItem, cannot save data');
+              return;
+            }
+
             const isAvailable = await crashProofStorage.isAvailable();
             if (!isAvailable) {
               console.warn('AsyncStorage not available, cannot save data');
