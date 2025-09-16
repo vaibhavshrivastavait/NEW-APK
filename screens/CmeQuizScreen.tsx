@@ -75,20 +75,7 @@ export default function CmeQuizScreen({ navigation, route }: Props) {
   const { moduleId } = route.params;
   
   // Safely handle CME content with fallback for APK builds
-  const [cmeContent] = useState(() => {
-    try {
-      return cmeContentImport || {
-        modules: [],
-        popularQuizzes: { quizzes: [] }
-      };
-    } catch (error) {
-      console.error('Error loading CME content:', error);
-      return {
-        modules: [],
-        popularQuizzes: { quizzes: [] }
-      };
-    }
-  });
+  const [cmeContent] = useState(() => loadCmeContent());
   
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
