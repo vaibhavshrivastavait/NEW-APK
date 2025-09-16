@@ -140,7 +140,7 @@ export interface TreatmentPlan {
   disclaimer: string;
 }
 
-class TreatmentPlanGenerator {
+export class TreatmentPlanGenerator {
   private rules = treatmentRules;
   
   /**
