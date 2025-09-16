@@ -64,6 +64,8 @@ const STORAGE_KEYS = {
 };
 
 export default function CmeCertificateScreen({ navigation }: Props) {
+  // Safely handle CME content with fallback for APK builds
+  const [cmeContent] = useState(() => loadCmeContent());
   const [progress, setProgress] = useState<CmeProgress>({});
   const [attempts, setAttempts] = useState<CmeAttempt[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
