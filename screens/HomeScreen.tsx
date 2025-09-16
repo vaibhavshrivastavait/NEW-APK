@@ -15,7 +15,6 @@ type RootStackParamList = {
   Symptoms: undefined;
   Cme: undefined;
   Guidelines: undefined;
-  RobustTreatmentPlan: undefined;
 };
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
