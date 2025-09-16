@@ -14,7 +14,17 @@ import { MaterialIcons } from '@expo/vector-icons';
 import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 
-const cmeContent = require('../assets/cme-content.json');
+// Import CME content with proper error handling for APK compatibility
+const loadCmeContent = () => {
+  try {
+    return require('../assets/cme-content.json');
+  } catch (error) {
+    console.error('Error loading CME content:', error);
+    return {
+      modules: []
+    };
+  }
+};
 
 type RootStackParamList = {
   Cme: undefined;
