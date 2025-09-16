@@ -9,7 +9,7 @@
  * - Plan templates and protocols
  */
 
-import { crashProofStorage } from './asyncStorageUtils';
+import crashProofStorage from './asyncStorageUtils';
 import { EnhancedTreatmentPlan } from './enhancedTreatmentEngine';
 
 export interface ClinicalGuideline {
