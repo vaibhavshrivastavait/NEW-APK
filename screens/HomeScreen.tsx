@@ -148,7 +148,7 @@ export default function HomeScreen({ navigation }: Props) {
             onPress={() => navigation.navigate('RobustTreatmentPlan')}
             testID="treatment-plan-generator"
           >
-            <MaterialIcons name="medical_services" size={24} color="#D81B60" />
+            <MaterialIcons name="healing" size={24} color="#D81B60" />
             <Text style={styles.secondaryButtonText}>Treatment Plan Generator</Text>
           </TouchableOpacity>
 
