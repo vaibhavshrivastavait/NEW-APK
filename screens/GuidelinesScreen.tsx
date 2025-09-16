@@ -19,8 +19,8 @@ import SafeFlatList from '../components/SafeFlatList';
 import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Import the guidelines data
-const guidelinesData = require('../assets/guidelines.json');
+// Import the guidelines data - using import instead of require for APK compatibility
+import guidelinesDataImport from '../assets/guidelines.json';
 
 type RootStackParamList = {
   Home: undefined;
