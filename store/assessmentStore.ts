@@ -477,6 +477,12 @@ const useAssessmentStore = create<AssessmentStore>()(
         },
         removeItem: async (name) => {
           try {
+            // Additional safety check for crashProofStorage availability
+            if (!crashProofStorage || typeof crashProofStorage.removeItem !== 'function') {
+              console.warn('crashProofStorage not available during removeItem, cannot remove data');
+              return;
+            }
+
             const isAvailable = await crashProofStorage.isAvailable();
             if (!isAvailable) {
               console.warn('AsyncStorage not available, cannot remove data');
