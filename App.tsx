@@ -25,6 +25,7 @@ import ClinicalDecisionSummaryScreen from './screens/ClinicalDecisionSummaryScre
 import PersonalizedRiskCalculatorsScreen from './screens/PersonalizedRiskCalculatorsScreen';
 import TreatmentPlanScreen from './screens/TreatmentPlanScreen';
 import RulesBasedTreatmentPlanScreen from './screens/RulesBasedTreatmentPlanScreen';
+import RobustTreatmentPlanScreen from './screens/RobustTreatmentPlanScreen';
 import MedicineSettingsScreen from './screens/MedicineSettingsScreen';
 
 // Import splash screen with FIXES
