@@ -743,5 +743,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
   },
+  errorText: {
+    fontSize: 14,
+    color: '#F44336',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    padding: 16,
+  },
 
 });
