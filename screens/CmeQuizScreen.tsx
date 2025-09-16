@@ -13,8 +13,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-// Import CME content - use merged content with popular quizzes
-const cmeContent = require('../assets/cme-content-merged.json');
+// Import CME content - using import instead of require for APK compatibility
+import cmeContentImport from '../assets/cme-content-merged.json';
 
 type RootStackParamList = {
   Cme: undefined;
