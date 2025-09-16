@@ -397,19 +397,15 @@ const useAssessmentStore = create<AssessmentStore>()(
       storage: {
         getItem: async (name) => {
           try {
-            // Additional safety check for crashProofStorage availability
-            if (!crashProofStorage || typeof crashProofStorage.getItem !== 'function') {
-              console.warn('crashProofStorage not available during getItem, returning empty state');
-              return null;
-            }
-
-            const isAvailable = await crashProofStorage.isAvailable();
-            if (!isAvailable) {
+            // Use direct AsyncStorage import for better reliability
+            const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+            
+            if (!AsyncStorage) {
               console.warn('AsyncStorage not available, returning empty state');
               return null;
             }
 
-            const value = await crashProofStorage.getItem(name);
+            const value = await AsyncStorage.getItem(name);
             if (!value) return null;
             
             const parsed = JSON.parse(value);
