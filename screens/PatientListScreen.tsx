@@ -29,7 +29,16 @@ interface Props {
 }
 
 export default function PatientListScreen({ navigation }: Props) {
-  const { patients, deletePatient, deleteAllPatients } = useAssessmentStore();
+  // 🔧 CRITICAL FIX: Handle store initialization failures
+  const storeData = useAssessmentStore();
+  console.log("🔍 PatientListScreen: Store data:", storeData);
+  
+  const { 
+    patients = [], 
+    deletePatient = () => {}, 
+    deleteAllPatients = () => {} 
+  } = storeData || {};
+  
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDeleteAll = () => {
