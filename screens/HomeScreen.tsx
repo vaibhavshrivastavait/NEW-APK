@@ -145,15 +145,6 @@ export default function HomeScreen({ navigation }: Props) {
 
           <TouchableOpacity 
             style={styles.secondaryButton} 
-            onPress={() => navigation.navigate('RobustTreatmentPlan')}
-            testID="treatment-plan-generator"
-          >
-            <MaterialIcons name="healing" size={24} color="#D81B60" />
-            <Text style={styles.secondaryButtonText}>Treatment Plan Generator</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={styles.secondaryButton} 
             onPress={() => navigation.navigate('About')}
             testID="about"
           >
