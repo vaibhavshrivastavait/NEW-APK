@@ -97,10 +97,24 @@ export default class SafeFlatList<T> extends Component<SafeFlatListProps<T>, Saf
       );
     }
 
+    // 🔧 CRITICAL FIX: Handle completely undefined data prop
+    console.log("🔍 SafeFlatList render - data type:", typeof this.props.data, "data:", this.props.data);
+    
     // Ensure data is always an array to prevent crashes
+    let safeData;
+    if (this.props.data === undefined || this.props.data === null) {
+      console.warn("🚨 SafeFlatList: data prop is null/undefined, using empty array");
+      safeData = [];
+    } else if (Array.isArray(this.props.data)) {
+      safeData = this.props.data;
+    } else {
+      console.warn("🚨 SafeFlatList: data prop is not an array, converting:", typeof this.props.data);
+      safeData = [];
+    }
+
     const safeProps = {
       ...this.props,
-      data: Array.isArray(this.props.data) ? this.props.data : []
+      data: safeData
     };
 
     // Safely render FlatList - let React handle other errors naturally
