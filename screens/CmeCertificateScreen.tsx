@@ -15,8 +15,18 @@ import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-// Import CME content
-const cmeContent = require('../assets/cme-content.json');
+// Import CME content with proper error handling for APK compatibility
+const loadCmeContent = () => {
+  try {
+    return require('../assets/cme-content.json');
+  } catch (error) {
+    console.error('Error loading CME content:', error);
+    return {
+      modules: [],
+      metadata: { totalCredits: 0 }
+    };
+  }
+};
 
 type RootStackParamList = {
   Cme: undefined;
