@@ -239,7 +239,7 @@ export default function TreatmentPlanScreenSimple({ navigation, route }: Props) 
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>📝 Clinical Summary</Text>
               <Text style={styles.summaryText}>
-                {route.params.generatedPlan.rationale?.[0]?.point || 
+                {route.params.generatedPlan.rationale && route.params.generatedPlan.rationale[0] && route.params.generatedPlan.rationale[0].point || 
                  'General menopause management approach with evidence-based recommendations.'}
               </Text>
             </View>
