@@ -8,6 +8,9 @@ module.exports = function (api) {
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       ['@babel/plugin-transform-private-methods', { loose: true }],
       ['@babel/plugin-transform-private-property-in-object', { loose: true }],
+      // Explicitly handle optional chaining and nullish coalescing
+      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-proposal-nullish-coalescing-operator',
       // NOTE: react-native-reanimated/plugin must be listed last
       'react-native-reanimated/plugin',
     ]
