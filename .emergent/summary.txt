@@ -1,69 +1,78 @@
 <analysis>
-The previous AI engineer focused on stabilizing the MHT Assessment Expo application. Initially, it fixed  errors by refactoring the Drug Interaction Checker and enhancing its UI. Persistent  crashes, primarily affecting  usage in , , and , were a major challenge. The engineer developed  with dynamic imports and updated core files, along with implementing . GitHub synchronization issues, including large file sizes and authentication, were repeatedly addressed. A Treatment Plan Generator feature was briefly implemented and then removed. Disk space, dependency (), and port conflicts repeatedly plagued the local development environment, leading to  failures. The most recent efforts centered on diagnosing persistent unable to load list errors on the mobile APK, which the AI initially misdiagnosed as rendering issues, then correctly as  import problems. Several  fixes were applied, archives were created, but the user continues to report the same mobile APK errors, and the AI is unable to access the uploaded error logs for diagnosis.
+The previous AI engineer focused on resolving persistent mobile APK issues. Initially, unable to load list errors were misdiagnosed as  problems, then correctly identified as  failures for JSON assets by a troubleshoot agent. After fixing these, a  emerged, pointing to  initialization. This involved multiple  import corrections and testing ChatGPT-suggested  wrappers. Due to environmental limitations, the AI could not execute builds, necessitating extensive user interaction for log collection and manual command execution. Git synchronization proved problematic, leading to manual instruction sets. Most recently, after attempts to disable Hermes (suspected as a cause for  issues), the app is now crashing on startup, shifting the focus to diagnosing this new critical error.
 </analysis>
 
 <product_requirements>
-The MHT Assessment is an offline-first React Native/Expo mobile app for clinical decision support, providing risk scoring, treatment plans, and a Drug Interaction Checker (DIC).
-**Problem:** The application has suffered from critical runtime errors, especially with , data persistence issues, and challenges with building and syncing the codebase.
-**Key Requirements & Current Implementation:**
-1.  **Stability**: Initial  crashes were addressed by developing  using dynamic  imports and implementing . However, these errors persist in mobile APK.
-2.  **Data Persistence**: Stabilized  access for patient records and guidelines, though reliability issues remain.
-3.  **Branding**: Custom app icon and animated splash screen.
-4.  **Drug Interaction Checker (DIC)**: Fully implemented with 150 combinations, categorized selection, and medical disclaimer.
-5.  **Deliverables**: Provided compressed project archives, detailed local setup, and APK build instructions, and scripts for GitHub synchronization.
-6.  **Ongoing Bug Fixes**: Addressed  failures, missing dependencies, and web preview failures. The current focus is to resolve the recurring unable to load list errors on the mobile APK. A Treatment Plan Generator feature was implemented and then removed per user request.
+The MHT Assessment is an offline-first React Native/Expo mobile application designed for clinical decision support, featuring risk scoring, treatment plans, and a Drug Interaction Checker (DIC). The core problem addressed has been persistent runtime errors, especially concerning , data persistence, and codebase build/sync challenges.
+
+Key requirements and current implementation status include:
+*   **Stability**: Addressed  crashes through , , and later by correcting  import mismatches. JSON asset loading via  calls in APK builds was also fixed with robust error handling. However, new crashes on startup have emerged after attempts to disable Hermes.
+*   **Data Persistence**:  access for patient records and guidelines was stabilized, though its reliability continues to be a debugging focus.
+*   **Branding**: Custom app icon and an animated splash screen are implemented.
+*   **Drug Interaction Checker (DIC)**: Fully functional with 150 combinations, categorized selection, and a medical disclaimer.
+*   **Deliverables**: Comprehensive project archives, local setup, APK build instructions, and GitHub synchronization scripts have been provided.
+*   **Ongoing Bug Fixes**: The current focus is diagnosing a new app crash on opening, which arose after attempting to disable Hermes to resolve previous  undefined errors.
 </product_requirements>
 
 <key_technical_concepts>
--   **React Native/Expo (SDK 50)**: Cross-platform mobile development,  for file-based routing.
--   **Zustand & **: State management with offline data persistence.
--   **TypeScript**: Type safety.
--   **Error Boundaries (, )**: UI stability.
--   **Android Gradle Build System**: Native APK generation.
--   **Git Large File Storage (Git LFS)**: For large files.
+-   **React Native/Expo (SDK 50)**: Cross-platform mobile development using .
+-   **Zustand & **: State management for offline data persistence.
+-   **TypeScript**: Ensures type safety throughout the codebase.
+-   **Error Boundaries (, )**: Critical for UI stability.
+-   **Android Gradle Build System**: For generating native APKs.
+-   **Hermes**: JavaScript engine for React Native, currently under investigation for runtime issues.
 </key_technical_concepts>
 
 <code_architecture>
-The application uses a standard Expo project structure, with  for file-based routing.
+The application uses a standard Expo project structure, leveraging  for file-based routing.
 
--   ****: Critical screen for MHT guidelines.
-    -   **Changes**: Initially updated to use  and . Later, defensive coding (null checks, try-catch) was added to  to prevent crashes from rendering logic errors.
--   ****: Manages patient records, previously crashed on load/save.
-    -   **Changes**: Updated to use  with  and relies on . Defensive coding was added to  with null checks and error logging.
--   ****: Zustand store for app state and patient data.
-    -   **Changes**: Direct  calls replaced with . Later, Zustand's persist configuration was made more resilient to  failures.
--   ****: Provides error boundaries for lists.
-    -   **Changes**: Initially designed to prevent crashes; later, its error boundary was adjusted to be less aggressive and provide better error recovery, distinguishing rendering errors from storage errors.
--   ****: Core  wrapper.
-    -   **Changes**: Initially used dynamic  with try/catch. Later, refactored to use a direct  for improved reliability and to avoid dynamic import timing issues, while retaining error handling.
--   ****: Displays assessment results and integrates DIC.
-    -   **Changes**: Fixed an incorrect import path for  from  to .
--   ****: Drug interaction logic.
-    -   **Changes**: Corrected an import path from  when the  directory was initially missing from the archive.
+
+
+-   ****: The main entry point for the application.
+    -   **Changes**: Debugging logs for  availability were added. A duplicate  import was introduced, causing an  error, which was subsequently fixed.
+-   ****: Displays MHT clinical guidelines.
+    -   **Changes**: Updated to use  function instead of direct  for JSON assets. Defensive coding with fallbacks for  was added to prevent crashes from undefined data.
+-   ****: Manages patient records.
+    -   **Changes**: Uses  with . Defensive coding with safe destructuring and fallbacks was added for  from  to handle store initialization issues. Debug logging for  was introduced.
+-   ****: Zustand store for application state.
+    -   **Changes**:  calls were initially replaced with . Later, modified to use  with a  wrapper, and then adjusted to use direct  to address timing issues. Additional store persistence protection was implemented.
+-   ****: Provides error boundaries and safe rendering for lists.
+    -   **Changes**: Enhanced error messages, added more robust handling for /  prop with detailed logging. A bug was identified and fixed where it incorrectly called  on the  prop.
+-   ****: Wrapper for .
+    -   **Changes**: Refactored to use a direct import of  from  and includes an  method.
+-   ****: Displays assessment results.
+    -   **Changes**: Fixed an incorrect import path for .
+-   ****: Implements drug interaction logic.
+    -   **Changes**: Corrected an import path for .
 -   ****: Utility for drug interaction aggregation.
-    -   **Changes**: Ensured this file, and its containing  directory, are properly included in the project archives after being identified as missing.
+    -   **Changes**: Updated  to  function for APK compatibility.
+-   ****, ****, ****, ****: CME-related screens.
+    -   **Changes**: Updated  statements to use  functions with error handling for JSON assets.
+-   ****: Safe wrapper for DIC.
+    -   **Changes**: Updated  to  function for JSON assets.
+-   **** and ****: Utilities for treatment plan data.
+    -   **Changes**: Corrected  imports from named  to default .
+-   ****: Screen for treatment plans.
+    -   **Changes**: Corrected  import from named to default.
+-   **** and ****: Temporary files created for debugging purposes.
+    -   **Changes**: These were created to test a simplified store and list component, bypassing  persistence to isolate the root cause.
+-   ** (PowerShell scripts)**: , , ,  (and their  versions).
+    -   **Changes**: These scripts were created and iteratively corrected for PowerShell syntax errors to help the user verify applied fixes, apply missing ones, and automatically disable Hermes on their local PC.
 </code_architecture>
 
 <pending_tasks>
--   User needs to consistently build and test fresh APKs on their local PC with the latest provided archives to verify fixes for unable to load list errors.
--   The AI engineer needs to continue diagnosing the mobile APK unable to load list error, especially since the uploaded error logs are not accessible.
--   Complete implementation of the Robust, offline-capable Treatment Plan Generator (initially added, then removed the button from UI, but the underlying components might still exist).
+-   Diagnose the new app crash on opening, which occurred after attempts to disable Hermes.
+-   Continue troubleshooting persistent  if it recurs.
+-   Complete implementation of the Robust, offline-capable Treatment Plan Generator (initially added, then button removed).
 -   Address remaining comprehensive product specifications (e.g., Knowledge Hub, encrypted SQLite, E2E tests).
 </pending_tasks>
 
 <current_work>
-Immediately before this summary, the AI engineer was addressing a persistent user report of unable to load list errors in Patient Records and MHT Guidelines on the mobile APK. The user has repeatedly uploaded  logs from their phone, but the AI engineer has consistently failed to extract and analyze these files directly from the provided URLs (e.g., Chat 567, 568).
+Immediately before this summary request, the user reported that the application is now **crashing on opening**. This critical issue emerged after the AI engineer, in an attempt to resolve prior  errors, provided a PowerShell script () to automatically disable Hermes, a suggestion to address potential timing or module loading conflicts specific to the Hermes JavaScript engine.
 
-Despite the inability to directly inspect the user's mobile error logs, the AI engineer has implemented several fixes based on the reported symptoms:
-1.  **Adjusted SafeFlatList error boundary** to be less aggressive and provide clearer messages, distinguishing rendering errors from storage issues (Chat 473).
-2.  **Added defensive coding** (null checks, try-catch blocks) to rendering logic in  (Chat 477) and  (Chat 485) to prevent crashes from invalid data.
-3.  **Simplified ** to use a direct import of  from  instead of a dynamic import, enhancing reliability (Chat 520).
-4.  **Corrected an import path** in  from  to  (Chat 424).
-5.  **Ensured the  directory** containing  was included in the compressed archives, as it was previously missing and caused build failures (Chat 544).
-
-The AI engineer has provided the user with an updated compressed archive () containing these fixes and comprehensive instructions for building a fresh APK (Chat 552, 562). The user's most recent message (Chat 563) indicates the same error persists on the phone, and the AI's last action was another unsuccessful attempt to analyze the provided  (Chat 565).
+The AI engineer's last action was to request specific and comprehensive crash logs from the user's mobile device to diagnose the immediate startup crash. The AI provided several  commands targeted at capturing all relevant crash details, including , , and fatal errors (). The AI also offered quick recovery steps, such as reverting Hermes changes (by restoring backup files) and performing a nuclear clean and rebuild of the project. This indicates a shift from debugging list loading failures to a more fundamental app initialization failure.
 </current_work>
 
 <optional_next_step>
-Explain inability to access error log, and request user to paste the exact error log content to enable further diagnosis of the mobile APK issue.
+Analyze the crash logs provided by the user to identify the root cause of the app crashing on opening.
 </optional_next_step>

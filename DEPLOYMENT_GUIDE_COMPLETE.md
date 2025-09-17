@@ -65,7 +65,7 @@ yarn install
 npx expo start
 
 # 3. Web Preview
-# Open: https://offline-medic.preview.emergentagent.com
+# Open: https://crash-proof-app.preview.emergentagent.com
 # Scan QR code with Expo Go app for mobile testing
 
 # 4. Android APK Build
@@ -146,7 +146,7 @@ python simple_backend.py
 ### **1. Development Environment**
 ```bash
 # Web Preview (Current)
-URL: https://offline-medic.preview.emergentagent.com
+URL: https://crash-proof-app.preview.emergentagent.com
 Features: Full interactive functionality
 Backend: FastAPI on port 8001
 Status: ✅ OPERATIONAL
