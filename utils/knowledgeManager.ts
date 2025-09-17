@@ -434,7 +434,7 @@ class KnowledgeManager {
    * Get nested property value
    */
   private getNestedValue(obj: any, path: string): any {
-    return path.split('.').reduce((current, key) => current?.[key], obj);
+    return path.split('.').reduce((current, key) => (current && current[key]) ? current[key] : undefined, obj);
   }
 }
 
