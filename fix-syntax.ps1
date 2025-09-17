@@ -55,14 +55,14 @@ foreach ($file in $filesToProcess) {
         $content = $content -replace '(\w+)\?\.([\w\[\]]+)', '$1 && $1.$2'
         $content = $content -replace '(\))\?\.([\w\[\]]+)', '$1 && $1.$2'
         $content = $content -replace '(\])\?\.([\w\[\]]+)', '$1 && $1.$2'
-        Write-Host "  $relativePath: $optionalChainingCount optional chaining operators" -ForegroundColor Yellow
+        Write-Host "  ${relativePath} - $optionalChainingCount optional chaining operators" -ForegroundColor Yellow
     }
     
     # Replace nullish coalescing (??) with || operator
     $nullishCount = ([regex]::Matches($content, '\?\?').Count)
     if ($nullishCount -gt 0) {
         $content = $content -replace '\?\?', '||'
-        Write-Host "  $relativePath: $nullishCount nullish coalescing operators" -ForegroundColor Yellow
+        Write-Host "  ${relativePath} - $nullishCount nullish coalescing operators" -ForegroundColor Yellow
     }
     
     if ($content -ne $originalContent) {
