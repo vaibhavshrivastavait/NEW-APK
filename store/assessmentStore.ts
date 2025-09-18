@@ -73,7 +73,7 @@ export interface RiskAssessment {
   cvdRisk: 'low' | 'moderate' | 'high';
   vteRisk: 'low' | 'moderate' | 'high' | 'very-high';
   overallRisk: 'low' | 'moderate' | 'high';
-  calculatedAt: Date;
+  calculatedAt: Date | string;
 }
 
 export interface MHTRecommendation {
