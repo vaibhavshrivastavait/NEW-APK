@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,14 +8,13 @@ import {
   TouchableOpacity,
   TextInput,
   Modal,
-  FlatList as RNFlatList,
+  FlatList,
   Linking,
   Alert,
   ActivityIndicator,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
-import SafeFlatList from '../components/SafeFlatList';
 import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
