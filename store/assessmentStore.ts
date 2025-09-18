@@ -305,7 +305,7 @@ const useAssessmentStore = create<AssessmentStore>()(
           cvdRisk,
           vteRisk,
           overallRisk,
-          calculatedAt: new Date(),
+          calculatedAt: new Date().toISOString(),
         };
 
         const assessments = get().assessments.filter(a => a.patientId !== patientId);
