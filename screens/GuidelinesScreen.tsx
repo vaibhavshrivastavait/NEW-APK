@@ -132,15 +132,17 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
     saveBookmarks(newBookmarks);
   };
 
-  // Bulletproof filtering that ALWAYS returns valid array
   const getFilteredGuidelines = (): GuidelineItem[] => {
     try {
+      // Defensive check - ensure guidelines is always a valid array
+      const safeGuidelines = Array.isArray(guidelines) ? guidelines : [];
+      
       if (!searchQuery.trim()) {
-        return [...guidelines]; // Always return a copy
+        return [...safeGuidelines]; // Always return a copy
       }
       
       const query = searchQuery.toLowerCase();
-      const filtered = guidelines.filter(item => 
+      const filtered = safeGuidelines.filter(item => 
         item && 
         item.title && 
         item.content && (
@@ -149,10 +151,12 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
         )
       );
       
-      return filtered.length > 0 ? filtered : [];
+      // Ensure we always return an array
+      return Array.isArray(filtered) ? filtered : [];
     } catch (error) {
       console.error('Error filtering guidelines:', error);
-      return [...guidelines]; // Fallback to all guidelines
+      // Fallback to safe empty array
+      return [];
     }
   };
 
