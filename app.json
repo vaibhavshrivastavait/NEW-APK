@@ -29,7 +29,29 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mht.assessment"
+      "package": "com.mht.assessment",
+      "versionCode": 1,
+      "permissions": [],
+      "allowBackup": false,
+      "supportsRtl": false,
+      "installLocation": "auto",
+      "largeHeap": true,
+      "screenOrientation": "default",
+      "resizeableActivity": true,
+      "supportsPictureInPicture": false,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.mht-assessment.com"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "bundler": "metro",
