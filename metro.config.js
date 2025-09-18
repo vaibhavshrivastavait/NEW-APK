@@ -30,4 +30,18 @@ config.resolver = {
   sourceExts: [...config.resolver.sourceExts, 'tsx', 'ts', 'jsx', 'js', 'json'],
 };
 
+// FIX FOR CONTAINER FILE WATCHER LIMITS (ENOSPC)
+// Use polling instead of file watching to bypass inotify limits
+config.watcher = {
+  usePolling: true,
+  pollDelayMs: 1000,
+  ignoreNodeModules: true,
+};
+
+// Exclude heavy directories from watching to reduce file count
+config.watchFolders = [];
+
+// Reduce file watching overhead
+config.maxWorkers = 2;
+
 module.exports = config;
