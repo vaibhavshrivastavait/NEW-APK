@@ -128,7 +128,7 @@ export default function App() {
       >
         <Stack.Screen 
           name="Home" 
-          component={HomeScreen}
+          component={HomeScreenComponent}
           options={{ title: 'MHT Assessment' }}
         />
         <Stack.Screen 
@@ -138,7 +138,7 @@ export default function App() {
         />
         <Stack.Screen 
           name="PatientList" 
-          component={PatientListScreen}
+          component={PatientListScreenComponent}
           options={{ title: 'Patient Records' }}
         />
         <Stack.Screen 
@@ -173,7 +173,7 @@ export default function App() {
         />
         <Stack.Screen 
           name="Guidelines" 
-          component={GuidelinesScreen}
+          component={GuidelinesScreenComponent}
           options={{ title: 'MHT Guidelines' }}
         />
         <Stack.Screen 
