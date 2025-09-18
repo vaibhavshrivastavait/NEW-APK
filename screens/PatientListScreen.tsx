@@ -165,10 +165,10 @@ export default function PatientListScreen({ navigation }: Props) {
     }
   }, [navigation]);
 
-  const renderPatientItem = ({ item }: { item: PatientData }) => {
-    // Add defensive checks for item data
+  // Enhanced render function with proper error handling and memoization
+  const renderPatientItem = useCallback(({ item }: { item: PatientData }) => {
     if (!item) {
-      console.error('🚨 PatientListScreen: Received null/undefined item in renderPatientItem');
+      console.error('❌ PatientListScreen: Received null/undefined item in renderPatientItem');
       return (
         <View style={styles.patientCard}>
           <Text style={styles.errorText}>Invalid patient data</Text>
@@ -176,13 +176,21 @@ export default function PatientListScreen({ navigation }: Props) {
       );
     }
 
-    // Ensure required fields exist
+    // Create safe item with all required fields
     const safeItem = {
+      id: item.id || `fallback_${Date.now()}`,
       name: item.name || 'Unknown Patient',
       age: item.age || 0,
       bmi: item.bmi || null,
       menopausalStatus: item.menopausalStatus || 'Unknown',
       createdAt: item.createdAt || new Date(),
+      height: item.height || 0,
+      weight: item.weight || 0,
+      hysterectomy: item.hysterectomy || false,
+      oophorectomy: item.oophorectomy || false,
+      hotFlushes: item.hotFlushes || 0,
+      nightSweats: item.nightSweats || 0,
+      sleepDisturbance: item.sleepDisturbance || 0,
       ...item
     };
 
@@ -190,17 +198,7 @@ export default function PatientListScreen({ navigation }: Props) {
       return (
         <TouchableOpacity 
           style={styles.patientCard}
-          onPress={() => navigation.navigate('PatientDetails', { 
-            patient: {
-              ...safeItem,
-              // Safely handle createdAt whether it's a Date object or string
-              createdAt: safeItem.createdAt && typeof safeItem.createdAt === 'object' && safeItem.createdAt.toISOString 
-                ? safeItem.createdAt.toISOString() 
-                : typeof safeItem.createdAt === 'string' 
-                  ? safeItem.createdAt 
-                  : new Date().toISOString()
-            }
-          })}
+          onPress={() => navigateToPatientDetails(safeItem)}
           activeOpacity={0.7}
         >
           <View style={styles.patientInfo}>
@@ -220,17 +218,9 @@ export default function PatientListScreen({ navigation }: Props) {
               style={styles.detailsButton}
               onPress={(e) => {
                 e.stopPropagation();
-                navigation.navigate('PatientDetails', { 
-                  patient: {
-                    ...safeItem,
-                    createdAt: safeItem.createdAt && typeof safeItem.createdAt === 'object' && safeItem.createdAt.toISOString 
-                      ? safeItem.createdAt.toISOString() 
-                      : typeof safeItem.createdAt === 'string' 
-                        ? safeItem.createdAt 
-                        : new Date().toISOString()
-                  }
-                });
+                navigateToPatientDetails(safeItem);
               }}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
               <MaterialIcons name="visibility" size={20} color="#2196F3" />
               <Text style={styles.detailsText}>View</Text>
@@ -241,6 +231,7 @@ export default function PatientListScreen({ navigation }: Props) {
                 e.stopPropagation();
                 handleDeletePatient(safeItem);
               }}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
               <MaterialIcons name="delete" size={20} color="#F44336" />
               <Text style={styles.deleteText}>Delete</Text>
@@ -249,14 +240,14 @@ export default function PatientListScreen({ navigation }: Props) {
         </TouchableOpacity>
       );
     } catch (error) {
-      console.error('🚨 PatientListScreen: Error rendering patient item:', error, 'Item:', item);
+      console.error('❌ PatientListScreen: Error rendering patient item:', error, 'Item:', item);
       return (
         <View style={styles.patientCard}>
           <Text style={styles.errorText}>Error displaying patient: {safeItem.name}</Text>
         </View>
       );
     }
-  };
+  }, [navigateToPatientDetails, handleDeletePatient, formatDate]);
 
   return (
     <SafeAreaView style={styles.container}>
