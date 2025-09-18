@@ -263,13 +263,14 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
     const isBookmarked = bookmarks.includes(guideline.id);
     const isExpanded = !isMultiPane && expandedSections[guideline.id];
     const isSelected = selectedGuideline?.id === guideline.id;
+    const isLegacy = guideline.id.startsWith('legacy-');
 
     return (
       <View 
         key={guideline.id} 
         style={[
           styles.guidelineCard, 
-          { backgroundColor: PRIORITY_COLORS[guideline.priority] },
+          { backgroundColor: PINK_PRIORITY_COLORS[guideline.priority] },
           isSelected && styles.selectedGuidelineCard
         ]}
       >
@@ -279,21 +280,30 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
           activeOpacity={0.7}
         >
           <View style={styles.headerLeft}>
-            <View style={styles.iconContainer}>
-              <MaterialIcons name={guideline.icon as any} size={24} color="#1976D2" />
+            <View style={[styles.iconContainer, { backgroundColor: isLegacy ? PINK_COLOR_SCHEME.secondary + '30' : PINK_COLOR_SCHEME.primaryLight }]}>
+              <MaterialIcons name={guideline.icon as any} size={24} color={PINK_COLOR_SCHEME.primary} />
             </View>
             <View style={styles.titleContainer}>
-              <ResponsiveText 
-                variant={deviceInfo.isTablet ? 'body' : 'caption'}
-                style={[styles.cardTitle, isSelected && styles.selectedText]}
-              >
-                {guideline.title}
-              </ResponsiveText>
+              <View style={styles.titleRow}>
+                <ResponsiveText 
+                  variant={deviceInfo.isTablet ? 'body' : 'caption'}
+                  style={[styles.cardTitle, isSelected && { color: PINK_COLOR_SCHEME.primary }]}
+                >
+                  {guideline.title}
+                </ResponsiveText>
+                {isLegacy && (
+                  <View style={[styles.legacyBadge, { backgroundColor: PINK_COLOR_SCHEME.secondary }]}>
+                    <ResponsiveText variant="caption" style={styles.legacyText}>
+                      Traditional
+                    </ResponsiveText>
+                  </View>
+                )}
+              </View>
               {renderPriorityBadge(guideline.priority)}
             </View>
           </View>
           <View style={styles.headerRight}>
-            <TouchableOpacity
+            <TouchableOpability
               style={[styles.bookmarkButton, { minHeight: touchTarget }]}
               onPress={() => toggleBookmark(guideline.id)}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
@@ -301,21 +311,21 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
               <MaterialIcons 
                 name={isBookmarked ? "bookmark" : "bookmark-border"} 
                 size={20} 
-                color={isBookmarked ? "#D32F2F" : "#757575"} 
+                color={isBookmarked ? PINK_COLOR_SCHEME.primary : "#757575"} 
               />
             </TouchableOpacity>
             {!isMultiPane && (
               <MaterialIcons 
                 name={isExpanded ? "keyboard-arrow-up" : "keyboard-arrow-down"} 
                 size={24} 
-                color="#757575" 
+                color={PINK_COLOR_SCHEME.primary} 
               />
             )}
             {isMultiPane && (
               <MaterialIcons 
                 name="chevron-right" 
                 size={24} 
-                color={isSelected ? '#1976D2' : '#ccc'} 
+                color={isSelected ? PINK_COLOR_SCHEME.primary : '#ccc'} 
               />
             )}
           </View>
@@ -323,28 +333,28 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
 
         {isExpanded && !isMultiPane && (
           <View style={styles.expandedContent}>
-            <ResponsiveText variant="caption" style={styles.overview}>
+            <ResponsiveText variant="caption" style={[styles.overview, { color: PINK_COLOR_SCHEME.text.secondary }]}>
               {guideline.content.overview}
             </ResponsiveText>
             
             {/* Quick Reference */}
             {guideline.quickReference && (
               <View style={styles.quickRefContainer}>
-                <ResponsiveText variant="body" style={styles.sectionTitle}>
+                <ResponsiveText variant="body" style={[styles.sectionTitle, { color: PINK_COLOR_SCHEME.primary }]}>
                   Quick Reference
                 </ResponsiveText>
                 {guideline.quickReference.items.map((item, index) => (
                   <View key={index} style={[styles.quickRefItem, 
                     { backgroundColor: item.severity === 'danger' ? '#FFEBEE' : 
-                                       item.severity === 'warning' ? '#FFF8E1' : '#E8F5E8' }
+                                       item.severity === 'warning' ? '#FFF8E1' : PINK_COLOR_SCHEME.background.selected }
                   ]}>
                     <ResponsiveText 
                       variant="caption"
-                      style={[styles.quickRefLabel, item.highlight && styles.boldText]}
+                      style={[styles.quickRefLabel, item.highlight && styles.boldText, { color: PINK_COLOR_SCHEME.text.primary }]}
                     >
                       {item.label}
                     </ResponsiveText>
-                    <ResponsiveText variant="caption" style={styles.quickRefValue}>
+                    <ResponsiveText variant="caption" style={[styles.quickRefValue, { color: PINK_COLOR_SCHEME.text.muted }]}>
                       {item.value}
                     </ResponsiveText>
                   </View>
@@ -355,7 +365,7 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
             {/* Action Buttons */}
             <View style={styles.actionButtons}>
               <TouchableOpacity 
-                style={[styles.actionButton, { minHeight: touchTarget }]}
+                style={[styles.actionButton, { minHeight: touchTarget, backgroundColor: PINK_COLOR_SCHEME.primary }]}
                 onPress={() => handleGuidelineSelect(guideline)}
               >
                 <MaterialIcons name="info" size={16} color="white" />
@@ -366,7 +376,7 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
               
               {guideline.decisionTree && (
                 <TouchableOpacity 
-                  style={[styles.actionButton, styles.decisionButton, { minHeight: touchTarget }]}
+                  style={[styles.actionButton, styles.decisionButton, { minHeight: touchTarget, backgroundColor: PINK_COLOR_SCHEME.accent }]}
                   onPress={() => startDecisionTree(guideline)}
                 >
                   <MaterialIcons name="account-tree" size={16} color="white" />
