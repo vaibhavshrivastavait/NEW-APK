@@ -356,6 +356,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
     );
   }, [selectedSection, modalVisible, closeSectionModal, toggleBookmark, bookmarks, renderTable, openWebLink, guidelines.version, guidelines.lastUpdated]);
 
+  // Main render
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" backgroundColor="#FFC1CC" />
@@ -365,6 +366,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
         <TouchableOpacity 
           style={styles.backButton} 
           onPress={() => navigation.goBack()}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Text style={styles.backButtonText}>←</Text>
         </TouchableOpacity>
@@ -372,6 +374,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
         <TouchableOpacity
           style={styles.searchButton}
           onPress={() => setShowSearch(!showSearch)}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <MaterialIcons name="search" size={24} color="#D81B60" />
         </TouchableOpacity>
@@ -393,6 +396,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
             <TouchableOpacity
               style={styles.clearButton}
               onPress={() => setSearchQuery('')}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
               <MaterialIcons name="clear" size={20} color="#999" />
             </TouchableOpacity>
@@ -422,18 +426,23 @@ export default function GuidelinesScreen({ navigation }: Props) {
         </View>
       </View>
 
-      {/* Sections list */}
-      <RNFlatList
-        data={filteredSections || []}
+      {/* Sections list - Using standard FlatList */}
+      <FlatList
+        data={filteredSections}
         keyExtractor={(item) => item.id}
         renderItem={renderSectionCard}
         contentContainerStyle={styles.sectionsList}
         showsVerticalScrollIndicator={false}
+        removeClippedSubviews={true}
+        maxToRenderPerBatch={10}
+        updateCellsBatchingPeriod={100}
+        windowSize={10}
       />
 
       {/* Section detail modal */}
       {renderSectionDetail()}
 
+      {/* Loading overlay */}
       {isLoading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color="#D81B60" />
