@@ -1,35 +1,23 @@
 const { getDefaultConfig } = require('expo/metro-config');
+const path = require('path');
 
-// Get the default Expo Metro configuration
 const config = getDefaultConfig(__dirname);
 
-// FIX FOR METRO SOURCE MAP ERROR
-config.serializer = {
-  ...config.serializer,
-  customSerializer: undefined,
-};
+// Minimal config to avoid file watcher issues
+config.resolver.blacklistRE = /(node_modules\/.*\/node_modules\/.*|__tests__\/.*|.*\/__tests__\/.*)/;
+config.resolver.platforms = ['ios', 'android', 'native', 'web'];
 
-// Disable source maps for debug builds
-config.transformer = {
-  ...config.transformer,
-  minifierConfig: {
-    sourceMap: false,
-    keep_fnames: true,
-    mangle: {
-      keep_fnames: true,
-    },
-  },
-};
+// Disable unnecessary features
+config.serializer.customSerializer = undefined;
+config.transformer.minifierConfig = { sourceMap: false };
 
-// Basic resolver
-config.resolver = {
-  ...config.resolver,
-  platforms: ['ios', 'android', 'native', 'web'],
-  sourceExts: [...config.resolver.sourceExts, 'tsx', 'ts', 'jsx', 'js', 'json'],
-};
-
-// Minimal configuration to reduce file system load
-config.watchFolders = [];
+// Limit watched folders
+config.watchFolders = [
+  path.resolve(__dirname, 'screens'),
+  path.resolve(__dirname, 'components'),
+  path.resolve(__dirname, 'utils'),
+  path.resolve(__dirname, 'store'),
+];
 config.maxWorkers = 1;
 
 module.exports = config;
