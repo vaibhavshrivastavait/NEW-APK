@@ -13,7 +13,7 @@ console.log("🔍 AsyncStorage.setItem type:", typeof AsyncStorage?.setItem);
 // Import screens
 import HomeScreen from './screens/HomeScreen';
 import PatientIntakeScreen from './screens/PatientIntakeScreen';
-import PatientListScreen from './screens/PatientListScreen';
+import PatientListScreen from './screens/PatientListScreenCrashProof';
 import DemographicsScreen from './screens/DemographicsScreen';
 import SymptomsScreen from './screens/SymptomsScreen';
 import RiskFactorsScreen from './screens/RiskFactorsScreen';
