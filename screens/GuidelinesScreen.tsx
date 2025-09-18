@@ -18,12 +18,25 @@ import { MaterialIcons } from '@expo/vector-icons';
 import crashProofStorage from '../utils/asyncStorageUtils';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Import guidelines data with proper error handling for APK compatibility
-const loadGuidelinesData = () => {
+// Safe guidelines data loading with comprehensive error handling
+const loadGuidelinesData = (): GuidelinesData => {
   try {
-    return require('../assets/guidelines.json');
+    const data = require('../assets/guidelines.json');
+    console.log('✅ Guidelines data loaded successfully');
+    
+    // Validate the data structure
+    if (!data || !data.sections || !Array.isArray(data.sections)) {
+      console.warn('⚠️ Invalid guidelines data structure, using fallback');
+      return {
+        version: "1.0.0",
+        lastUpdated: new Date().toISOString(),
+        sections: []
+      };
+    }
+    
+    return data;
   } catch (error) {
-    console.error('Error loading guidelines data:', error);
+    console.error('❌ Error loading guidelines data:', error);
     return {
       version: "1.0.0",
       lastUpdated: new Date().toISOString(),
