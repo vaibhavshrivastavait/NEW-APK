@@ -249,6 +249,7 @@ export default function PatientListScreen({ navigation }: Props) {
     }
   }, [navigateToPatientDetails, handleDeletePatient, formatDate]);
 
+  // Main render with enhanced UI and search functionality
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" backgroundColor="#FFC1CC" />
@@ -258,6 +259,7 @@ export default function PatientListScreen({ navigation }: Props) {
         <TouchableOpacity 
           style={styles.headerButton}
           onPress={() => navigation.goBack()}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
         </TouchableOpacity>
@@ -265,21 +267,71 @@ export default function PatientListScreen({ navigation }: Props) {
         <View style={styles.headerActions}>
           <TouchableOpacity 
             style={styles.headerButton}
+            onPress={() => setShowSearch(!showSearch)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <MaterialIcons name="search" size={24} color="#D81B60" />
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.headerButton}
             onPress={handleDeleteAll}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <MaterialIcons name="delete-sweep" size={24} color="#F44336" />
           </TouchableOpacity>
           <TouchableOpacity 
             style={styles.headerButton}
             onPress={() => navigation.navigate('PatientIntake')}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <MaterialIcons name="add" size={24} color="#D81B60" />
           </TouchableOpacity>
         </View>
       </View>
 
+      {/* Search bar */}
+      {showSearch && (
+        <View style={styles.searchContainer}>
+          <MaterialIcons name="search" size={20} color="#999" style={styles.searchIcon} />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search patients by name, age, or status..."
+            placeholderTextColor="#999"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            autoFocus
+          />
+          {searchQuery.length > 0 && (
+            <TouchableOpacity
+              style={styles.clearButton}
+              onPress={() => setSearchQuery('')}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <MaterialIcons name="clear" size={20} color="#999" />
+            </TouchableOpacity>
+          )}
+        </View>
+      )}
+
+      {/* Patient statistics */}
+      {patients.length > 0 && (
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{patients.length}</Text>
+            <Text style={styles.statLabel}>Total Records</Text>
+          </View>
+          {searchQuery && (
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>{filteredPatients.length}</Text>
+              <Text style={styles.statLabel}>Search Results</Text>
+            </View>
+          )}
+        </View>
+      )}
+
       <View style={styles.content}>
-        {patients.length === 0 ? (
+        {filteredPatients.length === 0 && !searchQuery ? (
+          /* Empty state */
           <View style={styles.emptyContainer}>
             <MaterialIcons name="folder-open" size={80} color="#E0E0E0" />
             <Text style={styles.emptyTitle}>No Patient Records</Text>
@@ -295,18 +347,53 @@ export default function PatientListScreen({ navigation }: Props) {
               <Text style={styles.addButtonText}>Start New Assessment</Text>
             </TouchableOpacity>
           </View>
+        ) : filteredPatients.length === 0 && searchQuery ? (
+          /* No search results */
+          <View style={styles.emptyContainer}>
+            <MaterialIcons name="search-off" size={80} color="#E0E0E0" />
+            <Text style={styles.emptyTitle}>No Results Found</Text>
+            <Text style={styles.emptySubtitle}>
+              No patient records match "{searchQuery}". Try adjusting your search terms.
+            </Text>
+            <TouchableOpacity 
+              style={styles.clearSearchButton} 
+              onPress={() => setSearchQuery('')}
+            >
+              <Text style={styles.clearSearchButtonText}>Clear Search</Text>
+            </TouchableOpacity>
+          </View>
         ) : (
-          <SafeFlatList
-            data={patients || []}
+          /* Patient list using standard FlatList */
+          <FlatList
+            data={filteredPatients}
             renderItem={renderPatientItem}
             keyExtractor={(item) => item.id}
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                colors={['#D81B60']}
+                tintColor="#D81B60"
+              />
+            }
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContainer}
+            removeClippedSubviews={true}
+            maxToRenderPerBatch={10}
+            updateCellsBatchingPeriod={100}
+            windowSize={10}
+            initialNumToRender={8}
           />
         )}
       </View>
+
+      {/* Loading overlay */}
+      {isLoading && (
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator size="large" color="#D81B60" />
+          <Text style={styles.loadingText}>Processing...</Text>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
