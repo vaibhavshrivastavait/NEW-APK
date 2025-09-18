@@ -462,6 +462,55 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
     );
   };
 
+  const renderPatientList = () => (
+    <View style={styles.patientListContainer}>
+      {/* Stats Bar */}
+      <View style={styles.statsBar}>
+        <Text style={styles.statsText}>
+          {filteredPatients.length} of {patients.length} patients
+        </Text>
+        <View style={styles.riskStats}>
+          <View style={[styles.riskStat, { backgroundColor: PINK_COLORS.risk.high }]}>
+            <Text style={styles.riskStatText}>
+              {filteredPatients.filter(p => p.riskLevel === 'high').length}
+            </Text>
+          </View>
+          <View style={[styles.riskStat, { backgroundColor: PINK_COLORS.risk.moderate }]}>
+            <Text style={styles.riskStatText}>
+              {filteredPatients.filter(p => p.riskLevel === 'moderate').length}
+            </Text>
+          </View>
+          <View style={[styles.riskStat, { backgroundColor: PINK_COLORS.risk.low }]}>
+            <Text style={styles.riskStatText}>
+              {filteredPatients.filter(p => p.riskLevel === 'low').length}
+            </Text>
+          </View>
+        </View>
+      </View>
+
+      {/* Patient List */}
+      <FlatList
+        data={filteredPatients}
+        renderItem={renderPatientCard}
+        keyExtractor={(item) => item.id}
+        style={styles.patientList}
+        contentContainerStyle={styles.patientListContent}
+        showsVerticalScrollIndicator={false}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        ListEmptyComponent={
+          <View style={styles.emptyContainer}>
+            <MaterialIcons name="folder-open" size={64} color={PINK_COLORS.text.light} />
+            <Text style={styles.emptyTitle}>No Patient Records Found</Text>
+            <Text style={styles.emptySubtitle}>
+              {searchQuery ? 'Try adjusting your search criteria' : 'Complete patient assessments will appear here'}
+            </Text>
+          </View>
+        }
+      />
+    </View>
+  );
+
   const renderPatientDetails = () => {
     if (!selectedPatient) {
       return (
