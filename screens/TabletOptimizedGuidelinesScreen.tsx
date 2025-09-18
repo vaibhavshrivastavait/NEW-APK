@@ -24,7 +24,17 @@ import ResponsiveText from '../components/ResponsiveText';
 import TabletOptimizedHeader from '../components/TabletOptimizedHeader';
 
 import { 
-  MHT_GUIDELINES, 
+  COMBINED_MHT_GUIDELINES,
+  PINK_COLOR_SCHEME,
+  PINK_CATEGORIES,
+  PINK_PRIORITY_COLORS,
+  EVIDENCE_COLORS,
+  searchGuidelines,
+  filterGuidelinesByCategory,
+  getGuidelinesCountByCategory
+} from '../data/combinedMHTGuidelines';
+
+import { 
   GuidelineSection, 
   ClinicalRecommendation, 
   DecisionTreeNode,
