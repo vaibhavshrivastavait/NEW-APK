@@ -94,7 +94,7 @@ export interface FollowUp {
   id: string;
   patientId: string;
   type: '1-month' | '6-month' | '12-month';
-  scheduledDate: Date;
+  scheduledDate: Date | string;
   completed: boolean;
   notes?: string;
 }
