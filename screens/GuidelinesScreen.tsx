@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   TextInput,
   Modal,
-  FlatList,
   Alert,
   ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -31,7 +33,7 @@ interface GuidelineItem {
   keyPoints: string[];
 }
 
-// Hardcoded safe data to prevent any loading issues
+// Bulletproof safe data
 const SAFE_GUIDELINES_DATA: GuidelineItem[] = [
   {
     id: '1',
@@ -83,10 +85,10 @@ const SAFE_GUIDELINES_DATA: GuidelineItem[] = [
   }
 ];
 
-const BOOKMARKS_KEY = 'mht_guidelines_bookmarks_crashproof';
+const BOOKMARKS_KEY = 'mht_guidelines_bookmarks_bulletproof';
 
-export default function GuidelinesScreenCrashProof({ navigation }: Props) {
-  // Simple state management with safe defaults
+export default function GuidelinesScreenBulletproof({ navigation }: Props) {
+  // Simple state with guaranteed safe defaults
   const [guidelines] = useState<GuidelineItem[]>(SAFE_GUIDELINES_DATA);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGuideline, setSelectedGuideline] = useState<GuidelineItem | null>(null);
@@ -130,35 +132,37 @@ export default function GuidelinesScreenCrashProof({ navigation }: Props) {
     saveBookmarks(newBookmarks);
   };
 
-  // Safe filtering with guaranteed array return
+  // Bulletproof filtering that ALWAYS returns valid array
   const getFilteredGuidelines = (): GuidelineItem[] => {
     try {
       if (!searchQuery.trim()) {
-        return Array.isArray(guidelines) ? guidelines : [];
+        return [...guidelines]; // Always return a copy
       }
       
       const query = searchQuery.toLowerCase();
       const filtered = guidelines.filter(item => 
-        item && (
-          item.title?.toLowerCase().includes(query) ||
-          item.content?.toLowerCase().includes(query)
+        item && 
+        item.title && 
+        item.content && (
+          item.title.toLowerCase().includes(query) ||
+          item.content.toLowerCase().includes(query)
         )
       );
       
-      return Array.isArray(filtered) ? filtered : [];
+      return filtered.length > 0 ? filtered : [];
     } catch (error) {
       console.error('Error filtering guidelines:', error);
-      return [];
+      return [...guidelines]; // Fallback to all guidelines
     }
   };
 
   const filteredGuidelines = getFilteredGuidelines();
 
-  const renderGuidelineCard = ({ item }: { item: GuidelineItem }) => {
-    if (!item) {
+  const renderGuidelineCard = (item: GuidelineItem, index: number) => {
+    if (!item || !item.id) {
       return (
-        <View style={styles.errorCard}>
-          <Text style={styles.errorText}>Invalid data</Text>
+        <View key={`error_${index}`} style={styles.errorCard}>
+          <Text style={styles.errorText}>Invalid guideline data</Text>
         </View>
       );
     }
@@ -167,6 +171,7 @@ export default function GuidelinesScreenCrashProof({ navigation }: Props) {
     
     return (
       <TouchableOpacity
+        key={item.id}
         style={styles.guidelineCard}
         onPress={() => setSelectedGuideline(item)}
         activeOpacity={0.7}
@@ -182,17 +187,17 @@ export default function GuidelinesScreenCrashProof({ navigation }: Props) {
           <TouchableOpacity
             style={styles.bookmarkButton}
             onPress={() => toggleBookmark(item.id)}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
             <MaterialIcons 
               name={isBookmarked ? "bookmark" : "bookmark-border"} 
-              size={20} 
+              size={24} 
               color={isBookmarked ? "#D81B60" : "#999"} 
             />
           </TouchableOpacity>
         </View>
         
-        <Text style={styles.cardTitle}>{item.title}</Text>
+        <Text style={styles.cardTitle} numberOfLines={2}>{item.title}</Text>
         <Text style={styles.cardContent} numberOfLines={3}>
           {item.content}
         </Text>
@@ -214,7 +219,6 @@ export default function GuidelinesScreenCrashProof({ navigation }: Props) {
       <Modal
         visible={!!selectedGuideline}
         animationType="slide"
-        presentationStyle="pageSheet"
         onRequestClose={() => setSelectedGuideline(null)}
       >
         <SafeAreaView style={styles.modalContainer}>
@@ -222,14 +226,20 @@ export default function GuidelinesScreenCrashProof({ navigation }: Props) {
             <TouchableOpacity
               style={styles.closeButton}
               onPress={() => setSelectedGuideline(null)}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             >
               <MaterialIcons name="close" size={24} color="#D81B60" />
             </TouchableOpacity>
-            <Text style={styles.modalTitle}>{selectedGuideline.title}</Text>
+            <Text style={styles.modalTitle} numberOfLines={1}>
+              {selectedGuideline.title}
+            </Text>
+            <View style={styles.closeButton} />
           </View>
 
-          <ScrollView style={styles.modalContent}>
+          <ScrollView 
+            style={styles.modalContent}
+            showsVerticalScrollIndicator={false}
+          >
             <Text style={styles.detailContent}>
               {selectedGuideline.content}
             </Text>
@@ -252,105 +262,101 @@ export default function GuidelinesScreenCrashProof({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" backgroundColor="#FFC1CC" />
-      
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.backButton} 
-          onPress={() => navigation.goBack()}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>MHT Guidelines</Text>
-        <TouchableOpacity
-          style={styles.searchButton}
-          onPress={() => setShowSearch(!showSearch)}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <MaterialIcons name="search" size={24} color="#D81B60" />
-        </TouchableOpacity>
-      </View>
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="dark" backgroundColor="#FFC1CC" />
+        
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity 
+            style={styles.backButton} 
+            onPress={() => navigation.goBack()}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>MHT Guidelines</Text>
+          <TouchableOpacity
+            style={styles.searchButton}
+            onPress={() => setShowSearch(!showSearch)}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <MaterialIcons name="search" size={24} color="#D81B60" />
+          </TouchableOpacity>
+        </View>
 
-      {/* Search Bar */}
-      {showSearch && (
-        <View style={styles.searchContainer}>
-          <MaterialIcons name="search" size={20} color="#999" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search guidelines..."
-            placeholderTextColor="#999"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            autoFocus
-          />
-          {searchQuery.length > 0 && (
-            <TouchableOpacity
-              onPress={() => setSearchQuery('')}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <MaterialIcons name="clear" size={20} color="#999" />
-            </TouchableOpacity>
-          )}
-        </View>
-      )}
-
-      {/* Stats */}
-      <View style={styles.statsContainer}>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{guidelines.length}</Text>
-          <Text style={styles.statLabel}>Guidelines</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>{bookmarks.length}</Text>
-          <Text style={styles.statLabel}>Bookmarked</Text>
-        </View>
-        <View style={styles.statItem}>
-          <Text style={styles.statNumber}>100%</Text>
-          <Text style={styles.statLabel}>Offline</Text>
-        </View>
-      </View>
-
-      {/* Guidelines List - CRASH PROOF */}
-      <View style={styles.listContainer}>
-        {isLoading ? (
-          <View style={styles.centerContainer}>
-            <ActivityIndicator size="large" color="#D81B60" />
-          </View>
-        ) : filteredGuidelines.length === 0 ? (
-          <View style={styles.centerContainer}>
-            <MaterialIcons name="search-off" size={60} color="#E0E0E0" />
-            <Text style={styles.emptyText}>
-              {searchQuery ? 'No results found' : 'No guidelines available'}
-            </Text>
-          </View>
-        ) : (
-          <FlatList
-            data={filteredGuidelines}
-            keyExtractor={(item) => item?.id || `fallback_${Math.random()}`}
-            renderItem={renderGuidelineCard}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContent}
-            removeClippedSubviews={false}
-            maxToRenderPerBatch={5}
-            updateCellsBatchingPeriod={100}
-            windowSize={10}
-            initialNumToRender={5}
-            onEndReachedThreshold={0.1}
-            ListEmptyComponent={() => (
-              <View style={styles.centerContainer}>
-                <Text style={styles.emptyText}>No guidelines found</Text>
-              </View>
+        {/* Search */}
+        {showSearch && (
+          <View style={styles.searchContainer}>
+            <MaterialIcons name="search" size={20} color="#999" />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search guidelines..."
+              placeholderTextColor="#999"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              autoFocus
+              returnKeyType="search"
+              onSubmitEditing={() => Keyboard.dismiss()}
+            />
+            {searchQuery.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setSearchQuery('')}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              >
+                <MaterialIcons name="clear" size={20} color="#999" />
+              </TouchableOpacity>
             )}
-          />
+          </View>
         )}
-      </View>
 
-      {/* Detail Modal */}
-      {renderDetailModal()}
-    </SafeAreaView>
+        {/* Stats */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{guidelines.length}</Text>
+            <Text style={styles.statLabel}>Guidelines</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>{bookmarks.length}</Text>
+            <Text style={styles.statLabel}>Bookmarked</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statNumber}>100%</Text>
+            <Text style={styles.statLabel}>Offline</Text>
+          </View>
+        </View>
+
+        {/* BULLETPROOF LIST - NO FLATLIST */}
+        <ScrollView 
+          style={styles.listContainer}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          {isLoading ? (
+            <View style={styles.centerContainer}>
+              <ActivityIndicator size="large" color="#D81B60" />
+              <Text style={styles.loadingText}>Loading guidelines...</Text>
+            </View>
+          ) : filteredGuidelines.length === 0 ? (
+            <View style={styles.centerContainer}>
+              <MaterialIcons name="search-off" size={60} color="#E0E0E0" />
+              <Text style={styles.emptyText}>
+                {searchQuery ? 'No results found' : 'No guidelines available'}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.listContent}>
+              {filteredGuidelines.map((item, index) => renderGuidelineCard(item, index))}
+            </View>
+          )}
+        </ScrollView>
+
+        {renderDetailModal()}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -363,8 +369,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     backgroundColor: '#FFC1CC',
     elevation: 2,
     shadowColor: '#000',
@@ -373,26 +379,32 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   backButton: {
-    padding: 8,
-    borderRadius: 8,
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 22,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: '#D81B60',
     flex: 1,
     textAlign: 'center',
   },
   searchButton: {
-    padding: 8,
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginHorizontal: 20,
-    marginTop: 16,
+    marginHorizontal: 16,
+    marginTop: 12,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 8,
@@ -409,8 +421,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: 'white',
-    marginHorizontal: 20,
-    marginTop: 16,
+    marginHorizontal: 16,
+    marginTop: 12,
     borderRadius: 12,
     paddingVertical: 16,
     elevation: 1,
@@ -419,21 +431,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#D81B60',
   },
   statLabel: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#999',
     marginTop: 4,
   },
   listContainer: {
     flex: 1,
-    marginTop: 16,
+    marginTop: 12,
   },
   listContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     paddingBottom: 20,
   },
   guidelineCard: {
@@ -462,13 +474,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bookmarkButton: {
-    padding: 4,
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
     marginBottom: 8,
+    lineHeight: 22,
   },
   cardContent: {
     fontSize: 14,
@@ -490,11 +506,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 60,
+    minHeight: 200,
   },
   emptyText: {
     fontSize: 16,
     color: '#999',
     marginTop: 16,
+    textAlign: 'center',
+  },
+  loadingText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 12,
   },
   errorCard: {
     backgroundColor: '#FFEBEE',
@@ -503,6 +526,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#FFCDD2',
+    justifyContent: 'center',
   },
   errorText: {
     fontSize: 14,
@@ -516,13 +540,17 @@ const styles = StyleSheet.create({
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     backgroundColor: '#FFC1CC',
     elevation: 2,
   },
   closeButton: {
-    padding: 8,
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modalTitle: {
     fontSize: 18,
@@ -534,7 +562,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   detailContent: {
     fontSize: 16,
