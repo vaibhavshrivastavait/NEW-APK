@@ -74,7 +74,6 @@ type RootStackParamList = {
   Results: undefined;
   Cme: undefined;
   Guidelines: undefined;
-  Export: undefined;
   PatientDetails: { 
     patient: Omit<PatientData, 'createdAt'> & { 
       createdAt: string | Date; // Allow both serialized string and Date
