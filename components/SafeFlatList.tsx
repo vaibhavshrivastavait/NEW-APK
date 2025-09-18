@@ -112,9 +112,26 @@ export default class SafeFlatList<T> extends Component<SafeFlatListProps<T>, Saf
       safeData = [];
     }
 
+    // Provide safe defaults for required FlatList props
     const safeProps = {
       ...this.props,
-      data: safeData
+      data: safeData,
+      // Provide default keyExtractor if missing
+      keyExtractor: this.props.keyExtractor || ((item: any, index: number) => {
+        if (item && typeof item === 'object' && item.id) {
+          return String(item.id);
+        }
+        if (item && typeof item === 'object' && item.key) {
+          return String(item.key);
+        }
+        return String(index);
+      }),
+      // Provide default renderItem if missing
+      renderItem: this.props.renderItem || (({ item }) => (
+        <View style={{ padding: 10 }}>
+          <Text>{JSON.stringify(item)}</Text>
+        </View>
+      ))
     };
 
     // Safely render FlatList - let React handle other errors naturally
