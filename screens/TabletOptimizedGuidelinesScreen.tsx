@@ -54,27 +54,7 @@ interface Props {
   navigation: GuidelinesNavigationProp;
 }
 
-const CATEGORIES = [
-  { key: 'all', label: 'All', icon: 'view-module', color: '#1976D2' },
-  { key: 'critical', label: 'Critical', icon: 'priority-high', color: '#D32F2F' },
-  { key: 'important', label: 'Important', icon: 'star', color: '#F57C00' },
-  { key: 'tools', label: 'Tools', icon: 'build', color: '#388E3C' },
-];
-
-const PRIORITY_COLORS = {
-  critical: '#FFEBEE',
-  important: '#FFF3E0',
-  standard: '#F5F5F5'
-};
-
-const EVIDENCE_COLORS = {
-  'High': '#4CAF50',
-  'Moderate': '#FF9800',
-  'Low': '#FF5722',
-  'Very Low': '#9E9E9E'
-};
-
-const BOOKMARKS_KEY = 'mht_professional_guidelines_bookmarks';
+const BOOKMARKS_KEY = 'mht_combined_guidelines_bookmarks';
 
 export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -127,29 +107,21 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
   };
 
   const filteredGuidelines = useMemo(() => {
-    let filtered = MHT_GUIDELINES;
-
-    // Filter by category
-    if (selectedCategory === 'critical') {
-      filtered = filtered.filter(g => g.priority === 'critical');
-    } else if (selectedCategory === 'important') {
-      filtered = filtered.filter(g => g.priority === 'important');
-    } else if (selectedCategory === 'tools') {
-      filtered = filtered.filter(g => g.decisionTree || g.quickReference);
-    }
-
-    // Filter by search
+    // First filter by category
+    let filtered = filterGuidelinesByCategory(selectedCategory, COMBINED_MHT_GUIDELINES);
+    
+    // Then filter by search query
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(guideline =>
-        guideline.title.toLowerCase().includes(query) ||
-        guideline.content.overview.toLowerCase().includes(query) ||
-        guideline.content.keyPoints.some(point => point.toLowerCase().includes(query))
-      );
+      filtered = searchGuidelines(searchQuery, filtered);
     }
 
     return filtered;
   }, [selectedCategory, searchQuery]);
+
+  const guidelinesCount = useMemo(() => 
+    getGuidelinesCountByCategory(COMBINED_MHT_GUIDELINES), 
+    []
+  );
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
