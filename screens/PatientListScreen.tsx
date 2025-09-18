@@ -181,11 +181,102 @@ export default function PatientListScreenBulletproof({ navigation }: Props) {
 
   const navigateToPatientDetails = useCallback((patient: SafePatientData) => {
     try {
-      // For now, just show an alert - you can implement navigation later
+      // Get full patient data from store
+      const fullPatientData = store?.patients?.find(p => p.id === patient.id);
+      const patientAssessment = store?.assessments?.find(a => a.patientId === patient.id);
+      const patientRecommendation = store?.recommendations?.find(r => r.patientId === patient.id);
+      
+      if (!fullPatientData) {
+        Alert.alert('Error', 'Patient details not found.');
+        return;
+      }
+
+      // Build comprehensive details text
+      let detailsText = `👤 PATIENT INFORMATION
+Name: ${fullPatientData.name}
+Age: ${fullPatientData.age} years
+Height: ${fullPatientData.height} cm
+Weight: ${fullPatientData.weight} kg
+BMI: ${fullPatientData.bmi?.toFixed(1) || 'N/A'}
+Menopausal Status: ${fullPatientData.menopausalStatus}
+Hysterectomy: ${fullPatientData.hysterectomy ? 'Yes' : 'No'}
+Oophorectomy: ${fullPatientData.oophorectomy ? 'Yes' : 'No'}
+
+🌡️ SYMPTOMS (VAS 0-10)
+Hot Flushes: ${fullPatientData.hotFlushes}/10
+Night Sweats: ${fullPatientData.nightSweats}/10
+Sleep Disturbance: ${fullPatientData.sleepDisturbance}/10
+Vaginal Dryness: ${fullPatientData.vaginalDryness}/10
+Mood Changes: ${fullPatientData.moodChanges}/10
+Joint Aches: ${fullPatientData.jointAches}/10
+
+⚠️ RISK FACTORS
+Family History Breast Cancer: ${fullPatientData.familyHistoryBreastCancer ? 'Yes' : 'No'}
+Family History Ovarian Cancer: ${fullPatientData.familyHistoryOvarian ? 'Yes' : 'No'}
+Personal History Breast Cancer: ${fullPatientData.personalHistoryBreastCancer ? 'Yes' : 'No'}
+Personal History DVT: ${fullPatientData.personalHistoryDVT ? 'Yes' : 'No'}
+Thrombophilia: ${fullPatientData.thrombophilia ? 'Yes' : 'No'}
+Smoking: ${fullPatientData.smoking ? 'Yes' : 'No'}
+Diabetes: ${fullPatientData.diabetes ? 'Yes' : 'No'}
+Hypertension: ${fullPatientData.hypertension ? 'Yes' : 'No'}
+High Cholesterol: ${fullPatientData.cholesterolHigh ? 'Yes' : 'No'}`;
+
+      // Add risk assessment if available
+      if (patientAssessment) {
+        detailsText += `
+
+📊 RISK ASSESSMENT
+Breast Cancer Risk: ${patientAssessment.breastCancerRisk?.toUpperCase() || 'N/A'}
+CVD Risk: ${patientAssessment.cvdRisk?.toUpperCase() || 'N/A'}
+VTE Risk: ${patientAssessment.vteRisk?.toUpperCase() || 'N/A'}
+Overall Risk: ${patientAssessment.overallRisk?.toUpperCase() || 'N/A'}`;
+      }
+
+      // Add recommendation if available
+      if (patientRecommendation) {
+        detailsText += `
+
+💊 MHT RECOMMENDATION
+Type: ${patientRecommendation.type || 'N/A'}
+Route: ${patientRecommendation.route === 'oral' ? 'Oral' :
+             patientRecommendation.route === 'transdermal' ? 'Transdermal' :
+             patientRecommendation.route === 'vaginal' ? 'Vaginal' :
+             patientRecommendation.route === 'none' ? 'None' : 'N/A'}`;
+        
+        if (patientRecommendation.progestogenType) {
+          detailsText += `
+Progestogen: ${patientRecommendation.progestogenType === 'micronized' ? 'Micronized Progesterone' :
+                  patientRecommendation.progestogenType === 'ius' ? 'Levonorgestrel IUS' :
+                  patientRecommendation.progestogenType === 'synthetic' ? 'Synthetic Progestogen' : 'N/A'}`;
+        }
+
+        if (patientRecommendation.rationale && patientRecommendation.rationale.length > 0) {
+          detailsText += `
+Rationale: ${patientRecommendation.rationale.join(', ')}`;
+        }
+      }
+
+      detailsText += `
+
+📅 ASSESSMENT DATE
+Created: ${formatDate(fullPatientData.createdAt || '')}`;
+
       Alert.alert(
-        'Patient Details',
-        `Name: ${patient.name}\nAge: ${patient.age}\nBMI: ${patient.bmi?.toFixed(1) || 'N/A'}\nStatus: ${patient.menopausalStatus}`,
-        [{ text: 'OK' }]
+        'Complete Patient Assessment',
+        detailsText,
+        [
+          { text: 'Close', style: 'cancel' },
+          { 
+            text: 'Export Report', 
+            onPress: () => {
+              // Could implement export functionality here
+              Alert.alert('Export', 'Export functionality can be implemented here');
+            }
+          }
+        ],
+        { 
+          style: 'default'
+        }
       );
     } catch (error) {
       console.error('Error showing patient details:', error);
