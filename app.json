@@ -3,7 +3,7 @@
     "name": "MHT Assessment",
     "slug": "mht-assessment",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "platforms": ["ios", "android", "web"],
