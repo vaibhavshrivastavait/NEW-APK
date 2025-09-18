@@ -38,10 +38,8 @@ interface Props {
 }
 
 export default function PatientListScreen({ navigation }: Props) {
-  // 🔧 CRITICAL FIX: Handle store initialization failures
+  // State management with modern React patterns
   const storeData = useAssessmentStore();
-  console.log("🔍 PatientListScreen: Store data:", storeData);
-  
   const { 
     patients = [], 
     deletePatient = () => {}, 
@@ -49,8 +47,42 @@ export default function PatientListScreen({ navigation }: Props) {
   } = storeData || {};
   
   const [refreshing, setRefreshing] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleDeleteAll = () => {
+  // Memoized filtered patients list for search functionality
+  const filteredPatients = useMemo(() => {
+    if (!searchQuery.trim()) return patients || [];
+    
+    const query = searchQuery.toLowerCase();
+    return (patients || []).filter(patient => 
+      patient.name.toLowerCase().includes(query) ||
+      patient.menopausalStatus.toLowerCase().includes(query) ||
+      patient.age.toString().includes(query)
+    );
+  }, [patients, searchQuery]);
+
+  // Memoized date formatter to prevent recreation on every render
+  const formatDate = useCallback((date: Date | string) => {
+    try {
+      const dateObj = typeof date === 'string' ? new Date(date) : date;
+      if (!dateObj || isNaN(dateObj.getTime())) {
+        return 'Invalid Date';
+      }
+      return dateObj.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    } catch (error) {
+      console.error('❌ Error formatting date:', error);
+      return 'Invalid Date';
+    }
+  }, []);
+
+  // Enhanced delete all functionality with better UX
+  const handleDeleteAll = useCallback(() => {
     if (patients.length === 0) {
       Alert.alert('Info', 'No patient records to delete.');
       return;
@@ -65,14 +97,24 @@ export default function PatientListScreen({ navigation }: Props) {
           text: 'Delete All', 
           style: 'destructive',
           onPress: () => {
-            deleteAllPatients();
+            setIsLoading(true);
+            try {
+              deleteAllPatients();
+              Alert.alert('Success', 'All patient records have been deleted.');
+            } catch (error) {
+              console.error('❌ Error deleting all patients:', error);
+              Alert.alert('Error', 'Failed to delete patient records. Please try again.');
+            } finally {
+              setIsLoading(false);
+            }
           }
         }
       ]
     );
-  };
+  }, [patients.length, deleteAllPatients]);
 
-  const handleDeletePatient = (patient: PatientData) => {
+  // Enhanced delete patient functionality
+  const handleDeletePatient = useCallback((patient: PatientData) => {
     Alert.alert(
       'Delete Patient Record',
       `Are you sure you want to delete ${patient.name}'s record? This action cannot be undone.`,
@@ -81,35 +123,47 @@ export default function PatientListScreen({ navigation }: Props) {
         { 
           text: 'Delete', 
           style: 'destructive',
-          onPress: () => deletePatient(patient.id)
+          onPress: () => {
+            try {
+              deletePatient(patient.id);
+              Alert.alert('Success', `${patient.name}'s record has been deleted.`);
+            } catch (error) {
+              console.error('❌ Error deleting patient:', error);
+              Alert.alert('Error', 'Failed to delete patient record. Please try again.');
+            }
+          }
         }
       ]
     );
-  };
+  }, [deletePatient]);
 
-  const handleRefresh = () => {
+  // Enhanced refresh functionality
+  const handleRefresh = useCallback(() => {
     setRefreshing(true);
-    // Simulate refresh delay
-    setTimeout(() => setRefreshing(false), 1000);
-  };
+    // Simulate refresh delay - in a real app this would fetch fresh data
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 1000);
+  }, []);
 
-  const formatDate = (date: Date | string) => {
-    // Handle both Date objects and string dates safely
+  // Navigate to patient details with proper error handling
+  const navigateToPatientDetails = useCallback((patient: PatientData) => {
     try {
-      const dateObj = typeof date === 'string' ? new Date(date) : date;
-      if (!dateObj || isNaN(dateObj.getTime())) {
-        return 'Invalid Date';
-      }
-      return dateObj.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
+      navigation.navigate('PatientDetails', { 
+        patient: {
+          ...patient,
+          createdAt: patient.createdAt && typeof patient.createdAt === 'object' && patient.createdAt.toISOString 
+            ? patient.createdAt.toISOString() 
+            : typeof patient.createdAt === 'string' 
+              ? patient.createdAt 
+              : new Date().toISOString()
+        }
       });
     } catch (error) {
-      console.error('Error formatting date:', error);
-      return 'Invalid Date';
+      console.error('❌ Error navigating to patient details:', error);
+      Alert.alert('Error', 'Unable to open patient details. Please try again.');
     }
-  };
+  }, [navigation]);
 
   const renderPatientItem = ({ item }: { item: PatientData }) => {
     // Add defensive checks for item data
