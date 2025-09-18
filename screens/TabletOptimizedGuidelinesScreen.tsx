@@ -176,7 +176,7 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
   const renderCategoryTabs = () => (
     <View style={[styles.tabContainer, { paddingHorizontal: spacing }]}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {CATEGORIES.map((category) => (
+        {PINK_CATEGORIES.map((category) => (
           <TouchableOpacity
             key={category.key}
             style={[
@@ -203,6 +203,23 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
             >
               {category.label}
             </ResponsiveText>
+            {/* Show count badge */}
+            {guidelinesCount[category.key] && (
+              <View style={[
+                styles.countBadge,
+                { backgroundColor: selectedCategory === category.key ? 'rgba(255,255,255,0.3)' : PINK_COLOR_SCHEME.primaryLight }
+              ]}>
+                <ResponsiveText 
+                  variant="caption"
+                  style={[
+                    styles.countText,
+                    { color: selectedCategory === category.key ? 'white' : PINK_COLOR_SCHEME.primary }
+                  ]}
+                >
+                  {guidelinesCount[category.key]}
+                </ResponsiveText>
+              </View>
+            )}
           </TouchableOpacity>
         ))}
       </ScrollView>
