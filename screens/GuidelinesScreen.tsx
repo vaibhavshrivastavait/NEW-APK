@@ -63,7 +63,7 @@ const SAFE_GUIDELINES_DATA: GuidelineItem[] = [
     id: '3',
     title: 'Route Selection',
     content: 'Choose between oral, transdermal, or vaginal routes based on patient risk factors and preferences.',
-    icon: 'medical_services',
+    icon: 'local-hospital',
     keyPoints: [
       'Transdermal preferred for VTE risk',
       'Oral acceptable for low-risk patients',
