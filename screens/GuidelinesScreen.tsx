@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -9,15 +9,25 @@ import {
   TextInput,
   Modal,
   Alert,
-  ActivityIndicator,
+  Dimensions,
   KeyboardAvoidingView,
   Platform,
-  Keyboard,
+  Linking,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { 
+  MHT_GUIDELINES, 
+  GuidelineSection, 
+  ClinicalRecommendation, 
+  DecisionTreeNode,
+  DECISION_TREES 
+} from '../data/comprehensiveMHTGuidelines';
+
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const TAB_WIDTH = (SCREEN_WIDTH - 40) / 4;
 
 type GuidelinesNavigationProp = NativeStackNavigationProp<any, 'Guidelines'>;
 
@@ -25,78 +35,39 @@ interface Props {
   navigation: GuidelinesNavigationProp;
 }
 
-interface GuidelineItem {
-  id: string;
-  title: string;
-  content: string;
-  icon: string;
-  keyPoints: string[];
-}
-
-// Bulletproof safe data
-const SAFE_GUIDELINES_DATA: GuidelineItem[] = [
-  {
-    id: '1',
-    title: 'Basic MHT Principles',
-    content: 'Menopause Hormone Therapy should be individualized based on patient symptoms, risk factors, and preferences. Use the lowest effective dose for the shortest duration needed.',
-    icon: 'info',
-    keyPoints: [
-      'Individualized risk-benefit assessment',
-      'Lowest effective dose',
-      'Regular monitoring and review',
-      'Shared decision making with patient'
-    ]
-  },
-  {
-    id: '2',
-    title: 'Contraindications',
-    content: 'Absolute contraindications include current breast cancer, active liver disease, recent VTE, and unexplained vaginal bleeding.',
-    icon: 'warning',
-    keyPoints: [
-      'Current or recent breast cancer',
-      'Active liver disease with abnormal LFTs',
-      'Recent venous thromboembolism',
-      'Unexplained vaginal bleeding'
-    ]
-  },
-  {
-    id: '3',
-    title: 'Route Selection',
-    content: 'Choose between oral, transdermal, or vaginal routes based on patient risk factors and preferences.',
-    icon: 'local-hospital',
-    keyPoints: [
-      'Transdermal preferred for VTE risk',
-      'Oral acceptable for low-risk patients',
-      'Vaginal for genitourinary symptoms only',
-      'Consider patient preference and convenience'
-    ]
-  },
-  {
-    id: '4',
-    title: 'Monitoring Guidelines',
-    content: 'Regular follow-up is essential for all patients on MHT to assess efficacy, safety, and continuation needs.',
-    icon: 'schedule',
-    keyPoints: [
-      '1-month initial follow-up',
-      '6-month routine monitoring',
-      'Annual comprehensive review',
-      'Breast and pelvic examination'
-    ]
-  }
+const CATEGORIES = [
+  { key: 'all', label: 'All', icon: 'view-module', color: '#1976D2' },
+  { key: 'critical', label: 'Critical', icon: 'priority-high', color: '#D32F2F' },
+  { key: 'important', label: 'Important', icon: 'star', color: '#F57C00' },
+  { key: 'tools', label: 'Tools', icon: 'build', color: '#388E3C' },
 ];
 
-const BOOKMARKS_KEY = 'mht_guidelines_bookmarks_bulletproof';
+const PRIORITY_COLORS = {
+  critical: '#FFEBEE',
+  important: '#FFF3E0',
+  standard: '#F5F5F5'
+};
 
-export default function GuidelinesScreenBulletproof({ navigation }: Props) {
-  // Simple state with guaranteed safe defaults
-  const [guidelines] = useState<GuidelineItem[]>(SAFE_GUIDELINES_DATA);
+const EVIDENCE_COLORS = {
+  'High': '#4CAF50',
+  'Moderate': '#FF9800',
+  'Low': '#FF5722',
+  'Very Low': '#9E9E9E'
+};
+
+const BOOKMARKS_KEY = 'mht_professional_guidelines_bookmarks';
+
+export default function ProfessionalGuidelinesScreen({ navigation }: Props) {
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedGuideline, setSelectedGuideline] = useState<GuidelineItem | null>(null);
+  const [selectedGuideline, setSelectedGuideline] = useState<GuidelineSection | null>(null);
+  const [activeTab, setActiveTab] = useState('overview');
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [bookmarks, setBookmarks] = useState<string[]>([]);
-  const [showSearch, setShowSearch] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [showDecisionTree, setShowDecisionTree] = useState(false);
+  const [decisionTreePath, setDecisionTreePath] = useState<string[]>([]);
+  const [currentDecisionNode, setCurrentDecisionNode] = useState<DecisionTreeNode | null>(null);
 
-  // Load bookmarks on mount
   useEffect(() => {
     loadBookmarks();
   }, []);
@@ -112,7 +83,6 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
       }
     } catch (error) {
       console.error('Error loading bookmarks:', error);
-      setBookmarks([]);
     }
   };
 
@@ -132,92 +102,224 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
     saveBookmarks(newBookmarks);
   };
 
-  const getFilteredGuidelines = (): GuidelineItem[] => {
-    try {
-      // Defensive check - ensure guidelines is always a valid array
-      const safeGuidelines = Array.isArray(guidelines) ? guidelines : [];
-      
-      if (!searchQuery.trim()) {
-        return [...safeGuidelines]; // Always return a copy
-      }
-      
+  const filteredGuidelines = useMemo(() => {
+    let filtered = MHT_GUIDELINES;
+
+    // Filter by category
+    if (selectedCategory === 'critical') {
+      filtered = filtered.filter(g => g.priority === 'critical');
+    } else if (selectedCategory === 'important') {
+      filtered = filtered.filter(g => g.priority === 'important');
+    } else if (selectedCategory === 'tools') {
+      filtered = filtered.filter(g => g.decisionTree || g.quickReference);
+    }
+
+    // Filter by search
+    if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      const filtered = safeGuidelines.filter(item => 
-        item && 
-        item.title && 
-        item.content && (
-          item.title.toLowerCase().includes(query) ||
-          item.content.toLowerCase().includes(query)
-        )
+      filtered = filtered.filter(guideline =>
+        guideline.title.toLowerCase().includes(query) ||
+        guideline.content.overview.toLowerCase().includes(query) ||
+        guideline.content.keyPoints.some(point => point.toLowerCase().includes(query))
       );
-      
-      // Ensure we always return an array
-      return Array.isArray(filtered) ? filtered : [];
-    } catch (error) {
-      console.error('Error filtering guidelines:', error);
-      // Fallback to safe empty array
-      return [];
+    }
+
+    return filtered;
+  }, [selectedCategory, searchQuery]);
+
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }));
+  };
+
+  const startDecisionTree = (guideline: GuidelineSection) => {
+    if (!guideline.decisionTree) return;
+    
+    setCurrentDecisionNode(guideline.decisionTree);
+    setDecisionTreePath([]);
+    setShowDecisionTree(true);
+  };
+
+  const handleDecisionChoice = (option: any) => {
+    if (option.nextNodeId) {
+      // Navigate to next node
+      const treeKey = Object.keys(DECISION_TREES).find(key => 
+        DECISION_TREES[key][option.nextNodeId]
+      );
+      if (treeKey && DECISION_TREES[treeKey][option.nextNodeId]) {
+        setCurrentDecisionNode(DECISION_TREES[treeKey][option.nextNodeId]);
+        setDecisionTreePath(prev => [...prev, option.text]);
+      }
+    } else {
+      // Show outcome
+      setDecisionTreePath(prev => [...prev, option.text]);
+      Alert.alert(
+        'Recommendation',
+        option.outcome,
+        [
+          { text: 'Start Over', onPress: () => setShowDecisionTree(false) },
+          { text: 'OK' }
+        ]
+      );
     }
   };
 
-  const filteredGuidelines = getFilteredGuidelines();
-
-  const renderGuidelineCard = (item: GuidelineItem, index: number) => {
-    if (!item || !item.id) {
-      return (
-        <View key={`error_${index}`} style={styles.errorCard}>
-          <Text style={styles.errorText}>Invalid guideline data</Text>
-        </View>
-      );
-    }
-
-    const isBookmarked = bookmarks.includes(item.id);
-    
-    return (
-      <TouchableOpacity
-        key={item.id}
-        style={styles.guidelineCard}
-        onPress={() => setSelectedGuideline(item)}
-        activeOpacity={0.7}
-      >
-        <View style={styles.cardHeader}>
-          <View style={styles.iconContainer}>
-            <MaterialIcons 
-              name={item.icon as any} 
-              size={24} 
-              color="#D81B60" 
-            />
-          </View>
+  const renderCategoryTabs = () => (
+    <View style={styles.tabContainer}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {CATEGORIES.map((category) => (
           <TouchableOpacity
-            style={styles.bookmarkButton}
-            onPress={() => toggleBookmark(item.id)}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            key={category.key}
+            style={[
+              styles.categoryTab,
+              selectedCategory === category.key && styles.activeTab,
+              { backgroundColor: selectedCategory === category.key ? category.color : 'white' }
+            ]}
+            onPress={() => setSelectedCategory(category.key)}
           >
             <MaterialIcons 
-              name={isBookmarked ? "bookmark" : "bookmark-border"} 
-              size={24} 
-              color={isBookmarked ? "#D81B60" : "#999"} 
+              name={category.icon as any} 
+              size={16} 
+              color={selectedCategory === category.key ? 'white' : category.color} 
             />
+            <Text style={[
+              styles.tabText,
+              { color: selectedCategory === category.key ? 'white' : category.color }
+            ]}>
+              {category.label}
+            </Text>
           </TouchableOpacity>
-        </View>
-        
-        <Text style={styles.cardTitle} numberOfLines={2}>{item.title}</Text>
-        <Text style={styles.cardContent} numberOfLines={3}>
-          {item.content}
+        ))}
+      </ScrollView>
+    </View>
+  );
+
+  const renderPriorityBadge = (priority: string) => (
+    <View style={[styles.priorityBadge, { backgroundColor: PRIORITY_COLORS[priority] }]}>
+      <MaterialIcons 
+        name={priority === 'critical' ? 'priority-high' : priority === 'important' ? 'star' : 'info'} 
+        size={12} 
+        color={priority === 'critical' ? '#D32F2F' : priority === 'important' ? '#F57C00' : '#757575'} 
+      />
+      <Text style={[styles.priorityText, { 
+        color: priority === 'critical' ? '#D32F2F' : priority === 'important' ? '#F57C00' : '#757575' 
+      }]}>
+        {priority.toUpperCase()}
+      </Text>
+    </View>
+  );
+
+  const renderEvidenceGrade = (recommendation: ClinicalRecommendation) => (
+    <View style={styles.evidenceContainer}>
+      <View style={[styles.evidenceBadge, { backgroundColor: EVIDENCE_COLORS[recommendation.evidenceLevel] }]}>
+        <Text style={styles.evidenceText}>
+          {recommendation.evidenceLevel}
         </Text>
-        
-        <View style={styles.cardFooter}>
-          <Text style={styles.keyPointsCount}>
-            {item.keyPoints?.length || 0} key points
-          </Text>
-          <MaterialIcons name="arrow-forward" size={16} color="#D81B60" />
-        </View>
-      </TouchableOpacity>
+      </View>
+      <Text style={styles.gradeText}>
+        {recommendation.grade} Recommendation
+      </Text>
+    </View>
+  );
+
+  const renderGuidelineCard = (guideline: GuidelineSection) => {
+    const isBookmarked = bookmarks.includes(guideline.id);
+    const isExpanded = expandedSections[guideline.id];
+
+    return (
+      <View key={guideline.id} style={[styles.guidelineCard, { backgroundColor: PRIORITY_COLORS[guideline.priority] }]}>
+        <TouchableOpacity
+          style={styles.cardHeader}
+          onPress={() => toggleSection(guideline.id)}
+          activeOpacity={0.7}
+        >
+          <View style={styles.headerLeft}>
+            <View style={styles.iconContainer}>
+              <MaterialIcons name={guideline.icon as any} size={20} color="#1976D2" />
+            </View>
+            <View style={styles.titleContainer}>
+              <Text style={styles.cardTitle}>{guideline.title}</Text>
+              {renderPriorityBadge(guideline.priority)}
+            </View>
+          </View>
+          <View style={styles.headerRight}>
+            <TouchableOpacity
+              style={styles.bookmarkButton}
+              onPress={() => toggleBookmark(guideline.id)}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            >
+              <MaterialIcons 
+                name={isBookmarked ? "bookmark" : "bookmark-border"} 
+                size={20} 
+                color={isBookmarked ? "#D32F2F" : "#757575"} 
+              />
+            </TouchableOpacity>
+            <MaterialIcons 
+              name={isExpanded ? "keyboard-arrow-up" : "keyboard-arrow-down"} 
+              size={24} 
+              color="#757575" 
+            />
+          </View>
+        </TouchableOpacity>
+
+        {isExpanded && (
+          <View style={styles.expandedContent}>
+            <Text style={styles.overview}>{guideline.content.overview}</Text>
+            
+            {/* Quick Reference */}
+            {guideline.quickReference && (
+              <View style={styles.quickRefContainer}>
+                <Text style={styles.sectionTitle}>Quick Reference</Text>
+                {guideline.quickReference.items.map((item, index) => (
+                  <View key={index} style={[styles.quickRefItem, 
+                    { backgroundColor: item.severity === 'danger' ? '#FFEBEE' : 
+                                       item.severity === 'warning' ? '#FFF8E1' : '#E8F5E8' }
+                  ]}>
+                    <Text style={[styles.quickRefLabel, item.highlight && styles.boldText]}>
+                      {item.label}
+                    </Text>
+                    <Text style={styles.quickRefValue}>{item.value}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
+
+            {/* Action Buttons */}
+            <View style={styles.actionButtons}>
+              <TouchableOpacity 
+                style={styles.actionButton}
+                onPress={() => setSelectedGuideline(guideline)}
+              >
+                <MaterialIcons name="info" size={16} color="white" />
+                <Text style={styles.actionButtonText}>Full Details</Text>
+              </TouchableOpacity>
+              
+              {guideline.decisionTree && (
+                <TouchableOpacity 
+                  style={[styles.actionButton, styles.decisionButton]}
+                  onPress={() => startDecisionTree(guideline)}
+                >
+                  <MaterialIcons name="account-tree" size={16} color="white" />
+                  <Text style={styles.actionButtonText}>Decision Tool</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+        )}
+      </View>
     );
   };
 
   const renderDetailModal = () => {
     if (!selectedGuideline) return null;
+
+    const tabs = [
+      { key: 'overview', label: 'Overview', icon: 'info' },
+      { key: 'recommendations', label: 'Evidence', icon: 'fact-check' },
+      { key: 'counseling', label: 'Counseling', icon: 'chat' }
+    ];
 
     return (
       <Modal
@@ -232,29 +334,90 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
               onPress={() => setSelectedGuideline(null)}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             >
-              <MaterialIcons name="close" size={24} color="#D81B60" />
+              <MaterialIcons name="close" size={24} color="#1976D2" />
             </TouchableOpacity>
-            <Text style={styles.modalTitle} numberOfLines={1}>
-              {selectedGuideline.title}
-            </Text>
+            <Text style={styles.modalTitle}>{selectedGuideline.title}</Text>
             <View style={styles.closeButton} />
           </View>
 
-          <ScrollView 
-            style={styles.modalContent}
-            showsVerticalScrollIndicator={false}
-          >
-            <Text style={styles.detailContent}>
-              {selectedGuideline.content}
-            </Text>
+          {/* Modal Tabs */}
+          <View style={styles.modalTabContainer}>
+            {tabs.map((tab) => (
+              <TouchableOpacity
+                key={tab.key}
+                style={[
+                  styles.modalTab,
+                  activeTab === tab.key && styles.activeModalTab
+                ]}
+                onPress={() => setActiveTab(tab.key)}
+              >
+                <MaterialIcons 
+                  name={tab.icon as any} 
+                  size={16} 
+                  color={activeTab === tab.key ? "#1976D2" : "#757575"} 
+                />
+                <Text style={[
+                  styles.modalTabText,
+                  { color: activeTab === tab.key ? "#1976D2" : "#757575" }
+                ]}>
+                  {tab.label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
 
-            {selectedGuideline.keyPoints && selectedGuideline.keyPoints.length > 0 && (
-              <View style={styles.keyPointsSection}>
-                <Text style={styles.sectionTitle}>Key Points</Text>
-                {selectedGuideline.keyPoints.map((point, index) => (
-                  <View key={index} style={styles.keyPoint}>
-                    <MaterialIcons name="fiber-manual-record" size={8} color="#D81B60" />
+          <ScrollView style={styles.modalContent}>
+            {activeTab === 'overview' && (
+              <View>
+                <Text style={styles.modalOverview}>{selectedGuideline.content.overview}</Text>
+                
+                <Text style={styles.modalSectionTitle}>Key Points</Text>
+                {selectedGuideline.content.keyPoints.map((point, index) => (
+                  <View key={index} style={styles.keyPointItem}>
+                    <MaterialIcons name="check-circle" size={16} color="#4CAF50" />
                     <Text style={styles.keyPointText}>{point}</Text>
+                  </View>
+                ))}
+
+                {selectedGuideline.content.clinicalPearls && (
+                  <>
+                    <Text style={styles.modalSectionTitle}>Clinical Pearls</Text>
+                    {selectedGuideline.content.clinicalPearls.map((pearl, index) => (
+                      <View key={index} style={styles.pearlItem}>
+                        <MaterialIcons name="lightbulb" size={16} color="#FF9800" />
+                        <Text style={styles.pearlText}>{pearl}</Text>
+                      </View>
+                    ))}
+                  </>
+                )}
+              </View>
+            )}
+
+            {activeTab === 'recommendations' && (
+              <View>
+                {selectedGuideline.content.recommendations.map((rec, index) => (
+                  <View key={index} style={styles.recommendationCard}>
+                    {renderEvidenceGrade(rec)}
+                    <Text style={styles.recommendationText}>{rec.text}</Text>
+                    
+                    <Text style={styles.referencesTitle}>References:</Text>
+                    {rec.references.map((ref, refIndex) => (
+                      <Text key={refIndex} style={styles.referenceText}>
+                        • {ref.source} ({ref.year}) - Grade {ref.level}
+                      </Text>
+                    ))}
+                  </View>
+                ))}
+              </View>
+            )}
+
+            {activeTab === 'counseling' && selectedGuideline.content.patientCounseling && (
+              <View>
+                <Text style={styles.modalSectionTitle}>Patient Counseling Points</Text>
+                {selectedGuideline.content.patientCounseling.map((point, index) => (
+                  <View key={index} style={styles.counselingItem}>
+                    <MaterialIcons name="chat-bubble" size={16} color="#2196F3" />
+                    <Text style={styles.counselingText}>{point}</Text>
                   </View>
                 ))}
               </View>
@@ -265,13 +428,75 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
     );
   };
 
+  const renderDecisionTreeModal = () => (
+    <Modal
+      visible={showDecisionTree}
+      animationType="slide"
+      onRequestClose={() => setShowDecisionTree(false)}
+    >
+      <SafeAreaView style={styles.modalContainer}>
+        <View style={styles.modalHeader}>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => setShowDecisionTree(false)}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <MaterialIcons name="close" size={24} color="#1976D2" />
+          </TouchableOpacity>
+          <Text style={styles.modalTitle}>Clinical Decision Tool</Text>
+          <View style={styles.closeButton} />
+        </View>
+
+        <ScrollView style={styles.modalContent}>
+          {/* Decision Path */}
+          {decisionTreePath.length > 0 && (
+            <View style={styles.pathContainer}>
+              <Text style={styles.pathTitle}>Decision Path:</Text>
+              {decisionTreePath.map((step, index) => (
+                <Text key={index} style={styles.pathStep}>
+                  {index + 1}. {step}
+                </Text>
+              ))}
+            </View>
+          )}
+
+          {/* Current Decision */}
+          {currentDecisionNode && (
+            <View style={styles.decisionContainer}>
+              <Text style={styles.decisionQuestion}>{currentDecisionNode.question}</Text>
+              {currentDecisionNode.options?.map((option, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={[styles.decisionOption, 
+                    option.riskLevel === 'high' && styles.highRiskOption,
+                    option.riskLevel === 'moderate' && styles.moderateRiskOption
+                  ]}
+                  onPress={() => handleDecisionChoice(option)}
+                >
+                  <Text style={styles.decisionOptionText}>{option.text}</Text>
+                  {option.riskLevel && (
+                    <MaterialIcons 
+                      name={option.riskLevel === 'high' ? 'warning' : 'info'} 
+                      size={16} 
+                      color={option.riskLevel === 'high' ? '#D32F2F' : '#FF9800'} 
+                    />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </Modal>
+  );
+
   return (
     <KeyboardAvoidingView 
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <SafeAreaView style={styles.container}>
-        <StatusBar style="dark" backgroundColor="#FFC1CC" />
+        <StatusBar style="dark" backgroundColor="#E3F2FD" />
         
         {/* Header */}
         <View style={styles.header}>
@@ -280,85 +505,52 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
             onPress={() => navigation.goBack()}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
-            <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
+            <MaterialIcons name="arrow-back" size={24} color="#1976D2" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>MHT Guidelines</Text>
-          <TouchableOpacity
-            style={styles.searchButton}
-            onPress={() => setShowSearch(!showSearch)}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-          >
-            <MaterialIcons name="search" size={24} color="#D81B60" />
+          <Text style={styles.headerTitle}>MHT Clinical Guidelines</Text>
+          <TouchableOpacity style={styles.backButton}>
+            <MaterialIcons name="help" size={24} color="#1976D2" />
           </TouchableOpacity>
         </View>
 
         {/* Search */}
-        {showSearch && (
-          <View style={styles.searchContainer}>
-            <MaterialIcons name="search" size={20} color="#999" />
-            <TextInput
-              style={styles.searchInput}
-              placeholder="Search guidelines..."
-              placeholderTextColor="#999"
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              autoFocus
-              returnKeyType="search"
-              onSubmitEditing={() => Keyboard.dismiss()}
-            />
-            {searchQuery.length > 0 && (
-              <TouchableOpacity
-                onPress={() => setSearchQuery('')}
-                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              >
-                <MaterialIcons name="clear" size={20} color="#999" />
-              </TouchableOpacity>
-            )}
-          </View>
-        )}
-
-        {/* Stats */}
-        <View style={styles.statsContainer}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{guidelines.length}</Text>
-            <Text style={styles.statLabel}>Guidelines</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{bookmarks.length}</Text>
-            <Text style={styles.statLabel}>Bookmarked</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>100%</Text>
-            <Text style={styles.statLabel}>Offline</Text>
-          </View>
+        <View style={styles.searchContainer}>
+          <MaterialIcons name="search" size={20} color="#757575" />
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search guidelines, conditions, medications..."
+            placeholderTextColor="#999"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+          {searchQuery.length > 0 && (
+            <TouchableOpacity onPress={() => setSearchQuery('')}>
+              <MaterialIcons name="clear" size={20} color="#757575" />
+            </TouchableOpacity>
+          )}
         </View>
 
-        {/* BULLETPROOF LIST - NO FLATLIST */}
+        {/* Category Tabs */}
+        {renderCategoryTabs()}
+
+        {/* Guidelines List */}
         <ScrollView 
-          style={styles.listContainer}
+          style={styles.content}
           showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
         >
-          {isLoading ? (
-            <View style={styles.centerContainer}>
-              <ActivityIndicator size="large" color="#D81B60" />
-              <Text style={styles.loadingText}>Loading guidelines...</Text>
-            </View>
-          ) : filteredGuidelines.length === 0 ? (
-            <View style={styles.centerContainer}>
-              <MaterialIcons name="search-off" size={60} color="#E0E0E0" />
-              <Text style={styles.emptyText}>
-                {searchQuery ? 'No results found' : 'No guidelines available'}
-              </Text>
+          {filteredGuidelines.length === 0 ? (
+            <View style={styles.emptyContainer}>
+              <MaterialIcons name="search-off" size={64} color="#E0E0E0" />
+              <Text style={styles.emptyText}>No guidelines found</Text>
+              <Text style={styles.emptySubtext}>Try adjusting your search or category filter</Text>
             </View>
           ) : (
-            <View style={styles.listContent}>
-              {filteredGuidelines.map((item, index) => renderGuidelineCard(item, index))}
-            </View>
+            filteredGuidelines.map(renderGuidelineCard)
           )}
         </ScrollView>
 
         {renderDetailModal()}
+        {renderDecisionTreeModal()}
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -367,15 +559,15 @@ export default function GuidelinesScreenBulletproof({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF5F7',
+    backgroundColor: '#FAFAFA',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#FFC1CC',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: '#E3F2FD',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -391,72 +583,68 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
   headerTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#D81B60',
+    color: '#1976D2',
     flex: 1,
     textAlign: 'center',
-  },
-  searchButton: {
-    minWidth: 44,
-    minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    marginHorizontal: 16,
-    marginTop: 12,
+    marginHorizontal: 20,
+    marginTop: 16,
     borderRadius: 12,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 12,
     elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
   },
   searchInput: {
     flex: 1,
-    paddingVertical: 8,
     paddingHorizontal: 12,
     fontSize: 16,
     color: '#333',
   },
-  statsContainer: {
+  tabContainer: {
+    paddingHorizontal: 20,
+    paddingTop: 16,
+  },
+  categoryTab: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: 'white',
-    marginHorizontal: 16,
-    marginTop: 12,
-    borderRadius: 12,
-    paddingVertical: 16,
-    elevation: 1,
-  },
-  statItem: {
     alignItems: 'center',
-  },
-  statNumber: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#D81B60',
-  },
-  statLabel: {
-    fontSize: 11,
-    color: '#999',
-    marginTop: 4,
-  },
-  listContainer: {
-    flex: 1,
-    marginTop: 12,
-  },
-  listContent: {
     paddingHorizontal: 16,
-    paddingBottom: 20,
+    paddingVertical: 8,
+    borderRadius: 20,
+    marginRight: 12,
+    elevation: 1,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+  },
+  activeTab: {
+    elevation: 2,
+    shadowOpacity: 0.1,
+  },
+  tabText: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 6,
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 16,
   },
   guidelineCard: {
     backgroundColor: 'white',
     borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+    marginBottom: 16,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -467,87 +655,145 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 12,
+    padding: 16,
+  },
+  headerLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
   },
   iconContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FFF0F5',
+    backgroundColor: '#E3F2FD',
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 12,
   },
-  bookmarkButton: {
-    minWidth: 44,
-    minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
+  titleContainer: {
+    flex: 1,
   },
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 8,
-    lineHeight: 22,
+    marginBottom: 4,
   },
-  cardContent: {
+  priorityBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 12,
+    alignSelf: 'flex-start',
+  },
+  priorityText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    marginLeft: 4,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  bookmarkButton: {
+    padding: 8,
+    marginRight: 8,
+  },
+  expandedContent: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  overview: {
     fontSize: 14,
     color: '#666',
     lineHeight: 20,
+    marginBottom: 16,
+  },
+  quickRefContainer: {
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
     marginBottom: 12,
   },
-  cardFooter: {
+  quickRefItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 8,
+    marginBottom: 4,
+  },
+  quickRefLabel: {
+    fontSize: 13,
+    color: '#333',
+    flex: 1,
+  },
+  quickRefValue: {
+    fontSize: 13,
+    color: '#666',
+    flex: 1,
+    textAlign: 'right',
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+  actionButtons: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    backgroundColor: '#1976D2',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    flex: 1,
+    justifyContent: 'center',
   },
-  keyPointsCount: {
+  decisionButton: {
+    backgroundColor: '#388E3C',
+  },
+  actionButtonText: {
+    color: 'white',
     fontSize: 12,
-    color: '#999',
+    fontWeight: '600',
+    marginLeft: 6,
   },
-  centerContainer: {
+  emptyContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 60,
-    minHeight: 200,
+    paddingVertical: 80,
   },
   emptyText: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#999',
     marginTop: 16,
-    textAlign: 'center',
+    marginBottom: 8,
   },
-  loadingText: {
+  emptySubtext: {
     fontSize: 14,
-    color: '#666',
-    marginTop: 12,
-  },
-  errorCard: {
-    backgroundColor: '#FFEBEE',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#FFCDD2',
-    justifyContent: 'center',
-  },
-  errorText: {
-    fontSize: 14,
-    color: '#F44336',
+    color: '#999',
     textAlign: 'center',
   },
   modalContainer: {
     flex: 1,
-    backgroundColor: '#FFF5F7',
+    backgroundColor: '#FAFAFA',
   },
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#FFC1CC',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: '#E3F2FD',
     elevation: 2,
   },
   closeButton: {
@@ -559,35 +805,55 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#D81B60',
+    color: '#1976D2',
     flex: 1,
     textAlign: 'center',
     marginHorizontal: 16,
   },
+  modalTabContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    elevation: 1,
+  },
+  modalTab: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
+  },
+  activeModalTab: {
+    borderBottomColor: '#1976D2',
+  },
+  modalTabText: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginLeft: 6,
+  },
   modalContent: {
     flex: 1,
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
-  detailContent: {
+  modalOverview: {
     fontSize: 16,
     color: '#333',
     lineHeight: 24,
-    marginVertical: 20,
+    marginBottom: 24,
   },
-  keyPointsSection: {
-    marginVertical: 20,
-  },
-  sectionTitle: {
+  modalSectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#D81B60',
-    marginBottom: 12,
+    color: '#1976D2',
+    marginBottom: 16,
+    marginTop: 8,
   },
-  keyPoint: {
+  keyPointItem: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    marginBottom: 8,
-    paddingLeft: 8,
+    marginBottom: 12,
   },
   keyPointText: {
     fontSize: 14,
@@ -595,5 +861,137 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginLeft: 12,
     flex: 1,
+  },
+  pearlItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+    backgroundColor: '#FFF8E1',
+    padding: 12,
+    borderRadius: 8,
+  },
+  pearlText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+    marginLeft: 12,
+    flex: 1,
+    fontStyle: 'italic',
+  },
+  recommendationCard: {
+    backgroundColor: 'white',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 16,
+    elevation: 1,
+  },
+  evidenceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  evidenceBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 12,
+    marginRight: 12,
+  },
+  evidenceText: {
+    color: 'white',
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
+  gradeText: {
+    fontSize: 12,
+    color: '#666',
+    fontWeight: '600',
+  },
+  recommendationText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+    marginBottom: 12,
+  },
+  referencesTitle: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: '#666',
+    marginBottom: 8,
+  },
+  referenceText: {
+    fontSize: 11,
+    color: '#666',
+    lineHeight: 16,
+    marginBottom: 2,
+  },
+  counselingItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+    backgroundColor: '#E8F5E8',
+    padding: 12,
+    borderRadius: 8,
+  },
+  counselingText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
+    marginLeft: 12,
+    flex: 1,
+  },
+  pathContainer: {
+    backgroundColor: '#E3F2FD',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 20,
+  },
+  pathTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1976D2',
+    marginBottom: 8,
+  },
+  pathStep: {
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 4,
+  },
+  decisionContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 12,
+    elevation: 2,
+  },
+  decisionQuestion: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  decisionOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#F5F5F5',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
+  },
+  highRiskOption: {
+    backgroundColor: '#FFEBEE',
+    borderColor: '#FFCDD2',
+  },
+  moderateRiskOption: {
+    backgroundColor: '#FFF8E1',
+    borderColor: '#FFE0B2',
+  },
+  decisionOptionText: {
+    fontSize: 14,
+    color: '#333',
+    flex: 1,
+    lineHeight: 20,
   },
 });
