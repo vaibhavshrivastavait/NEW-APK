@@ -495,20 +495,31 @@ export default function ProfessionalGuidelinesScreen({ navigation }: Props) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <SafeAreaView style={styles.container}>
-        <StatusBar style="dark" backgroundColor="#E3F2FD" />
+        <StatusBar style="dark" backgroundColor={PINK_COLOR_SCHEME.primaryLight} />
         
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity 
-            style={styles.backButton} 
+        <View style={[styles.header, { backgroundColor: PINK_COLOR_SCHEME.primaryLight }]}>
+          <TouchableOpacity
+            style={styles.backButton}
             onPress={() => navigation.goBack()}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
-            <MaterialIcons name="arrow-back" size={24} color="#1976D2" />
+            <MaterialIcons name="arrow-back" size={24} color={PINK_COLOR_SCHEME.primary} />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>MHT Clinical Guidelines</Text>
-          <TouchableOpacity style={styles.backButton}>
-            <MaterialIcons name="help" size={24} color="#1976D2" />
+          
+          <View style={styles.headerCenter}>
+            <Text style={[styles.title, { color: PINK_COLOR_SCHEME.primary }]}>MHT Clinical Guidelines</Text>
+            <Text style={[styles.subtitle, { color: PINK_COLOR_SCHEME.text.muted }]}>
+              {filteredGuidelines.length} of {COMBINED_MHT_GUIDELINES.length} guideline{filteredGuidelines.length !== 1 ? 's' : ''}
+            </Text>
+          </View>
+          
+          <TouchableOpacity
+            style={styles.helpButton}
+            onPress={() => Alert.alert('MHT Guidelines', 'Combined traditional and evidence-based MHT clinical guidelines with search and bookmark features')}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <MaterialIcons name="help" size={24} color={PINK_COLOR_SCHEME.primary} />
           </TouchableOpacity>
         </View>
 
