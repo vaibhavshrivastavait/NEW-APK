@@ -5,10 +5,13 @@ import {
   StyleSheet, 
   TouchableOpacity, 
   Alert, 
-  FlatList,
   RefreshControl,
   ActivityIndicator,
-  TextInput
+  TextInput,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -33,7 +36,7 @@ interface SafePatientData {
   weight: number;
 }
 
-export default function PatientListScreenCrashProof({ navigation }: Props) {
+export default function PatientListScreenBulletproof({ navigation }: Props) {
   // Safe store access
   const store = useAssessmentStore();
   const [patients, setPatients] = useState<SafePatientData[]>([]);
@@ -75,26 +78,27 @@ export default function PatientListScreenCrashProof({ navigation }: Props) {
     }
   }, [store]);
 
-  // Safe filtering function
+  // Safe filtering function that ALWAYS returns array
   const getFilteredPatients = (): SafePatientData[] => {
     try {
       if (!searchQuery.trim()) {
-        return Array.isArray(patients) ? patients : [];
+        return [...patients]; // Always return a copy
       }
       
       const query = searchQuery.toLowerCase();
       const filtered = patients.filter(patient => 
-        patient && (
-          patient.name?.toLowerCase().includes(query) ||
+        patient && 
+        patient.name && (
+          patient.name.toLowerCase().includes(query) ||
           patient.menopausalStatus?.toLowerCase().includes(query) ||
           patient.age?.toString().includes(query)
         )
       );
       
-      return Array.isArray(filtered) ? filtered : [];
+      return filtered.length > 0 ? filtered : [];
     } catch (error) {
       console.error('Error filtering patients:', error);
-      return [];
+      return [...patients]; // Fallback to all patients
     }
   };
 
@@ -189,10 +193,11 @@ export default function PatientListScreenCrashProof({ navigation }: Props) {
     }
   }, []);
 
-  const renderPatientItem = ({ item }: { item: SafePatientData }) => {
-    if (!item) {
+  // Bulletproof render patient item - NO FLATLIST
+  const renderPatientItem = (item: SafePatientData, index: number) => {
+    if (!item || !item.id) {
       return (
-        <View style={styles.errorCard}>
+        <View key={`error_${index}`} style={styles.errorCard}>
           <Text style={styles.errorText}>Invalid patient data</Text>
         </View>
       );
@@ -200,6 +205,7 @@ export default function PatientListScreenCrashProof({ navigation }: Props) {
 
     return (
       <TouchableOpacity 
+        key={item.id}
         style={styles.patientCard}
         onPress={() => navigateToPatientDetails(item)}
         activeOpacity={0.7}
@@ -223,7 +229,7 @@ export default function PatientListScreenCrashProof({ navigation }: Props) {
               e.stopPropagation();
               navigateToPatientDetails(item);
             }}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
             <MaterialIcons name="visibility" size={20} color="#2196F3" />
             <Text style={styles.detailsText}>View</Text>
@@ -234,7 +240,7 @@ export default function PatientListScreenCrashProof({ navigation }: Props) {
               e.stopPropagation();
               handleDeletePatient(item);
             }}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
             <MaterialIcons name="delete" size={20} color="#F44336" />
             <Text style={styles.deleteText}>Delete</Text>
@@ -245,149 +251,145 @@ export default function PatientListScreenCrashProof({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" backgroundColor="#FFC1CC" />
-      
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity 
-          style={styles.headerButton}
-          onPress={() => navigation.goBack()}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Patient Records</Text>
-        <View style={styles.headerActions}>
+    <KeyboardAvoidingView 
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <SafeAreaView style={styles.container}>
+        <StatusBar style="dark" backgroundColor="#FFC1CC" />
+        
+        {/* Header */}
+        <View style={styles.header}>
           <TouchableOpacity 
             style={styles.headerButton}
-            onPress={() => setShowSearch(!showSearch)}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            onPress={() => navigation.goBack()}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
           >
-            <MaterialIcons name="search" size={24} color="#D81B60" />
+            <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
           </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.headerButton}
-            onPress={handleDeleteAll}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <MaterialIcons name="delete-sweep" size={24} color="#F44336" />
-          </TouchableOpacity>
-          <TouchableOpacity 
-            style={styles.headerButton}
-            onPress={() => navigation.navigate('PatientIntake')}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <MaterialIcons name="add" size={24} color="#D81B60" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* Search bar */}
-      {showSearch && (
-        <View style={styles.searchContainer}>
-          <MaterialIcons name="search" size={20} color="#999" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search patients..."
-            placeholderTextColor="#999"
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-            autoFocus
-          />
-          {searchQuery.length > 0 && (
-            <TouchableOpacity
-              onPress={() => setSearchQuery('')}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <MaterialIcons name="clear" size={20} color="#999" />
-            </TouchableOpacity>
-          )}
-        </View>
-      )}
-
-      {/* Patient statistics */}
-      {patients.length > 0 && (
-        <View style={styles.statsContainer}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{patients.length}</Text>
-            <Text style={styles.statLabel}>Total Records</Text>
-          </View>
-          {searchQuery && (
-            <View style={styles.statItem}>
-              <Text style={styles.statNumber}>{filteredPatients.length}</Text>
-              <Text style={styles.statLabel}>Search Results</Text>
-            </View>
-          )}
-        </View>
-      )}
-
-      {/* Content Area - CRASH PROOF */}
-      <View style={styles.content}>
-        {isLoading ? (
-          <View style={styles.centerContainer}>
-            <ActivityIndicator size="large" color="#D81B60" />
-            <Text style={styles.loadingText}>Loading patients...</Text>
-          </View>
-        ) : filteredPatients.length === 0 && !searchQuery ? (
-          <View style={styles.emptyContainer}>
-            <MaterialIcons name="folder-open" size={80} color="#E0E0E0" />
-            <Text style={styles.emptyTitle}>No Patient Records</Text>
-            <Text style={styles.emptySubtitle}>
-              Complete patient assessments will appear here for future reference.
-            </Text>
+          <Text style={styles.title}>Patient Records</Text>
+          <View style={styles.headerActions}>
             <TouchableOpacity 
-              style={styles.addButton} 
+              style={styles.headerButton}
+              onPress={() => setShowSearch(!showSearch)}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            >
+              <MaterialIcons name="search" size={24} color="#D81B60" />
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.headerButton}
+              onPress={handleDeleteAll}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            >
+              <MaterialIcons name="delete-sweep" size={24} color="#F44336" />
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={styles.headerButton}
               onPress={() => navigation.navigate('PatientIntake')}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             >
-              <MaterialIcons name="add" size={24} color="white" />
-              <Text style={styles.addButtonText}>Start New Assessment</Text>
+              <MaterialIcons name="add" size={24} color="#D81B60" />
             </TouchableOpacity>
           </View>
-        ) : filteredPatients.length === 0 && searchQuery ? (
-          <View style={styles.emptyContainer}>
-            <MaterialIcons name="search-off" size={80} color="#E0E0E0" />
-            <Text style={styles.emptyTitle}>No Results Found</Text>
-            <Text style={styles.emptySubtitle}>
-              No patient records match "{searchQuery}".
-            </Text>
-            <TouchableOpacity 
-              style={styles.clearSearchButton} 
-              onPress={() => setSearchQuery('')}
-            >
-              <Text style={styles.clearSearchButtonText}>Clear Search</Text>
-            </TouchableOpacity>
+        </View>
+
+        {/* Search bar */}
+        {showSearch && (
+          <View style={styles.searchContainer}>
+            <MaterialIcons name="search" size={20} color="#999" />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search patients..."
+              placeholderTextColor="#999"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+              autoFocus
+              returnKeyType="search"
+              onSubmitEditing={() => Keyboard.dismiss()}
+            />
+            {searchQuery.length > 0 && (
+              <TouchableOpacity
+                onPress={() => setSearchQuery('')}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              >
+                <MaterialIcons name="clear" size={20} color="#999" />
+              </TouchableOpacity>
+            )}
           </View>
-        ) : (
-          <FlatList
-            data={filteredPatients}
-            renderItem={renderPatientItem}
-            keyExtractor={(item) => item?.id || `fallback_${Math.random()}`}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={handleRefresh}
-                colors={['#D81B60']}
-                tintColor="#D81B60"
-              />
-            }
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.listContainer}
-            removeClippedSubviews={false}
-            maxToRenderPerBatch={5}
-            updateCellsBatchingPeriod={100}
-            windowSize={10}
-            initialNumToRender={5}
-            onEndReachedThreshold={0.1}
-            ListEmptyComponent={() => (
-              <View style={styles.centerContainer}>
-                <Text style={styles.emptyText}>No patients found</Text>
+        )}
+
+        {/* Patient statistics */}
+        {patients.length > 0 && (
+          <View style={styles.statsContainer}>
+            <View style={styles.statItem}>
+              <Text style={styles.statNumber}>{patients.length}</Text>
+              <Text style={styles.statLabel}>Total Records</Text>
+            </View>
+            {searchQuery && (
+              <View style={styles.statItem}>
+                <Text style={styles.statNumber}>{filteredPatients.length}</Text>
+                <Text style={styles.statLabel}>Search Results</Text>
               </View>
             )}
-          />
+          </View>
         )}
-      </View>
-    </SafeAreaView>
+
+        {/* BULLETPROOF PATIENT LIST - NO FLATLIST */}
+        <ScrollView
+          style={styles.content}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              colors={['#D81B60']}
+              tintColor="#D81B60"
+            />
+          }
+        >
+          {isLoading ? (
+            <View style={styles.centerContainer}>
+              <ActivityIndicator size="large" color="#D81B60" />
+              <Text style={styles.loadingText}>Loading patients...</Text>
+            </View>
+          ) : filteredPatients.length === 0 && !searchQuery ? (
+            <View style={styles.emptyContainer}>
+              <MaterialIcons name="folder-open" size={80} color="#E0E0E0" />
+              <Text style={styles.emptyTitle}>No Patient Records</Text>
+              <Text style={styles.emptySubtitle}>
+                Complete patient assessments will appear here for future reference.
+              </Text>
+              <TouchableOpacity 
+                style={styles.addButton} 
+                onPress={() => navigation.navigate('PatientIntake')}
+              >
+                <MaterialIcons name="add" size={24} color="white" />
+                <Text style={styles.addButtonText}>Start New Assessment</Text>
+              </TouchableOpacity>
+            </View>
+          ) : filteredPatients.length === 0 && searchQuery ? (
+            <View style={styles.emptyContainer}>
+              <MaterialIcons name="search-off" size={80} color="#E0E0E0" />
+              <Text style={styles.emptyTitle}>No Results Found</Text>
+              <Text style={styles.emptySubtitle}>
+                No patient records match "{searchQuery}".
+              </Text>
+              <TouchableOpacity 
+                style={styles.clearSearchButton} 
+                onPress={() => setSearchQuery('')}
+              >
+                <Text style={styles.clearSearchButtonText}>Clear Search</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.listContainer}>
+              {filteredPatients.map((item, index) => renderPatientItem(item, index))}
+            </View>
+          )}
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -410,8 +412,8 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   headerButton: {
-    width: 40,
-    height: 40,
+    minWidth: 44,
+    minHeight: 44,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -475,6 +477,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 60,
+    minHeight: 200,
   },
   loadingText: {
     fontSize: 16,
@@ -486,6 +489,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 40,
+    minHeight: 300,
   },
   emptyTitle: {
     fontSize: 24,
@@ -502,11 +506,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginBottom: 30,
   },
-  emptyText: {
-    fontSize: 16,
-    color: '#999',
-    marginTop: 16,
-  },
   addButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -514,12 +513,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 25,
-    gap: 8,
   },
   addButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+    marginLeft: 8,
   },
   clearSearchButton: {
     backgroundColor: '#E3F2FD',
@@ -579,12 +578,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
-    gap: 4,
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
   },
   detailsText: {
     fontSize: 12,
     color: '#2196F3',
     fontWeight: '600',
+    marginLeft: 4,
   },
   deleteButton: {
     flexDirection: 'row',
@@ -593,12 +595,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8,
-    gap: 4,
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
   },
   deleteText: {
     fontSize: 12,
     color: '#F44336',
     fontWeight: '600',
+    marginLeft: 4,
   },
   errorCard: {
     backgroundColor: '#FFEBEE',
@@ -607,6 +612,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#FFCDD2',
+    justifyContent: 'center',
   },
   errorText: {
     fontSize: 14,
