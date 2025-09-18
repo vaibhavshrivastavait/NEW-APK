@@ -19,7 +19,7 @@ import SymptomsScreen from './screens/SymptomsScreen';
 import RiskFactorsScreen from './screens/RiskFactorsScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import CmeScreen from './screens/CmeScreen';
-import GuidelinesScreen from './screens/GuidelinesScreenCrashProof';
+import GuidelinesScreen from './screens/GuidelinesScreen';
 import ExportScreen from './screens/ExportScreen';
 import PatientDetailsScreen from './screens/PatientDetailsScreen';
 import SettingsScreen from './screens/SettingsScreen';
