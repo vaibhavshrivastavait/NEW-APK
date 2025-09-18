@@ -87,7 +87,7 @@ export interface MHTRecommendation {
     sixMonths: boolean;
     twelveMonths: boolean;
   };
-  generatedAt: Date;
+  generatedAt: Date | string;
 }
 
 export interface FollowUp {
