@@ -45,10 +45,29 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   console.log('🚀 App.tsx starting to render...');
+  
+  // Get device info to determine which screens to use
+  const [deviceInfo, setDeviceInfo] = useState(getDeviceInfo());
+  
   // TEMPORARILY BYPASS SPLASH SCREEN FOR TESTING
   const [showSplash, setShowSplash] = useState(false); // Changed to false
   const [appInitialized, setAppInitialized] = useState(true); // Changed to true
   const [splashCompleted, setSplashCompleted] = useState(true); // Changed to true
+
+  // Update device info on orientation change
+  useEffect(() => {
+    const updateDeviceInfo = () => {
+      setDeviceInfo(getDeviceInfo());
+    };
+
+    const subscription = Dimensions.addEventListener('change', updateDeviceInfo);
+    return () => subscription?.remove();
+  }, []);
+
+  // Choose appropriate screen components based on device type
+  const HomeScreenComponent = deviceInfo.isTablet ? TabletOptimizedHomeScreen : HomeScreen;
+  const PatientListScreenComponent = deviceInfo.isTablet ? TabletOptimizedPatientListScreen : PatientListScreen;
+  const GuidelinesScreenComponent = deviceInfo.isTablet ? TabletOptimizedGuidelinesScreen : GuidelinesScreen;
 
   useEffect(() => {
     // Handle app state changes to prevent window leaks
