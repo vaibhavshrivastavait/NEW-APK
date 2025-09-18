@@ -806,7 +806,585 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
 
         {/* Sort Modal */}
         {renderSortModal()}
-      </SafeAreaView>
-    </KeyboardAvoidingView>
-  );
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: PINK_COLORS.background.main,
+  },
+  
+  // Header Styles
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    backgroundColor: PINK_COLORS.primaryLight,
+    borderBottomWidth: 1,
+    borderBottomColor: PINK_COLORS.primaryLight,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  backButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1,
+  },
+  headerCenter: {
+    flex: 1,
+    alignItems: 'center',
+    paddingHorizontal: 16,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: PINK_COLORS.primary,
+  },
+  headerSubtitle: {
+    fontSize: 14,
+    color: PINK_COLORS.text.muted,
+    marginTop: 2,
+  },
+  addButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1,
+  },
+
+  // Search and Filter Styles
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    backgroundColor: PINK_COLORS.background.card,
+    borderBottomWidth: 1,
+    borderBottomColor: PINK_COLORS.primaryLight,
+  },
+  searchBar: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: PINK_COLORS.background.section,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    marginRight: 12,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  searchInput: {
+    flex: 1,
+    marginLeft: 8,
+    fontSize: 16,
+    color: PINK_COLORS.text.dark,
+  },
+  filterButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: PINK_COLORS.background.card,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primary,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  filterButtonText: {
+    marginLeft: 6,
+    fontSize: 14,
+    fontWeight: '600',
+    color: PINK_COLORS.primary,
+  },
+
+  // Multi-pane Layout
+  multiPaneContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  leftPane: {
+    width: '40%',
+    borderRightWidth: 1,
+    borderRightColor: PINK_COLORS.primaryLight,
+    backgroundColor: PINK_COLORS.background.section,
+  },
+  rightPane: {
+    flex: 1,
+    backgroundColor: PINK_COLORS.background.card,
+  },
+
+  // Patient List Styles
+  patientListContainer: {
+    flex: 1,
+  },
+  statsBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    backgroundColor: PINK_COLORS.background.card,
+    borderBottomWidth: 1,
+    borderBottomColor: PINK_COLORS.primaryLight,
+  },
+  statsText: {
+    fontSize: 14,
+    color: PINK_COLORS.text.dark,
+    fontWeight: '500',
+  },
+  riskStats: {
+    flexDirection: 'row',
+    gap: 6,
+  },
+  riskStat: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  riskStatText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  patientList: {
+    flex: 1,
+  },
+  patientListContent: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+
+  // Patient Card Styles
+  patientCard: {
+    backgroundColor: PINK_COLORS.background.card,
+    borderRadius: 16,
+    marginVertical: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(216, 27, 96, 0.1)',
+  },
+  selectedPatientCard: {
+    backgroundColor: PINK_COLORS.primaryLighter,
+    borderColor: PINK_COLORS.primary,
+    elevation: 6,
+  },
+  cardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+  },
+  patientAvatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: PINK_COLORS.primaryLighter,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+    borderWidth: 2,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  patientInfo: {
+    flex: 1,
+  },
+  patientName: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 4,
+  },
+  selectedText: {
+    color: PINK_COLORS.primary,
+  },
+  patientDetails: {
+    fontSize: 14,
+    color: PINK_COLORS.text.light,
+    marginBottom: 2,
+  },
+  selectedSubText: {
+    color: PINK_COLORS.text.muted,
+  },
+  patientDate: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    fontStyle: 'italic',
+  },
+  riskContainer: {
+    alignItems: 'center',
+    marginLeft: 12,
+  },
+  riskBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    marginBottom: 4,
+  },
+  riskText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
+  },
+  riskScore: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: PINK_COLORS.text.light,
+  },
+  cardActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingBottom: 12,
+    gap: 12,
+  },
+  actionIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: PINK_COLORS.background.section,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  // Empty State Styles
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 80,
+    paddingHorizontal: 40,
+  },
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    marginTop: 16,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptySubtitle: {
+    fontSize: 14,
+    color: PINK_COLORS.text.light,
+    textAlign: 'center',
+    lineHeight: 20,
+  },
+
+  // Patient Details Styles
+  emptyDetailsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 40,
+  },
+  emptyDetailsTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    marginTop: 16,
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptyDetailsSubtitle: {
+    fontSize: 16,
+    color: PINK_COLORS.text.light,
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  detailsContainer: {
+    flex: 1,
+    padding: 20,
+  },
+  detailsHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: PINK_COLORS.primaryLight,
+  },
+  detailsAvatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: PINK_COLORS.primaryLighter,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
+    borderWidth: 3,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  detailsHeaderInfo: {
+    flex: 1,
+  },
+  detailsName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 4,
+  },
+  detailsSubInfo: {
+    fontSize: 16,
+    color: PINK_COLORS.text.muted,
+    marginBottom: 2,
+  },
+  detailsId: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    fontFamily: 'monospace',
+  },
+  detailsRiskBadge: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  detailsRiskText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+  },
+
+  // Details Sections
+  detailsSection: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: PINK_COLORS.primary,
+    marginBottom: 16,
+  },
+  demographicsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+  },
+  demographicItem: {
+    flex: 1,
+    minWidth: 120,
+    backgroundColor: PINK_COLORS.background.section,
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  demographicLabel: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    marginBottom: 4,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  demographicValue: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+  },
+
+  // Risk Summary
+  riskSummaryContainer: {
+    flexDirection: 'row',
+    backgroundColor: PINK_COLORS.background.section,
+    borderRadius: 16,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  riskScoreContainer: {
+    alignItems: 'center',
+    marginRight: 20,
+  },
+  riskScoreNumber: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: PINK_COLORS.primary,
+  },
+  riskScoreLabel: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    marginTop: 4,
+  },
+  riskDetails: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  riskLevelIndicator: {
+    alignSelf: 'flex-start',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    marginBottom: 8,
+  },
+  riskLevelText: {
+    fontSize: 12,
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
+  },
+  riskDescription: {
+    fontSize: 14,
+    color: PINK_COLORS.text.dark,
+    lineHeight: 20,
+  },
+
+  // Timeline Styles
+  timeline: {
+    paddingTop: 8,
+  },
+  timelineItem: {
+    flexDirection: 'row',
+    marginBottom: 16,
+  },
+  timelineIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  timelineLine: {
+    position: 'absolute',
+    left: 15,
+    top: 32,
+    bottom: -16,
+    width: 2,
+    backgroundColor: PINK_COLORS.primaryLight,
+  },
+  timelineContent: {
+    flex: 1,
+    paddingTop: 4,
+  },
+  timelineDate: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 4,
+  },
+  timelineRisk: {
+    fontSize: 12,
+    color: PINK_COLORS.text.muted,
+    marginBottom: 4,
+  },
+  timelineNotes: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    fontStyle: 'italic',
+  },
+  noHistory: {
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  noHistoryText: {
+    fontSize: 14,
+    color: PINK_COLORS.text.light,
+    marginTop: 12,
+  },
+
+  // Action Buttons
+  detailsActions: {
+    gap: 12,
+    paddingTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: PINK_COLORS.primaryLight,
+  },
+  actionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    borderRadius: 12,
+    gap: 8,
+  },
+  primaryActionButton: {
+    backgroundColor: PINK_COLORS.primary,
+  },
+  secondaryActionButton: {
+    backgroundColor: PINK_COLORS.background.card,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primary,
+  },
+  dangerActionButton: {
+    backgroundColor: PINK_COLORS.status.error,
+  },
+  actionButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: 'white',
+  },
+
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: PINK_COLORS.background.card,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingBottom: 40,
+    maxHeight: '80%',
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: PINK_COLORS.primaryLight,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: PINK_COLORS.text.dark,
+  },
+  modalSection: {
+    paddingHorizontal: 24,
+    paddingTop: 20,
+  },
+  modalSectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: PINK_COLORS.primary,
+    marginBottom: 12,
+  },
+  modalOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    marginBottom: 8,
+    backgroundColor: PINK_COLORS.background.section,
+  },
+  selectedModalOption: {
+    backgroundColor: PINK_COLORS.primaryLighter,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primary,
+  },
+  modalOptionText: {
+    flex: 1,
+    fontSize: 16,
+    color: PINK_COLORS.text.dark,
+    marginLeft: 12,
+  },
+  selectedModalOptionText: {
+    color: PINK_COLORS.primary,
+    fontWeight: '600',
+  },
+});
