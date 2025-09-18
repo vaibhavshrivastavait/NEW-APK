@@ -672,7 +672,7 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
   const headerActions = [
     {
       icon: 'help',
-      onPress: () => Alert.alert('Help', 'This screen contains evidence-based MHT clinical guidelines'),
+      onPress: () => Alert.alert('MHT Guidelines', 'Combined traditional and evidence-based MHT clinical guidelines with search and bookmark features'),
       testID: 'guidelines-help',
     },
   ];
@@ -683,14 +683,14 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <SafeAreaView style={styles.container}>
-        <StatusBar style="dark" backgroundColor="#E3F2FD" />
+        <StatusBar style="dark" backgroundColor={PINK_COLOR_SCHEME.primaryLight} />
         
         <TabletOptimizedHeader
           title="MHT Clinical Guidelines"
           onBack={() => navigation.goBack()}
           actions={headerActions}
-          backgroundColor="#E3F2FD"
-          subtitle={`${filteredGuidelines.length} guideline${filteredGuidelines.length !== 1 ? 's' : ''}`}
+          backgroundColor={PINK_COLOR_SCHEME.primaryLight}
+          subtitle={`${filteredGuidelines.length} of ${COMBINED_MHT_GUIDELINES.length} guideline${filteredGuidelines.length !== 1 ? 's' : ''}`}
         />
 
         <ResponsiveLayout
