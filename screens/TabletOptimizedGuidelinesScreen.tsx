@@ -227,16 +227,18 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
   );
 
   const renderPriorityBadge = (priority: string) => (
-    <View style={[styles.priorityBadge, { backgroundColor: PRIORITY_COLORS[priority] }]}>
+    <View style={[styles.priorityBadge, { backgroundColor: PINK_PRIORITY_COLORS[priority] }]}>
       <MaterialIcons 
         name={priority === 'critical' ? 'priority-high' : priority === 'important' ? 'star' : 'info'} 
         size={12} 
-        color={priority === 'critical' ? '#D32F2F' : priority === 'important' ? '#F57C00' : '#757575'} 
+        color={priority === 'critical' ? PINK_COLOR_SCHEME.status.critical : 
+               priority === 'important' ? '#FF9800' : PINK_COLOR_SCHEME.primary} 
       />
       <ResponsiveText 
         variant="caption"
         style={[styles.priorityText, { 
-          color: priority === 'critical' ? '#D32F2F' : priority === 'important' ? '#F57C00' : '#757575' 
+          color: priority === 'critical' ? PINK_COLOR_SCHEME.status.critical : 
+                 priority === 'important' ? '#FF9800' : PINK_COLOR_SCHEME.primary 
         }]}
       >
         {priority.toUpperCase()}
