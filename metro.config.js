@@ -31,17 +31,20 @@ config.resolver = {
 };
 
 // FIX FOR CONTAINER FILE WATCHER LIMITS (ENOSPC)
-// Use polling instead of file watching to bypass inotify limits
-config.watcher = {
-  usePolling: true,
-  pollDelayMs: 1000,
-  ignoreNodeModules: true,
+// Configure Metro file-map to use polling and ignore node_modules
+config.fileMap = {
+  ...config.fileMap,
+  useWatchman: false,
+  useNodeWatcher: false,
 };
 
-// Exclude heavy directories from watching to reduce file count
+// Reduce the number of watched files
 config.watchFolders = [];
 
-// Reduce file watching overhead
-config.maxWorkers = 2;
+// Override the default watcher settings
+config.server = {
+  ...config.server,
+  useGlobalHotkey: false,
+};
 
 module.exports = config;
