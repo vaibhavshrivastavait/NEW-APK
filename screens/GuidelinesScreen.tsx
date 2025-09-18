@@ -668,6 +668,19 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginLeft: 6,
   },
+  countBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 10,
+    marginLeft: 6,
+    minWidth: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  countText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
   content: {
     flex: 1,
     paddingHorizontal: 20,
