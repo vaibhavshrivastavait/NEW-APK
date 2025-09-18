@@ -599,6 +599,28 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'center',
   },
+  headerCenter: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 2,
+  },
+  helpButton: {
+    minWidth: 44,
+    minHeight: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
