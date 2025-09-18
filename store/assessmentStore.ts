@@ -219,8 +219,8 @@ const useAssessmentStore = create<AssessmentStore>()(
             diabetes: current.diabetes || false,
             hypertension: current.hypertension || false,
             cholesterolHigh: current.cholesterolHigh || false,
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           };
 
           const patients = get().patients.filter(p => p.id !== patient.id);
