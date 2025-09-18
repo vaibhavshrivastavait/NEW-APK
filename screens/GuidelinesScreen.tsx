@@ -228,7 +228,7 @@ export default function ProfessionalGuidelinesScreen({ navigation }: Props) {
     const isExpanded = expandedSections[guideline.id];
 
     return (
-      <View key={guideline.id} style={[styles.guidelineCard, { backgroundColor: PRIORITY_COLORS[guideline.priority] }]}>
+      <View key={guideline.id} style={[styles.guidelineCard, { backgroundColor: PINK_PRIORITY_COLORS[guideline.priority] }]}>
         <TouchableOpacity
           style={styles.cardHeader}
           onPress={() => toggleSection(guideline.id)}
