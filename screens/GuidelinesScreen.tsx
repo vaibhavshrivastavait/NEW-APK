@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -9,229 +9,179 @@ import {
   TextInput,
   Modal,
   FlatList,
-  Linking,
   Alert,
   ActivityIndicator,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
-import crashProofStorage from '../utils/asyncStorageUtils';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Safe guidelines data loading with comprehensive error handling
-const loadGuidelinesData = (): GuidelinesData => {
-  try {
-    const data = require('../assets/guidelines.json');
-    console.log('✅ Guidelines data loaded successfully');
-    
-    // Validate the data structure
-    if (!data || !data.sections || !Array.isArray(data.sections)) {
-      console.warn('⚠️ Invalid guidelines data structure, using fallback');
-      return {
-        version: "1.0.0",
-        lastUpdated: new Date().toISOString(),
-        sections: []
-      };
-    }
-    
-    return data;
-  } catch (error) {
-    console.error('❌ Error loading guidelines data:', error);
-    return {
-      version: "1.0.0",
-      lastUpdated: new Date().toISOString(),
-      sections: []
-    };
-  }
-};
-
-type RootStackParamList = {
-  Home: undefined;
-  PatientIntake: undefined;
-  Demographics: undefined;
-  Symptoms: undefined;
-  RiskFactors: undefined;
-  Results: undefined;
-  Cme: undefined;
-  Guidelines: undefined;
-  PatientList: undefined;
-  Export: undefined;
-  PatientDetails: undefined;
-};
-
-type GuidelinesNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Guidelines'>;
+type GuidelinesNavigationProp = NativeStackNavigationProp<any, 'Guidelines'>;
 
 interface Props {
   navigation: GuidelinesNavigationProp;
 }
 
-interface GuidelineSection {
+interface GuidelineItem {
   id: string;
   title: string;
+  content: string;
   icon: string;
-  body_md: string;
-  bullets: string[];
-  tables: Array<{
-    title: string;
-    columns: string[];
-    rows: string[][];
-  }>;
-  citations: Array<{
-    label: string;
-    url: string;
-  }>;
+  keyPoints: string[];
 }
 
-interface GuidelinesData {
-  version: string;
-  lastUpdated: string;
-  sections: GuidelineSection[];
-}
+// Hardcoded safe data to prevent any loading issues
+const SAFE_GUIDELINES_DATA: GuidelineItem[] = [
+  {
+    id: '1',
+    title: 'Basic MHT Principles',
+    content: 'Menopause Hormone Therapy should be individualized based on patient symptoms, risk factors, and preferences. Use the lowest effective dose for the shortest duration needed.',
+    icon: 'info',
+    keyPoints: [
+      'Individualized risk-benefit assessment',
+      'Lowest effective dose',
+      'Regular monitoring and review',
+      'Shared decision making with patient'
+    ]
+  },
+  {
+    id: '2',
+    title: 'Contraindications',
+    content: 'Absolute contraindications include current breast cancer, active liver disease, recent VTE, and unexplained vaginal bleeding.',
+    icon: 'warning',
+    keyPoints: [
+      'Current or recent breast cancer',
+      'Active liver disease with abnormal LFTs',
+      'Recent venous thromboembolism',
+      'Unexplained vaginal bleeding'
+    ]
+  },
+  {
+    id: '3',
+    title: 'Route Selection',
+    content: 'Choose between oral, transdermal, or vaginal routes based on patient risk factors and preferences.',
+    icon: 'medical_services',
+    keyPoints: [
+      'Transdermal preferred for VTE risk',
+      'Oral acceptable for low-risk patients',
+      'Vaginal for genitourinary symptoms only',
+      'Consider patient preference and convenience'
+    ]
+  },
+  {
+    id: '4',
+    title: 'Monitoring Guidelines',
+    content: 'Regular follow-up is essential for all patients on MHT to assess efficacy, safety, and continuation needs.',
+    icon: 'schedule',
+    keyPoints: [
+      '1-month initial follow-up',
+      '6-month routine monitoring',
+      'Annual comprehensive review',
+      'Breast and pelvic examination'
+    ]
+  }
+];
 
-const BOOKMARKS_KEY = 'mht_guidelines_bookmarks';
-const GUIDELINES_VERSION_KEY = 'mht_guidelines_version';
+const BOOKMARKS_KEY = 'mht_guidelines_bookmarks_crashproof';
 
-export default function GuidelinesScreen({ navigation }: Props) {
-  // State management
-  const [guidelines] = useState<GuidelinesData>(() => loadGuidelinesData());
+export default function GuidelinesScreenCrashProof({ navigation }: Props) {
+  // Simple state management with safe defaults
+  const [guidelines] = useState<GuidelineItem[]>(SAFE_GUIDELINES_DATA);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSection, setSelectedSection] = useState<GuidelineSection | null>(null);
+  const [selectedGuideline, setSelectedGuideline] = useState<GuidelineItem | null>(null);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [showSearch, setShowSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
-  // Load bookmarks and check for updates on mount
+  // Load bookmarks on mount
   useEffect(() => {
     loadBookmarks();
-    checkForUpdates();
   }, []);
 
-  // Sync modal visibility with selectedSection
-  useEffect(() => {
-    setModalVisible(!!selectedSection);
-  }, [selectedSection]);
-
-  // Bookmark management functions
-  const loadBookmarks = useCallback(async () => {
+  const loadBookmarks = async () => {
     try {
-      const savedBookmarks = await crashProofStorage.getItem(BOOKMARKS_KEY);
-      if (savedBookmarks) {
-        const parsed = JSON.parse(savedBookmarks);
+      const saved = await AsyncStorage.getItem(BOOKMARKS_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
           setBookmarks(parsed);
         }
       }
     } catch (error) {
-      console.error('❌ Error loading bookmarks:', error);
+      console.error('Error loading bookmarks:', error);
       setBookmarks([]);
     }
-  }, []);
+  };
 
-  const saveBookmarks = useCallback(async (newBookmarks: string[]) => {
+  const saveBookmarks = async (newBookmarks: string[]) => {
     try {
-      await crashProofStorage.setItem(BOOKMARKS_KEY, JSON.stringify(newBookmarks));
+      await AsyncStorage.setItem(BOOKMARKS_KEY, JSON.stringify(newBookmarks));
       setBookmarks(newBookmarks);
     } catch (error) {
-      console.error('❌ Error saving bookmarks:', error);
+      console.error('Error saving bookmarks:', error);
     }
-  }, []);
+  };
 
-  const toggleBookmark = useCallback((sectionId: string) => {
-    const newBookmarks = bookmarks.includes(sectionId)
-      ? bookmarks.filter(id => id !== sectionId)
-      : [...bookmarks, sectionId];
+  const toggleBookmark = (guidelineId: string) => {
+    const newBookmarks = bookmarks.includes(guidelineId)
+      ? bookmarks.filter(id => id !== guidelineId)
+      : [...bookmarks, guidelineId];
     saveBookmarks(newBookmarks);
-  }, [bookmarks, saveBookmarks]);
+  };
 
-  const checkForUpdates = useCallback(async () => {
+  // Safe filtering with guaranteed array return
+  const getFilteredGuidelines = (): GuidelineItem[] => {
     try {
-      const savedVersion = await crashProofStorage.getItem(GUIDELINES_VERSION_KEY);
-      if (savedVersion && savedVersion !== guidelines.version) {
-        console.log('ℹ️ Guidelines version mismatch - could check for updates');
+      if (!searchQuery.trim()) {
+        return Array.isArray(guidelines) ? guidelines : [];
       }
+      
+      const query = searchQuery.toLowerCase();
+      const filtered = guidelines.filter(item => 
+        item && (
+          item.title?.toLowerCase().includes(query) ||
+          item.content?.toLowerCase().includes(query)
+        )
+      );
+      
+      return Array.isArray(filtered) ? filtered : [];
     } catch (error) {
-      console.error('❌ Error checking version:', error);
+      console.error('Error filtering guidelines:', error);
+      return [];
     }
-  }, [guidelines.version]);
+  };
 
-  // Modal management functions
-  const openSectionModal = useCallback((section: GuidelineSection) => {
-    setSelectedSection(section);
-  }, []);
+  const filteredGuidelines = getFilteredGuidelines();
 
-  const closeSectionModal = useCallback(() => {
-    setModalVisible(false);
-    setTimeout(() => {
-      setSelectedSection(null);
-    }, 100);
-  }, []);
-
-  // Search functionality with memoization
-  const filteredSections = useMemo(() => {
-    const sections = guidelines?.sections || [];
-    if (!searchQuery.trim()) return sections;
-    
-    const query = searchQuery.toLowerCase();
-    return sections.filter(section =>
-      section.title.toLowerCase().includes(query) ||
-      section.body_md.toLowerCase().includes(query) ||
-      section.bullets.some(bullet => bullet.toLowerCase().includes(query)) ||
-      section.tables.some(table => 
-        table.title.toLowerCase().includes(query) ||
-        table.rows.some(row => row.some(cell => cell.toLowerCase().includes(query)))
-      )
-    );
-  }, [searchQuery, guidelines.sections]);
-
-  // Link handling
-  const openWebLink = useCallback((url: string) => {
-    Linking.canOpenURL(url).then(supported => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        Alert.alert('Error', 'Cannot open this link');
-      }
-    });
-  }, []);
-
-  // Render functions
-  const renderSectionCard = useCallback(({ item }: { item: GuidelineSection }) => {
+  const renderGuidelineCard = ({ item }: { item: GuidelineItem }) => {
     if (!item) {
       return (
-        <View style={styles.sectionCard}>
-          <Text style={styles.errorText}>Invalid guideline data</Text>
+        <View style={styles.errorCard}>
+          <Text style={styles.errorText}>Invalid data</Text>
         </View>
       );
     }
 
-    const safeItem = {
-      id: item.id || `fallback_${Date.now()}`,
-      title: item.title || 'Unknown Guideline',
-      body_md: item.body_md || 'No content available',
-      bullets: item.bullets || [],
-      icon: item.icon || 'help',
-      tables: item.tables || [],
-      citations: item.citations || [],
-    };
-
-    const isBookmarked = bookmarks.includes(safeItem.id);
+    const isBookmarked = bookmarks.includes(item.id);
     
     return (
       <TouchableOpacity
-        style={styles.sectionCard}
-        onPress={() => openSectionModal(safeItem)}
+        style={styles.guidelineCard}
+        onPress={() => setSelectedGuideline(item)}
         activeOpacity={0.7}
       >
         <View style={styles.cardHeader}>
-          <MaterialIcons 
-            name={safeItem.icon as any} 
-            size={24} 
-            color="#D81B60" 
-          />
+          <View style={styles.iconContainer}>
+            <MaterialIcons 
+              name={item.icon as any} 
+              size={24} 
+              color="#D81B60" 
+            />
+          </View>
           <TouchableOpacity
             style={styles.bookmarkButton}
-            onPress={() => toggleBookmark(safeItem.id)}
+            onPress={() => toggleBookmark(item.id)}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
             <MaterialIcons 
@@ -241,135 +191,66 @@ export default function GuidelinesScreen({ navigation }: Props) {
             />
           </TouchableOpacity>
         </View>
-        <Text style={styles.cardTitle}>{safeItem.title}</Text>
-        <Text style={styles.cardPreview} numberOfLines={2}>
-          {safeItem.body_md.substring(0, 100)}...
+        
+        <Text style={styles.cardTitle}>{item.title}</Text>
+        <Text style={styles.cardContent} numberOfLines={3}>
+          {item.content}
         </Text>
+        
         <View style={styles.cardFooter}>
-          <Text style={styles.bulletCount}>{safeItem.bullets.length} key points</Text>
+          <Text style={styles.keyPointsCount}>
+            {item.keyPoints?.length || 0} key points
+          </Text>
           <MaterialIcons name="arrow-forward" size={16} color="#D81B60" />
         </View>
       </TouchableOpacity>
     );
-  }, [bookmarks, openSectionModal, toggleBookmark]);
+  };
 
-  const renderTable = useCallback((table: any, index: number) => (
-    <View key={index} style={styles.tableContainer}>
-      <Text style={styles.tableTitle}>{table.title}</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <View style={styles.table}>
-          {/* Header */}
-          <View style={styles.tableRow}>
-            {table.columns.map((column: string, colIndex: number) => (
-              <Text key={colIndex} style={[styles.tableCell, styles.tableHeader]}>
-                {column}
-              </Text>
-            ))}
-          </View>
-          {/* Rows */}
-          {table.rows.map((row: string[], rowIndex: number) => (
-            <View key={rowIndex} style={styles.tableRow}>
-              {row.map((cell: string, cellIndex: number) => (
-                <Text key={cellIndex} style={styles.tableCell}>
-                  {cell}
-                </Text>
-              ))}
-            </View>
-          ))}
-        </View>
-      </ScrollView>
-    </View>
-  ), []);
-
-  const renderSectionDetail = useCallback(() => {
-    if (!selectedSection) return null;
+  const renderDetailModal = () => {
+    if (!selectedGuideline) return null;
 
     return (
       <Modal
-        visible={modalVisible}
+        visible={!!selectedGuideline}
         animationType="slide"
         presentationStyle="pageSheet"
-        onRequestClose={closeSectionModal}
-        supportedOrientations={['portrait', 'landscape']}
+        onRequestClose={() => setSelectedGuideline(null)}
       >
         <SafeAreaView style={styles.modalContainer}>
           <View style={styles.modalHeader}>
             <TouchableOpacity
               style={styles.closeButton}
-              onPress={closeSectionModal}
+              onPress={() => setSelectedGuideline(null)}
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
               <MaterialIcons name="close" size={24} color="#D81B60" />
             </TouchableOpacity>
-            <Text style={styles.modalTitle} numberOfLines={1}>
-              {selectedSection.title}
-            </Text>
-            <TouchableOpacity
-              style={styles.bookmarkButton}
-              onPress={() => toggleBookmark(selectedSection.id)}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <MaterialIcons 
-                name={bookmarks.includes(selectedSection.id) ? "bookmark" : "bookmark-border"} 
-                size={24} 
-                color={bookmarks.includes(selectedSection.id) ? "#D81B60" : "#999"} 
-              />
-            </TouchableOpacity>
+            <Text style={styles.modalTitle}>{selectedGuideline.title}</Text>
           </View>
 
-          <ScrollView style={styles.modalContent} showsVerticalScrollIndicator={false}>
-            {/* Main content */}
-            <Text style={styles.sectionContent}>
-              {selectedSection.body_md.replace(/##/g, '\n').replace(/\*\*/g, '')}
+          <ScrollView style={styles.modalContent}>
+            <Text style={styles.detailContent}>
+              {selectedGuideline.content}
             </Text>
 
-            {/* Key points */}
-            {selectedSection.bullets.length > 0 && (
-              <View style={styles.bulletsSection}>
-                <Text style={styles.subsectionTitle}>Key Points</Text>
-                {selectedSection.bullets.map((bullet, index) => (
-                  <View key={index} style={styles.bulletItem}>
+            {selectedGuideline.keyPoints && selectedGuideline.keyPoints.length > 0 && (
+              <View style={styles.keyPointsSection}>
+                <Text style={styles.sectionTitle}>Key Points</Text>
+                {selectedGuideline.keyPoints.map((point, index) => (
+                  <View key={index} style={styles.keyPoint}>
                     <MaterialIcons name="fiber-manual-record" size={8} color="#D81B60" />
-                    <Text style={styles.bulletText}>{bullet}</Text>
+                    <Text style={styles.keyPointText}>{point}</Text>
                   </View>
                 ))}
               </View>
             )}
-
-            {/* Tables */}
-            {selectedSection.tables.map((table, index) => renderTable(table, index))}
-
-            {/* Citations */}
-            {selectedSection.citations.length > 0 && (
-              <View style={styles.citationsSection}>
-                <Text style={styles.subsectionTitle}>References</Text>
-                {selectedSection.citations.map((citation, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={styles.citationItem}
-                    onPress={() => openWebLink(citation.url)}
-                    activeOpacity={0.7}
-                  >
-                    <MaterialIcons name="link" size={16} color="#D81B60" />
-                    <Text style={styles.citationText}>{citation.label}</Text>
-                    <MaterialIcons name="open-in-new" size={16} color="#999" />
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
-
-            <View style={styles.modalFooter}>
-              <Text style={styles.versionText}>
-                Guidelines v{guidelines.version} • Last updated: {new Date(guidelines.lastUpdated).toLocaleDateString()}
-              </Text>
-            </View>
           </ScrollView>
         </SafeAreaView>
       </Modal>
     );
-  }, [selectedSection, modalVisible, closeSectionModal, toggleBookmark, bookmarks, renderTable, openWebLink, guidelines.version, guidelines.lastUpdated]);
+  };
 
-  // Main render
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" backgroundColor="#FFC1CC" />
@@ -381,9 +262,9 @@ export default function GuidelinesScreen({ navigation }: Props) {
           onPress={() => navigation.goBack()}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <MaterialIcons name="arrow-back" size={24} color="#D81B60" />
         </TouchableOpacity>
-        <Text style={styles.title}>MHT Guidelines</Text>
+        <Text style={styles.headerTitle}>MHT Guidelines</Text>
         <TouchableOpacity
           style={styles.searchButton}
           onPress={() => setShowSearch(!showSearch)}
@@ -393,10 +274,10 @@ export default function GuidelinesScreen({ navigation }: Props) {
         </TouchableOpacity>
       </View>
 
-      {/* Search bar */}
+      {/* Search Bar */}
       {showSearch && (
         <View style={styles.searchContainer}>
-          <MaterialIcons name="search" size={20} color="#999" style={styles.searchIcon} />
+          <MaterialIcons name="search" size={20} color="#999" />
           <TextInput
             style={styles.searchInput}
             placeholder="Search guidelines..."
@@ -407,7 +288,6 @@ export default function GuidelinesScreen({ navigation }: Props) {
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity
-              style={styles.clearButton}
               onPress={() => setSearchQuery('')}
               hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
@@ -417,51 +297,59 @@ export default function GuidelinesScreen({ navigation }: Props) {
         </View>
       )}
 
-      {/* Guidelines overview */}
-      <View style={styles.overview}>
-        <Text style={styles.overviewTitle}>Clinical Practice Guidelines</Text>
-        <Text style={styles.overviewText}>
-          Evidence-based guidelines for menopause hormone therapy management
-        </Text>
-        <View style={styles.statsRow}>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{guidelines.sections.length}</Text>
-            <Text style={styles.statLabel}>Sections</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>{bookmarks.length}</Text>
-            <Text style={styles.statLabel}>Bookmarked</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Text style={styles.statNumber}>100%</Text>
-            <Text style={styles.statLabel}>Offline</Text>
-          </View>
+      {/* Stats */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>{guidelines.length}</Text>
+          <Text style={styles.statLabel}>Guidelines</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>{bookmarks.length}</Text>
+          <Text style={styles.statLabel}>Bookmarked</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>100%</Text>
+          <Text style={styles.statLabel}>Offline</Text>
         </View>
       </View>
 
-      {/* Sections list - Using standard FlatList */}
-      <FlatList
-        data={filteredSections}
-        keyExtractor={(item) => item.id}
-        renderItem={renderSectionCard}
-        contentContainerStyle={styles.sectionsList}
-        showsVerticalScrollIndicator={false}
-        removeClippedSubviews={true}
-        maxToRenderPerBatch={10}
-        updateCellsBatchingPeriod={100}
-        windowSize={10}
-      />
+      {/* Guidelines List - CRASH PROOF */}
+      <View style={styles.listContainer}>
+        {isLoading ? (
+          <View style={styles.centerContainer}>
+            <ActivityIndicator size="large" color="#D81B60" />
+          </View>
+        ) : filteredGuidelines.length === 0 ? (
+          <View style={styles.centerContainer}>
+            <MaterialIcons name="search-off" size={60} color="#E0E0E0" />
+            <Text style={styles.emptyText}>
+              {searchQuery ? 'No results found' : 'No guidelines available'}
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={filteredGuidelines}
+            keyExtractor={(item) => item?.id || `fallback_${Math.random()}`}
+            renderItem={renderGuidelineCard}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContent}
+            removeClippedSubviews={false}
+            maxToRenderPerBatch={5}
+            updateCellsBatchingPeriod={100}
+            windowSize={10}
+            initialNumToRender={5}
+            onEndReachedThreshold={0.1}
+            ListEmptyComponent={() => (
+              <View style={styles.centerContainer}>
+                <Text style={styles.emptyText}>No guidelines found</Text>
+              </View>
+            )}
+          />
+        )}
+      </View>
 
-      {/* Section detail modal */}
-      {renderSectionDetail()}
-
-      {/* Loading overlay */}
-      {isLoading && (
-        <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color="#D81B60" />
-          <Text style={styles.loadingText}>Updating guidelines...</Text>
-        </View>
-      )}
+      {/* Detail Modal */}
+      {renderDetailModal()}
     </SafeAreaView>
   );
 }
@@ -485,27 +373,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   backButton: {
-    padding: 12,
+    padding: 8,
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Increase opacity for better visibility
-    minWidth: 48,
-    minHeight: 48,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(216, 27, 96, 0.3)', // Add border for definition
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
-  backButtonText: {
-    fontSize: 24,
-    color: '#D81B60',
-    fontWeight: 'bold',
-  },
-  title: {
+  headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#D81B60',
@@ -523,50 +395,25 @@ const styles = StyleSheet.create({
     marginTop: 16,
     borderRadius: 12,
     paddingHorizontal: 16,
+    paddingVertical: 8,
     elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-  },
-  searchIcon: {
-    marginRight: 12,
   },
   searchInput: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
     fontSize: 16,
     color: '#333',
   },
-  clearButton: {
-    padding: 4,
-  },
-  overview: {
-    margin: 20,
-    padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 12,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-  overviewTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#D81B60',
-    marginBottom: 8,
-  },
-  overviewText: {
-    fontSize: 14,
-    color: '#666',
-    lineHeight: 20,
-    marginBottom: 16,
-  },
-  statsRow: {
+  statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    backgroundColor: 'white',
+    marginHorizontal: 20,
+    marginTop: 16,
+    borderRadius: 12,
+    paddingVertical: 16,
+    elevation: 1,
   },
   statItem: {
     alignItems: 'center',
@@ -581,11 +428,15 @@ const styles = StyleSheet.create({
     color: '#999',
     marginTop: 4,
   },
-  sectionsList: {
+  listContainer: {
+    flex: 1,
+    marginTop: 16,
+  },
+  listContent: {
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
-  sectionCard: {
+  guidelineCard: {
     backgroundColor: 'white',
     borderRadius: 12,
     padding: 16,
@@ -602,6 +453,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 12,
   },
+  iconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFF0F5',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   bookmarkButton: {
     padding: 4,
   },
@@ -611,7 +470,7 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 8,
   },
-  cardPreview: {
+  cardContent: {
     fontSize: 14,
     color: '#666',
     lineHeight: 20,
@@ -622,9 +481,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  bulletCount: {
+  keyPointsCount: {
     fontSize: 12,
     color: '#999',
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 60,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#999',
+    marginTop: 16,
+  },
+  errorCard: {
+    backgroundColor: '#FFEBEE',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#FFCDD2',
+  },
+  errorText: {
+    fontSize: 14,
+    color: '#F44336',
+    textAlign: 'center',
   },
   modalContainer: {
     flex: 1,
@@ -633,15 +516,10 @@ const styles = StyleSheet.create({
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 16,
     backgroundColor: '#FFC1CC',
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
   },
   closeButton: {
     padding: 8,
@@ -658,130 +536,32 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
-  sectionContent: {
+  detailContent: {
     fontSize: 16,
     color: '#333',
     lineHeight: 24,
     marginVertical: 20,
   },
-  bulletsSection: {
+  keyPointsSection: {
     marginVertical: 20,
   },
-  subsectionTitle: {
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#D81B60',
     marginBottom: 12,
   },
-  bulletItem: {
+  keyPoint: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 8,
     paddingLeft: 8,
   },
-  bulletText: {
+  keyPointText: {
     fontSize: 14,
     color: '#333',
     lineHeight: 20,
     marginLeft: 12,
     flex: 1,
   },
-  tableContainer: {
-    marginVertical: 16,
-    backgroundColor: 'white',
-    borderRadius: 12,
-    padding: 16,
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-  },
-  tableTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#D81B60',
-    marginBottom: 12,
-  },
-  table: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
-    overflow: 'hidden',
-  },
-  tableRow: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
-  },
-  tableCell: {
-    padding: 12,
-    minWidth: 120,
-    fontSize: 14,
-    color: '#333',
-    borderRightWidth: 1,
-    borderRightColor: '#E0E0E0',
-  },
-  tableHeader: {
-    backgroundColor: '#F5F5F5',
-    fontWeight: 'bold',
-    color: '#D81B60',
-  },
-  citationsSection: {
-    marginVertical: 20,
-  },
-  citationItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 12,
-    marginBottom: 8,
-    borderRadius: 8,
-    elevation: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-  },
-  citationText: {
-    fontSize: 14,
-    color: '#D81B60',
-    flex: 1,
-    marginHorizontal: 12,
-  },
-  modalFooter: {
-    marginVertical: 20,
-    padding: 16,
-    backgroundColor: 'white',
-    borderRadius: 8,
-    elevation: 1,
-  },
-  versionText: {
-    fontSize: 12,
-    color: '#999',
-    textAlign: 'center',
-  },
-  loadingOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loadingText: {
-    marginTop: 12,
-    fontSize: 16,
-    color: 'white',
-  },
-  errorText: {
-    fontSize: 14,
-    color: '#F44336',
-    textAlign: 'center',
-    fontStyle: 'italic',
-    padding: 16,
-  },
-
 });
