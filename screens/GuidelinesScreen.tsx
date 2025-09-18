@@ -240,7 +240,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
     );
   }, [bookmarks, openSectionModal, toggleBookmark]);
 
-  const renderTable = (table: any, index: number) => (
+  const renderTable = useCallback((table: any, index: number) => (
     <View key={index} style={styles.tableContainer}>
       <Text style={styles.tableTitle}>{table.title}</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -266,9 +266,9 @@ export default function GuidelinesScreen({ navigation }: Props) {
         </View>
       </ScrollView>
     </View>
-  );
+  ), []);
 
-  const renderSectionDetail = () => {
+  const renderSectionDetail = useCallback(() => {
     if (!selectedSection) return null;
 
     return (
@@ -276,14 +276,15 @@ export default function GuidelinesScreen({ navigation }: Props) {
         visible={modalVisible}
         animationType="slide"
         presentationStyle="pageSheet"
-        onRequestClose={closeSectionModal} // Android back button support
-        supportedOrientations={['portrait', 'landscape']} // Better device support
+        onRequestClose={closeSectionModal}
+        supportedOrientations={['portrait', 'landscape']}
       >
         <SafeAreaView style={styles.modalContainer}>
           <View style={styles.modalHeader}>
             <TouchableOpacity
               style={styles.closeButton}
               onPress={closeSectionModal}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
               <MaterialIcons name="close" size={24} color="#D81B60" />
             </TouchableOpacity>
@@ -293,6 +294,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
             <TouchableOpacity
               style={styles.bookmarkButton}
               onPress={() => toggleBookmark(selectedSection.id)}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             >
               <MaterialIcons 
                 name={bookmarks.includes(selectedSection.id) ? "bookmark" : "bookmark-border"} 
@@ -333,6 +335,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
                     key={index}
                     style={styles.citationItem}
                     onPress={() => openWebLink(citation.url)}
+                    activeOpacity={0.7}
                   >
                     <MaterialIcons name="link" size={16} color="#D81B60" />
                     <Text style={styles.citationText}>{citation.label}</Text>
@@ -351,7 +354,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
         </SafeAreaView>
       </Modal>
     );
-  };
+  }, [selectedSection, modalVisible, closeSectionModal, toggleBookmark, bookmarks, renderTable, openWebLink, guidelines.version, guidelines.lastUpdated]);
 
   return (
     <SafeAreaView style={styles.container}>
