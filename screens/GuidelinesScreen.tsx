@@ -154,12 +154,8 @@ export default function GuidelinesScreen({ navigation }: Props) {
     }, 100);
   }, []);
 
-  // Search functionality with safe fallback
+  // Search functionality with memoization
   const filteredSections = useMemo(() => {
-    // 🔧 CRITICAL FIX: Handle undefined guidelines.sections
-    console.log("🔍 GuidelinesScreen: filteredSections - guidelines:", guidelines);
-    console.log("🔍 GuidelinesScreen: guidelines.sections type:", typeof guidelines?.sections);
-    
     const sections = guidelines?.sections || [];
     if (!searchQuery.trim()) return sections;
     
@@ -173,9 +169,10 @@ export default function GuidelinesScreen({ navigation }: Props) {
         table.rows.some(row => row.some(cell => cell.toLowerCase().includes(query)))
       )
     );
-  }, [searchQuery, guidelines?.sections]);
+  }, [searchQuery, guidelines.sections]);
 
-  const openWebLink = (url: string) => {
+  // Link handling
+  const openWebLink = useCallback((url: string) => {
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
         Linking.openURL(url);
@@ -183,12 +180,11 @@ export default function GuidelinesScreen({ navigation }: Props) {
         Alert.alert('Error', 'Cannot open this link');
       }
     });
-  };
+  }, []);
 
-  const renderSectionCard = ({ item }: { item: GuidelineSection }) => {
-    // Add defensive checks for item data
+  // Render functions
+  const renderSectionCard = useCallback(({ item }: { item: GuidelineSection }) => {
     if (!item) {
-      console.error('🚨 GuidelinesScreen: Received null/undefined item in renderSectionCard');
       return (
         <View style={styles.sectionCard}>
           <Text style={styles.errorText}>Invalid guideline data</Text>
@@ -196,60 +192,53 @@ export default function GuidelinesScreen({ navigation }: Props) {
       );
     }
 
-    // Ensure required fields exist
     const safeItem = {
       id: item.id || `fallback_${Date.now()}`,
       title: item.title || 'Unknown Guideline',
       body_md: item.body_md || 'No content available',
       bullets: item.bullets || [],
       icon: item.icon || 'help',
-      ...item
+      tables: item.tables || [],
+      citations: item.citations || [],
     };
 
-    try {
-      const isBookmarked = bookmarks.includes(safeItem.id);
-      
-      return (
-        <TouchableOpacity
-          style={styles.sectionCard}
-          onPress={() => openSectionModal(safeItem)}
-        >
-          <View style={styles.cardHeader}>
+    const isBookmarked = bookmarks.includes(safeItem.id);
+    
+    return (
+      <TouchableOpacity
+        style={styles.sectionCard}
+        onPress={() => openSectionModal(safeItem)}
+        activeOpacity={0.7}
+      >
+        <View style={styles.cardHeader}>
+          <MaterialIcons 
+            name={safeItem.icon as any} 
+            size={24} 
+            color="#D81B60" 
+          />
+          <TouchableOpacity
+            style={styles.bookmarkButton}
+            onPress={() => toggleBookmark(safeItem.id)}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
             <MaterialIcons 
-              name={safeItem.icon as any} 
-              size={24} 
-              color="#D81B60" 
+              name={isBookmarked ? "bookmark" : "bookmark-border"} 
+              size={20} 
+              color={isBookmarked ? "#D81B60" : "#999"} 
             />
-            <TouchableOpacity
-              style={styles.bookmarkButton}
-              onPress={() => toggleBookmark(safeItem.id)}
-            >
-              <MaterialIcons 
-                name={isBookmarked ? "bookmark" : "bookmark-border"} 
-                size={20} 
-                color={isBookmarked ? "#D81B60" : "#999"} 
-              />
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.cardTitle}>{safeItem.title}</Text>
-          <Text style={styles.cardPreview} numberOfLines={2}>
-            {safeItem.body_md.substring(0, 100)}...
-          </Text>
-          <View style={styles.cardFooter}>
-            <Text style={styles.bulletCount}>{safeItem.bullets.length} key points</Text>
-            <MaterialIcons name="arrow-forward" size={16} color="#D81B60" />
-          </View>
-        </TouchableOpacity>
-      );
-    } catch (error) {
-      console.error('🚨 GuidelinesScreen: Error rendering section card:', error, 'Item:', item);
-      return (
-        <View style={styles.sectionCard}>
-          <Text style={styles.errorText}>Error displaying: {safeItem.title}</Text>
+          </TouchableOpacity>
         </View>
-      );
-    }
-  };
+        <Text style={styles.cardTitle}>{safeItem.title}</Text>
+        <Text style={styles.cardPreview} numberOfLines={2}>
+          {safeItem.body_md.substring(0, 100)}...
+        </Text>
+        <View style={styles.cardFooter}>
+          <Text style={styles.bulletCount}>{safeItem.bullets.length} key points</Text>
+          <MaterialIcons name="arrow-forward" size={16} color="#D81B60" />
+        </View>
+      </TouchableOpacity>
+    );
+  }, [bookmarks, openSectionModal, toggleBookmark]);
 
   const renderTable = (table: any, index: number) => (
     <View key={index} style={styles.tableContainer}>
