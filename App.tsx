@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import { AppState } from 'react-native';
+import { AppState, Dimensions } from 'react-native';
 import { getDeviceInfo } from './utils/deviceUtils';
 
 // 🔍 DEBUG: AsyncStorage availability check (ChatGPT suggestion)
