@@ -92,6 +92,8 @@ interface Props {
 
 export default function PatientDetailsScreen({ navigation, route }: Props) {
   const { patient } = route.params;
+  const { width } = Dimensions.get('window');
+  const isTablet = width >= 768;
 
   const formatDate = (date: string | Date) => {
     const dateObj = typeof date === 'string' ? new Date(date) : date;
@@ -145,6 +147,14 @@ export default function PatientDetailsScreen({ navigation, route }: Props) {
     return 'Obese';
   };
 
+  const getBMICategoryColor = (bmi?: number) => {
+    if (!bmi) return PINK_COLORS.text.light;
+    if (bmi < 18.5) return PINK_COLORS.status.warning;
+    if (bmi < 25) return PINK_COLORS.status.success;
+    if (bmi < 30) return PINK_COLORS.status.warning;
+    return PINK_COLORS.status.error;
+  };
+
   const getSymptomSeverity = (score: number) => {
     if (score === 0) return 'None';
     if (score <= 2) return 'Mild';
@@ -152,173 +162,138 @@ export default function PatientDetailsScreen({ navigation, route }: Props) {
     return 'Severe';
   };
 
+  const getSymptomColor = (score: number) => {
+    if (score === 0) return PINK_COLORS.status.success;
+    if (score <= 2) return PINK_COLORS.status.info;
+    if (score <= 4) return PINK_COLORS.status.warning;
+    return PINK_COLORS.status.error;
+  };
+
   const getCategoryStyle = (category: string) => {
     switch (category.toLowerCase()) {
       case 'low':
-        return styles.categoryLow;
+        return { backgroundColor: '#e8f5e8', color: '#2e7d32' };
       case 'moderate':
       case 'intermediate':
       case 'borderline':
-        return styles.categoryModerate;
+        return { backgroundColor: '#fff3e0', color: '#f57c00' };
       case 'high':
-        return styles.categoryHigh;
+        return { backgroundColor: '#ffebee', color: '#d32f2f' };
       default:
-        return styles.categoryModerate;
+        return { backgroundColor: '#fff3e0', color: '#f57c00' };
     }
   };
 
+  const renderPatientHeader = () => (
+    <View style={styles.patientHeader}>
+      <View style={styles.avatarContainer}>
+        <MaterialIcons name="person" size={isTablet ? 64 : 48} color={PINK_COLORS.primary} />
+      </View>
+      <View style={styles.patientHeaderInfo}>
+        <Text style={[styles.patientName, { fontSize: isTablet ? 28 : 24 }]}>{patient.name}</Text>
+        <Text style={[styles.patientSubInfo, { fontSize: isTablet ? 18 : 16 }]}>
+          {patient.age} years • {patient.menopausalStatus.charAt(0).toUpperCase() + patient.menopausalStatus.slice(1)}
+        </Text>
+        <Text style={[styles.patientDate, { fontSize: isTablet ? 14 : 12 }]}>
+          Last updated: {formatDate(patient.updatedAt)}
+        </Text>
+      </View>
+    </View>
+  );
+
+  const renderSymptomChart = () => (
+    <View style={styles.chartContainer}>
+      <Text style={[styles.chartTitle, { fontSize: isTablet ? 18 : 16 }]}>Symptom Severity Overview</Text>
+      <View style={styles.chartGrid}>
+        {[
+          { name: 'Hot Flushes', score: patient.hotFlushes, icon: 'local-fire-department' },
+          { name: 'Night Sweats', score: patient.nightSweats, icon: 'nights-stay' },
+          { name: 'Sleep Issues', score: patient.sleepDisturbance, icon: 'bedtime' },
+          { name: 'Vaginal Dryness', score: patient.vaginalDryness, icon: 'water-drop' },
+          { name: 'Mood Changes', score: patient.moodChanges, icon: 'mood' },
+          { name: 'Joint Aches', score: patient.jointAches, icon: 'accessibility' },
+        ].map((symptom) => (
+          <View key={symptom.name} style={styles.chartBar}>
+            <View style={styles.chartBarHeader}>
+              <MaterialIcons name={symptom.icon as any} size={16} color={PINK_COLORS.text.muted} />
+              <Text style={styles.chartBarLabel}>{symptom.name}</Text>
+            </View>
+            <View style={styles.chartBarContainer}>
+              <View 
+                style={[
+                  styles.chartBarFill, 
+                  { 
+                    width: `${(symptom.score / 6) * 100}%`,
+                    backgroundColor: getSymptomColor(symptom.score)
+                  }
+                ]} 
+              />
+            </View>
+            <Text style={[styles.chartBarValue, { color: getSymptomColor(symptom.score) }]}>
+              {symptom.score}/6
+            </Text>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+
   return (
     <SafeAreaView style={styles.container}>
+      {/* Enhanced Header */}
       <View style={styles.header}>
         <TouchableOpacity 
           style={styles.backButton}
           onPress={() => navigation.goBack()}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
         >
-          <Text style={styles.backButtonText}>←</Text>
+          <MaterialIcons name="arrow-back" size={24} color={PINK_COLORS.primary} />
         </TouchableOpacity>
-        <Text style={styles.title}>Patient Details</Text>
-        <View style={styles.placeholder} />
+        <Text style={styles.headerTitle}>Patient Profile</Text>
+        <View style={styles.headerActions}>
+          <TouchableOpacity style={styles.headerActionButton}>
+            <MaterialIcons name="share" size={20} color={PINK_COLORS.primary} />
+          </TouchableOpacity>
+        </View>
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {/* Patient Basic Info */}
+        {/* Patient Header Card */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MaterialIcons name="person" size={24} color="#D81B60" />
-            <Text style={styles.sectionTitle}>Basic Information</Text>
+          {renderPatientHeader()}
+        </View>
+
+        {/* Quick Stats Row */}
+        <View style={styles.quickStatsContainer}>
+          <View style={styles.quickStatItem}>
+            <Text style={styles.quickStatValue}>{patient.bmi ? patient.bmi.toFixed(1) : 'N/A'}</Text>
+            <Text style={styles.quickStatLabel}>BMI</Text>
+            <Text style={[styles.quickStatCategory, { color: getBMICategoryColor(patient.bmi) }]}>
+              {getBMICategory(patient.bmi)}
+            </Text>
           </View>
-          <View style={styles.infoGrid}>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Name</Text>
-              <Text style={styles.infoValue}>{patient.name}</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Age</Text>
-              <Text style={styles.infoValue}>{patient.age} years</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Height</Text>
-              <Text style={styles.infoValue}>{patient.height} cm</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Weight</Text>
-              <Text style={styles.infoValue}>{patient.weight} kg</Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>BMI</Text>
-              <Text style={styles.infoValue}>
-                {patient.bmi ? patient.bmi.toFixed(1) : 'N/A'}
-              </Text>
-              <Text style={styles.infoBadge}>
-                {getBMICategory(patient.bmi)}
-              </Text>
-            </View>
-            <View style={styles.infoItem}>
-              <Text style={styles.infoLabel}>Menopausal Status</Text>
-              <Text style={styles.infoValue}>
-                {patient.menopausalStatus.charAt(0).toUpperCase() + patient.menopausalStatus.slice(1)}
-              </Text>
-            </View>
+          <View style={styles.quickStatItem}>
+            <Text style={styles.quickStatValue}>{patient.height}</Text>
+            <Text style={styles.quickStatLabel}>Height (cm)</Text>
+          </View>
+          <View style={styles.quickStatItem}>
+            <Text style={styles.quickStatValue}>{patient.weight}</Text>
+            <Text style={styles.quickStatLabel}>Weight (kg)</Text>
+          </View>
+          <View style={styles.quickStatItem}>
+            <Text style={styles.quickStatValue}>
+              {contraindications.filter(c => c.type === 'absolute').length}
+            </Text>
+            <Text style={styles.quickStatLabel}>Alerts</Text>
+            <Text style={[styles.quickStatCategory, { color: contraindications.length > 0 ? PINK_COLORS.status.error : PINK_COLORS.status.success }]}>
+              {contraindications.length > 0 ? 'Review' : 'Clear'}
+            </Text>
           </View>
         </View>
 
-        {/* Medical History */}
+        {/* Symptom Chart */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MaterialIcons name="medical-services" size={24} color="#D81B60" />
-            <Text style={styles.sectionTitle}>Medical History</Text>
-          </View>
-          <View style={styles.historyGrid}>
-            <View style={[styles.historyItem, patient.hysterectomy && styles.historyPositive]}>
-              <MaterialIcons 
-                name={patient.hysterectomy ? "check-circle" : "cancel"} 
-                size={20} 
-                color={patient.hysterectomy ? "#4CAF50" : "#999"} 
-              />
-              <Text style={[styles.historyText, patient.hysterectomy && styles.historyPositiveText]}>
-                Hysterectomy
-              </Text>
-            </View>
-            <View style={[styles.historyItem, patient.oophorectomy && styles.historyPositive]}>
-              <MaterialIcons 
-                name={patient.oophorectomy ? "check-circle" : "cancel"} 
-                size={20} 
-                color={patient.oophorectomy ? "#4CAF50" : "#999"} 
-              />
-              <Text style={[styles.historyText, patient.oophorectomy && styles.historyPositiveText]}>
-                Oophorectomy
-              </Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Symptoms Assessment */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MaterialIcons name="healing" size={24} color="#D81B60" />
-            <Text style={styles.sectionTitle}>Symptom Assessment</Text>
-          </View>
-          <View style={styles.symptomGrid}>
-            {[
-              { name: 'Hot Flushes', score: patient.hotFlushes, icon: 'local-fire-department' },
-              { name: 'Night Sweats', score: patient.nightSweats, icon: 'nights-stay' },
-              { name: 'Sleep Disturbance', score: patient.sleepDisturbance, icon: 'bedtime' },
-              { name: 'Vaginal Dryness', score: patient.vaginalDryness, icon: 'water-drop' },
-              { name: 'Mood Changes', score: patient.moodChanges, icon: 'mood' },
-              { name: 'Joint Aches', score: patient.jointAches, icon: 'accessibility' },
-            ].map((symptom) => (
-              <View key={symptom.name} style={styles.symptomItem}>
-                <View style={styles.symptomHeader}>
-                  <MaterialIcons name={symptom.icon as any} size={20} color="#666" />
-                  <Text style={styles.symptomName}>{symptom.name}</Text>
-                </View>
-                <View style={styles.symptomScore}>
-                  <Text style={styles.scoreNumber}>{symptom.score}/6</Text>
-                  <Text style={[
-                    styles.scoreSeverity,
-                    symptom.score === 0 && styles.scoreNone,
-                    symptom.score <= 2 && symptom.score > 0 && styles.scoreMild,
-                    symptom.score <= 4 && symptom.score > 2 && styles.scoreModerate,
-                    symptom.score > 4 && styles.scoreSevere,
-                  ]}>
-                    {getSymptomSeverity(symptom.score)}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        </View>
-
-        {/* Risk Factors */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <MaterialIcons name="warning" size={24} color="#FF9800" />
-            <Text style={styles.sectionTitle}>Risk Factors</Text>
-          </View>
-          <View style={styles.riskGrid}>
-            {[
-              { name: 'Family History - Breast Cancer', value: patient.familyHistoryBreastCancer },
-              { name: 'Family History - Ovarian Cancer', value: patient.familyHistoryOvarian },
-              { name: 'Personal History - Breast Cancer', value: patient.personalHistoryBreastCancer },
-              { name: 'Personal History - DVT/PE', value: patient.personalHistoryDVT },
-              { name: 'Thrombophilia', value: patient.thrombophilia },
-              { name: 'Smoking', value: patient.smoking },
-              { name: 'Diabetes', value: patient.diabetes },
-              { name: 'Hypertension', value: patient.hypertension },
-              { name: 'High Cholesterol', value: patient.cholesterolHigh },
-            ].map((risk) => (
-              <View key={risk.name} style={[styles.riskItem, risk.value && styles.riskPositive]}>
-                <MaterialIcons 
-                  name={risk.value ? "warning" : "check-circle"} 
-                  size={18} 
-                  color={risk.value ? "#FF5722" : "#4CAF50"} 
-                />
-                <Text style={[styles.riskText, risk.value && styles.riskPositiveText]}>
-                  {risk.name}
-                </Text>
-              </View>
-            ))}
-          </View>
+          {renderSymptomChart()}
         </View>
 
         {/* Risk Calculators */}
