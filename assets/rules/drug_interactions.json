@@ -1,8 +1,8 @@
 {
   "meta": {
     "main_medicines": 10,
-    "optional_medicines": 15,
-    "rules_total": 150,
+    "optional_medicines": 16,
+    "rules_total": 160,
     "note": "Full mapping of severity values between main and optional medicines (Low/Moderate/High)."
   },
   "rules": [
@@ -1726,5 +1726,78 @@
     "rationale": "Low interaction: routine monitoring advised; usually no change required.",
     "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   }
-  ]
+  
+  {
+    "main_category": "Hormone Replacement Therapy (HRT)",
+    "interaction_with": "Breast cancer",
+    "severity": "high",
+    "rationale": "HRT (estrogen ± progestin) increases the risk of breast cancer recurrence and progression in women with a history of breast cancer.",
+    "recommended_action": "Avoid systemic HRT in women with current or past breast cancer. Consider non-hormonal therapies for symptom control."
+  },
+  {
+    "main_category": "Selective Estrogen Receptor Modulators (SERMs)",
+    "interaction_with": "Breast cancer",
+    "severity": "moderate",
+    "rationale": "SERMs such as tamoxifen and raloxifene are sometimes used in breast cancer treatment and prevention. They may reduce recurrence risk but can interact with other therapies.",
+    "recommended_action": "Use under oncologist supervision. Monitor for drug–drug interactions (e.g., SSRIs inhibiting tamoxifen metabolism)."
+  },
+  {
+    "main_category": "Tibolone",
+    "interaction_with": "Breast cancer",
+    "severity": "high",
+    "rationale": "Tibolone has estrogenic activity and has been associated with an increased risk of breast cancer recurrence.",
+    "recommended_action": "Contraindicated in women with current or previous breast cancer. Do not use."
+  },
+  {
+    "main_category": "SSRIs / SNRIs",
+    "interaction_with": "Breast cancer",
+    "severity": "moderate",
+    "rationale": "SSRIs (especially paroxetine, fluoxetine) inhibit CYP2D6, reducing conversion of tamoxifen to its active metabolite, lowering efficacy.",
+    "recommended_action": "Avoid strong CYP2D6 inhibitors in patients on tamoxifen. Prefer venlafaxine, citalopram, or escitalopram for hot flashes."
+  },
+  {
+    "main_category": "Anticonvulsants (for menopause symptoms)",
+    "interaction_with": "Breast cancer",
+    "severity": "low",
+    "rationale": "Gabapentin and pregabalin are used for hot flashes; they have no direct effect on breast cancer but may cause CNS side effects and polypharmacy risks.",
+    "recommended_action": "Generally safe in breast cancer patients. Monitor tolerability and interactions with other CNS drugs."
+  },
+  {
+    "main_category": "Clonidine & Other Antihypertensives",
+    "interaction_with": "Breast cancer",
+    "severity": "low",
+    "rationale": "Clonidine reduces vasomotor symptoms without direct estrogenic effects. No direct influence on breast cancer.",
+    "recommended_action": "Can be considered for hot flashes in breast cancer patients, but monitor for hypotension and side effects."
+  },
+  {
+    "main_category": "Herbal Estrogen Supplements (phytoestrogens)",
+    "interaction_with": "Breast cancer",
+    "severity": "moderate",
+    "rationale": "Soy isoflavones and red clover have weak estrogenic effects; evidence on safety in breast cancer survivors is conflicting.",
+    "recommended_action": "Avoid high-dose phytoestrogens in breast cancer patients. If used, monitor closely and discuss with oncologist."
+  },
+  {
+    "main_category": "General Herbal Supplements",
+    "interaction_with": "Breast cancer",
+    "severity": "low",
+    "rationale": "Most non-estrogenic supplements (e.g., black cohosh) show no strong evidence of worsening breast cancer, though data are limited.",
+    "recommended_action": "Use with caution; avoid unregulated products; inform patients of uncertain evidence base."
+  },
+  {
+    "main_category": "Complementary & Alternative Therapies",
+    "interaction_with": "Breast cancer",
+    "severity": "low",
+    "rationale": "Acupuncture, yoga, and lifestyle interventions are non-pharmacological and have no direct interaction with breast cancer.",
+    "recommended_action": "Safe and often recommended for symptom relief and quality of life improvements."
+  },
+  {
+    "main_category": "Bisphosphonates",
+    "interaction_with": "Breast cancer",
+    "severity": "low",
+    "rationale": "Bisphosphonates (zoledronic acid, alendronate) are often used in breast cancer to reduce bone loss and prevent metastasis.",
+    "recommended_action": "Safe and sometimes beneficial in breast cancer patients, especially postmenopausal women at fracture risk."
+  }
+]
+
+
 }
