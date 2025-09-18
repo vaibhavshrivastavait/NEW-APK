@@ -18,8 +18,19 @@ import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 import { 
-  MHT_GUIDELINES, 
+  COMBINED_MHT_GUIDELINES,
+  PINK_COLOR_SCHEME,
+  PINK_CATEGORIES,
+  PINK_PRIORITY_COLORS,
+  EVIDENCE_COLORS,
+  searchGuidelines,
+  filterGuidelinesByCategory,
+  getGuidelinesCountByCategory
+} from '../data/combinedMHTGuidelines';
+
+import { 
   GuidelineSection, 
   ClinicalRecommendation, 
   DecisionTreeNode,
