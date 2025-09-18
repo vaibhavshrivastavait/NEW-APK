@@ -144,6 +144,16 @@ export default function App() {
           options={{ title: 'Patient Records' }}
         />
         <Stack.Screen 
+          name="SavedPatientRecords" 
+          component={SavedPatientRecordsScreen}
+          options={{ title: 'Saved Patients' }}
+        />
+        <Stack.Screen 
+          name="SavedPatientDetails" 
+          component={SavedPatientDetailsScreen}
+          options={{ title: 'Patient Details' }}
+        />
+        <Stack.Screen 
           name="PatientListTest" 
           component={require('./screens/PatientListScreenTest').default}
           options={{ title: 'Patient Records (Test)' }}
