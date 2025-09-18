@@ -65,7 +65,7 @@ yarn install
 npx expo start
 
 # 3. Web Preview
-# Open: https://medical-compas.preview.emergentagent.com
+# Open: https://clinic-assist-7.preview.emergentagent.com
 # Scan QR code with Expo Go app for mobile testing
 
 # 4. Android APK Build
@@ -146,7 +146,7 @@ python simple_backend.py
 ### **1. Development Environment**
 ```bash
 # Web Preview (Current)
-URL: https://medical-compas.preview.emergentagent.com
+URL: https://clinic-assist-7.preview.emergentagent.com
 Features: Full interactive functionality
 Backend: FastAPI on port 8001
 Status: ✅ OPERATIONAL

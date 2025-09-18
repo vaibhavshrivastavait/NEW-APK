@@ -92,7 +92,7 @@ The MHT Assessment Clinical Decision Support System has successfully completed c
 ## 📱 **MOBILE APP TESTING VALIDATION**
 
 ### **Web Preview Testing** (Current Environment)
-- **URL**: https://medical-compas.preview.emergentagent.com
+- **URL**: https://clinic-assist-7.preview.emergentagent.com
 - **Status**: ✅ **FULLY OPERATIONAL**
 - **Features**: Complete interactive functionality
 - **Performance**: Fast loading, smooth navigation
