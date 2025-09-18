@@ -366,7 +366,7 @@ const useAssessmentStore = create<AssessmentStore>()(
             sixMonths: true,
             twelveMonths: true,
           },
-          generatedAt: new Date(),
+          generatedAt: new Date().toISOString(),
         };
 
         const recommendations = get().recommendations.filter(r => r.patientId !== patientId);
