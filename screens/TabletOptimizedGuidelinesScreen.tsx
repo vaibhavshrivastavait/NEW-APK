@@ -730,7 +730,7 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: PINK_COLOR_SCHEME.background.primary,
   },
   guidelinesListContainer: {
     flex: 1,
@@ -754,7 +754,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 12,
     fontSize: 16,
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
   },
   tabContainer: {
     paddingTop: 16,
@@ -780,6 +780,18 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     marginLeft: 6,
   },
+  countBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 10,
+    marginLeft: 8,
+    minWidth: 20,
+    alignItems: 'center',
+  },
+  countText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+  },
   guidelinesScroll: {
     flex: 1,
   },
@@ -799,7 +811,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   selectedGuidelineCard: {
-    borderColor: '#1976D2',
+    borderColor: PINK_COLOR_SCHEME.primary,
     elevation: 4,
   },
   cardHeader: {
@@ -817,7 +829,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#E3F2FD',
+    backgroundColor: PINK_COLOR_SCHEME.primaryLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
@@ -825,13 +837,26 @@ const styles = StyleSheet.create({
   titleContainer: {
     flex: 1,
   },
-  cardTitle: {
-    fontWeight: 'bold',
-    color: '#333',
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 4,
   },
-  selectedText: {
-    color: '#1976D2',
+  cardTitle: {
+    fontWeight: 'bold',
+    color: PINK_COLOR_SCHEME.text.primary,
+    flex: 1,
+  },
+  legacyBadge: {
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: 8,
+    marginLeft: 8,
+  },
+  legacyText: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: 'white',
   },
   priorityBadge: {
     flexDirection: 'row',
@@ -862,7 +887,6 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   overview: {
-    color: '#666',
     lineHeight: 20,
     marginBottom: 16,
   },
@@ -871,7 +895,6 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 12,
   },
   quickRefItem: {
@@ -884,11 +907,9 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   quickRefLabel: {
-    color: '#333',
     flex: 1,
   },
   quickRefValue: {
-    color: '#666',
     flex: 1,
     textAlign: 'right',
   },
@@ -902,7 +923,6 @@ const styles = StyleSheet.create({
   actionButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#1976D2',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
@@ -910,7 +930,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   decisionButton: {
-    backgroundColor: '#388E3C',
+    // backgroundColor will be set inline
   },
   actionButtonText: {
     color: 'white',
@@ -946,13 +966,13 @@ const styles = StyleSheet.create({
   },
   emptyDetailsTitle: {
     fontWeight: '600',
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     marginTop: 16,
     marginBottom: 8,
     textAlign: 'center',
   },
   emptyDetailsSubtitle: {
-    color: '#666',
+    color: PINK_COLOR_SCHEME.text.muted,
     textAlign: 'center',
     lineHeight: 22,
   },
@@ -973,7 +993,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#E3F2FD',
+    backgroundColor: PINK_COLOR_SCHEME.primaryLight,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -983,7 +1003,7 @@ const styles = StyleSheet.create({
   },
   detailsTitle: {
     fontWeight: 'bold',
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     marginBottom: 8,
   },
   detailsHeaderActions: {
@@ -1015,7 +1035,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
   },
   activeDetailsTab: {
-    borderBottomColor: '#1976D2',
+    borderBottomColor: PINK_COLOR_SCHEME.primary,
   },
   detailsTabText: {
     fontWeight: '600',
@@ -1026,13 +1046,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   detailsOverview: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     lineHeight: 24,
     marginBottom: 24,
   },
   detailsSectionTitle: {
     fontWeight: 'bold',
-    color: '#1976D2',
+    color: PINK_COLOR_SCHEME.primary,
     marginBottom: 16,
     marginTop: 8,
   },
@@ -1042,7 +1062,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   keyPointText: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     lineHeight: 20,
     marginLeft: 12,
     flex: 1,
@@ -1051,12 +1071,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 12,
-    backgroundColor: '#FFF8E1',
+    backgroundColor: PINK_COLOR_SCHEME.background.hover,
     padding: 12,
     borderRadius: 8,
   },
   pearlText: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     lineHeight: 20,
     marginLeft: 12,
     flex: 1,
@@ -1090,7 +1110,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   recommendationText: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -1108,12 +1128,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 12,
-    backgroundColor: '#E8F5E8',
+    backgroundColor: PINK_COLOR_SCHEME.background.selected,
     padding: 12,
     borderRadius: 8,
   },
   counselingText: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     lineHeight: 20,
     marginLeft: 12,
     flex: 1,
@@ -1121,24 +1141,24 @@ const styles = StyleSheet.create({
   // Modal Styles
   modalContainer: {
     flex: 1,
-    backgroundColor: '#FAFAFA',
+    backgroundColor: PINK_COLOR_SCHEME.background.primary,
   },
   modalContent: {
     flex: 1,
   },
   pathContainer: {
-    backgroundColor: '#E3F2FD',
+    backgroundColor: PINK_COLOR_SCHEME.primaryLight,
     padding: 16,
     borderRadius: 12,
     marginBottom: 20,
   },
   pathTitle: {
     fontWeight: 'bold',
-    color: '#1976D2',
+    color: PINK_COLOR_SCHEME.primary,
     marginBottom: 8,
   },
   pathStep: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     marginBottom: 4,
   },
   decisionContainer: {
@@ -1149,7 +1169,7 @@ const styles = StyleSheet.create({
   },
   decisionQuestion: {
     fontWeight: 'bold',
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     marginBottom: 20,
     textAlign: 'center',
   },
@@ -1169,11 +1189,11 @@ const styles = StyleSheet.create({
     borderColor: '#FFCDD2',
   },
   moderateRiskOption: {
-    backgroundColor: '#FFF8E1',
-    borderColor: '#FFE0B2',
+    backgroundColor: PINK_COLOR_SCHEME.background.hover,
+    borderColor: PINK_COLOR_SCHEME.primaryLight,
   },
   decisionOptionText: {
-    color: '#333',
+    color: PINK_COLOR_SCHEME.text.primary,
     flex: 1,
     lineHeight: 20,
   },
