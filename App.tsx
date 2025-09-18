@@ -17,6 +17,8 @@ import TabletOptimizedHomeScreen from './screens/TabletOptimizedHomeScreen';
 import PatientIntakeScreen from './screens/PatientIntakeScreen';
 import PatientListScreen from './screens/PatientListScreen';
 import TabletOptimizedPatientListScreen from './screens/TabletOptimizedPatientListScreen';
+import SavedPatientRecordsScreen from './screens/SavedPatientRecordsScreen';
+import SavedPatientDetailsScreen from './screens/SavedPatientDetailsScreen';
 import DemographicsScreen from './screens/DemographicsScreen';
 import SymptomsScreen from './screens/SymptomsScreen';
 import RiskFactorsScreen from './screens/RiskFactorsScreen';
