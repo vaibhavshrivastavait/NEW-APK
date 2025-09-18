@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { AppState } from 'react-native';
+import { getDeviceInfo } from './utils/deviceUtils';
 
 // 🔍 DEBUG: AsyncStorage availability check (ChatGPT suggestion)
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,16 +11,19 @@ console.log("🔍 AsyncStorage module check:", AsyncStorage);
 console.log("🔍 AsyncStorage.getItem type:", typeof AsyncStorage?.getItem);
 console.log("🔍 AsyncStorage.setItem type:", typeof AsyncStorage?.setItem);
 
-// Import screens
+// Import screens - Use tablet-optimized versions when appropriate
 import HomeScreen from './screens/HomeScreen';
+import TabletOptimizedHomeScreen from './screens/TabletOptimizedHomeScreen';
 import PatientIntakeScreen from './screens/PatientIntakeScreen';
 import PatientListScreen from './screens/PatientListScreen';
+import TabletOptimizedPatientListScreen from './screens/TabletOptimizedPatientListScreen';
 import DemographicsScreen from './screens/DemographicsScreen';
 import SymptomsScreen from './screens/SymptomsScreen';
 import RiskFactorsScreen from './screens/RiskFactorsScreen';
 import ResultsScreen from './screens/ResultsScreen';
 import CmeScreen from './screens/CmeScreen';
 import GuidelinesScreen from './screens/GuidelinesScreen';
+import TabletOptimizedGuidelinesScreen from './screens/TabletOptimizedGuidelinesScreen';
 import ExportScreen from './screens/ExportScreen';
 import PatientDetailsScreen from './screens/PatientDetailsScreen';
 import SettingsScreen from './screens/SettingsScreen';
