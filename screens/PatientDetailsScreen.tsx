@@ -518,315 +518,435 @@ export default function PatientDetailsScreen({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: '#f5f5f5' 
+    backgroundColor: PINK_COLORS.background.main 
   },
+  
+  // Enhanced Header Styles
   header: { 
     flexDirection: 'row', 
     alignItems: 'center', 
     justifyContent: 'space-between',
-    padding: 20, 
-    backgroundColor: 'white',
+    paddingHorizontal: 20, 
+    paddingVertical: 16,
+    backgroundColor: PINK_COLORS.primaryLight,
     borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  backButton: {
-    padding: 8,
-    borderRadius: 8,
-    backgroundColor: 'rgba(216, 27, 96, 0.1)',
-  },
-  backButtonText: {
-    fontSize: 24,
-    color: '#D81B60',
-    fontWeight: 'bold',
-  },
-  title: { 
-    fontSize: 20, 
-    fontWeight: 'bold', 
-    color: '#D81B60',
-  },
-  placeholder: {
-    width: 40,
-  },
-  content: { 
-    flex: 1,
-    padding: 16,
-  },
-  section: {
-    backgroundColor: 'white',
-    borderRadius: 12,
-    padding: 20,
-    marginBottom: 16,
+    borderBottomColor: PINK_COLORS.primaryLight,
+    elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 2,
+  },
+  backButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 1,
+  },
+  headerTitle: { 
+    fontSize: 20, 
+    fontWeight: 'bold', 
+    color: PINK_COLORS.primary,
+    flex: 1,
+    textAlign: 'center',
+  },
+  headerActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  headerActionButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+  },
+
+  // Content Styles
+  content: { 
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  section: {
+    backgroundColor: PINK_COLORS.background.card,
+    borderRadius: 16,
+    padding: 20,
+    marginVertical: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: 'rgba(216, 27, 96, 0.1)',
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
-    marginLeft: 8,
-  },
-  infoGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  infoItem: {
+    color: PINK_COLORS.text.dark,
+    marginLeft: 12,
     flex: 1,
-    minWidth: '45%',
-    backgroundColor: '#f9f9f9',
-    padding: 12,
-    borderRadius: 8,
   },
-  infoLabel: {
-    fontSize: 12,
-    color: '#666',
-    marginBottom: 4,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  infoValue: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  infoBadge: {
-    fontSize: 12,
-    color: '#D81B60',
-    marginTop: 2,
-    fontWeight: '500',
-  },
-  historyGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  historyItem: {
+
+  // Patient Header Styles
+  patientHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    padding: 12,
-    borderRadius: 8,
+    paddingVertical: 8,
+  },
+  avatarContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: PINK_COLORS.primaryLighter,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 20,
+    borderWidth: 2,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  patientHeaderInfo: {
     flex: 1,
-    minWidth: '45%',
+  },
+  patientName: {
+    fontWeight: 'bold',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 4,
+  },
+  patientSubInfo: {
+    color: PINK_COLORS.text.muted,
+    marginBottom: 2,
+  },
+  patientDate: {
+    color: PINK_COLORS.text.light,
+    fontStyle: 'italic',
+  },
+
+  // Quick Stats Styles
+  quickStatsContainer: {
+    flexDirection: 'row',
+    marginVertical: 8,
+    gap: 8,
+  },
+  quickStatItem: {
+    flex: 1,
+    backgroundColor: PINK_COLORS.background.card,
+    padding: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primaryLight,
+    elevation: 1,
+  },
+  quickStatValue: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: PINK_COLORS.primary,
+    marginBottom: 4,
+  },
+  quickStatLabel: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    textAlign: 'center',
+    marginBottom: 2,
+  },
+  quickStatCategory: {
+    fontSize: 10,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+
+  // Chart Styles
+  chartContainer: {
+    marginTop: 8,
+  },
+  chartTitle: {
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 16,
+  },
+  chartGrid: {
+    gap: 12,
+  },
+  chartBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  chartBarHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    minWidth: 120,
+  },
+  chartBarLabel: {
+    fontSize: 14,
+    color: PINK_COLORS.text.dark,
+    marginLeft: 8,
+    flex: 1,
+  },
+  chartBarContainer: {
+    flex: 2,
+    height: 8,
+    backgroundColor: PINK_COLORS.background.accent,
+    borderRadius: 4,
+    marginHorizontal: 12,
+  },
+  chartBarFill: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  chartBarValue: {
+    fontSize: 12,
+    fontWeight: '600',
+    minWidth: 40,
+    textAlign: 'right',
+  },
+
+  // Medical History Styles
+  subsectionContainer: {
+    marginBottom: 20,
+  },
+  subsectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: PINK_COLORS.primary,
+    marginBottom: 12,
+  },
+  historyRow: {
+    flexDirection: 'row',
+    gap: 12,
+    marginBottom: 16,
+  },
+  historyChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: PINK_COLORS.background.section,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primaryLight,
   },
   historyPositive: {
-    backgroundColor: '#e8f5e8',
-    borderColor: '#4CAF50',
-    borderWidth: 1,
+    backgroundColor: '#E8F5E8',
+    borderColor: PINK_COLORS.status.success,
   },
   historyText: {
     fontSize: 14,
-    color: '#666',
-    marginLeft: 8,
+    color: PINK_COLORS.text.light,
+    marginLeft: 6,
   },
   historyPositiveText: {
-    color: '#2e7d32',
+    color: PINK_COLORS.status.success,
     fontWeight: '500',
   },
-  symptomGrid: {
-    gap: 12,
-  },
-  symptomItem: {
+
+  // Risk Factor Styles
+  riskFactorGrid: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    padding: 12,
-    borderRadius: 8,
-  },
-  symptomHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  symptomName: {
-    fontSize: 14,
-    color: '#333',
-    marginLeft: 8,
-  },
-  symptomScore: {
-    alignItems: 'flex-end',
-  },
-  scoreNumber: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  scoreSeverity: {
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  scoreNone: {
-    color: '#4CAF50',
-  },
-  scoreMild: {
-    color: '#FF9800',
-  },
-  scoreModerate: {
-    color: '#FF5722',
-  },
-  scoreSevere: {
-    color: '#F44336',
-  },
-  riskGrid: {
+    flexWrap: 'wrap',
     gap: 8,
   },
-  riskItem: {
+  riskChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    padding: 12,
-    borderRadius: 8,
-  },
-  riskPositive: {
-    backgroundColor: '#ffebee',
-    borderColor: '#FF5722',
+    backgroundColor: PINK_COLORS.background.section,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 16,
     borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  riskActive: {
+    backgroundColor: '#FFEBEE',
+    borderColor: PINK_COLORS.status.error,
   },
   riskText: {
-    fontSize: 14,
-    color: '#666',
-    marginLeft: 8,
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    marginLeft: 4,
   },
-  riskPositiveText: {
-    color: '#d84315',
+  riskActiveText: {
+    color: PINK_COLORS.status.error,
     fontWeight: '500',
   },
-  timelineItem: {
+
+  // Risk Summary Styles
+  riskSummaryGrid: {
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f9f9f9',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 8,
-  },
-  timelineContent: {
-    marginLeft: 12,
-  },
-  timelineTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#333',
-  },
-  timelineDate: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 2,
-  },
-  // New styles for risk calculators
-  calculatorSection: {
-    marginBottom: 20,
-  },
-  calculatorTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 12,
-  },
-  calculatorGrid: {
-    flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: 12,
   },
-  calculatorItem: {
+  riskSummaryCard: {
     flex: 1,
-    backgroundColor: '#f9f9f9',
+    minWidth: 140,
+    backgroundColor: PINK_COLORS.background.section,
     padding: 16,
-    borderRadius: 10,
+    borderRadius: 12,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#e0e0e0',
+    borderColor: PINK_COLORS.primaryLight,
   },
-  calculatorLabel: {
-    fontSize: 12,
-    color: '#666',
-    textAlign: 'center',
+  riskIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 8,
-    fontWeight: '500',
   },
-  calculatorValue: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
+  riskCardTitle: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
+    textAlign: 'center',
     marginBottom: 4,
   },
-  calculatorCategory: {
-    fontSize: 12,
+  riskCardValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 4,
+  },
+  riskCardCategory: {
+    fontSize: 10,
     fontWeight: '600',
     textAlign: 'center',
     paddingHorizontal: 8,
     paddingVertical: 2,
+    borderRadius: 10,
+  },
+
+  // Alert Styles
+  alertBadge: {
+    backgroundColor: PINK_COLORS.status.error,
     borderRadius: 12,
-    overflow: 'hidden',
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    marginLeft: 8,
   },
-  categoryLow: {
-    backgroundColor: '#e8f5e8',
-    color: '#2e7d32',
+  alertBadgeText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
   },
-  categoryModerate: {
-    backgroundColor: '#fff3e0',
-    color: '#f57c00',
-  },
-  categoryHigh: {
-    backgroundColor: '#ffebee',
-    color: '#d32f2f',
-  },
-  // Alert styles
-  alertItem: {
+  alertCard: {
     flexDirection: 'row',
     padding: 16,
-    borderRadius: 10,
+    borderRadius: 12,
     marginBottom: 12,
     borderWidth: 1,
   },
   alertAbsolute: {
-    backgroundColor: '#ffebee',
-    borderColor: '#F44336',
+    backgroundColor: '#FFEBEE',
+    borderColor: PINK_COLORS.status.error,
   },
   alertRelative: {
-    backgroundColor: '#fff3e0',
-    borderColor: '#FF9800',
+    backgroundColor: '#FFF8E1',
+    borderColor: PINK_COLORS.status.warning,
+  },
+  alertIconContainer: {
+    marginRight: 12,
+    paddingTop: 2,
   },
   alertContent: {
     flex: 1,
-    marginLeft: 12,
   },
   alertTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
+    color: PINK_COLORS.status.error,
+    marginBottom: 4,
+    letterSpacing: 0.5,
+  },
+  alertCondition: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
     marginBottom: 4,
   },
   alertMessage: {
     fontSize: 13,
-    color: '#666',
-    marginBottom: 4,
+    color: PINK_COLORS.text.light,
+    marginBottom: 6,
     lineHeight: 18,
   },
   alertRecommendation: {
     fontSize: 13,
     fontWeight: '500',
-    color: '#333',
+    color: PINK_COLORS.text.dark,
     lineHeight: 18,
   },
-  // Recommendation styles
-  recommendationItem: {
-    backgroundColor: '#f9f9f9',
+
+  // Recommendation Styles
+  recommendationCard: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    backgroundColor: PINK_COLORS.background.section,
     padding: 12,
     borderRadius: 8,
     marginBottom: 8,
     borderLeftWidth: 4,
-    borderLeftColor: '#2196F3',
+    borderLeftColor: PINK_COLORS.status.info,
+  },
+  recommendationIcon: {
+    marginRight: 8,
+    paddingTop: 2,
   },
   recommendationText: {
     fontSize: 14,
-    color: '#333',
+    color: PINK_COLORS.text.dark,
     lineHeight: 20,
+    flex: 1,
+  },
+
+  // Timeline Styles
+  timeline: {
+    paddingTop: 8,
+  },
+  timelineItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 16,
+  },
+  timelineIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timelineLine: {
+    position: 'absolute',
+    left: 15,
+    top: 32,
+    bottom: -16,
+    width: 2,
+    backgroundColor: PINK_COLORS.primaryLight,
+  },
+  timelineContent: {
+    marginLeft: 16,
+    flex: 1,
+    paddingTop: 4,
+  },
+  timelineTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 2,
+  },
+  timelineDate: {
+    fontSize: 12,
+    color: PINK_COLORS.text.light,
   },
 });
