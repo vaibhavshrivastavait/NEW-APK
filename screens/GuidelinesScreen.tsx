@@ -152,7 +152,7 @@ export default function ProfessionalGuidelinesScreen({ navigation }: Props) {
   const renderCategoryTabs = () => (
     <View style={styles.tabContainer}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {CATEGORIES.map((category) => (
+        {PINK_CATEGORIES.map((category) => (
           <TouchableOpacity
             key={category.key}
             style={[
@@ -173,6 +173,20 @@ export default function ProfessionalGuidelinesScreen({ navigation }: Props) {
             ]}>
               {category.label}
             </Text>
+            {/* Show count badge */}
+            {guidelinesCount[category.key] && (
+              <View style={[
+                styles.countBadge,
+                { backgroundColor: selectedCategory === category.key ? 'rgba(255,255,255,0.3)' : PINK_COLOR_SCHEME.primaryLight }
+              ]}>
+                <Text style={[
+                  styles.countText,
+                  { color: selectedCategory === category.key ? 'white' : PINK_COLOR_SCHEME.primary }
+                ]}>
+                  {guidelinesCount[category.key]}
+                </Text>
+              </View>
+            )}
           </TouchableOpacity>
         ))}
       </ScrollView>
