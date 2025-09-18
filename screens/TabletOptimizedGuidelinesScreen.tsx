@@ -303,7 +303,7 @@ export default function TabletOptimizedGuidelinesScreen({ navigation }: Props) {
             </View>
           </View>
           <View style={styles.headerRight}>
-            <TouchableOpability
+            <TouchableOpacity
               style={[styles.bookmarkButton, { minHeight: touchTarget }]}
               onPress={() => toggleBookmark(guideline.id)}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
