@@ -806,6 +806,11 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
 
         {/* Sort Modal */}
         {renderSortModal()}
+      </SafeAreaView>
+    </KeyboardAvoidingView>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
