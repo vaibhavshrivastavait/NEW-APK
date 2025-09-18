@@ -1,1722 +1,1849 @@
-[
+{
+  "meta": {
+    "main_medicines": 10,
+    "optional_medicines": 17,
+    "rules_total": 170,
+    "note": "Full mapping of severity values between main and optional medicines (Low/Moderate/High). Includes breast cancer interactions."
+  },
+  "rules": [
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Anticoagulants",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
+  },
+  {
+    "primary": "Hormone Replacement Therapy (HRT)",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Blood pressure medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "NSAIDs",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Hormone Replacement Therapy (HRT)",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Hormone Replacement Therapy (HRT)",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Anticoagulants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
+  },
+  {
+    "primary": "Selective Estrogen Receptor Modulators (SERMs)",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Blood pressure medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "NSAIDs",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Selective Estrogen Receptor Modulators (SERMs)",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Selective Estrogen Receptor Modulators (SERMs)",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Anticoagulants",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
+  },
+  {
+    "primary": "Tibolone",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Tibolone",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Tibolone",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Blood pressure medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "NSAIDs",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Tibolone",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Tibolone",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Anticoagulants",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "Increased bleeding risk when combined with anticoagulants.",
+    "recommended_action": "Avoid combination when possible; if necessary, monitor for bleeding and INR where applicable."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "SSRIs / SNRIs",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "SSRIs / SNRIs",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "SSRIs / SNRIs",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Blood pressure medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "NSAIDs",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "SSRIs / SNRIs",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "SSRIs / SNRIs",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Anticoagulants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
+  },
+  {
+    "primary": "Anticonvulsants (for menopause symptoms)",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Thyroid medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Blood pressure medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Statins",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "NSAIDs",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Anticonvulsants (for menopause symptoms)",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Anticonvulsants (for menopause symptoms)",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Anticoagulants",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Anticonvulsants",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Clonidine & Other Antihypertensives",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Blood pressure medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "NSAIDs",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Clonidine & Other Antihypertensives",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Clonidine & Other Antihypertensives",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Anticoagulants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
+  },
+  {
+    "primary": "Herbal Estrogen Supplements (phytoestrogens)",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Blood pressure medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "NSAIDs",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Herbal Estrogen Supplements (phytoestrogens)",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Herbal Estrogen Supplements (phytoestrogens)",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Anticoagulants",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Anticonvulsants",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "General Herbal Supplements",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "General Herbal Supplements",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Diabetes medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Blood pressure medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "NSAIDs",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "General Herbal Supplements",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "General Herbal Supplements",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Anticoagulants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Anticonvulsants",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Complementary & Alternative Therapies",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Complementary & Alternative Therapies",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Diabetes medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Blood pressure medications",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "NSAIDs",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
     "interaction_with": "Calcium / Antacids",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Complementary & Alternative Therapies",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Complementary & Alternative Therapies",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Anticoagulants",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "warfarin",
       "rivaroxaban",
       "apixaban",
       "dabigatran"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Anticonvulsants",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "carbamazepine",
       "phenytoin",
-      "valproate"
+      "phenobarbital"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Bisphosphonates",
+    "interaction_with": "Anticonvulsants (other)",
+    "examples": [
+      "valproate",
+      "levetiracetam"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Antibiotics (rifampin)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
-      "rifampin"
+      "rifampin",
+      "rifabutin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Bisphosphonates",
-    "interaction_with": "Antifungals (azoles)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antifungals (azole inhibitors)",
     "examples": [
       "ketoconazole",
       "fluconazole",
       "itraconazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
-    "interaction_with": "Herbal supplements (St. John's wort, etc.)",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Herbal supplements",
     "examples": [
       "st john's wort",
       "ginseng",
       "ginkgo"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Thyroid medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "levothyroxine"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Diabetes medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "metformin",
       "insulin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Blood pressure medications",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "lisinopril",
       "amlodipine",
       "atenolol"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Statins",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
     "examples": [
       "atorvastatin",
-      "simvastatin"
+      "simvastatin",
+      "rosuvastatin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "NSAIDs",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "ibuprofen",
-      "naproxen"
+      "naproxen",
+      "diclofenac"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: may require monitoring, dose adjustment, or selection of alternatives.",
+    "recommended_action": "Review therapy, consider alternatives or dose changes; monitor symptoms/labs as appropriate."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Proton Pump Inhibitors (PPIs)",
-    "severity": "MODERATE",
-    "rationale": "Potential interaction that may require monitoring or dose adjustment; clinical context matters.",
-    "recommended_action": "Review therapy alternatives; increase monitoring; adjust doses where recommended.",
     "examples": [
       "omeprazole",
       "lansoprazole"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
   },
   {
     "primary": "Bisphosphonates",
     "interaction_with": "Calcium / Antacids",
-    "severity": "HIGH",
-    "rationale": "Combination can meaningfully increase risk (thrombosis, bleeding, loss of efficacy, or serious adverse events).",
-    "recommended_action": "Avoid the combination if possible; if unavoidable consult specialist and monitor closely (lab monitoring, clinical follow-up).",
     "examples": [
       "calcium carbonate",
       "tums"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: combination may lead to serious adverse events (bleeding, therapeutic failure, or significant pharmacodynamic/pharmacokinetic interaction).",
+    "recommended_action": "Avoid combination if possible; consult specialist and monitor closely (lab monitoring or clinical review)."
   },
   {
     "primary": "Bisphosphonates",
-    "interaction_with": "Topical / Other herbal products",
-    "severity": "LOW",
-    "rationale": "Minimal clinical concern in most patients but monitor for expected effects or when combined with other risk factors.",
-    "recommended_action": "No routine change required; document and monitor as part of routine care.",
+    "interaction_with": "Antibacterials / Antibiotics (general)",
     "examples": [
-      "various topical/herbal products"
+      "amoxicillin",
+      "azithromycin"
     ],
-    "source": "Local rules (knowledge-based)",
-    "created_at": "2025-09-13T20:49:20.280168Z"
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Bisphosphonates",
+    "interaction_with": "Antifungals",
+    "examples": [
+      "fluconazole",
+      "nystatin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: routine monitoring advised; usually no change required.",
+    "recommended_action": "Standard monitoring and patient counselling; no routine change required."
+  },
+  {
+    "primary": "Hormone Replacement Therapy (HRT)",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "estradiol",
+      "conjugated estrogens",
+      "estrogen patches"
+    ],
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: HRT (estrogen ± progestin) increases the risk of breast cancer recurrence and progression in women with a history of breast cancer.",
+    "recommended_action": "Avoid systemic HRT in women with current or past breast cancer. Consider non-hormonal therapies for symptom control."
+  },
+  {
+    "primary": "Selective Estrogen Receptor Modulators (SERMs)",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "tamoxifen",
+      "raloxifene",
+      "toremifene"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: SERMs such as tamoxifen and raloxifene are sometimes used in breast cancer treatment and prevention. They may reduce recurrence risk but can interact with other therapies.",
+    "recommended_action": "Use under oncologist supervision. Monitor for drug–drug interactions (e.g., SSRIs inhibiting tamoxifen metabolism)."
+  },
+  {
+    "primary": "Tibolone",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "tibolone"
+    ],
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: Tibolone has estrogenic activity and has been associated with an increased risk of breast cancer recurrence.",
+    "recommended_action": "Contraindicated in women with current or previous breast cancer. Do not use."
+  },
+  {
+    "primary": "SSRIs / SNRIs",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "paroxetine",
+      "fluoxetine",
+      "sertraline",
+      "venlafaxine"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: SSRIs (especially paroxetine, fluoxetine) inhibit CYP2D6, reducing conversion of tamoxifen to its active metabolite, lowering efficacy.",
+    "recommended_action": "Avoid strong CYP2D6 inhibitors in patients on tamoxifen. Prefer venlafaxine, citalopram, or escitalopram for hot flashes."
+  },
+  {
+    "primary": "Anticonvulsants (for menopause symptoms)",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "gabapentin",
+      "pregabalin"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: Gabapentin and pregabalin are used for hot flashes; they have no direct effect on breast cancer but may cause CNS side effects and polypharmacy risks.",
+    "recommended_action": "Generally safe in breast cancer patients. Monitor tolerability and interactions with other CNS drugs."
+  },
+  {
+    "primary": "Clonidine & Other Antihypertensives",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "clonidine",
+      "methyldopa"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: Clonidine reduces vasomotor symptoms without direct estrogenic effects. No direct influence on breast cancer.",
+    "recommended_action": "Can be considered for hot flashes in breast cancer patients, but monitor for hypotension and side effects."
+  },
+  {
+    "primary": "Herbal Estrogen Supplements (phytoestrogens)",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "soy isoflavones",
+      "red clover",
+      "dong quai"
+    ],
+    "severity": "MODERATE",
+    "rationale": "Moderate interaction: Soy isoflavones and red clover have weak estrogenic effects; evidence on safety in breast cancer survivors is conflicting.",
+    "recommended_action": "Avoid high-dose phytoestrogens in breast cancer patients. If used, monitor closely and discuss with oncologist."
+  },
+  {
+    "primary": "General Herbal Supplements",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "black cohosh",
+      "evening primrose oil",
+      "ginseng"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: Most non-estrogenic supplements (e.g., black cohosh) show no strong evidence of worsening breast cancer, though data are limited.",
+    "recommended_action": "Use with caution; avoid unregulated products; inform patients of uncertain evidence base."
+  },
+  {
+    "primary": "Complementary & Alternative Therapies",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "acupuncture",
+      "yoga",
+      "cognitive behavioral therapy"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: Acupuncture, yoga, and lifestyle interventions are non-pharmacological and have no direct interaction with breast cancer.",
+    "recommended_action": "Safe and often recommended for symptom relief and quality of life improvements."
+  },
+  {
+    "primary": "Bisphosphonates",
+    "interaction_with": "Breast cancer",
+    "examples": [
+      "zoledronic acid",
+      "alendronate",
+      "ibandronate"
+    ],
+    "severity": "LOW",
+    "rationale": "Low interaction: Bisphosphonates (zoledronic acid, alendronate) are often used in breast cancer to reduce bone loss and prevent metastasis.",
+    "recommended_action": "Safe and sometimes beneficial in breast cancer patients, especially postmenopausal women at fracture risk."
   }
 ]
+
+
+}
