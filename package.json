@@ -106,6 +106,7 @@
     "eslint-config-expo": "~7.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.0",
+    "metro": "^0.83.1",
     "react-native-web": "~0.19.6",
     "typescript": "~5.3.3",
     "webpack-cli": "^5.1.4"
