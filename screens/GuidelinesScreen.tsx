@@ -431,7 +431,7 @@ export default function GuidelinesScreen({ navigation }: Props) {
       </View>
 
       {/* Sections list */}
-      <SafeFlatList
+      <RNFlatList
         data={filteredSections || []}
         keyExtractor={(item) => item.id}
         renderItem={renderSectionCard}
