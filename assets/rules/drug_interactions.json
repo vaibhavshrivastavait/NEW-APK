@@ -1725,13 +1725,17 @@
     "severity": "LOW",
     "rationale": "Low interaction: routine monitoring advised; usually no change required.",
     "recommended_action": "Standard monitoring and patient counselling; no routine change required."
-  }
-  
+  },
   {
-    "main_category": "Hormone Replacement Therapy (HRT)",
+    "primary": "Hormone Replacement Therapy (HRT)",
     "interaction_with": "Breast cancer",
-    "severity": "high",
-    "rationale": "HRT (estrogen ± progestin) increases the risk of breast cancer recurrence and progression in women with a history of breast cancer.",
+    "examples": [
+      "estradiol",
+      "conjugated estrogens",
+      "estrogen patches"
+    ],
+    "severity": "HIGH",
+    "rationale": "High-risk interaction: HRT (estrogen ± progestin) increases the risk of breast cancer recurrence and progression in women with a history of breast cancer.",
     "recommended_action": "Avoid systemic HRT in women with current or past breast cancer. Consider non-hormonal therapies for symptom control."
   },
   {
