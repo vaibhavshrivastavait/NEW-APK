@@ -1,9 +1,9 @@
 {
   "meta": {
     "main_medicines": 10,
-    "optional_medicines": 16,
-    "rules_total": 160,
-    "note": "Full mapping of severity values between main and optional medicines (Low/Moderate/High)."
+    "optional_medicines": 17,
+    "rules_total": 170,
+    "note": "Full mapping of severity values between main and optional medicines (Low/Moderate/High). Includes breast cancer interactions."
   },
   "rules": [
   {
