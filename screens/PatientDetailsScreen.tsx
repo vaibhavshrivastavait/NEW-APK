@@ -1,11 +1,39 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RouteProp } from '@react-navigation/native';
 import { calculateAllRisks, type ComprehensiveRiskResults, type PatientRiskData } from '../utils/medicalCalculators';
 import { checkHRTContraindications, getMedicationRecommendations, type ContraindicationAlert } from '../utils/drugInteractionChecker';
+
+// Pink color scheme matching the app theme
+const PINK_COLORS = {
+  primary: '#D81B60',
+  primaryLight: '#FFC1CC',
+  primaryLighter: '#FFF0F5',
+  secondary: '#FFB3BA',
+  accent: '#FF69B4',
+  text: {
+    primary: '#D81B60',
+    secondary: '#B71C1C',
+    muted: '#E91E63',
+    dark: '#333333',
+    light: '#666666'
+  },
+  background: {
+    main: '#FFF0F5',
+    card: '#FFFFFF',
+    section: '#FAFAFA',
+    accent: '#FCE4EC'
+  },
+  status: {
+    success: '#4CAF50',
+    warning: '#FF9800',
+    error: '#F44336',
+    info: '#2196F3'
+  }
+};
 
 interface PatientData {
   id: string;
