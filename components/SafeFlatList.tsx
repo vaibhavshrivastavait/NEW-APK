@@ -97,45 +97,64 @@ export default class SafeFlatList<T> extends Component<SafeFlatListProps<T>, Saf
       );
     }
 
-    // 🔧 CRITICAL FIX: Handle completely undefined data prop
-    console.log("🔍 SafeFlatList render - data type:", typeof this.props.data, "data:", this.props.data);
-    
-    // Ensure data is always an array to prevent crashes
-    let safeData;
-    if (this.props.data === undefined || this.props.data === null) {
-      console.warn("🚨 SafeFlatList: data prop is null/undefined, using empty array");
-      safeData = [];
-    } else if (Array.isArray(this.props.data)) {
-      safeData = this.props.data;
-    } else {
-      console.warn("🚨 SafeFlatList: data prop is not an array, converting:", typeof this.props.data);
-      safeData = [];
-    }
+    try {
+      // 🔧 CRITICAL FIX: Handle completely undefined data prop
+      console.log("🔍 SafeFlatList render - data type:", typeof this.props.data, "data:", this.props.data);
+      
+      // Ensure data is always an array to prevent crashes
+      let safeData;
+      if (this.props.data === undefined || this.props.data === null) {
+        console.warn("🚨 SafeFlatList: data prop is null/undefined, using empty array");
+        safeData = [];
+      } else if (Array.isArray(this.props.data)) {
+        safeData = this.props.data;
+      } else {
+        console.warn("🚨 SafeFlatList: data prop is not an array, converting:", typeof this.props.data);
+        safeData = [];
+      }
 
-    // Provide safe defaults for required FlatList props
-    const safeProps = {
-      ...this.props,
-      data: safeData,
-      // Provide default keyExtractor if missing
-      keyExtractor: this.props.keyExtractor || ((item: any, index: number) => {
-        if (item && typeof item === 'object' && item.id) {
-          return String(item.id);
-        }
-        if (item && typeof item === 'object' && item.key) {
-          return String(item.key);
-        }
-        return String(index);
-      }),
-      // Provide default renderItem if missing
-      renderItem: this.props.renderItem || (({ item }) => (
-        <View style={{ padding: 10 }}>
-          <Text>{JSON.stringify(item)}</Text>
+      // Clean props - remove any non-FlatList props that might cause issues
+      const { fallbackMessage, onRetry, ...flatListProps } = this.props;
+
+      // Provide safe defaults for required FlatList props
+      const safeProps = {
+        ...flatListProps,
+        data: safeData,
+        // Provide default keyExtractor if missing
+        keyExtractor: this.props.keyExtractor || ((item: any, index: number) => {
+          if (item && typeof item === 'object' && item.id) {
+            return String(item.id);
+          }
+          if (item && typeof item === 'object' && item.key) {
+            return String(item.key);
+          }
+          return String(index);
+        }),
+        // Provide default renderItem if missing
+        renderItem: this.props.renderItem || (({ item }) => (
+          <View style={{ padding: 10 }}>
+            <Text>{JSON.stringify(item)}</Text>
+          </View>
+        ))
+      };
+
+      // Safely render FlatList
+      return <FlatList {...safeProps} />;
+      
+    } catch (error) {
+      console.error('🚨 SafeFlatList: Render error caught:', error);
+      // Force error state and re-render with fallback UI
+      this.setState({ hasError: true, error: error as Error });
+      return (
+        <View style={styles.errorContainer}>
+          <MaterialIcons name="error-outline" size={48} color="#D81B60" />
+          <Text style={styles.errorTitle}>Render Error</Text>
+          <Text style={styles.errorMessage}>
+            A rendering error occurred. Please try refreshing.
+          </Text>
         </View>
-      ))
-    };
-
-    // Safely render FlatList - let React handle other errors naturally
-    return <FlatList {...safeProps} />;
+      );
+    }
   }
 }
 
