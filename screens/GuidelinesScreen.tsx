@@ -79,18 +79,16 @@ const BOOKMARKS_KEY = 'mht_guidelines_bookmarks';
 const GUIDELINES_VERSION_KEY = 'mht_guidelines_version';
 
 export default function GuidelinesScreen({ navigation }: Props) {
-  // Safely handle guidelines data with fallback for APK builds
-  const [guidelines, setGuidelines] = useState<GuidelinesData>(() => {
-    return loadGuidelinesData();
-  });
+  // State management
+  const [guidelines] = useState<GuidelinesData>(() => loadGuidelinesData());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSection, setSelectedSection] = useState<GuidelineSection | null>(null);
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [showSearch, setShowSearch] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false); // Control modal state explicitly
+  const [modalVisible, setModalVisible] = useState(false);
 
-  // Load bookmarks on mount
+  // Load bookmarks and check for updates on mount
   useEffect(() => {
     loadBookmarks();
     checkForUpdates();
@@ -101,57 +99,60 @@ export default function GuidelinesScreen({ navigation }: Props) {
     setModalVisible(!!selectedSection);
   }, [selectedSection]);
 
-  const openSectionModal = (section: GuidelineSection) => {
-    setSelectedSection(section);
-    setModalVisible(true);
-  };
-
-  const closeSectionModal = () => {
-    setModalVisible(false);
-    // Add slight delay to ensure modal closes before clearing section
-    setTimeout(() => {
-      setSelectedSection(null);
-    }, 100);
-  };
-
-  const loadBookmarks = async () => {
+  // Bookmark management functions
+  const loadBookmarks = useCallback(async () => {
     try {
       const savedBookmarks = await crashProofStorage.getItem(BOOKMARKS_KEY);
       if (savedBookmarks) {
-        setBookmarks(JSON.parse(savedBookmarks));
+        const parsed = JSON.parse(savedBookmarks);
+        if (Array.isArray(parsed)) {
+          setBookmarks(parsed);
+        }
       }
     } catch (error) {
-      console.error('Error loading bookmarks:', error);
+      console.error('❌ Error loading bookmarks:', error);
+      setBookmarks([]);
     }
-  };
+  }, []);
 
-  const saveBookmarks = async (newBookmarks: string[]) => {
+  const saveBookmarks = useCallback(async (newBookmarks: string[]) => {
     try {
       await crashProofStorage.setItem(BOOKMARKS_KEY, JSON.stringify(newBookmarks));
       setBookmarks(newBookmarks);
     } catch (error) {
-      console.error('Error saving bookmarks:', error);
+      console.error('❌ Error saving bookmarks:', error);
     }
-  };
+  }, []);
 
-  const toggleBookmark = (sectionId: string) => {
+  const toggleBookmark = useCallback((sectionId: string) => {
     const newBookmarks = bookmarks.includes(sectionId)
       ? bookmarks.filter(id => id !== sectionId)
       : [...bookmarks, sectionId];
     saveBookmarks(newBookmarks);
-  };
+  }, [bookmarks, saveBookmarks]);
 
-  const checkForUpdates = async () => {
+  const checkForUpdates = useCallback(async () => {
     try {
       const savedVersion = await crashProofStorage.getItem(GUIDELINES_VERSION_KEY);
       if (savedVersion && savedVersion !== guidelines.version) {
-        // Could implement remote update check here
-        console.log('Guidelines version mismatch - could check for updates');
+        console.log('ℹ️ Guidelines version mismatch - could check for updates');
       }
     } catch (error) {
-      console.error('Error checking version:', error);
+      console.error('❌ Error checking version:', error);
     }
-  };
+  }, [guidelines.version]);
+
+  // Modal management functions
+  const openSectionModal = useCallback((section: GuidelineSection) => {
+    setSelectedSection(section);
+  }, []);
+
+  const closeSectionModal = useCallback(() => {
+    setModalVisible(false);
+    setTimeout(() => {
+      setSelectedSection(null);
+    }, 100);
+  }, []);
 
   // Search functionality with safe fallback
   const filteredSections = useMemo(() => {
