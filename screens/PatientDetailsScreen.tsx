@@ -296,101 +296,155 @@ export default function PatientDetailsScreen({ navigation, route }: Props) {
           {renderSymptomChart()}
         </View>
 
-        {/* Risk Calculators */}
+        {/* Medical History & Risk Factors Combined */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcons name="analytics" size={24} color="#4CAF50" />
-            <Text style={styles.sectionTitle}>Risk Calculators</Text>
+            <MaterialIcons name="medical-services" size={24} color={PINK_COLORS.primary} />
+            <Text style={styles.sectionTitle}>Medical History & Risk Factors</Text>
           </View>
           
-          {/* Cardiovascular Risk */}
-          <View style={styles.calculatorSection}>
-            <Text style={styles.calculatorTitle}>Cardiovascular Risk Assessment</Text>
-            <View style={styles.calculatorGrid}>
-              <View style={styles.calculatorItem}>
-                <Text style={styles.calculatorLabel}>ASCVD Score</Text>
-                <Text style={styles.calculatorValue}>{riskResults.ascvd.risk.toFixed(1)}%</Text>
-                <Text style={[styles.calculatorCategory, getCategoryStyle(riskResults.ascvd.category)]}>
-                  {riskResults.ascvd.category}
+          {/* Surgical History */}
+          <View style={styles.subsectionContainer}>
+            <Text style={styles.subsectionTitle}>Surgical History</Text>
+            <View style={styles.historyRow}>
+              <View style={[styles.historyChip, patient.hysterectomy && styles.historyPositive]}>
+                <MaterialIcons 
+                  name={patient.hysterectomy ? "check-circle" : "cancel"} 
+                  size={16} 
+                  color={patient.hysterectomy ? PINK_COLORS.status.success : PINK_COLORS.text.light} 
+                />
+                <Text style={[styles.historyText, patient.hysterectomy && styles.historyPositiveText]}>
+                  Hysterectomy
                 </Text>
               </View>
-              <View style={styles.calculatorItem}>
-                <Text style={styles.calculatorLabel}>Framingham Score</Text>
-                <Text style={styles.calculatorValue}>{riskResults.framingham.risk.toFixed(1)}%</Text>
-                <Text style={[styles.calculatorCategory, getCategoryStyle(riskResults.framingham.category)]}>
-                  {riskResults.framingham.category}
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          {/* Breast Cancer Risk */}
-          <View style={styles.calculatorSection}>
-            <Text style={styles.calculatorTitle}>Breast Cancer Risk Assessment</Text>
-            <View style={styles.calculatorGrid}>
-              <View style={styles.calculatorItem}>
-                <Text style={styles.calculatorLabel}>Gail Risk</Text>
-                <Text style={styles.calculatorValue}>{riskResults.gail.risk.toFixed(1)}%</Text>
-                <Text style={[styles.calculatorCategory, getCategoryStyle(riskResults.gail.category)]}>
-                  {riskResults.gail.category}
-                </Text>
-              </View>
-              <View style={styles.calculatorItem}>
-                <Text style={styles.calculatorLabel}>Tyrer-Cuzick Risk</Text>
-                <Text style={styles.calculatorValue}>{riskResults.tyrerCuzick.risk.toFixed(1)}%</Text>
-                <Text style={[styles.calculatorCategory, getCategoryStyle(riskResults.tyrerCuzick.category)]}>
-                  {riskResults.tyrerCuzick.category}
+              <View style={[styles.historyChip, patient.oophorectomy && styles.historyPositive]}>
+                <MaterialIcons 
+                  name={patient.oophorectomy ? "check-circle" : "cancel"} 
+                  size={16} 
+                  color={patient.oophorectomy ? PINK_COLORS.status.success : PINK_COLORS.text.light} 
+                />
+                <Text style={[styles.historyText, patient.oophorectomy && styles.historyPositiveText]}>
+                  Oophorectomy
                 </Text>
               </View>
             </View>
           </View>
 
-          {/* VTE and Fracture Risk */}
-          <View style={styles.calculatorSection}>
-            <Text style={styles.calculatorTitle}>VTE & Fracture Risk Assessment</Text>
-            <View style={styles.calculatorGrid}>
-              <View style={styles.calculatorItem}>
-                <Text style={styles.calculatorLabel}>Wells VTE Score</Text>
-                <Text style={styles.calculatorValue}>{riskResults.wells.score}</Text>
-                <Text style={[styles.calculatorCategory, getCategoryStyle(riskResults.wells.category)]}>
-                  {riskResults.wells.category}
-                </Text>
-              </View>
-              <View style={styles.calculatorItem}>
-                <Text style={styles.calculatorLabel}>FRAX 10-Year Risk</Text>
-                <Text style={styles.calculatorValue}>{riskResults.frax.majorFractureRisk.toFixed(1)}%</Text>
-                <Text style={[styles.calculatorCategory, getCategoryStyle(riskResults.frax.category)]}>
-                  {riskResults.frax.category}
-                </Text>
-              </View>
+          {/* Risk Factors Grid */}
+          <View style={styles.subsectionContainer}>
+            <Text style={styles.subsectionTitle}>Risk Assessment</Text>
+            <View style={styles.riskFactorGrid}>
+              {[
+                { name: 'Family Breast Ca', value: patient.familyHistoryBreastCancer, category: 'family' },
+                { name: 'Family Ovarian Ca', value: patient.familyHistoryOvarian, category: 'family' },
+                { name: 'Personal Breast Ca', value: patient.personalHistoryBreastCancer, category: 'personal' },
+                { name: 'DVT/PE History', value: patient.personalHistoryDVT, category: 'personal' },
+                { name: 'Thrombophilia', value: patient.thrombophilia, category: 'genetic' },
+                { name: 'Smoking', value: patient.smoking, category: 'lifestyle' },
+                { name: 'Diabetes', value: patient.diabetes, category: 'medical' },
+                { name: 'Hypertension', value: patient.hypertension, category: 'medical' },
+                { name: 'High Cholesterol', value: patient.cholesterolHigh, category: 'medical' },
+              ].map((risk) => (
+                <View key={risk.name} style={[styles.riskChip, risk.value && styles.riskActive]}>
+                  <MaterialIcons 
+                    name={risk.value ? "warning" : "check-circle"} 
+                    size={14} 
+                    color={risk.value ? PINK_COLORS.status.error : PINK_COLORS.status.success} 
+                  />
+                  <Text style={[styles.riskText, risk.value && styles.riskActiveText]}>
+                    {risk.name}
+                  </Text>
+                </View>
+              ))}
             </View>
           </View>
         </View>
 
-        {/* Contraindication Alerts */}
+        {/* Enhanced Risk Calculator Results */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <MaterialIcons name="analytics" size={24} color={PINK_COLORS.primary} />
+            <Text style={styles.sectionTitle}>Clinical Risk Assessment</Text>
+          </View>
+          
+          {/* Risk Summary Cards */}
+          <View style={styles.riskSummaryGrid}>
+            <View style={styles.riskSummaryCard}>
+              <View style={[styles.riskIcon, { backgroundColor: '#E8F5E8' }]}>
+                <MaterialIcons name="favorite" size={20} color={PINK_COLORS.status.error} />
+              </View>
+              <Text style={styles.riskCardTitle}>Cardiovascular</Text>
+              <Text style={styles.riskCardValue}>{riskResults.ascvd.risk.toFixed(1)}%</Text>
+              <Text style={[styles.riskCardCategory, getCategoryStyle(riskResults.ascvd.category)]}>
+                {riskResults.ascvd.category}
+              </Text>
+            </View>
+
+            <View style={styles.riskSummaryCard}>
+              <View style={[styles.riskIcon, { backgroundColor: '#FCE4EC' }]}>
+                <MaterialIcons name="healing" size={20} color={PINK_COLORS.primary} />
+              </View>
+              <Text style={styles.riskCardTitle}>Breast Cancer</Text>
+              <Text style={styles.riskCardValue}>{riskResults.gail.risk.toFixed(1)}%</Text>
+              <Text style={[styles.riskCardCategory, getCategoryStyle(riskResults.gail.category)]}>
+                {riskResults.gail.category}
+              </Text>
+            </View>
+
+            <View style={styles.riskSummaryCard}>
+              <View style={[styles.riskIcon, { backgroundColor: '#E3F2FD' }]}>
+                <MaterialIcons name="air" size={20} color={PINK_COLORS.status.info} />
+              </View>
+              <Text style={styles.riskCardTitle}>VTE Risk</Text>
+              <Text style={styles.riskCardValue}>{riskResults.wells.score}</Text>
+              <Text style={[styles.riskCardCategory, getCategoryStyle(riskResults.wells.category)]}>
+                {riskResults.wells.category}
+              </Text>
+            </View>
+
+            <View style={styles.riskSummaryCard}>
+              <View style={[styles.riskIcon, { backgroundColor: '#FFF3E0' }]}>
+                <MaterialIcons name="accessibility" size={20} color={PINK_COLORS.status.warning} />
+              </View>
+              <Text style={styles.riskCardTitle}>Fracture</Text>
+              <Text style={styles.riskCardValue}>{riskResults.frax.majorFractureRisk.toFixed(1)}%</Text>
+              <Text style={[styles.riskCardCategory, getCategoryStyle(riskResults.frax.category)]}>
+                {riskResults.frax.category}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Clinical Alerts - Enhanced */}
         {contraindications.length > 0 && (
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <MaterialIcons name="warning" size={24} color="#F44336" />
+              <MaterialIcons name="warning" size={24} color={PINK_COLORS.status.error} />
               <Text style={styles.sectionTitle}>Clinical Alerts</Text>
+              <View style={styles.alertBadge}>
+                <Text style={styles.alertBadgeText}>{contraindications.length}</Text>
+              </View>
             </View>
             {contraindications.map((alert, index) => (
               <View 
                 key={index} 
                 style={[
-                  styles.alertItem, 
+                  styles.alertCard, 
                   alert.type === 'absolute' ? styles.alertAbsolute : styles.alertRelative
                 ]}
               >
-                <MaterialIcons 
-                  name={alert.type === 'absolute' ? 'block' : 'warning'} 
-                  size={20} 
-                  color={alert.type === 'absolute' ? '#F44336' : '#FF9800'} 
-                />
+                <View style={styles.alertIconContainer}>
+                  <MaterialIcons 
+                    name={alert.type === 'absolute' ? 'block' : 'warning'} 
+                    size={24} 
+                    color={alert.type === 'absolute' ? PINK_COLORS.status.error : PINK_COLORS.status.warning} 
+                  />
+                </View>
                 <View style={styles.alertContent}>
                   <Text style={styles.alertTitle}>
-                    {alert.type === 'absolute' ? 'CONTRAINDICATION' : 'CAUTION'}: {alert.condition}
+                    {alert.type === 'absolute' ? 'CONTRAINDICATION' : 'CAUTION'}
                   </Text>
+                  <Text style={styles.alertCondition}>{alert.condition}</Text>
                   <Text style={styles.alertMessage}>{alert.message}</Text>
                   <Text style={styles.alertRecommendation}>{alert.recommendation}</Text>
                 </View>
@@ -399,49 +453,63 @@ export default function PatientDetailsScreen({ navigation, route }: Props) {
           </View>
         )}
 
-        {/* Treatment Recommendations */}
+        {/* Treatment Recommendations - Enhanced */}
         {medicationRecommendations.length > 0 && (
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <MaterialIcons name="medication" size={24} color="#2196F3" />
+              <MaterialIcons name="medication" size={24} color={PINK_COLORS.status.info} />
               <Text style={styles.sectionTitle}>Treatment Recommendations</Text>
             </View>
             {medicationRecommendations.map((recommendation, index) => (
-              <View key={index} style={styles.recommendationItem}>
+              <View key={index} style={styles.recommendationCard}>
+                <View style={styles.recommendationIcon}>
+                  <MaterialIcons name="check-circle" size={16} color={PINK_COLORS.status.success} />
+                </View>
                 <Text style={styles.recommendationText}>{recommendation}</Text>
               </View>
             ))}
           </View>
         )}
 
-        {/* Timeline */}
+        {/* Timeline - Enhanced */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
-            <MaterialIcons name="schedule" size={24} color="#2196F3" />
-            <Text style={styles.sectionTitle}>Timeline</Text>
+            <MaterialIcons name="schedule" size={24} color={PINK_COLORS.primary} />
+            <Text style={styles.sectionTitle}>Patient Timeline</Text>
           </View>
-          <View style={styles.timelineItem}>
-            <MaterialIcons name="add-circle" size={20} color="#4CAF50" />
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineTitle}>Patient Created</Text>
-              <Text style={styles.timelineDate}>{formatDate(patient.createdAt)}</Text>
+          <View style={styles.timeline}>
+            <View style={styles.timelineItem}>
+              <View style={[styles.timelineIcon, { backgroundColor: PINK_COLORS.status.success }]}>
+                <MaterialIcons name="add-circle" size={16} color="white" />
+              </View>
+              <View style={styles.timelineLine} />
+              <View style={styles.timelineContent}>
+                <Text style={styles.timelineTitle}>Patient Created</Text>
+                <Text style={styles.timelineDate}>{formatDate(patient.createdAt)}</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.timelineItem}>
-            <MaterialIcons name="edit" size={20} color="#FF9800" />
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineTitle}>Last Updated</Text>
-              <Text style={styles.timelineDate}>{formatDate(patient.updatedAt)}</Text>
+            <View style={styles.timelineItem}>
+              <View style={[styles.timelineIcon, { backgroundColor: PINK_COLORS.status.warning }]}>
+                <MaterialIcons name="edit" size={16} color="white" />
+              </View>
+              <View style={styles.timelineLine} />
+              <View style={styles.timelineContent}>
+                <Text style={styles.timelineTitle}>Last Updated</Text>
+                <Text style={styles.timelineDate}>{formatDate(patient.updatedAt)}</Text>
+              </View>
             </View>
-          </View>
-          <View style={styles.timelineItem}>
-            <MaterialIcons name="analytics" size={20} color="#4CAF50" />
-            <View style={styles.timelineContent}>
-              <Text style={styles.timelineTitle}>Risk Assessment Calculated</Text>
-              <Text style={styles.timelineDate}>{formatDate(riskResults.calculatedAt)}</Text>
+            <View style={styles.timelineItem}>
+              <View style={[styles.timelineIcon, { backgroundColor: PINK_COLORS.primary }]}>
+                <MaterialIcons name="analytics" size={16} color="white" />
+              </View>
+              <View style={styles.timelineContent}>
+                <Text style={styles.timelineTitle}>Risk Assessment</Text>
+                <Text style={styles.timelineDate}>{formatDate(riskResults.calculatedAt)}</Text>
+              </View>
             </View>
           </View>
         </View>
+
       </ScrollView>
     </SafeAreaView>
   );
