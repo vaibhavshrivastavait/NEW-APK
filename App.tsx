@@ -68,7 +68,7 @@ export default function App() {
 
   // Choose appropriate screen components based on device type
   const HomeScreenComponent = deviceInfo.isTablet ? TabletOptimizedHomeScreen : HomeScreen;
-  const PatientListScreenComponent = deviceInfo.isTablet ? TabletOptimizedPatientListScreen : PatientListScreen;
+  const PatientListScreenComponent = SavedPatientRecordsScreen; // Use new unified screen for all devices
   const GuidelinesScreenComponent = deviceInfo.isTablet ? TabletOptimizedGuidelinesScreen : GuidelinesScreen;
 
   useEffect(() => {
