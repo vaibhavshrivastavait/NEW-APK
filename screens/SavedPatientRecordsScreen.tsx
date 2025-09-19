@@ -619,14 +619,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
             <Text style={styles.actionButtonText}>Reassess Patient</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity
-            style={[styles.actionButton, styles.secondaryActionButton]}
-            onPress={() => handleExportPatient(selectedPatient, 'pdf')}
-          >
-            <MaterialIcons name="download" size={20} color={PINK_COLORS.primary} />
-            <Text style={[styles.actionButtonText, { color: PINK_COLORS.primary }]}>Export Report</Text>
-          </TouchableOpacity>
-          
+
           <TouchableOpacity
             style={[styles.actionButton, styles.dangerActionButton]}
             onPress={() => handleDeletePatient(selectedPatient)}
