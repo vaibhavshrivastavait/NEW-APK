@@ -115,47 +115,6 @@ export default function SavedPatientDetailsScreen({ navigation, route }: SavedPa
   const { width } = Dimensions.get('window');
   const isTablet = width >= 768;
 
-  const handleDeletePatient = useCallback(() => {
-    Alert.alert(
-      'Delete Patient Record',
-      `Are you sure you want to delete ${patient.name}'s record?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => {
-            try {
-              store?.deletePatient?.(patient.id);
-              navigation.goBack();
-              Alert.alert('Success', `${patient.name}'s record has been deleted.`);
-            } catch (error) {
-              console.error('Error deleting patient:', error);
-              Alert.alert('Error', 'Failed to delete patient record.');
-            }
-          }
-        }
-      ]
-    );
-  }, [store, patient, navigation]);
-
-  const handleExportPatient = useCallback((format: 'pdf' | 'excel') => {
-    Alert.alert(
-      'Export Patient Record',
-      `Export ${patient.name}'s record as ${format.toUpperCase()}?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Export',
-          onPress: () => {
-            // TODO: Implement actual export functionality
-            Alert.alert('Export', `${format.toUpperCase()} export functionality will be implemented here.`);
-          }
-        }
-      ]
-    );
-  }, [patient]);
-
   const getRiskBadgeStyle = (riskLevel: 'low' | 'moderate' | 'high') => {
     return {
       backgroundColor: PINK_COLORS.risk[riskLevel],
