@@ -112,8 +112,18 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [isLoading, setIsLoading] = useState(true);
 
-  // Ensure filteredPatients is always an array
-  const safeFilteredPatients = Array.isArray(filteredPatients) ? filteredPatients : [];
+  // Ensure filteredPatients is always an array with useMemo for performance
+  const safeFilteredPatients = useMemo(() => {
+    if (!filteredPatients) {
+      console.warn('filteredPatients is null/undefined, returning empty array');
+      return [];
+    }
+    if (!Array.isArray(filteredPatients)) {
+      console.warn('filteredPatients is not an array:', typeof filteredPatients, filteredPatients);
+      return [];
+    }
+    return filteredPatients;
+  }, [filteredPatients]);
 
   const deviceInfo = getDeviceInfo();
   const isMultiPane = shouldUseMultiPane();
