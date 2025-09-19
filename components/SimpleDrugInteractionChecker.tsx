@@ -325,10 +325,6 @@ export default function SimpleDrugInteractionChecker() {
               </View>
             </View>
 
-            <Text style={styles.checkingSubtitle}>
-              Displaying severity for each selected optional medicine (1:1 mapping)
-            </Text>
-
             <View 
               style={styles.resultsContainer}
               id="interaction-results"
