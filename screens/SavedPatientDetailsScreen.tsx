@@ -225,7 +225,7 @@ export default function SavedPatientDetailsScreen({ navigation, route }: SavedPa
           </View>
         </View>
 
-        {/* Assessment History Timeline */}
+        {/* Assessment History Timeline - Enhanced with comprehensive details */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Assessment History</Text>
           <View style={styles.timeline}>
@@ -243,6 +243,126 @@ export default function SavedPatientDetailsScreen({ navigation, route }: SavedPa
                     <Text style={styles.timelineRisk}>
                       Risk Level: {assessment.riskLevel.toUpperCase()} ({assessment.riskScore.toFixed(0)}%)
                     </Text>
+                    
+                    {/* Vital Signs / Anthropometry */}
+                    <View style={styles.assessmentSection}>
+                      <Text style={styles.assessmentSectionTitle}>Vital Signs & Anthropometry</Text>
+                      <View style={styles.assessmentGrid}>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>BMI</Text>
+                          <Text style={styles.assessmentValue}>
+                            {patient.bmi ? patient.bmi.toFixed(1) : 'N/A'}
+                          </Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Height</Text>
+                          <Text style={styles.assessmentValue}>{patient.height} cm</Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Weight</Text>
+                          <Text style={styles.assessmentValue}>{patient.weight} kg</Text>
+                        </View>
+                        {assessment.vitals?.bloodPressure && (
+                          <View style={styles.assessmentItem}>
+                            <Text style={styles.assessmentLabel}>BP</Text>
+                            <Text style={styles.assessmentValue}>{assessment.vitals.bloodPressure}</Text>
+                          </View>
+                        )}
+                      </View>
+                    </View>
+
+                    {/* MHT Symptoms Assessment */}
+                    <View style={styles.assessmentSection}>
+                      <Text style={styles.assessmentSectionTitle}>MHT Symptoms (VAS 0-10)</Text>
+                      <View style={styles.assessmentGrid}>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Hot Flushes</Text>
+                          <Text style={styles.assessmentValue}>{assessment.symptoms.hotFlushes}/10</Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Night Sweats</Text>
+                          <Text style={styles.assessmentValue}>{assessment.symptoms.nightSweats}/10</Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Sleep Issues</Text>
+                          <Text style={styles.assessmentValue}>{assessment.symptoms.sleepDisturbance}/10</Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Vaginal Dryness</Text>
+                          <Text style={styles.assessmentValue}>{assessment.symptoms.vaginalDryness}/10</Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Mood Changes</Text>
+                          <Text style={styles.assessmentValue}>{assessment.symptoms.moodChanges}/10</Text>
+                        </View>
+                        <View style={styles.assessmentItem}>
+                          <Text style={styles.assessmentLabel}>Joint Aches</Text>
+                          <Text style={styles.assessmentValue}>{assessment.symptoms.jointAches}/10</Text>
+                        </View>
+                      </View>
+                    </View>
+
+                    {/* Risk Assessment Details */}
+                    {assessment.riskAssessment && (
+                      <View style={styles.assessmentSection}>
+                        <Text style={styles.assessmentSectionTitle}>Risk Assessment</Text>
+                        <View style={styles.riskGrid}>
+                          <View style={styles.riskItem}>
+                            <Text style={styles.riskLabel}>Breast Cancer Risk</Text>
+                            <View style={[styles.riskBadgeSmall, { backgroundColor: PINK_COLORS.risk[assessment.riskAssessment.breastCancerRisk] }]}>
+                              <Text style={styles.riskBadgeText}>{assessment.riskAssessment.breastCancerRisk.toUpperCase()}</Text>
+                            </View>
+                          </View>
+                          <View style={styles.riskItem}>
+                            <Text style={styles.riskLabel}>Cardiovascular Risk</Text>
+                            <View style={[styles.riskBadgeSmall, { backgroundColor: PINK_COLORS.risk[assessment.riskAssessment.cvdRisk] }]}>
+                              <Text style={styles.riskBadgeText}>{assessment.riskAssessment.cvdRisk.toUpperCase()}</Text>
+                            </View>
+                          </View>
+                          <View style={styles.riskItem}>
+                            <Text style={styles.riskLabel}>VTE Risk</Text>
+                            <View style={[styles.riskBadgeSmall, { backgroundColor: PINK_COLORS.risk[assessment.riskAssessment.vteRisk === 'very-high' ? 'high' : assessment.riskAssessment.vteRisk] }]}>
+                              <Text style={styles.riskBadgeText}>{assessment.riskAssessment.vteRisk.toUpperCase()}</Text>
+                            </View>
+                          </View>
+                          {assessment.riskAssessment.osteoporosisRisk && (
+                            <View style={styles.riskItem}>
+                              <Text style={styles.riskLabel}>Osteoporosis Risk</Text>
+                              <View style={[styles.riskBadgeSmall, { backgroundColor: PINK_COLORS.risk[assessment.riskAssessment.osteoporosisRisk] }]}>
+                                <Text style={styles.riskBadgeText}>{assessment.riskAssessment.osteoporosisRisk.toUpperCase()}</Text>
+                              </View>
+                            </View>
+                          )}
+                        </View>
+                      </View>
+                    )}
+
+                    {/* MHT Recommendation */}
+                    {assessment.mhtRecommendation && (
+                      <View style={styles.assessmentSection}>
+                        <Text style={styles.assessmentSectionTitle}>MHT Recommendation</Text>
+                        <View style={styles.recommendationContainer}>
+                          <View style={styles.recommendationHeader}>
+                            <Text style={styles.recommendationType}>{assessment.mhtRecommendation.type}</Text>
+                            <Text style={styles.recommendationRoute}>{assessment.mhtRecommendation.route}</Text>
+                          </View>
+                          {assessment.mhtRecommendation.progestogenType && (
+                            <Text style={styles.recommendationDetail}>
+                              Progestogen: {assessment.mhtRecommendation.progestogenType}
+                            </Text>
+                          )}
+                          {assessment.mhtRecommendation.rationale.length > 0 && (
+                            <View style={styles.rationaleContainer}>
+                              <Text style={styles.rationaleTitle}>Rationale:</Text>
+                              {assessment.mhtRecommendation.rationale.map((reason, idx) => (
+                                <Text key={idx} style={styles.rationaleItem}>• {reason}</Text>
+                              ))}
+                            </View>
+                          )}
+                        </View>
+                      </View>
+                    )}
+
                     {assessment.notes && (
                       <Text style={styles.timelineNotes}>{assessment.notes}</Text>
                     )}
