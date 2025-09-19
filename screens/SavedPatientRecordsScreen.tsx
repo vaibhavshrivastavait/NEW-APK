@@ -301,6 +301,8 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
 
       // Ensure filtered is always an array
       const safeFiltered = Array.isArray(filtered) ? filtered : [];
+      
+      console.log('Setting filtered patients:', safeFiltered.length, 'patients');
       setFilteredPatients(safeFiltered);
     } catch (error) {
       console.error('Error in filterAndSortPatients:', error);
