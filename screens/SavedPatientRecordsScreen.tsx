@@ -781,7 +781,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
           <View style={styles.headerCenter}>
             <Text style={styles.headerTitle}>Saved Patients</Text>
             <Text style={styles.headerSubtitle}>
-              {filteredPatients.length} patient{filteredPatients.length !== 1 ? 's' : ''}
+              {safeFilteredPatients.length} patient{safeFilteredPatients.length !== 1 ? 's' : ''}
             </Text>
           </View>
           
