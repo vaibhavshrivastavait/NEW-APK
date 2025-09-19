@@ -762,19 +762,6 @@ const styles = StyleSheet.create({
     color: '#666',
     lineHeight: 16,
   },
-  dataSourceSection: {
-    backgroundColor: '#F5F5F5',
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 20,
-    alignItems: 'center',
-  },
-  dataSourceText: {
-    fontSize: 12,
-    color: '#666',
-    textAlign: 'center',
-    fontStyle: 'italic',
-  },
   sectionSpacer: {
     height: 24,
     marginVertical: 8,
