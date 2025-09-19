@@ -149,6 +149,8 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
       const storePatients = store?.patients || [];
       const storeAssessments = store?.assessments || [];
       
+      console.log('Loading patients:', storePatients.length, 'assessments:', storeAssessments.length);
+      
       // Ensure we have valid arrays
       if (!Array.isArray(storePatients)) {
         console.warn('storePatients is not an array:', storePatients);
