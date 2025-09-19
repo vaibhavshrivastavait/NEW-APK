@@ -764,10 +764,15 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
         </View>
 
         {/* Search and Filter */}
-        {renderSearchAndFilter()}
+        {!isLoading && renderSearchAndFilter()}
 
         {/* Content */}
-        {isMultiPane ? (
+        {isLoading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={PINK_COLORS.primary} />
+            <Text style={styles.loadingText}>Loading patient records...</Text>
+          </View>
+        ) : isMultiPane ? (
           <View style={styles.multiPaneContainer}>
             <View style={styles.leftPane}>
               {renderPatientList()}
