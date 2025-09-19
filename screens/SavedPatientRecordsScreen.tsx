@@ -309,22 +309,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
     );
   }, [store, selectedPatient, loadPatients]);
 
-  const handleExportPatient = useCallback((patient: PatientRecord, format: 'pdf' | 'excel') => {
-    Alert.alert(
-      'Export Patient Record',
-      `Export ${patient.name}'s record as ${format.toUpperCase()}?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Export',
-          onPress: () => {
-            // TODO: Implement actual export functionality
-            Alert.alert('Export', `${format.toUpperCase()} export functionality will be implemented here.`);
-          }
-        }
-      ]
-    );
-  }, []);
+
 
   const getRiskBadgeStyle = (riskLevel: 'low' | 'moderate' | 'high') => {
     return {
