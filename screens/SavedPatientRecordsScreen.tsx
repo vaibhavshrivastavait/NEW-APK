@@ -136,6 +136,14 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
       const storePatients = store?.patients || [];
       const storeAssessments = store?.assessments || [];
       
+      // Ensure we have valid arrays
+      if (!Array.isArray(storePatients)) {
+        console.warn('storePatients is not an array:', storePatients);
+        setPatients([]);
+        setIsLoading(false);
+        return;
+      }
+      
       const patientRecords: PatientRecord[] = storePatients.map(patient => {
         // Find the most recent assessment for this patient
         const patientAssessments = storeAssessments.filter(a => a.patientId === patient.id);
