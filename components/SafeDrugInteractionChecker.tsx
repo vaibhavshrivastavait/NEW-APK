@@ -304,9 +304,6 @@ export default function SafeDrugInteractionChecker() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Drug Interaction Checker</Text>
-      <Text style={styles.subtitle}>
-        {drugData.length} Evidence-Based Drug Interactions Loaded
-      </Text>
 
       <ScrollView style={styles.content}>
         {/* Recommended Medicine Selection - Vertical List */}
