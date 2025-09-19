@@ -1374,4 +1374,18 @@ const styles = StyleSheet.create({
     color: PINK_COLORS.primary,
     fontWeight: '600',
   },
+
+  // Loading Styles
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 80,
+  },
+  loadingText: {
+    fontSize: 16,
+    color: PINK_COLORS.text.light,
+    marginTop: 16,
+    textAlign: 'center',
+  },
 });
