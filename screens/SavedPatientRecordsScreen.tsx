@@ -427,13 +427,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
             >
               <MaterialIcons name="edit" size={18} color={PINK_COLORS.status.info} />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.actionIcon}
-              onPress={() => handleExportPatient(item, 'pdf')}
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-            >
-              <MaterialIcons name="download" size={18} color={PINK_COLORS.status.success} />
-            </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.actionIcon}
               onPress={() => handleDeletePatient(item)}
