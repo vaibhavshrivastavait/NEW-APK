@@ -13,8 +13,8 @@ import {
   KeyboardAvoidingView,
   Platform,
   Animated,
-  FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
