@@ -530,13 +530,6 @@ export default function SafeDrugInteractionChecker() {
             ) : null}
           </View>
         )}
-
-        {/* Data Source Information */}
-        <View style={styles.dataSourceSection}>
-          <Text style={styles.dataSourceText}>
-            Database contains {drugData.length} evidence-based drug interactions for clinical decision support.
-          </Text>
-        </View>
       </ScrollView>
     </View>
   );
