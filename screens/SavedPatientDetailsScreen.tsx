@@ -378,7 +378,7 @@ export default function SavedPatientDetailsScreen({ navigation, route }: SavedPa
           </View>
         </View>
 
-        {/* Action Buttons */}
+        {/* Action Buttons - Only Reassess Patient */}
         <View style={styles.actionsSection}>
           <TouchableOpacity
             style={[styles.actionButton, styles.primaryActionButton]}
@@ -386,22 +386,6 @@ export default function SavedPatientDetailsScreen({ navigation, route }: SavedPa
           >
             <MaterialIcons name="refresh" size={20} color="white" />
             <Text style={styles.actionButtonText}>Reassess Patient</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity
-            style={[styles.actionButton, styles.secondaryActionButton]}
-            onPress={() => handleExportPatient('pdf')}
-          >
-            <MaterialIcons name="download" size={20} color={PINK_COLORS.primary} />
-            <Text style={[styles.actionButtonText, { color: PINK_COLORS.primary }]}>Export Report</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity
-            style={[styles.actionButton, styles.dangerActionButton]}
-            onPress={handleDeletePatient}
-          >
-            <MaterialIcons name="delete" size={20} color="white" />
-            <Text style={styles.actionButtonText}>Delete Record</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
