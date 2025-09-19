@@ -22,6 +22,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useAssessmentStore } from '../store/assessmentStore';
 import { getDeviceInfo, shouldUseMultiPane } from '../utils/deviceUtils';
+import SafeFlatList from '../components/SafeFlatList';
 
 // Pink color scheme matching the app theme
 const PINK_COLORS = {
