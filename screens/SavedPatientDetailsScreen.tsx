@@ -694,4 +694,118 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: 'white',
   },
+
+  // Enhanced Assessment Styles
+  assessmentSection: {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: PINK_COLORS.primaryLight,
+  },
+  assessmentSectionTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: PINK_COLORS.primary,
+    marginBottom: 8,
+  },
+  assessmentGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  assessmentItem: {
+    flex: 1,
+    minWidth: 80,
+    backgroundColor: PINK_COLORS.background.section,
+    padding: 8,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  assessmentLabel: {
+    fontSize: 10,
+    color: PINK_COLORS.text.light,
+    marginBottom: 2,
+    textAlign: 'center',
+  },
+  assessmentValue: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    textAlign: 'center',
+  },
+
+  // Risk Assessment Styles  
+  riskGrid: {
+    gap: 8,
+  },
+  riskItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  riskLabel: {
+    fontSize: 12,
+    color: PINK_COLORS.text.dark,
+    flex: 1,
+  },
+  riskBadgeSmall: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 10,
+  },
+  riskBadgeText: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    color: 'white',
+    letterSpacing: 0.5,
+  },
+
+  // MHT Recommendation Styles
+  recommendationContainer: {
+    backgroundColor: PINK_COLORS.background.section,
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: PINK_COLORS.primaryLight,
+  },
+  recommendationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  recommendationType: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: PINK_COLORS.primary,
+  },
+  recommendationRoute: {
+    fontSize: 12,
+    color: PINK_COLORS.text.muted,
+    backgroundColor: PINK_COLORS.primaryLighter,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 8,
+  },
+  recommendationDetail: {
+    fontSize: 11,
+    color: PINK_COLORS.text.dark,
+    marginBottom: 6,
+  },
+  rationaleContainer: {
+    marginTop: 6,
+  },
+  rationaleTitle: {
+    fontSize: 11,
+    fontWeight: '600',
+    color: PINK_COLORS.text.dark,
+    marginBottom: 4,
+  },
+  rationaleItem: {
+    fontSize: 10,
+    color: PINK_COLORS.text.light,
+    lineHeight: 14,
+    marginBottom: 2,
+  },
 });
