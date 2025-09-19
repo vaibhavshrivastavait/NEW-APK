@@ -236,41 +236,55 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
   };
 
   const filterAndSortPatients = useCallback(() => {
-    let filtered = [...patients];
+    try {
+      // Ensure patients is always an array
+      const safePatients = Array.isArray(patients) ? patients : [];
+      let filtered = [...safePatients];
 
-    // Apply search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(patient =>
-        patient.name.toLowerCase().includes(query) ||
-        patient.patientId?.toLowerCase().includes(query) ||
-        patient.age.toString().includes(query)
-      );
-    }
-
-    // Apply risk level filter
-    if (filterBy !== 'all') {
-      filtered = filtered.filter(patient => patient.riskLevel === filterBy);
-    }
-
-    // Apply sorting
-    filtered.sort((a, b) => {
-      switch (sortBy) {
-        case 'name':
-          return a.name.localeCompare(b.name);
-        case 'age':
-          return b.age - a.age;
-        case 'riskLevel':
-          const riskOrder = { high: 3, moderate: 2, low: 1 };
-          return riskOrder[b.riskLevel] - riskOrder[a.riskLevel];
-        case 'lastUpdated':
-          return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-        default:
-          return 0;
+      // Apply search filter
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        filtered = filtered.filter(patient =>
+          patient && patient.name && (
+            patient.name.toLowerCase().includes(query) ||
+            patient.patientId?.toLowerCase().includes(query) ||
+            patient.age?.toString().includes(query)
+          )
+        );
       }
-    });
 
-    setFilteredPatients(filtered);
+      // Apply risk level filter
+      if (filterBy !== 'all') {
+        filtered = filtered.filter(patient => patient && patient.riskLevel === filterBy);
+      }
+
+      // Apply sorting
+      filtered.sort((a, b) => {
+        if (!a || !b) return 0;
+        switch (sortBy) {
+          case 'name':
+            return (a.name || '').localeCompare(b.name || '');
+          case 'age':
+            return (b.age || 0) - (a.age || 0);
+          case 'riskLevel':
+            const riskOrder = { high: 3, moderate: 2, low: 1 };
+            return (riskOrder[b.riskLevel] || 0) - (riskOrder[a.riskLevel] || 0);
+          case 'lastUpdated':
+            const aDate = new Date(a.updatedAt || a.createdAt || 0).getTime();
+            const bDate = new Date(b.updatedAt || b.createdAt || 0).getTime();
+            return bDate - aDate;
+          default:
+            return 0;
+        }
+      });
+
+      // Ensure filtered is always an array
+      const safeFiltered = Array.isArray(filtered) ? filtered : [];
+      setFilteredPatients(safeFiltered);
+    } catch (error) {
+      console.error('Error in filterAndSortPatients:', error);
+      setFilteredPatients([]);
+    }
   }, [patients, searchQuery, sortBy, filterBy]);
 
   const handleRefresh = useCallback(() => {
