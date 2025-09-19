@@ -112,6 +112,9 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
   const [fadeAnim] = useState(new Animated.Value(0));
   const [isLoading, setIsLoading] = useState(true);
 
+  // Ensure filteredPatients is always an array
+  const safeFilteredPatients = Array.isArray(filteredPatients) ? filteredPatients : [];
+
   const deviceInfo = getDeviceInfo();
   const isMultiPane = shouldUseMultiPane();
   const { width } = Dimensions.get('window');
