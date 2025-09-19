@@ -150,34 +150,7 @@ export default function SavedPatientDetailsScreen({ navigation, route }: SavedPa
           <Text style={styles.headerSubtitle}>{patient.name}</Text>
         </View>
         
-        <TouchableOpacity
-          style={styles.moreButton}
-          onPress={() => {
-            Alert.alert(
-              'Patient Actions',
-              'Choose an action:',
-              [
-                { text: 'Cancel', style: 'cancel' },
-                {
-                  text: 'Export PDF',
-                  onPress: () => handleExportPatient('pdf')
-                },
-                {
-                  text: 'Export Excel',
-                  onPress: () => handleExportPatient('excel')
-                },
-                {
-                  text: 'Delete Record',
-                  style: 'destructive',
-                  onPress: handleDeletePatient
-                }
-              ]
-            );
-          }}
-          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-        >
-          <MaterialIcons name="more-vert" size={24} color={PINK_COLORS.primary} />
-        </TouchableOpacity>
+        <View style={styles.headerSpacer} />
       </View>
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
