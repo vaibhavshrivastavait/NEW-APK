@@ -183,9 +183,11 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
       });
 
       setPatients(patientRecords);
+      setIsLoading(false);
     } catch (error) {
       console.error('Error loading patients:', error);
       setPatients([]);
+      setIsLoading(false);
     }
   }, [store]);
 
