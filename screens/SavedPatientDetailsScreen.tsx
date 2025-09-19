@@ -448,6 +448,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 1,
   },
+  headerSpacer: {
+    width: 44, // Same width as backButton to center the title
+  },
 
   // Content Styles
   content: {
