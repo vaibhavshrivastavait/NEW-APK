@@ -109,6 +109,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
   const [showSortModal, setShowSortModal] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [fadeAnim] = useState(new Animated.Value(0));
+  const [isLoading, setIsLoading] = useState(true);
 
   const deviceInfo = getDeviceInfo();
   const isMultiPane = shouldUseMultiPane();
