@@ -513,14 +513,6 @@ export default function ProfessionalGuidelinesScreen({ navigation }: Props) {
               {filteredGuidelines.length} of {COMBINED_MHT_GUIDELINES.length} guideline{filteredGuidelines.length !== 1 ? 's' : ''}
             </Text>
           </View>
-          
-          <TouchableOpacity
-            style={styles.helpButton}
-            onPress={() => Alert.alert('MHT Guidelines', 'Combined traditional and evidence-based MHT clinical guidelines with search and bookmark features')}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-          >
-            <MaterialIcons name="help" size={24} color={PINK_COLOR_SCHEME.primary} />
-          </TouchableOpacity>
         </View>
 
         {/* Search */}
