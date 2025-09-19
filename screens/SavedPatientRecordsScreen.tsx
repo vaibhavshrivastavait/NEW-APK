@@ -131,6 +131,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
 
   const loadPatients = useCallback(() => {
     try {
+      setIsLoading(true);
       const storePatients = store?.patients || [];
       const storeAssessments = store?.assessments || [];
       
