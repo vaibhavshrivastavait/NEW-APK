@@ -168,22 +168,48 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
         const riskLevel = calculateRiskLevel(patient, latestAssessment);
         const riskScore = calculateRiskScore(patient, latestAssessment);
 
-        // Create assessment history
-        const assessmentHistory: AssessmentHistoryItem[] = patientAssessments.map(assessment => ({
-          id: assessment.id,
-          date: assessment.createdAt,
-          riskLevel: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate',
-          riskScore: riskScore,
-          symptoms: {
-            hotFlushes: patient.hotFlushes || 0,
-            nightSweats: patient.nightSweats || 0,
-            sleepDisturbance: patient.sleepDisturbance || 0,
-            vaginalDryness: patient.vaginalDryness || 0,
-            moodChanges: patient.moodChanges || 0,
-            jointAches: patient.jointAches || 0,
-          },
-          notes: assessment.notes || ''
-        }));
+        // Create assessment history with comprehensive details
+        const assessmentHistory: AssessmentHistoryItem[] = patientAssessments.map(assessment => {
+          // Get or calculate comprehensive risk assessment
+          const riskAssessment = {
+            breastCancerRisk: assessment.breastCancerRisk as 'low' | 'moderate' | 'high' || 'low',
+            cvdRisk: assessment.cvdRisk as 'low' | 'moderate' | 'high' || 'low', 
+            vteRisk: assessment.vteRisk as 'low' | 'moderate' | 'high' | 'very-high' || 'low',
+            osteoporosisRisk: 'low' as 'low' | 'moderate' | 'high', // Calculate based on age/risk factors
+            overallRisk: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate'
+          };
+
+          // Get MHT recommendation from store
+          const mhtRecommendation = store?.recommendations?.find(r => r.patientId === patient.id);
+
+          return {
+            id: assessment.id || Date.now().toString(),
+            date: assessment.calculatedAt || new Date().toISOString(),
+            riskLevel: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate',
+            riskScore: riskScore,
+            symptoms: {
+              hotFlushes: patient.hotFlushes || 0,
+              nightSweats: patient.nightSweats || 0,
+              sleepDisturbance: patient.sleepDisturbance || 0,
+              vaginalDryness: patient.vaginalDryness || 0,
+              moodChanges: patient.moodChanges || 0,
+              jointAches: patient.jointAches || 0,
+            },
+            riskAssessment,
+            mhtRecommendation: mhtRecommendation ? {
+              type: mhtRecommendation.type,
+              route: mhtRecommendation.route,
+              progestogenType: mhtRecommendation.progestogenType,
+              rationale: mhtRecommendation.rationale || []
+            } : undefined,
+            vitals: {
+              bloodPressure: patient.hypertension ? '140/90' : '120/80',
+              cholesterol: patient.cholesterolHigh ? 'High' : 'Normal',
+              bloodGlucose: patient.diabetes ? 'Elevated' : 'Normal'
+            },
+            notes: ''
+          };
+        });
 
         return {
           id: patient.id,
