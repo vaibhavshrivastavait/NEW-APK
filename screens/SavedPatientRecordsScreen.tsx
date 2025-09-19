@@ -481,22 +481,22 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
       {/* Stats Bar */}
       <View style={styles.statsBar}>
         <Text style={styles.statsText}>
-          {filteredPatients.length} of {patients.length} patients
+          {safeFilteredPatients.length} of {patients.length} patients
         </Text>
         <View style={styles.riskStats}>
           <View style={[styles.riskStat, { backgroundColor: PINK_COLORS.risk.high }]}>
             <Text style={styles.riskStatText}>
-              {filteredPatients.filter(p => p.riskLevel === 'high').length}
+              {safeFilteredPatients.filter(p => p.riskLevel === 'high').length}
             </Text>
           </View>
           <View style={[styles.riskStat, { backgroundColor: PINK_COLORS.risk.moderate }]}>
             <Text style={styles.riskStatText}>
-              {filteredPatients.filter(p => p.riskLevel === 'moderate').length}
+              {safeFilteredPatients.filter(p => p.riskLevel === 'moderate').length}
             </Text>
           </View>
           <View style={[styles.riskStat, { backgroundColor: PINK_COLORS.risk.low }]}>
             <Text style={styles.riskStatText}>
-              {filteredPatients.filter(p => p.riskLevel === 'low').length}
+              {safeFilteredPatients.filter(p => p.riskLevel === 'low').length}
             </Text>
           </View>
         </View>
