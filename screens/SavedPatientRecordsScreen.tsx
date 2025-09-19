@@ -169,23 +169,60 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
         const riskScore = calculateRiskScore(patient, latestAssessment);
 
         // Create assessment history with comprehensive details
-        const assessmentHistory: AssessmentHistoryItem[] = patientAssessments.map(assessment => {
-          // Get or calculate comprehensive risk assessment
-          const riskAssessment = {
-            breastCancerRisk: assessment.breastCancerRisk as 'low' | 'moderate' | 'high' || 'low',
-            cvdRisk: assessment.cvdRisk as 'low' | 'moderate' | 'high' || 'low', 
-            vteRisk: assessment.vteRisk as 'low' | 'moderate' | 'high' | 'very-high' || 'low',
-            osteoporosisRisk: 'low' as 'low' | 'moderate' | 'high', // Calculate based on age/risk factors
-            overallRisk: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate'
-          };
+        let assessmentHistory: AssessmentHistoryItem[] = [];
+        
+        if (patientAssessments.length > 0) {
+          // Use existing assessments
+          assessmentHistory = patientAssessments.map(assessment => {
+            // Get or calculate comprehensive risk assessment
+            const riskAssessment = {
+              breastCancerRisk: assessment.breastCancerRisk as 'low' | 'moderate' | 'high' || 'low',
+              cvdRisk: assessment.cvdRisk as 'low' | 'moderate' | 'high' || 'low', 
+              vteRisk: assessment.vteRisk as 'low' | 'moderate' | 'high' | 'very-high' || 'low',
+              osteoporosisRisk: 'low' as 'low' | 'moderate' | 'high', // Calculate based on age/risk factors
+              overallRisk: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate'
+            };
 
-          // Get MHT recommendation from store
+            // Get MHT recommendation from store
+            const mhtRecommendation = store?.recommendations?.find(r => r.patientId === patient.id);
+
+            return {
+              id: assessment.id || Date.now().toString(),
+              date: assessment.calculatedAt || new Date().toISOString(),
+              riskLevel: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate',
+              riskScore: riskScore,
+              symptoms: {
+                hotFlushes: patient.hotFlushes || 0,
+                nightSweats: patient.nightSweats || 0,
+                sleepDisturbance: patient.sleepDisturbance || 0,
+                vaginalDryness: patient.vaginalDryness || 0,
+                moodChanges: patient.moodChanges || 0,
+                jointAches: patient.jointAches || 0,
+              },
+              riskAssessment,
+              mhtRecommendation: mhtRecommendation ? {
+                type: mhtRecommendation.type,
+                route: mhtRecommendation.route,
+                progestogenType: mhtRecommendation.progestogenType,
+                rationale: mhtRecommendation.rationale || []
+              } : undefined,
+              vitals: {
+                bloodPressure: patient.hypertension ? '140/90' : '120/80',
+                cholesterol: patient.cholesterolHigh ? 'High' : 'Normal',
+                bloodGlucose: patient.diabetes ? 'Elevated' : 'Normal'
+              },
+              notes: ''
+            };
+          });
+        } else {
+          // Create a synthetic assessment history for patients without stored assessments
+          const syntheticRiskAssessment = store?.calculateRisks ? store.calculateRisks(patient.id) : null;
           const mhtRecommendation = store?.recommendations?.find(r => r.patientId === patient.id);
-
-          return {
-            id: assessment.id || Date.now().toString(),
-            date: assessment.calculatedAt || new Date().toISOString(),
-            riskLevel: assessment.overallRisk as 'low' | 'moderate' | 'high' || 'moderate',
+          
+          assessmentHistory = [{
+            id: `synthetic-${patient.id}`,
+            date: patient.createdAt || new Date().toISOString(),
+            riskLevel: riskLevel,
             riskScore: riskScore,
             symptoms: {
               hotFlushes: patient.hotFlushes || 0,
@@ -195,21 +232,37 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
               moodChanges: patient.moodChanges || 0,
               jointAches: patient.jointAches || 0,
             },
-            riskAssessment,
+            riskAssessment: syntheticRiskAssessment ? {
+              breastCancerRisk: syntheticRiskAssessment.breastCancerRisk as 'low' | 'moderate' | 'high',
+              cvdRisk: syntheticRiskAssessment.cvdRisk as 'low' | 'moderate' | 'high',
+              vteRisk: syntheticRiskAssessment.vteRisk as 'low' | 'moderate' | 'high' | 'very-high',
+              osteoporosisRisk: (patient.age > 65 ? 'moderate' : 'low') as 'low' | 'moderate' | 'high',
+              overallRisk: syntheticRiskAssessment.overallRisk as 'low' | 'moderate' | 'high'
+            } : {
+              breastCancerRisk: 'low' as 'low' | 'moderate' | 'high',
+              cvdRisk: 'low' as 'low' | 'moderate' | 'high',
+              vteRisk: 'low' as 'low' | 'moderate' | 'high' | 'very-high',
+              osteoporosisRisk: 'low' as 'low' | 'moderate' | 'high',
+              overallRisk: riskLevel
+            },
             mhtRecommendation: mhtRecommendation ? {
               type: mhtRecommendation.type,
               route: mhtRecommendation.route,
               progestogenType: mhtRecommendation.progestogenType,
               rationale: mhtRecommendation.rationale || []
-            } : undefined,
+            } : {
+              type: 'not-recommended' as 'ET' | 'EPT' | 'vaginal-only' | 'not-recommended',
+              route: 'none' as 'oral' | 'transdermal' | 'vaginal' | 'none',
+              rationale: ['Assessment required for recommendation']
+            },
             vitals: {
               bloodPressure: patient.hypertension ? '140/90' : '120/80',
               cholesterol: patient.cholesterolHigh ? 'High' : 'Normal',
               bloodGlucose: patient.diabetes ? 'Elevated' : 'Normal'
             },
-            notes: ''
-          };
-        });
+            notes: 'Initial assessment based on patient data'
+          }];
+        }
 
         return {
           id: patient.id,
