@@ -71,6 +71,7 @@ interface AssessmentHistoryItem {
   date: string | Date;
   riskLevel: 'low' | 'moderate' | 'high';
   riskScore: number;
+  // Enhanced assessment data
   symptoms: {
     hotFlushes: number;
     nightSweats: number;
@@ -78,6 +79,24 @@ interface AssessmentHistoryItem {
     vaginalDryness: number;
     moodChanges: number;
     jointAches: number;
+  };
+  riskAssessment?: {
+    breastCancerRisk: 'low' | 'moderate' | 'high';
+    cvdRisk: 'low' | 'moderate' | 'high';
+    vteRisk: 'low' | 'moderate' | 'high' | 'very-high';
+    osteoporosisRisk?: 'low' | 'moderate' | 'high';
+    overallRisk: 'low' | 'moderate' | 'high';
+  };
+  mhtRecommendation?: {
+    type: 'ET' | 'EPT' | 'vaginal-only' | 'not-recommended';
+    route: 'oral' | 'transdermal' | 'vaginal' | 'none';
+    progestogenType?: 'micronized' | 'ius' | 'synthetic';
+    rationale: string[];
+  };
+  vitals?: {
+    bloodPressure?: string;
+    cholesterol?: string;
+    bloodGlucose?: string;
   };
   notes?: string;
 }
