@@ -382,6 +382,11 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
   );
 
   const renderPatientCard = ({ item, index }: { item: PatientRecord; index: number }) => {
+    // Safety check for undefined items
+    if (!item) {
+      return null;
+    }
+    
     const isSelected = selectedPatient?.id === item.id;
     
     return (
