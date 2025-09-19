@@ -469,7 +469,7 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
 
       {/* Patient List */}
       <FlatList
-        data={filteredPatients}
+        data={filteredPatients || []}
         renderItem={renderPatientCard}
         keyExtractor={(item) => item.id}
         style={styles.patientList}
