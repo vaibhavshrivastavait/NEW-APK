@@ -514,26 +514,33 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
         </View>
       </View>
 
-      {/* Patient List */}
-      <FlatList
-        data={safeFilteredPatients}
-        renderItem={renderPatientCard}
-        keyExtractor={(item, index) => item?.id || `patient-${index}`}
-        style={styles.patientList}
-        contentContainerStyle={styles.patientListContent}
-        showsVerticalScrollIndicator={false}
-        refreshing={refreshing}
-        onRefresh={handleRefresh}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <MaterialIcons name="folder-open" size={64} color={PINK_COLORS.text.light} />
-            <Text style={styles.emptyTitle}>No Patient Records Found</Text>
-            <Text style={styles.emptySubtitle}>
-              {searchQuery ? 'Try adjusting your search criteria' : 'Complete patient assessments will appear here'}
-            </Text>
-          </View>
-        }
-      />
+      {/* Patient List - Only render when data is safe */}
+      {Array.isArray(safeFilteredPatients) ? (
+        <FlatList
+          data={safeFilteredPatients}
+          renderItem={renderPatientCard}
+          keyExtractor={(item, index) => item?.id || `patient-${index}`}
+          style={styles.patientList}
+          contentContainerStyle={styles.patientListContent}
+          showsVerticalScrollIndicator={false}
+          refreshing={refreshing}
+          onRefresh={handleRefresh}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <MaterialIcons name="folder-open" size={64} color={PINK_COLORS.text.light} />
+              <Text style={styles.emptyTitle}>No Patient Records Found</Text>
+              <Text style={styles.emptySubtitle}>
+                {searchQuery ? 'Try adjusting your search criteria' : 'Complete patient assessments will appear here'}
+              </Text>
+            </View>
+          }
+        />
+      ) : (
+        <View style={styles.emptyContainer}>
+          <ActivityIndicator size="large" color={PINK_COLORS.primary} />
+          <Text style={styles.emptyTitle}>Loading patient data...</Text>
+        </View>
+      )}
     </View>
   );
 
