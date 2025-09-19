@@ -515,9 +515,9 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
         </View>
       </View>
 
-      {/* Patient List - Only render when data is safe */}
+      {/* Patient List - Using SafeFlatList to prevent props.getItem errors */}
       {Array.isArray(safeFilteredPatients) ? (
-        <FlatList
+        <SafeFlatList
           data={safeFilteredPatients}
           renderItem={renderPatientCard}
           keyExtractor={(item, index) => item?.id || `patient-${index}`}
@@ -526,6 +526,8 @@ export default function SavedPatientRecordsScreen({ navigation }: Props) {
           showsVerticalScrollIndicator={false}
           refreshing={refreshing}
           onRefresh={handleRefresh}
+          fallbackMessage="Unable to load patient records. This may be due to a data loading issue."
+          onRetry={loadPatients}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
               <MaterialIcons name="folder-open" size={64} color={PINK_COLORS.text.light} />
